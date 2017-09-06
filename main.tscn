@@ -1,5 +1,13 @@
-[gd_scene format=1]
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://floor_texture.jpg" type="Texture" id=1]
 
 [node name="World" type="Node2D"]
+
+[node name="Floor" type="Sprite" parent="."]
+
+transform/pos = Vector2( 512.5, 302.5 )
+transform/scale = Vector2( 3.75926, 2.2037 )
+texture = ExtResource( 1 )
 
 
