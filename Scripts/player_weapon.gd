@@ -3,19 +3,32 @@ extends Sprite
 
 export(PackedScene) var projectile_scene
 
-var proj_spawner
+export var proj_spawn_pos = Vector2(0,0)
 
-#export(float, 0.1, 10, 0.1) var fire_rate
-var next_fire
+var fire_timer
 
-func _ready():
-	next_fire = 0
-	proj_spawner = get_node("Projectile Spawner")
+# how often a weapon fires
+export(float, 0.05, 2, 0.05) var fire_rate
+
+func _ready():	
+	fire_timer = Timer.new()
+	add_child(fire_timer)
+	fire_timer.set_wait_time(fire_rate)
+	fire_timer.set_one_shot(true)
+	
+	set_process(true)
+
+func _process(delta):
+	#print(fire_timer.get_time_left())
+	pass
 
 func fire():
-	# spawn projectile
-	var projectile = projectile_scene.instance()
-	projectile.set_global_pos(proj_spawner.get_global_pos())
-	projectile.set_global_rot(proj_spawner.get_global_rot())
-	get_tree().get_root().add_child(projectile)
-	#fire rate...
+	if fire_timer.get_time_left() <= 0:
+		print("firing")
+		var projectile = projectile_scene.instance()
+		projectile.set_global_pos(get_global_transform().xform(proj_spawn_pos))
+		projectile.set_global_rot(get_global_rot())
+		get_tree().get_root().add_child(projectile)
+		
+		fire_timer.start()
+	

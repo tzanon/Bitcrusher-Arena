@@ -10,7 +10,7 @@ func _ready():
 	set_max_contacts_reported(1)
 	
 	var rot = get_global_rot()
-	set_linear_velocity(Vector2(sin(rot), cos(rot)) * -speed)
+	set_linear_velocity(self.get_linear_velocity() + Vector2(sin(rot), cos(rot)) * -speed)
 	
 
 func _fixed_process(delta):

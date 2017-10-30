@@ -41,10 +41,6 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Node2D" type="Node2D" parent="."]
-
-transform/pos = Vector2( 32, -32 )
-
 [node name="PlayerSprite" type="Sprite" parent="."]
 
 texture = ExtResource( 2 )
@@ -54,6 +50,13 @@ texture = ExtResource( 2 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
+
+[node name="Weapon Fire Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
 
 [node name="Pickup Detector" type="Area2D" parent="."]
 
