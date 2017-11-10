@@ -31,4 +31,3 @@ func fire():
 		get_tree().get_root().add_child(projectile)
 		
 		fire_timer.start()
-	

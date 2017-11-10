@@ -21,7 +21,6 @@ const DIRECTION = {
 }
 
 func _ready():
-	print("ready!")
 	set_process_input(true)
 	set_fixed_process(true)
 	
@@ -62,8 +61,8 @@ func _pick_up_item():
 		if item.is_in_group("Ability"):
 			# add ability to player/replace current one
 			print("found an ability")
+			item.queue_free()
 			break
-			pass
 	
 
 func _equip_weapon(new_weapon_scene):
