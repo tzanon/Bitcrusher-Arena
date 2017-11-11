@@ -1,28 +1,94 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=8 format=1]
 
-[ext_resource path="res://Scenes/WeaponSpawner.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/playerRB.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Sprites/player.png" type="Texture" id=3]
-[ext_resource path="res://Scenes/static_obstacle_ph.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/moveable_obstacle_ph.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Sprites/player.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/WeaponSpawner.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/WeaponSpawnPoint.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/playerRB.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/static_obstacle_ph.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/moveable_obstacle_ph.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 32, 32 )
 
-[node name="Node2D" type="Node2D"]
+[node name="Root" type="Node2D"]
 
-[node name="WeaponSpawner" parent="." instance=ExtResource( 1 )]
+[node name="Walls" type="Node2D" parent="."]
 
-total_spawn_positions = [ Vector2( 256, 96 ), Vector2( 640, 352 ), Vector2( 192, 320 ) ]
+editor/display_folded = true
+transform/pos = Vector2( -6.10352e-05, 0 )
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
+[node name="wall1" type="StaticBody2D" parent="Walls"]
 
-transform/pos = Vector2( 544, 192 )
-damp_override/linear = 6.0
+editor/display_folded = true
+transform/pos = Vector2( 36.527, 434.157 )
+transform/rot = 89.9999
+transform/scale = Vector2( 15, 1 )
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
 
-[node name="floor" type="StaticBody2D" parent="."]
+[node name="Sprite" type="Sprite" parent="Walls/wall1"]
+
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/wall1"]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="wall2" type="StaticBody2D" parent="Walls"]
+
+editor/display_folded = true
+transform/pos = Vector2( 1024, 416 )
+transform/rot = -89.9999
+transform/scale = Vector2( 15, 1 )
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="Sprite" type="Sprite" parent="Walls/wall2"]
+
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/wall2"]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="floor" type="StaticBody2D" parent="Walls"]
 
 editor/display_folded = true
 transform/pos = Vector2( 531.527, 534.157 )
@@ -38,14 +104,14 @@ constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
 
-[node name="Sprite" type="Sprite" parent="floor"]
+[node name="Sprite" type="Sprite" parent="Walls/floor"]
 
-texture = ExtResource( 3 )
+texture = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="floor"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/floor"]
 
 shape = SubResource( 1 )
 trigger = false
@@ -54,94 +120,55 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="wall1" type="StaticBody2D" parent="floor"]
+[node name="WeaponSpawner" parent="." instance=ExtResource( 2 )]
 
-editor/display_folded = true
-transform/pos = Vector2( -33, -100 )
-transform/rot = 89.9985
-transform/scale = Vector2( 15, 0.0666667 )
-input/pickable = false
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
+[node name="WeaponSpawnPoint" parent="WeaponSpawner" instance=ExtResource( 3 )]
 
-[node name="Sprite" type="Sprite" parent="floor/wall1"]
+transform/pos = Vector2( 256, 64 )
 
-texture = ExtResource( 3 )
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="WeaponSpawnPoint1" parent="WeaponSpawner" instance=ExtResource( 3 )]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="floor/wall1"]
+transform/pos = Vector2( 736, 160 )
 
-shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="WeaponSpawnPoint2" parent="WeaponSpawner" instance=ExtResource( 3 )]
 
-[node name="wall2" type="StaticBody2D" parent="floor"]
+transform/pos = Vector2( 512, 384 )
 
-editor/display_folded = true
-transform/pos = Vector2( 33, -100 )
-transform/rot = -89.9985
-transform/scale = Vector2( 15, 0.0666667 )
-input/pickable = false
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
+[node name="WeaponSpawnPoint3" parent="WeaponSpawner" instance=ExtResource( 3 )]
 
-[node name="Sprite" type="Sprite" parent="floor/wall2"]
+transform/pos = Vector2( 832, 416 )
 
-texture = ExtResource( 3 )
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="WeaponSpawnPoint4" parent="WeaponSpawner" instance=ExtResource( 3 )]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="floor/wall2"]
+transform/pos = Vector2( 128, 288 )
 
-shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="Player" parent="." instance=ExtResource( 4 )]
 
-[node name="StaticObstacle" parent="." instance=ExtResource( 4 )]
+transform/pos = Vector2( 544, 192 )
+damp_override/linear = 6.0
+
+[node name="StaticObstacle" parent="." instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 160, 128 )
 
-[node name="StaticObstacle1" parent="." instance=ExtResource( 4 )]
+[node name="StaticObstacle1" parent="." instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 288, 416 )
 
-[node name="StaticObstacle2" parent="." instance=ExtResource( 4 )]
+[node name="StaticObstacle2" parent="." instance=ExtResource( 5 )]
 
-transform/pos = Vector2( 864, 256 )
+transform/pos = Vector2( 928, 160 )
 
-[node name="MoveableObstacle 2" parent="." instance=ExtResource( 5 )]
+[node name="MoveableObstacle" parent="." instance=ExtResource( 6 )]
 
-transform/pos = Vector2( 496, 352 )
+transform/pos = Vector2( 416, 256 )
 
-[node name="MoveableObstacle 2 2" parent="." instance=ExtResource( 5 )]
+[node name="MoveableObstacle1" parent="." instance=ExtResource( 6 )]
 
-transform/pos = Vector2( 736, 96 )
+transform/pos = Vector2( 832, 256 )
 
-[node name="MoveableObstacle" parent="." instance=ExtResource( 5 )]
+[node name="MoveableObstacle2" parent="." instance=ExtResource( 6 )]
 
-transform/pos = Vector2( 368, 112 )
+transform/pos = Vector2( 704, 96 )
 
 

@@ -11,13 +11,10 @@ const weapon_scenes = [
 
 #TODO: exported enum and case statement to select spawn mode
 
-var light_weapon_scenes = []
-var power_weapon_scenes = [] #more powerful: spawned in harder places
+const light_weapon_scenes = []
+const power_weapon_scenes = [] #more powerful: spawned in harder places
 
-export(Array) var spawn_position_sets
-export(Array) var total_spawn_positions #array of vector2
-export(Array) var light_spawn_positions
-export(Array) var power_spawn_positions
+var total_spawn_positions #array of vector2
 
 export(Dictionary) var position_weapon_scenes
 export(Dictionary) var position_possible_weapon_scenes
@@ -34,6 +31,12 @@ func _ready():
 	refresh_timer.set_one_shot(true)
 	refresh_timer.start()
 	
+	var children = get_children()
+	for child in children:
+		if child.is_in_group("WeaponSpawnPoint"):
+			child.hide()
+			total_spawn_positions.append(child.get_global_pos())
+	
 	arena_weapon_refs = []
 	_spawn_static_random()
 	
@@ -45,7 +48,7 @@ func _process(delta):
 		_clear_weapons()
 		_spawn_static_random()
 		refresh_timer.start()
-
+	
 
 func _clear_weapons():
 	for weapon_ref in arena_weapon_refs:
@@ -109,7 +112,6 @@ func _spawn_random_weapon(pos):
 	#get_tree().get_root().add_child(weapon)
 	get_tree().get_root().call_deferred("add_child", weapon)
 	return weapon
-
 
 # spawns weapon at its matching position
 func _spawn_weapon_with_position(pos):
