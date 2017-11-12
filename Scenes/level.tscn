@@ -17,7 +17,6 @@ extents = Vector2( 32, 32 )
 [node name="Walls" type="Node2D" parent="."]
 
 editor/display_folded = true
-transform/pos = Vector2( -6.10352e-05, 0 )
 __meta__ = {
 "_edit_group_": true
 }
