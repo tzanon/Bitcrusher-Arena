@@ -5,7 +5,9 @@ var refresh_timer
 
 const weapon_scenes = [
 	preload("res://Scenes/Weapons/world_orange_ph.tscn"),
-	preload("res://Scenes/Weapons/world_blue_ph.tscn")
+	preload("res://Scenes/Weapons/world_blue_ph.tscn"),
+	preload("res://Scenes/Weapons/WorldLaser.tscn"),
+	preload("res://Scenes/Weapons/WorldLauncher.tscn")
 ] #world weapon scenes to instantiate from
 
 const light_weapon_scenes = []
@@ -13,12 +15,11 @@ const power_weapon_scenes = [] #more powerful: spawned in harder places
 
 #TODO: exported enum and case statement to select spawn mode
 
-var total_spawn_positions #array of vector2
-export(Dictionary) var position_weapon_scenes
-export(Dictionary) var position_possible_weapon_scenes
+var total_spawn_positions = [] #array of vector2
+var total_spawn_points = []
 
-var MIN_SPAWN
-var MAX_SPAWN
+var min_spawn
+var max_spawn
 
 var arena_weapon_refs #array of all weapons currently in the arena
 
@@ -33,20 +34,21 @@ func _ready():
 	for child in children:
 		if child.is_in_group("WeaponSpawnPoint"):
 			child.hide()
-			total_spawn_positions.append(child.get_global_pos())
+			total_spawn_points.append(child)
+			#total_spawn_positions.append(child.get_global_pos())
 	
-	MIN_SPAWN = 0
-	MAX_SPAWN = total_spawn_positions.size()
+	min_spawn = 1
+	max_spawn = total_spawn_points.size()
 	
 	arena_weapon_refs = []
-	_spawn_select_random()
+	_spawn_static_random()
 	
 	set_process(true)
 
 func _process(delta):
 	if refresh_timer.get_time_left() <= 0:
 		_clear_weapons()
-		_spawn_select_random()
+		_spawn_static_random()
 		refresh_timer.start()
 	
 
@@ -63,53 +65,54 @@ func _clear_weapons():
 
 # spawns the corresponding weapon at each position
 func _spawn_static_fixed():
-	for pos in position_weapon_scenes.keys():
-		var weapon = _spawn_weapon_with_position(pos)
+	for point in total_spawn_points:
+		var weapon = _spawn_weapon_with_position(point)
 		arena_weapon_refs.append(weakref(weapon))
 
 # spawns a random weapon at each position
 func _spawn_static_random():
-	for pos in total_spawn_positions:
-		var weapon = _spawn_random_weapon(pos)
+	for point in total_spawn_points:
+		var weapon = _spawn_random_weapon(point)
 		arena_weapon_refs.append(weakref(weapon))
 
 # randomly selects positions and spawns the corresponding weapon at each
 func _spawn_select_fixed():
-	var spawn_positions = select_spawn_positions()
-	for pos in spawn_positions:
-		var weapon = _spawn_weapon_with_position(pos)
+	var spawn_points = _select_spawn_points()
+	for point in spawn_points:
+		var weapon = _spawn_weapon_with_position(point)
 		arena_weapon_refs.append(weakref(weapon))
 
 # randomly selects positions and spawns a random weapon at each
 func _spawn_select_random():
-	var spawn_positions = _select_spawn_positions()
-	for pos in spawn_positions:
-		var weapon = _spawn_random_weapon(pos)
+	var spawn_points = _select_spawn_points()
+	for point in spawn_points:
+		var weapon = _spawn_random_weapon(point)
 		arena_weapon_refs.append(weakref(weapon))
 
 
 
 # randomly choose n unique spawn positions
-func _select_spawn_positions():
-	var num_weapons = randi() % (MAX_SPAWN - MIN_SPAWN + 1) + MIN_SPAWN
-	var spawn_positions = []
-	var possible_positions = [] + total_spawn_positions
+func _select_spawn_points():
+	var num_weapons = randi() % (max_spawn - min_spawn + 1) + min_spawn
+	var spawn_points = []
+	#var possible_positions = [] + total_spawn_positions
+	var possible_points = [] + total_spawn_points
 	
 	for i in range(num_weapons):
 		print("i is ", i)
-		var j = randi() % (possible_positions.size())
-		spawn_positions.append(possible_positions[j])
-		possible_positions.remove(j)
+		var j = randi() % (possible_points.size())
+		spawn_points.append(possible_points[j])
+		possible_points.remove(j)
 	
-	return spawn_positions
+	return spawn_points
 
 
 
 # spawns a random weapon at the given position
-func _spawn_random_weapon(pos):
+func _spawn_random_weapon(point):
 	var i = randi() % (weapon_scenes.size())
 	var weapon = weapon_scenes[i].instance()
-	weapon.set_global_pos(pos)
+	weapon.set_global_pos(point.get_global_pos())
 	print("spawned weapon ", weapon.get_name())
 	#get_parent().add_child(weapon)
 	#get_tree().get_root().add_child(weapon)
@@ -117,10 +120,10 @@ func _spawn_random_weapon(pos):
 	return weapon
 
 # spawns weapon at its matching position
-func _spawn_weapon_with_position(pos):
-	var weapon = position_weapon_scenes[pos].instance()
-	weapon.set_pos(pos)
-	get_tree().get_root().add_child(weapon)
+func _spawn_weapon_with_position(point):
+	var weapon = point.get_object_scene().instance()
+	weapon.set_pos(point.get_global_pos())
+	get_tree().get_root().call_deferred("add_child", weapon)
 	return weapon
 
 

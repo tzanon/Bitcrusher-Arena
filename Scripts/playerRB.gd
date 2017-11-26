@@ -5,7 +5,7 @@ var top_speed = 200
 
 var rotd_speed = 180
 
-const START_WEAPON = preload("res://Scenes/Weapons/player_orange_ph.tscn")
+const START_WEAPON = preload("res://Scenes/Weapons/PlayerLaser.tscn")
 const weapon_pos = Vector2(32, -32)
 var weapon
 

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://Sprites/player_potato_gun128x256.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/player_weapon.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Weapons/Potato.tscn" type="PackedScene" id=3]
+
+[node name="PlayerLauncher" type="Sprite"]
+
+transform/scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 1 )
+script/script = ExtResource( 2 )
+projectile_scene = ExtResource( 3 )
+proj_spawn_pos = Vector2( 16, -128 )
+fire_rate = 0.2
+
+[node name="Node2D" type="Node2D" parent="."]
+
+transform/pos = Vector2( 16, -128 )
+
+

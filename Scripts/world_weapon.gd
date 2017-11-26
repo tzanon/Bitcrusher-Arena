@@ -6,4 +6,3 @@ export(PackedScene) var player_weapon_scene
 func _ready():
 	self.add_to_group("Weapon")
 
-

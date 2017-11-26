@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 9.2334, 19.0277 )
+extents = Vector2( 8, 16 )
 
 [node name="world_blue_ph" type="Area2D"]
 
@@ -20,22 +20,19 @@ gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
 script/script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 player_weapon_scene = ExtResource( 2 )
 
-[node name="Gun" type="Sprite" parent="."]
+[node name="WorldSprite" type="Sprite" parent="."]
 
 texture = ExtResource( 3 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
-__meta__ = {
-"_edit_lock_": true
-}
 
 

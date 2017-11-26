@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://Sprites/player_laser96x256.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/player_weapon.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Weapons/bullet_ph.tscn" type="PackedScene" id=3]
+
+[node name="PlayerLaser" type="Sprite"]
+
+transform/scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 1 )
+script/script = ExtResource( 2 )
+projectile_scene = ExtResource( 3 )
+proj_spawn_pos = Vector2( 0, -128 )
+fire_rate = 0.1
+
+

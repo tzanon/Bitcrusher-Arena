@@ -6,14 +6,6 @@
 
 script/script = ExtResource( 1 )
 refresh_interval = 4
-spawn_position_sets = null
-total_spawn_positions = [  ]
-light_spawn_positions = null
-power_spawn_positions = null
-position_weapon_scenes = null
-position_possible_weapon_scenes = null
-MIN_SPAWN = 0
-MAX_SPAWN = 10
 
 [node name="RefreshTimer" type="Timer" parent="."]
 
