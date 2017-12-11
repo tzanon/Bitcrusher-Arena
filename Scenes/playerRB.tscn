@@ -13,7 +13,9 @@ extents = Vector2( 32, 32 )
 custom_solver_bias = 0.0
 radius = 64.0
 
-[node name="Player" type="RigidBody2D"]
+[node name="Player" type="RigidBody2D" groups=[
+"Damageable",
+]]
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )

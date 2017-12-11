@@ -1,6 +1,6 @@
 extends Node2D
 
-export var refresh_interval = 4
+export var refresh_interval = 10
 var refresh_timer
 
 const weapon_scenes = [
@@ -15,7 +15,6 @@ const power_weapon_scenes = [] #more powerful: spawned in harder places
 
 #TODO: exported enum and case statement to select spawn mode
 
-var total_spawn_positions = [] #array of vector2
 var total_spawn_points = []
 
 var min_spawn
@@ -24,7 +23,6 @@ var max_spawn
 var arena_weapon_refs #array of all weapons currently in the arena
 
 func _ready():
-	print("starting")
 	refresh_timer = get_node("RefreshTimer")
 	refresh_timer.set_wait_time(refresh_interval)
 	refresh_timer.set_one_shot(true)
@@ -35,7 +33,6 @@ func _ready():
 		if child.is_in_group("WeaponSpawnPoint"):
 			child.hide()
 			total_spawn_points.append(child)
-			#total_spawn_positions.append(child.get_global_pos())
 	
 	min_spawn = 1
 	max_spawn = total_spawn_points.size()
@@ -95,7 +92,6 @@ func _spawn_select_random():
 func _select_spawn_points():
 	var num_weapons = randi() % (max_spawn - min_spawn + 1) + min_spawn
 	var spawn_points = []
-	#var possible_positions = [] + total_spawn_positions
 	var possible_points = [] + total_spawn_points
 	
 	for i in range(num_weapons):
@@ -107,13 +103,11 @@ func _select_spawn_points():
 	return spawn_points
 
 
-
 # spawns a random weapon at the given position
 func _spawn_random_weapon(point):
 	var i = randi() % (weapon_scenes.size())
 	var weapon = weapon_scenes[i].instance()
 	weapon.set_global_pos(point.get_global_pos())
-	print("spawned weapon ", weapon.get_name())
 	#get_parent().add_child(weapon)
 	#get_tree().get_root().add_child(weapon)
 	get_tree().get_root().call_deferred("add_child", weapon)
@@ -124,6 +118,4 @@ func _spawn_weapon_with_position(point):
 	var weapon = point.get_object_scene().instance()
 	weapon.set_pos(point.get_global_pos())
 	get_tree().get_root().call_deferred("add_child", weapon)
-	return weapon
-
-
+	return weapon	

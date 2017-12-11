@@ -7,7 +7,7 @@
 [ext_resource path="res://Scenes/Weapons/world_orange_ph.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Weapons/WorldLaser.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Weapons/WorldLauncher.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/playerRB.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/PlayerManager.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/static_obstacle_ph.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/moveable_obstacle_ph.tscn" type="PackedScene" id=10]
 
@@ -16,19 +16,16 @@
 custom_solver_bias = 0.0
 extents = Vector2( 32, 32 )
 
-[node name="Root" type="Node2D"]
+[node name="Level" type="Node2D"]
 
 [node name="Walls" type="Node2D" parent="."]
 
 editor/display_folded = true
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="wall1" type="StaticBody2D" parent="Walls"]
 
 editor/display_folded = true
-transform/pos = Vector2( 36.527, 434.157 )
+transform/pos = Vector2( 32, 416 )
 transform/rot = 89.9999
 transform/scale = Vector2( 15, 1 )
 input/pickable = false
@@ -94,8 +91,8 @@ __meta__ = {
 [node name="floor" type="StaticBody2D" parent="Walls"]
 
 editor/display_folded = true
-transform/pos = Vector2( 531.527, 534.157 )
-transform/scale = Vector2( 15, 1 )
+transform/pos = Vector2( 528, 544 )
+transform/scale = Vector2( 14.5, 1 )
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
@@ -125,6 +122,8 @@ __meta__ = {
 
 [node name="WeaponSpawner" parent="." instance=ExtResource( 2 )]
 
+editor/display_folded = true
+
 [node name="WeaponSpawnPoint" parent="WeaponSpawner" instance=ExtResource( 3 )]
 
 transform/pos = Vector2( 256, 64 )
@@ -150,14 +149,30 @@ world_object_scene = ExtResource( 6 )
 transform/pos = Vector2( 128, 288 )
 world_object_scene = ExtResource( 7 )
 
-[node name="Player" parent="." instance=ExtResource( 8 )]
+[node name="PlayerManager" parent="." instance=ExtResource( 8 )]
 
-transform/pos = Vector2( 544, 192 )
-damp_override/linear = 6.0
+editor/display_folded = true
+transform/pos = Vector2( 32, 0 )
+
+[node name="BlueSpawnPoint" parent="PlayerManager"]
+
+transform/pos = Vector2( 96, 64 )
+
+[node name="RedSpawnPoint" parent="PlayerManager"]
+
+transform/pos = Vector2( 896, 448 )
+
+[node name="GreenSpawnPoint" parent="PlayerManager"]
+
+transform/pos = Vector2( 96, 448 )
+
+[node name="YellowSpawnPoint" parent="PlayerManager"]
+
+transform/pos = Vector2( 896, 64 )
 
 [node name="StaticObstacle" parent="." instance=ExtResource( 9 )]
 
-transform/pos = Vector2( 160, 128 )
+transform/pos = Vector2( 160, 192 )
 
 [node name="StaticObstacle1" parent="." instance=ExtResource( 9 )]
 
@@ -188,3 +203,4 @@ transform/pos = Vector2( 416, 128 )
 transform/pos = Vector2( 608, 64 )
 
 
+[editable path="PlayerManager"]

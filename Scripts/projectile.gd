@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-export(int) var damage
+export(int) var damage_amount
 export(float) var speed
 
 func _ready():
@@ -15,14 +15,10 @@ func _ready():
 
 func _fixed_process(delta):
 	var bodies = get_colliding_bodies()
-	
 	if bodies.size() > 0:
-		print("hit something")
-		if bodies[0].is_in_group("Destructable"):
-			# damage object
-			pass
-		
+		if bodies[0].is_in_group("Damageable"):
+			#print("hit something damageable")
+			bodies[0].damage(damage_amount)
 		self.queue_free()
-	
 
 
