@@ -25,7 +25,7 @@ func _ready():
 	# should HUDs already exist in the scene?
 	# ...should we not have HUDs? just have some health indicator on players?
 	
-	var player_info = Global.get_info()
+	var player_info = GameInfo.get_info()
 	for info_entry in player_info:
 		print("spawning player ", info_entry.name)
 		#_enable_player_hud(info_entry)
@@ -47,8 +47,14 @@ func update_player_health(player_name, player_health):
 
 func remove_player(player_name):
 	# TODO: black out icon, erase player from ref tracker, check if one remaining
+	match_player_refs.erase(player_name)
 	print("player ", player_name, " died.")
-	pass
+	
+	if match_player_refs.size() == 1:
+		GameInfo.match_winner = match_player_refs.keys().front()
+		print("Winner is ", GameInfo.match_winner)
+	
+	
 
 # WIP; do not call or it will crash
 func _enable_player_hud(info_entry):

@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+export var debug_mode = false
+
 # gamepad device used to control this player
 var gamepad_id = 0 setget set_gamepad_id
 var name = "" setget set_name
@@ -43,29 +45,41 @@ func _ready():
 
 func _fixed_process(delta):
 	# aiming is currently just rotating -- should we have some sort of reticle to move around instead?
-	var axis_pos = -Input.get_joy_axis(gamepad_id, JOY_AXIS_2)
-	
-	if abs(axis_pos) > joystick_idle_limit:
-		set_rotd(get_rotd() + axis_pos * rotd_speed * delta)
-	
-	if Input.is_action_pressed("rotate_left"):
-		set_rotd(get_rotd() + rotd_speed * delta)
-	if Input.is_action_pressed("rotate_right"):
-		set_rotd(get_rotd() + -rotd_speed * delta)
+	if debug_mode:
+		if Input.is_action_pressed("rotate_left"):
+			set_rotd(get_rotd() + rotd_speed * delta)
+		if Input.is_action_pressed("rotate_right"):
+			set_rotd(get_rotd() + -rotd_speed * delta)
+	else:
+		var axis_pos = -Input.get_joy_axis(gamepad_id, JOY_AXIS_2)
+		
+		if abs(axis_pos) > joystick_idle_limit:
+			set_rotd(get_rotd() + axis_pos * rotd_speed * delta)
 	
 
 func _input(event):
 	# is_joy_button_pressed(device#, JOY_button const)
 	
-	if Input.is_action_pressed("fire_weapon") || Input.is_joy_button_pressed(gamepad_id, JOY_R2):
-		_fire_weapon()
+	if debug_mode:
+		if Input.is_action_pressed("fire_weapon"):
+			_fire_weapon()
+		
+		if Input.is_action_pressed("pick_up_item"):
+			_pick_up_item()
+	else:
+		if Input.is_joy_button_pressed(gamepad_id, JOY_R2):
+			_fire_weapon()
+		
+		if Input.is_joy_button_pressed(gamepad_id, JOY_XBOX_X):
+			_pick_up_item()
 	
-	if Input.is_action_pressed("pick_up_item") || Input.is_joy_button_pressed(gamepad_id, JOY_XBOX_X):
-		_pick_up_item()
 
 # handles movement
 func _integrate_forces(state):
-	directional_force = _calculate_direction_analog(state)
+	if debug_mode:
+		directional_force = _calculate_direction_digital(state)
+	else:
+		directional_force = _calculate_direction_analog(state)
 	
 	var final_velocity = state.get_linear_velocity() + (directional_force * acceleration)
 	final_velocity.x = clamp(final_velocity.x, -top_speed, top_speed)
@@ -104,7 +118,7 @@ func set_name(player_name):
 
 func set_gamepad_id(id):
 	gamepad_id = id
-	Global.print_player_name(gamepad_id)
+	GameInfo.print_player_name(gamepad_id)
 
 func damage(dmg):
 	health = clamp(health - dmg, 0, 100)
@@ -127,7 +141,7 @@ func _pick_up_item():
 	#if possible_items.size() > 0: print(possible_items)
 	for item in possible_items:
 		if item.is_in_group("Weapon"):
-			_equip_weapon(item.player_weapon_scene)
+			_equip_weapon(item.get_player_scene())
 			item.queue_free()
 			break
 		

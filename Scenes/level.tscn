@@ -1,15 +1,16 @@
-[gd_scene load_steps=12 format=1]
+[gd_scene load_steps=13 format=1]
 
-[ext_resource path="res://Sprites/player.png" type="Texture" id=1]
-[ext_resource path="res://Scenes/WeaponSpawner.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/WeaponSpawnPoint.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Weapons/world_blue_ph.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/Weapons/world_orange_ph.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Weapons/WorldLaser.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Weapons/WorldLauncher.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/PlayerManager.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/static_obstacle_ph.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/moveable_obstacle_ph.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/playerRB.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Sprites/player.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/WeaponSpawner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/WeaponSpawnPoint.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Weapons/world_blue_ph.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Weapons/world_orange_ph.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Weapons/WorldLaser.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Weapons/WorldLauncher.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/PlayerManager.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/static_obstacle_ph.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/moveable_obstacle_ph.tscn" type="PackedScene" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -17,6 +18,11 @@ custom_solver_bias = 0.0
 extents = Vector2( 32, 32 )
 
 [node name="Level" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+
+transform/pos = Vector2( 544, 224 )
+debug_mode = true
 
 [node name="Walls" type="Node2D" parent="."]
 
@@ -41,7 +47,7 @@ bounce = 0.0
 
 [node name="Sprite" type="Sprite" parent="Walls/wall1"]
 
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -74,7 +80,7 @@ bounce = 0.0
 
 [node name="Sprite" type="Sprite" parent="Walls/wall2"]
 
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -106,7 +112,7 @@ bounce = 0.0
 
 [node name="Sprite" type="Sprite" parent="Walls/floor"]
 
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -120,36 +126,36 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="WeaponSpawner" parent="." instance=ExtResource( 2 )]
+[node name="WeaponSpawner" parent="." instance=ExtResource( 3 )]
 
 editor/display_folded = true
 
-[node name="WeaponSpawnPoint" parent="WeaponSpawner" instance=ExtResource( 3 )]
+[node name="WeaponSpawnPoint" parent="WeaponSpawner" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 256, 64 )
-world_object_scene = ExtResource( 4 )
+world_object_scene = ExtResource( 5 )
 
-[node name="WeaponSpawnPoint1" parent="WeaponSpawner" instance=ExtResource( 3 )]
+[node name="WeaponSpawnPoint1" parent="WeaponSpawner" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 736, 160 )
-world_object_scene = ExtResource( 5 )
-
-[node name="WeaponSpawnPoint2" parent="WeaponSpawner" instance=ExtResource( 3 )]
-
-transform/pos = Vector2( 512, 384 )
-world_object_scene = ExtResource( 5 )
-
-[node name="WeaponSpawnPoint3" parent="WeaponSpawner" instance=ExtResource( 3 )]
-
-transform/pos = Vector2( 832, 416 )
 world_object_scene = ExtResource( 6 )
 
-[node name="WeaponSpawnPoint4" parent="WeaponSpawner" instance=ExtResource( 3 )]
+[node name="WeaponSpawnPoint2" parent="WeaponSpawner" instance=ExtResource( 4 )]
 
-transform/pos = Vector2( 128, 288 )
+transform/pos = Vector2( 512, 384 )
+world_object_scene = ExtResource( 6 )
+
+[node name="WeaponSpawnPoint3" parent="WeaponSpawner" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 832, 416 )
 world_object_scene = ExtResource( 7 )
 
-[node name="PlayerManager" parent="." instance=ExtResource( 8 )]
+[node name="WeaponSpawnPoint4" parent="WeaponSpawner" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 128, 288 )
+world_object_scene = ExtResource( 8 )
+
+[node name="PlayerManager" parent="." instance=ExtResource( 9 )]
 
 editor/display_folded = true
 transform/pos = Vector2( 32, 0 )
@@ -170,35 +176,35 @@ transform/pos = Vector2( 96, 448 )
 
 transform/pos = Vector2( 896, 64 )
 
-[node name="StaticObstacle" parent="." instance=ExtResource( 9 )]
+[node name="StaticObstacle" parent="." instance=ExtResource( 10 )]
 
 transform/pos = Vector2( 160, 192 )
 
-[node name="StaticObstacle1" parent="." instance=ExtResource( 9 )]
+[node name="StaticObstacle1" parent="." instance=ExtResource( 10 )]
 
 transform/pos = Vector2( 288, 416 )
 
-[node name="StaticObstacle2" parent="." instance=ExtResource( 9 )]
+[node name="StaticObstacle2" parent="." instance=ExtResource( 10 )]
 
 transform/pos = Vector2( 928, 160 )
 
-[node name="MoveableObstacle" parent="." instance=ExtResource( 10 )]
+[node name="MoveableObstacle" parent="." instance=ExtResource( 11 )]
 
 transform/pos = Vector2( 416, 256 )
 
-[node name="MoveableObstacle1" parent="." instance=ExtResource( 10 )]
+[node name="MoveableObstacle1" parent="." instance=ExtResource( 11 )]
 
 transform/pos = Vector2( 832, 256 )
 
-[node name="MoveableObstacle2" parent="." instance=ExtResource( 10 )]
+[node name="MoveableObstacle2" parent="." instance=ExtResource( 11 )]
 
 transform/pos = Vector2( 704, 96 )
 
-[node name="WorldLaser" parent="." instance=ExtResource( 6 )]
+[node name="WorldLaser" parent="." instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 416, 128 )
 
-[node name="WorldLauncher" parent="." instance=ExtResource( 7 )]
+[node name="WorldLauncher" parent="." instance=ExtResource( 8 )]
 
 transform/pos = Vector2( 608, 64 )
 
