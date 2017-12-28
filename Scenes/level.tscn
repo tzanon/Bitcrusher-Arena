@@ -128,8 +128,6 @@ __meta__ = {
 
 [node name="WeaponSpawner" parent="." instance=ExtResource( 3 )]
 
-editor/display_folded = true
-
 [node name="WeaponSpawnPoint" parent="WeaponSpawner" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 256, 64 )

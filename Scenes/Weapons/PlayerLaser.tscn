@@ -11,6 +11,6 @@ texture = ExtResource( 1 )
 script/script = ExtResource( 2 )
 projectile_scene = ExtResource( 3 )
 proj_spawn_pos = Vector2( 0, -128 )
-fire_rate = 0.1
+fire_rate = 0.25
 
 

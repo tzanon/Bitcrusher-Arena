@@ -1,6 +1,5 @@
 extends Node2D
 
-
 # different colours? orange, purple, grey, black, brown, white?
 onready var player_spawn_info = {
 	"blue" : { hud_pos = Vector2(0, 0), spawn_pos = get_node("BlueSpawnPoint").get_global_pos(), sprite_path = "" },

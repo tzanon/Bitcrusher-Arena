@@ -42,6 +42,7 @@ script/script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
+debug_mode = false
 
 [node name="PlayerSprite" type="Sprite" parent="."]
 

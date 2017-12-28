@@ -33,7 +33,6 @@ const DIRECTION = {
 }
 
 func _ready():
-	set_process_input(true)
 	set_fixed_process(true)
 	
 	item_detector = get_node("Pickup Detector")
@@ -48,30 +47,27 @@ func _fixed_process(delta):
 	if debug_mode:
 		if Input.is_action_pressed("rotate_left"):
 			set_rotd(get_rotd() + rotd_speed * delta)
+		
 		if Input.is_action_pressed("rotate_right"):
 			set_rotd(get_rotd() + -rotd_speed * delta)
-	else:
-		var axis_pos = -Input.get_joy_axis(gamepad_id, JOY_AXIS_2)
 		
-		if abs(axis_pos) > joystick_idle_limit:
-			set_rotd(get_rotd() + axis_pos * rotd_speed * delta)
-	
-
-func _input(event):
-	# is_joy_button_pressed(device#, JOY_button const)
-	
-	if debug_mode:
 		if Input.is_action_pressed("fire_weapon"):
 			_fire_weapon()
 		
 		if Input.is_action_pressed("pick_up_item"):
 			_pick_up_item()
+		
 	else:
+		var axis_pos = -Input.get_joy_axis(gamepad_id, JOY_AXIS_2)
+		if abs(axis_pos) > joystick_idle_limit:
+			set_rotd(get_rotd() + axis_pos * rotd_speed * delta)
+		
 		if Input.is_joy_button_pressed(gamepad_id, JOY_R2):
 			_fire_weapon()
 		
 		if Input.is_joy_button_pressed(gamepad_id, JOY_XBOX_X):
 			_pick_up_item()
+		
 	
 
 # handles movement

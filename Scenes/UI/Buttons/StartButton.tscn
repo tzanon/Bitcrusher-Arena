@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://Sprites/UI/ui_start_button.png" type="Texture" id=1]
+
+[node name="StartButton" type="TextureButton"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 1
+size_flags/vertical = 2
+margin/left = 2432.0
+margin/top = 960.0
+margin/right = 2752.0
+margin/bottom = 1068.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 1 )
+params/resize_mode = 0
+params/stretch_mode = 0
+
+
