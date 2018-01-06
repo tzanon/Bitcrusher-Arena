@@ -1,5 +1,7 @@
 extends Control
 
+export var debug_mode = false
+
 const main_menu_path = "res://Scenes/main_menu.tscn"
 const game_scene_path = "res://Scenes/level.tscn"
 
@@ -25,6 +27,10 @@ onready var start_button = get_node("MainMargin/DisplayLayout/NavigationArea/Sta
 
 func _ready():
 	GameInfo.clear_info()
+	
+	if debug_mode:
+		_request_join(1) # add one "dummy" player to proceed with one gamepad
+	
 	player_warning.hide()
 	
 	back_button.connect("pressed", self, "_back")
@@ -85,7 +91,7 @@ func _request_join(gamepad_id):
 	else:
 		_register_gamepad(gamepad_id)
 		# show icon and hide join text
-		#print("controller ", event.device, " registered")
+		# print("controller ", event.device, " registered")
 
 func _register_gamepad(gamepad_id):
 	if player_info.size() == 0:

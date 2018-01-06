@@ -9,7 +9,10 @@
 texture = ExtResource( 1 )
 script/script = ExtResource( 2 )
 projectile_scene = ExtResource( 3 )
-proj_spawn_pos = Vector2( 0, -16 )
 fire_rate = 0.9
+
+[node name="ProjectileSpawnPoint" type="Position2D" parent="."]
+
+transform/pos = Vector2( 0, -16 )
 
 

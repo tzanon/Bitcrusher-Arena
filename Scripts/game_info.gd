@@ -1,9 +1,9 @@
 extends Node
 
-# contains info for current game's players; initially null
+# contains info for current game's players; initially null (on official release)
 var registered_player_info = [
-	{ name = "blue", pad_id = 0, head_path = "" },
-	{ name = "yellow", pad_id = 1, head_path = "" }
+	{ name = "green", pad_id = 1, head_path = "" },
+	{ name = "yellow", pad_id = 2, head_path = "" }
 ]
 
 var match_winner = null

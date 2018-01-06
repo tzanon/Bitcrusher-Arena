@@ -3,7 +3,7 @@ extends Sprite
 
 export(PackedScene) var projectile_scene
 
-export var proj_spawn_pos = Vector2(0,0)
+onready var proj_spawn_point = get_node("ProjectileSpawnPoint")
 
 var fire_timer
 
@@ -25,7 +25,7 @@ func _process(delta):
 func fire():
 	if fire_timer.get_time_left() <= 0:
 		var projectile = projectile_scene.instance()
-		projectile.set_global_pos(get_global_transform().xform(proj_spawn_pos))
+		projectile.set_global_pos(proj_spawn_point.get_global_pos())
 		projectile.set_global_rot(get_global_rot())
 		get_tree().get_root().add_child(projectile)
 		

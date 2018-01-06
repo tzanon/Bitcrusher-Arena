@@ -10,7 +10,13 @@ transform/scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 1 )
 script/script = ExtResource( 2 )
 projectile_scene = ExtResource( 3 )
-proj_spawn_pos = Vector2( 16, -128 )
 fire_rate = 0.2
+
+[node name="ProjectileSpawnPoint" type="Position2D" parent="."]
+
+transform/pos = Vector2( 16, -128 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 

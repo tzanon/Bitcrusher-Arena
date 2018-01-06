@@ -8,19 +8,19 @@ const weapon_scenes = [
 	preload("res://Scenes/Weapons/world_blue_ph.tscn"),
 	preload("res://Scenes/Weapons/WorldLaser.tscn"),
 	preload("res://Scenes/Weapons/WorldLauncher.tscn")
-] #world weapon scenes to instantiate from
+] # world weapon scenes to instantiate from
 
 const light_weapon_scenes = []
-const power_weapon_scenes = [] #more powerful: spawned in harder places
+const power_weapon_scenes = [] # more powerful: spawned in harder places
 
-#TODO: exported enum and case statement to select spawn mode
+# TODO: exported enum and case statement to select spawn mode
 
 var total_spawn_points = []
 
 var min_spawn
 var max_spawn
 
-var arena_weapon_refs #array of all weapons currently in the arena
+var arena_weapon_refs # array of all weapons currently in the arena
 
 func _ready():
 	refresh_timer = get_node("RefreshTimer")
