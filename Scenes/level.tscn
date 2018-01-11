@@ -292,43 +292,36 @@ period = 1
 
 transform/pos = Vector2( 290, 40 )
 transform/rot = 180.0
-fire_rate = 3
 
 [node name="WallTrap1" parent="Traps" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 40, 110 )
 transform/rot = 270.0
-fire_rate = 3
 
 [node name="WallTrap5" parent="Traps" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 40, 230 )
 transform/rot = 270.0
-fire_rate = 3
 
 [node name="WallTrap6" parent="Traps" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 40, 170 )
 transform/rot = 270.0
-fire_rate = 3
 
 [node name="WallTrap2" parent="Traps" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 110, 40 )
 transform/rot = 180.0
-fire_rate = 3
 
 [node name="WallTrap3" parent="Traps" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 170, 40 )
 transform/rot = 180.0
-fire_rate = 3
 
 [node name="WallTrap4" parent="Traps" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 230, 40 )
 transform/rot = 180.0
-fire_rate = 3
 
 [node name="Player" parent="." instance=ExtResource( 8 )]
 
@@ -361,36 +354,35 @@ world_object_scene = ExtResource( 14 )
 
 [node name="PlayerManager" parent="." instance=ExtResource( 15 )]
 
-editor/display_folded = true
 transform/pos = Vector2( 450, 340 )
 
 [node name="BlueSpawnPoint" parent="PlayerManager"]
 
-transform/pos = Vector2( -352, -224 )
+transform/pos = Vector2( 210, 10 )
 
 [node name="RedSpawnPoint" parent="PlayerManager"]
 
-transform/pos = Vector2( 1376, 672 )
+transform/pos = Vector2( 700, 320 )
 
 [node name="GreenSpawnPoint" parent="PlayerManager"]
 
-transform/pos = Vector2( -352, 672 )
+transform/pos = Vector2( 200, 320 )
 
 [node name="YellowSpawnPoint" parent="PlayerManager"]
 
-transform/pos = Vector2( 1376, -224 )
+transform/pos = Vector2( 700, 0 )
 
 [node name="MoveableObstacle" parent="." instance=ExtResource( 16 )]
 
-transform/pos = Vector2( 630, 660 )
+transform/pos = Vector2( 650, 490 )
 
 [node name="MoveableObstacle1" parent="." instance=ExtResource( 16 )]
 
-transform/pos = Vector2( 1160, 290 )
+transform/pos = Vector2( 950, 310 )
 
 [node name="MoveableObstacle2" parent="." instance=ExtResource( 16 )]
 
-transform/pos = Vector2( 1170, 820 )
+transform/pos = Vector2( 1150, 510 )
 
 [node name="WorldLaser" parent="." instance=ExtResource( 13 )]
 
