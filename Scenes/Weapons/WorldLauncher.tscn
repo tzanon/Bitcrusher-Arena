@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/world_weapon.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Weapons/PlayerLauncher.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Sprites/world_potato_gun256x100.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Weapons/world_launcher_outline64x25.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -20,20 +20,16 @@ gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
 script/script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 player_weapon_scene = ExtResource( 2 )
-
-[node name="WorldSprite" type="Sprite" parent="."]
-
-transform/scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
+
+[node name="WorldSprite" type="Sprite" parent="."]
+
+texture = ExtResource( 3 )
 
 

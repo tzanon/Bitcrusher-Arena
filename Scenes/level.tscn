@@ -26,7 +26,6 @@ extents = Vector2( 32, 32 )
 
 [node name="Walls" type="Node2D" parent="."]
 
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -292,52 +291,43 @@ period = 1
 
 transform/pos = Vector2( 290, 40 )
 transform/rot = 180.0
-fire_rate = 3
 
 [node name="WallTrap1" parent="Traps" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 40, 110 )
 transform/rot = 270.0
-fire_rate = 3
 
 [node name="WallTrap5" parent="Traps" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 40, 230 )
 transform/rot = 270.0
-fire_rate = 3
 
 [node name="WallTrap6" parent="Traps" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 40, 170 )
 transform/rot = 270.0
-fire_rate = 3
 
 [node name="WallTrap2" parent="Traps" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 110, 40 )
 transform/rot = 180.0
-fire_rate = 3
 
 [node name="WallTrap3" parent="Traps" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 170, 40 )
 transform/rot = 180.0
-fire_rate = 3
 
 [node name="WallTrap4" parent="Traps" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 230, 40 )
 transform/rot = 180.0
-fire_rate = 3
 
 [node name="Player" parent="." instance=ExtResource( 8 )]
 
-transform/pos = Vector2( 660, 290 )
+transform/pos = Vector2( 608, 320 )
 debug_mode = true
 
 [node name="WeaponSpawner" parent="." instance=ExtResource( 9 )]
-
-editor/display_folded = true
 
 [node name="WeaponSpawnPoint" parent="WeaponSpawner" instance=ExtResource( 10 )]
 
@@ -361,12 +351,11 @@ world_object_scene = ExtResource( 14 )
 
 [node name="PlayerManager" parent="." instance=ExtResource( 15 )]
 
-editor/display_folded = true
-transform/pos = Vector2( 450, 340 )
+transform/pos = Vector2( 448, 320 )
 
 [node name="BlueSpawnPoint" parent="PlayerManager"]
 
-transform/pos = Vector2( -352, -224 )
+transform/pos = Vector2( -192, -64 )
 
 [node name="RedSpawnPoint" parent="PlayerManager"]
 
@@ -398,7 +387,7 @@ transform/pos = Vector2( 600, 480 )
 
 [node name="WorldLauncher" parent="." instance=ExtResource( 14 )]
 
-transform/pos = Vector2( 430, -140 )
+transform/pos = Vector2( 800, 448 )
 
 
 [editable path="PlayerManager"]

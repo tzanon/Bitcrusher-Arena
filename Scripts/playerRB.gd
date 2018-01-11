@@ -3,7 +3,7 @@ extends RigidBody2D
 export var debug_mode = false
 
 # gamepad device used to control this player
-var gamepad_id = 0 setget set_gamepad_id
+var gamepad_id = -1 setget set_gamepad_id
 var name = "" setget set_name
 
 var health = 100
@@ -12,8 +12,8 @@ signal died(player_name)
 
 const joystick_idle_limit = 0.15
 
-var acceleration = 40
-var top_speed = 200
+export var acceleration = 40
+export var top_speed = 200
 
 var rotd_speed = 180
 
@@ -34,6 +34,7 @@ const DIRECTION = {
 
 func _ready():
 	set_fixed_process(true)
+	set_process_input(true)
 	
 	item_detector = get_node("Pickup Detector")
 	_equip_weapon(start_weapon)
@@ -51,24 +52,26 @@ func _fixed_process(delta):
 		if Input.is_action_pressed("rotate_right"):
 			set_rotd(get_rotd() + -rotd_speed * delta)
 		
-		if Input.is_action_pressed("fire_weapon"):
-			_fire_weapon()
-		
-		if Input.is_action_pressed("pick_up_item"):
-			_pick_up_item()
-		
 	else:
 		var axis_pos = -Input.get_joy_axis(gamepad_id, JOY_AXIS_2)
 		if abs(axis_pos) > joystick_idle_limit:
 			set_rotd(get_rotd() + axis_pos * rotd_speed * delta)
-		
-		if Input.is_joy_button_pressed(gamepad_id, JOY_R2):
+	
+
+func _input(event):
+	
+	if debug_mode:
+		if event.is_action_pressed("fire_weapon"):
 			_fire_weapon()
 		
-		if Input.is_joy_button_pressed(gamepad_id, JOY_XBOX_X):
+		if event.is_action_pressed("pick_up_item"):
 			_pick_up_item()
+	else:
+		if event.is_action_pressed("joy_fire") && event.device == self.gamepad_id:
+			_fire_weapon()
 		
-	
+		if event.is_action_pressed("joy_pickup") && event.device == self.gamepad_id:
+			_pick_up_item()
 
 # handles movement
 func _integrate_forces(state):
@@ -114,7 +117,7 @@ func set_name(player_name):
 
 func set_gamepad_id(id):
 	gamepad_id = id
-	GameInfo.print_player_name(gamepad_id)
+	#GameInfo.print_player_name(gamepad_id)
 
 func damage(dmg):
 	health = clamp(health - dmg, 0, 100)

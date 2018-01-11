@@ -28,6 +28,7 @@ script/script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
+debug_mode = true
 
 [node name="MainMargin" type="MarginContainer" parent="."]
 
@@ -49,6 +50,7 @@ custom_constants/margin_bottom = 30
 [node name="PlayerWarning" type="PopupPanel" parent="MainMargin"]
 
 editor/display_folded = true
+visibility/visible = false
 rect/min_size = Vector2( 1024, 256 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -124,7 +126,6 @@ stretch_mode = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MainMargin/DisplayLayout"]
 
-editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 3
@@ -158,6 +159,7 @@ __meta__ = {
 
 [node name="Display1" type="Control" parent="MainMargin/DisplayLayout/HBoxContainer/JoinDisplays"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -198,6 +200,7 @@ stretch_mode = 0
 
 [node name="Display2" type="Control" parent="MainMargin/DisplayLayout/HBoxContainer/JoinDisplays"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -238,6 +241,7 @@ stretch_mode = 0
 
 [node name="Display3" type="Control" parent="MainMargin/DisplayLayout/HBoxContainer/JoinDisplays"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -278,6 +282,7 @@ stretch_mode = 0
 
 [node name="Display4" type="Control" parent="MainMargin/DisplayLayout/HBoxContainer/JoinDisplays"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -318,6 +323,7 @@ stretch_mode = 0
 
 [node name="NavigationArea" type="HBoxContainer" parent="MainMargin/DisplayLayout"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 3
