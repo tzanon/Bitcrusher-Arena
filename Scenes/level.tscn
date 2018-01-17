@@ -351,6 +351,7 @@ world_object_scene = ExtResource( 14 )
 
 [node name="PlayerManager" parent="." instance=ExtResource( 15 )]
 
+editor/display_folded = true
 transform/pos = Vector2( 450, 340 )
 
 [node name="BlueSpawnPoint" parent="PlayerManager"]

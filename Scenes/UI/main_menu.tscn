@@ -3,6 +3,7 @@
 [ext_resource path="res://Sprites/menu_bg.jpg" type="Texture" id=1]
 [ext_resource path="res://Scenes/UI/play_button.tscn" type="PackedScene" id=2]
 
+
 [node name="menu" type="Control"]
 
 anchor/right = 1
