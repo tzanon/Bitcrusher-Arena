@@ -324,7 +324,7 @@ transform/rot = 180.0
 
 [node name="Player" parent="." instance=ExtResource( 8 )]
 
-transform/pos = Vector2( 608, 320 )
+transform/pos = Vector2( 224, 416 )
 debug_mode = true
 
 [node name="WeaponSpawner" parent="." instance=ExtResource( 9 )]
