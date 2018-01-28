@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://Scripts/projectile.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/potato1.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Effects/Explosion1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Sprites/potato1.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -18,7 +19,7 @@ shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
 mode = 0
-mass = 1.0
+mass = 0.5
 friction = 1.0
 bounce = 0.0
 gravity_scale = 1.0
@@ -33,13 +34,14 @@ velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
 script/script = ExtResource( 1 )
-damage_amount = 25
+damage_amount = 15
 speed = 750.0
+impact_effect_scene = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 
 transform/scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 

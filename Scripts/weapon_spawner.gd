@@ -50,7 +50,7 @@ func _process(delta):
 	
 
 func _clear_weapons():
-	print("clearing ", arena_weapon_refs.size(), " weapons")
+	#print("clearing ", arena_weapon_refs.size(), " weapons")
 	for weapon_ref in arena_weapon_refs:
 		if weapon_ref.get_ref():
 			weapon_ref.get_ref().queue_free()
@@ -95,7 +95,7 @@ func _select_spawn_points():
 	var possible_points = [] + total_spawn_points
 	
 	for i in range(num_weapons):
-		print("i is ", i)
+		#print("i is ", i)
 		var j = randi() % (possible_points.size())
 		spawn_points.append(possible_points[j])
 		possible_points.remove(j)

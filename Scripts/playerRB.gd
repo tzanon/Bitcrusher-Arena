@@ -10,6 +10,8 @@ var health = 100
 signal health_changed(player_name, player_health)
 signal died(player_name)
 
+var animator
+
 const joystick_idle_limit = 0.15
 
 export var acceleration = 40
@@ -35,6 +37,8 @@ const DIRECTION = {
 func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
+	
+	animator = get_node("AnimationPlayer")
 	
 	item_detector = get_node("Pickup Detector")
 	_equip_weapon(start_weapon)
@@ -121,8 +125,9 @@ func set_gamepad_id(id):
 
 func damage(dmg):
 	health = clamp(health - dmg, 0, 100)
-	print("player ", name, " health: ", health)
+	if debug_mode: print("player ", name, " health: ", health)
 	emit_signal("health_changed", name, health)
+	animator.play("PlayerDamaged")
 	
 	if health <= 0:
 		emit_signal("died", name)
@@ -137,7 +142,7 @@ func _fire_weapon():
 # looks for item in pickup radius and replaces current one with it if there is
 func _pick_up_item():
 	var possible_items = item_detector.get_overlapping_areas()
-	#if possible_items.size() > 0: print(possible_items)
+	if debug_mode && possible_items.size() > 0: print(possible_items)
 	for item in possible_items:
 		if item.is_in_group("Weapon"):
 			_equip_weapon(item.get_player_scene())
@@ -147,7 +152,7 @@ func _pick_up_item():
 		# for extensibility in case we want to add abilities
 		if item.is_in_group("Ability"):
 			# add ability to player/replace current one
-			print("found an ability")
+			if debug_mode: print("found an ability")
 			item.queue_free()
 			break
 
@@ -158,8 +163,4 @@ func _equip_weapon(new_weapon_scene):
 	weapon = new_weapon_scene.instance()
 	add_child(weapon)
 	weapon.set_pos(weapon_pos)
-
-
-
-
 

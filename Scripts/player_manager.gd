@@ -11,7 +11,7 @@ onready var player_spawn_info = {
 const player_template = preload("res://Scenes/playerRB.tscn")
 const hud_template = null #= preload("")
 
-const spawn_path = "/root/Level"
+const spawn_path = "/root/Level/Players"
 
 
 var match_player_refs = {}
@@ -51,7 +51,7 @@ func remove_player(player_name):
 	
 	if match_player_refs.size() == 1:
 		GameInfo.match_winner = match_player_refs.keys().front()
-		get_tree().change_scene("res://Scenes/UI/results.tscn")
+		#get_tree().change_scene("res://Scenes/UI/results.tscn")
 		print("Winner is ", GameInfo.match_winner)
 	
 	
