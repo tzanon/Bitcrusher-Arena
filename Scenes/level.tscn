@@ -264,28 +264,26 @@ paused = true
 
 [node name="Traps" type="Node2D" parent="."]
 
-editor/display_folded = true
-
 [node name="FloorTrap" parent="Traps" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 390, 680 )
 script/script = ExtResource( 6 )
+period = 1.0
 damage_amount = 20
-period = 1
 
 [node name="FloorTrap1" parent="Traps" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 540, 970 )
 script/script = ExtResource( 6 )
+period = 1.0
 damage_amount = 20
-period = 1
 
 [node name="FloorTrap2" parent="Traps" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 290, 970 )
 script/script = ExtResource( 6 )
+period = 1.0
 damage_amount = 20
-period = 1
 
 [node name="WallTrap" parent="Traps" instance=ExtResource( 7 )]
 
