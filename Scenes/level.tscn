@@ -1,12 +1,12 @@
 [gd_scene load_steps=18 format=1]
 
-[ext_resource path="res://Scenes/static_obstacle_ph.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Sprites/player.png" type="Texture" id=2]
-[ext_resource path="res://Scenes/moving_wall.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scripts/moving_wall.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/floor_trap.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scripts/floor_trap.gd" type="Script" id=6]
-[ext_resource path="res://Scenes/wall_trap.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scripts/level.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/static_obstacle_ph.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Sprites/player.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/moving_wall.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scripts/moving_wall.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/wall_trap.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/floor_trap.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/playerRB.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/WeaponSpawner.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/WeaponSpawnPoint.tscn" type="PackedScene" id=10]
@@ -24,8 +24,11 @@ extents = Vector2( 32, 32 )
 
 [node name="Level" type="Node"]
 
+script/script = ExtResource( 1 )
+
 [node name="Walls" type="Node2D" parent="."]
 
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -38,13 +41,13 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Vertical" parent="Walls/TopLeftTriangle" instance=ExtResource( 1 )]
+[node name="Vertical" parent="Walls/TopLeftTriangle" instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 70, -40 )
 transform/rot = 90.0
 transform/scale = Vector2( 2.04688, 0.28125 )
 
-[node name="Horizontal" parent="Walls/TopLeftTriangle" instance=ExtResource( 1 )]
+[node name="Horizontal" parent="Walls/TopLeftTriangle" instance=ExtResource( 2 )]
 
 transform/pos = Vector2( -24.5, 55.5 )
 transform/scale = Vector2( 2.04688, 0.28125 )
@@ -54,40 +57,40 @@ transform/scale = Vector2( 2.04688, 0.28125 )
 editor/display_folded = true
 transform/pos = Vector2( 1450, 420 )
 
-[node name="Vertical" parent="Walls/TopRightTriangle" instance=ExtResource( 1 )]
+[node name="Vertical" parent="Walls/TopRightTriangle" instance=ExtResource( 2 )]
 
 transform/pos = Vector2( -70, -96.125 )
 transform/rot = 90.0
 transform/scale = Vector2( 3.87109, 0.28125 )
 
-[node name="Horizontal" parent="Walls/TopRightTriangle" instance=ExtResource( 1 )]
+[node name="Horizontal" parent="Walls/TopRightTriangle" instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 116.125, 80 )
 transform/scale = Vector2( 3.87109, 0.296875 )
 
-[node name="LeftWall" parent="Walls" instance=ExtResource( 1 )]
+[node name="LeftWall" parent="Walls" instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 234.5, 550 )
 transform/scale = Vector2( 4.85938, 1 )
 
-[node name="LeftWall1" parent="Walls" instance=ExtResource( 1 )]
+[node name="LeftWall1" parent="Walls" instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 500, 820 )
 transform/scale = Vector2( 4.70313, 1 )
 
-[node name="Pillar" parent="Walls" instance=ExtResource( 1 )]
+[node name="Pillar" parent="Walls" instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 950, 160 )
 
-[node name="Pillar1" parent="Walls" instance=ExtResource( 1 )]
+[node name="Pillar1" parent="Walls" instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 950, 410 )
 
-[node name="Pillar2" parent="Walls" instance=ExtResource( 1 )]
+[node name="Pillar2" parent="Walls" instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 950, 660 )
 
-[node name="Pillar3" parent="Walls" instance=ExtResource( 1 )]
+[node name="Pillar3" parent="Walls" instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 950, 910 )
 
@@ -113,7 +116,7 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="Walls/NorthWall"]
 
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -149,7 +152,7 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="Walls/SouthWall"]
 
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -186,7 +189,7 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="Walls/EastWall"]
 
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -223,7 +226,7 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="Walls/WestWall"]
 
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -241,22 +244,22 @@ __meta__ = {
 
 transform/pos = Vector2( 1630, 830 )
 
-[node name="Horizontal" parent="Walls/MovingWalls" instance=ExtResource( 3 )]
+[node name="Horizontal" parent="Walls/MovingWalls" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( -210, -30 )
 transform/scale = Vector2( 0.0937499, 2.98437 )
-script/script = ExtResource( 4 )
+script/script = ExtResource( 5 )
 period = 2.5
 dx = 320
 dy = 0
 paused = null
 
-[node name="Vertical" parent="Walls/MovingWalls" instance=ExtResource( 3 )]
+[node name="Vertical" parent="Walls/MovingWalls" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( -50, -190 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.0937499, 2.98437 )
-script/script = ExtResource( 4 )
+script/script = ExtResource( 5 )
 period = 2.5
 dx = 0
 dy = 320
@@ -264,61 +267,54 @@ paused = true
 
 [node name="Traps" type="Node2D" parent="."]
 
-[node name="FloorTrap" parent="Traps" instance=ExtResource( 5 )]
-
-transform/pos = Vector2( 390, 680 )
-script/script = ExtResource( 6 )
-period = 1.0
-damage_amount = 20
-
-[node name="FloorTrap1" parent="Traps" instance=ExtResource( 5 )]
-
-transform/pos = Vector2( 540, 970 )
-script/script = ExtResource( 6 )
-period = 1.0
-damage_amount = 20
-
-[node name="FloorTrap2" parent="Traps" instance=ExtResource( 5 )]
-
-transform/pos = Vector2( 290, 970 )
-script/script = ExtResource( 6 )
-period = 1.0
-damage_amount = 20
-
-[node name="WallTrap" parent="Traps" instance=ExtResource( 7 )]
+[node name="WallTrap" parent="Traps" instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 290, 40 )
 transform/rot = 180.0
 
-[node name="WallTrap1" parent="Traps" instance=ExtResource( 7 )]
+[node name="WallTrap1" parent="Traps" instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 40, 110 )
 transform/rot = 270.0
 
-[node name="WallTrap5" parent="Traps" instance=ExtResource( 7 )]
+[node name="WallTrap5" parent="Traps" instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 40, 230 )
 transform/rot = 270.0
 
-[node name="WallTrap6" parent="Traps" instance=ExtResource( 7 )]
+[node name="WallTrap6" parent="Traps" instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 40, 170 )
 transform/rot = 270.0
 
-[node name="WallTrap2" parent="Traps" instance=ExtResource( 7 )]
+[node name="WallTrap2" parent="Traps" instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 110, 40 )
 transform/rot = 180.0
 
-[node name="WallTrap3" parent="Traps" instance=ExtResource( 7 )]
+[node name="WallTrap3" parent="Traps" instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 170, 40 )
 transform/rot = 180.0
 
-[node name="WallTrap4" parent="Traps" instance=ExtResource( 7 )]
+[node name="WallTrap4" parent="Traps" instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 230, 40 )
 transform/rot = 180.0
+
+[node name="FloorTrap" parent="Traps" instance=ExtResource( 7 )]
+
+damage_amount = 20
+
+[node name="FloorTrap1" parent="Traps" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 540, 970 )
+damage_amount = 20
+
+[node name="FloorTrap2" parent="Traps" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 260, 970 )
+damage_amount = 20
 
 [node name="Player" parent="." instance=ExtResource( 8 )]
 
@@ -326,6 +322,8 @@ transform/pos = Vector2( 608, 320 )
 debug_mode = true
 
 [node name="WeaponSpawner" parent="." instance=ExtResource( 9 )]
+
+editor/display_folded = true
 
 [node name="WeaponSpawnPoint" parent="WeaponSpawner" instance=ExtResource( 10 )]
 
