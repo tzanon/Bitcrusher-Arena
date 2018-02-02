@@ -17,7 +17,7 @@ shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 2
 mode = 0
-mass = 1.0
+mass = 0.000102041
 friction = 1.0
 bounce = 0.0
 gravity_scale = 1.0
@@ -37,6 +37,7 @@ __meta__ = {
 }
 damage_amount = 10
 speed = 900.0
+impact_effect_scene = null
 
 [node name="Sprite" type="Sprite" parent="."]
 

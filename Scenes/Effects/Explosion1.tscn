@@ -23,7 +23,8 @@ angular_damp = 1.0
 script/script = ExtResource( 1 )
 is_damaging = true
 damage_amount = 10
-impact_force = 0.0
+impact_force = 500.0
+max_force_range = 60
 debug_mode = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -39,7 +40,7 @@ autoplay = "Explosion1"
 
 [node name="Explosion" type="Sprite" parent="."]
 
-transform/rot = 38.8889
+transform/scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 3 )
 
 [node name="Collider" type="CollisionShape2D" parent="."]

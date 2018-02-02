@@ -362,6 +362,8 @@ damage_amount = 20
 
 [node name="Obstacles" type="Node2D" parent="."]
 
+editor/display_folded = true
+
 [node name="MoveableObstacle" parent="Obstacles" instance=ExtResource( 11 )]
 
 transform/pos = Vector2( 672, 544 )
@@ -374,11 +376,13 @@ transform/pos = Vector2( 768, 224 )
 
 transform/pos = Vector2( 1152, 512 )
 
-[node name="WorldLaser" parent="." instance=ExtResource( 12 )]
+[node name="Pickups" type="Node2D" parent="."]
+
+[node name="WorldLaser" parent="Pickups" instance=ExtResource( 12 )]
 
 transform/pos = Vector2( 576, 640 )
 
-[node name="WorldLauncher" parent="." instance=ExtResource( 13 )]
+[node name="WorldLauncher" parent="Pickups" instance=ExtResource( 13 )]
 
 transform/pos = Vector2( 800, 576 )
 
