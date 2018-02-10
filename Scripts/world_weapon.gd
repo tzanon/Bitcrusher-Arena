@@ -4,7 +4,7 @@ extends Area2D
 export(PackedScene) var player_weapon_scene
 
 func _ready():
-	self.add_to_group("Weapon")
+	self.add_to_group("WeaponPickup")
 
 func get_player_scene():
 	return player_weapon_scene

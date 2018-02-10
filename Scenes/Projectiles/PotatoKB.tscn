@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://Scripts/projectile_kb.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Effects/Explosion1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Sprites/Projectiles/potato16x28.png" type="Texture" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 7.0
+height = 12.0
+
+[node name="PotatoKB" type="KinematicBody2D" groups=[
+"SolidProjectileKB",
+]]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 2
+collision/margin = 0.08
+script/script = ExtResource( 1 )
+debug_mode = true
+damage_amount = 15
+speed = 750.0
+bounce_groups = StringArray( "Airburst", "Bouncy" )
+bounce_factor = 1.0
+impact_effect_scene = ExtResource( 2 )
+effect_spawn_path = "/root/Level/Effects"
+
+[node name="Sprite" type="Sprite" parent="."]
+
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+

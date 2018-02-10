@@ -1,9 +1,14 @@
 extends RigidBody2D
 
+export(float) var max_speed # in case we want to have speed affected by certain factors, but kept within a range
+export(float) var min_speed
+
 export(int) var damage_amount = 0
-export(float) var speed
+export(float) var speed setget ,get_speed
 
 export(PackedScene) var impact_effect_scene
+
+export var effect_spawn_path = "/root/Level/Effects"
 
 func _ready():
 	set_mode(MODE_CHARACTER)
@@ -22,6 +27,22 @@ func _fixed_process(delta):
 			#print("hit something damageable")
 			bodies[0].damage(damage_amount)
 		self._explode()
+	
+
+func change_direction(angle):
+	
+	pass
+
+func change_velocity(new_vel):
+	
+	pass
+
+func bounce():
+	
+	pass
+
+func get_speed():
+	return speed
 
 func _explode():
 	if impact_effect_scene != null:
@@ -31,7 +52,7 @@ func _explode():
 		
 		#get_tree().get_root().add_child(effect)
 		#get_tree().get_root().get_node("Level/Effects").add_child(effect)
-		get_node("/root/Level/Effects").add_child(effect)
+		get_node(effect_spawn_path).add_child(effect)
 	
 	self.queue_free()
 
