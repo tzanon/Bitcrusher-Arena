@@ -7,7 +7,7 @@
 [sub_resource type="CapsuleShape2D" id=1]
 
 custom_solver_bias = 0.0
-radius = 7.0
+radius = 7.5
 height = 12.0
 
 [node name="PotatoKB" type="KinematicBody2D" groups=[
@@ -19,10 +19,10 @@ shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
-collision/mask = 2
+collision/mask = 3
 collision/margin = 0.08
 script/script = ExtResource( 1 )
-debug_mode = true
+debug_mode = false
 damage_amount = 15
 speed = 750.0
 bounce_groups = StringArray( "Airburst", "Bouncy" )

@@ -1,6 +1,8 @@
 extends Sprite
 # class for a player-held weapon
 
+var user setget set_user
+
 export(PackedScene) var projectile_scene
 
 onready var proj_spawn_point = get_node("ProjectileSpawnPoint")
@@ -23,10 +25,13 @@ func _process(delta):
 	#print(fire_timer.get_time_left())
 	pass
 
-func fire():
+func set_user(weap_user):
+	user = weap_user
+
+func fire(spawn_pos):
 	if fire_timer.get_time_left() <= 0:
 		var projectile = projectile_scene.instance()
-		projectile.set_global_pos(proj_spawn_point.get_global_pos())
+		projectile.set_global_pos(spawn_pos)
 		projectile.set_global_rot(get_global_rot())
 		get_node(proj_spawn_path).add_child(projectile)
 		

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=1]
+[gd_scene load_steps=19 format=1]
 
 [ext_resource path="res://Scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/PlayerManager.tscn" type="PackedScene" id=2]
@@ -8,12 +8,15 @@
 [ext_resource path="res://Sprites/player.png" type="Texture" id=6]
 [ext_resource path="res://Scenes/moving_wall.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scripts/moving_wall.gd" type="Script" id=8]
-[ext_resource path="res://Scenes/wall_trap.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/floor_trap.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/moveable_obstacle_ph.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Scenes/Weapons/WorldLaser.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/Weapons/WorldLauncher.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/playerRB.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Placeholders/LineCollTester.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/wall_trap.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/floor_trap.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Effects/Airburst.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/moveable_obstacle_ph.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Weapons/WorldLaser.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Weapons/WorldLauncher.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Weapons/WorldAirgun.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/playerRB.tscn" type="PackedScene" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -76,6 +79,7 @@ __meta__ = {
 editor/display_folded = true
 transform/pos = Vector2( 330, 280 )
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
@@ -94,6 +98,10 @@ transform/scale = Vector2( 2.04688, 0.28125 )
 
 editor/display_folded = true
 transform/pos = Vector2( 1450, 420 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="Vertical" parent="Walls/TopRightTriangle" instance=ExtResource( 5 )]
 
@@ -118,11 +126,11 @@ transform/scale = Vector2( 4.70313, 1 )
 
 [node name="Pillar" parent="Walls" instance=ExtResource( 5 )]
 
-transform/pos = Vector2( 950, 160 )
+transform/pos = Vector2( 960, 160 )
 
 [node name="Pillar1" parent="Walls" instance=ExtResource( 5 )]
 
-transform/pos = Vector2( 950, 410 )
+transform/pos = Vector2( 960, 416 )
 
 [node name="Pillar2" parent="Walls" instance=ExtResource( 5 )]
 
@@ -281,7 +289,7 @@ __meta__ = {
 [node name="MovingWalls" type="Node2D" parent="Walls"]
 
 editor/display_folded = true
-transform/pos = Vector2( 1630, 830 )
+transform/pos = Vector2( 1632, 832 )
 
 [node name="Horizontal" parent="Walls/MovingWalls" instance=ExtResource( 7 )]
 
@@ -304,94 +312,107 @@ dx = 0
 dy = 320
 paused = true
 
+[node name="LineCollTester" parent="Walls" instance=ExtResource( 9 )]
+
+transform/pos = Vector2( 672, 320 )
+
 [node name="Traps" type="Node2D" parent="."]
 
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="WallTrap" parent="Traps" instance=ExtResource( 9 )]
+[node name="WallTrap" parent="Traps" instance=ExtResource( 10 )]
 
 transform/pos = Vector2( 290, 40 )
 transform/rot = 180.0
 
-[node name="WallTrap1" parent="Traps" instance=ExtResource( 9 )]
+[node name="WallTrap1" parent="Traps" instance=ExtResource( 10 )]
 
 transform/pos = Vector2( 40, 110 )
 transform/rot = 270.0
 
-[node name="WallTrap5" parent="Traps" instance=ExtResource( 9 )]
+[node name="WallTrap5" parent="Traps" instance=ExtResource( 10 )]
 
-transform/pos = Vector2( 40, 230 )
+transform/pos = Vector2( 32, 224 )
 transform/rot = 270.0
 
-[node name="WallTrap6" parent="Traps" instance=ExtResource( 9 )]
+[node name="WallTrap6" parent="Traps" instance=ExtResource( 10 )]
 
 transform/pos = Vector2( 40, 170 )
 transform/rot = 270.0
 
-[node name="WallTrap2" parent="Traps" instance=ExtResource( 9 )]
+[node name="WallTrap2" parent="Traps" instance=ExtResource( 10 )]
 
 transform/pos = Vector2( 110, 40 )
 transform/rot = 180.0
 
-[node name="WallTrap3" parent="Traps" instance=ExtResource( 9 )]
+[node name="WallTrap3" parent="Traps" instance=ExtResource( 10 )]
 
 transform/pos = Vector2( 170, 40 )
 transform/rot = 180.0
 
-[node name="WallTrap4" parent="Traps" instance=ExtResource( 9 )]
+[node name="WallTrap4" parent="Traps" instance=ExtResource( 10 )]
 
 transform/pos = Vector2( 230, 40 )
 transform/rot = 180.0
 
-[node name="FloorTrap" parent="Traps" instance=ExtResource( 10 )]
+[node name="FloorTrap" parent="Traps" instance=ExtResource( 11 )]
 
 damage_amount = 20
 
-[node name="FloorTrap1" parent="Traps" instance=ExtResource( 10 )]
+[node name="FloorTrap1" parent="Traps" instance=ExtResource( 11 )]
 
 transform/pos = Vector2( 540, 970 )
 damage_amount = 20
 
-[node name="FloorTrap2" parent="Traps" instance=ExtResource( 10 )]
+[node name="FloorTrap2" parent="Traps" instance=ExtResource( 11 )]
 
 transform/pos = Vector2( 260, 970 )
 damage_amount = 20
 
+[node name="WallTrap7" parent="Traps" instance=ExtResource( 10 )]
+
+transform/pos = Vector2( 1056, 40 )
+transform/rot = -180.0
+projectile_scene = ExtResource( 12 )
+
 [node name="Obstacles" type="Node2D" parent="."]
 
-editor/display_folded = true
-
-[node name="MoveableObstacle" parent="Obstacles" instance=ExtResource( 11 )]
+[node name="MoveableObstacle" parent="Obstacles" instance=ExtResource( 13 )]
 
 transform/pos = Vector2( 672, 544 )
 
-[node name="MoveableObstacle3" parent="Obstacles" instance=ExtResource( 11 )]
+[node name="MoveableObstacle3" parent="Obstacles" instance=ExtResource( 13 )]
 
-transform/pos = Vector2( 768, 224 )
+transform/pos = Vector2( 576, 224 )
 
-[node name="MoveableObstacle4" parent="Obstacles" instance=ExtResource( 11 )]
+[node name="MoveableObstacle4" parent="Obstacles" instance=ExtResource( 13 )]
 
-transform/pos = Vector2( 1152, 512 )
+transform/pos = Vector2( 1248, 352 )
 
 [node name="Pickups" type="Node2D" parent="."]
 
-[node name="WorldLaser" parent="Pickups" instance=ExtResource( 12 )]
+[node name="WorldLaser" parent="Pickups" instance=ExtResource( 14 )]
 
 transform/pos = Vector2( 576, 640 )
 
-[node name="WorldLauncher" parent="Pickups" instance=ExtResource( 13 )]
+[node name="WorldLauncher" parent="Pickups" instance=ExtResource( 15 )]
 
 transform/pos = Vector2( 800, 576 )
 
+[node name="WorldAirgun" parent="Pickups" instance=ExtResource( 16 )]
+
+transform/pos = Vector2( 1248, 256 )
+
 [node name="Players" type="Node2D" parent="."]
 
-[node name="Player" parent="Players" instance=ExtResource( 14 )]
+[node name="Player" parent="Players" instance=ExtResource( 17 )]
 
-transform/pos = Vector2( 800, 704 )
+transform/pos = Vector2( 1152, 256 )
 debug_mode = true
+
+[node name="Projectiles" type="Node2D" parent="."]
 
 [node name="Effects" type="Node2D" parent="."]
 

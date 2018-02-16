@@ -4,10 +4,9 @@ export var refresh_interval = 10
 var refresh_timer
 
 const weapon_scenes = [
-	preload("res://Scenes/Weapons/world_orange_ph.tscn"),
-	preload("res://Scenes/Weapons/world_blue_ph.tscn"),
 	preload("res://Scenes/Weapons/WorldLaser.tscn"),
-	preload("res://Scenes/Weapons/WorldLauncher.tscn")
+	preload("res://Scenes/Weapons/WorldLauncher.tscn"),
+	preload("res://Scenes/Weapons/WorldAirgun.tscn")
 ] # world weapon scenes to instantiate from
 
 const light_weapon_scenes = []
@@ -88,7 +87,6 @@ func _spawn_select_random():
 		arena_weapon_refs.append(weakref(weapon))
 
 
-
 # randomly choose n unique spawn positions
 func _select_spawn_points():
 	var num_weapons = randi() % (max_spawn - min_spawn + 1) + min_spawn
@@ -109,8 +107,6 @@ func _spawn_random_weapon(point):
 	var i = randi() % (weapon_scenes.size())
 	var weapon = weapon_scenes[i].instance()
 	weapon.set_global_pos(point.get_global_pos())
-	#get_parent().add_child(weapon)
-	#get_tree().get_root().add_child(weapon)
 	get_node(spawn_path).call_deferred("add_child", weapon)
 	return weapon
 

@@ -30,8 +30,9 @@ func _fixed_process(delta):
 
 
 func _handle_collision(body):
+	if debug_mode: print("hit something")
 	if body.is_in_group("Damageable"):
-			if debug_mode: print("hit something damageable")
+			
 			body.damage(damage_amount)
 	
 	var bounced = false
@@ -50,6 +51,16 @@ func _handle_collision(body):
 	
 	if !bounced: # if not bouncing, exploding
 		self._explode()
+
+func bounce():
+	if debug_mode: print("bouncing")
+	
+	var normal = get_collision_normal()
+	if debug_mode: print("normal is ", normal)
+	#_movement = normal.reflect(_movement) * bounce_factor
+	
+	#var angle = atan(_movement.x / _movement.y)
+	#set_global_rot(angle)
 
 func get_speed():
 	return speed

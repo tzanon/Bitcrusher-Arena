@@ -20,7 +20,7 @@ export var top_speed = 200
 var rotd_speed = 180
 
 const start_weapon = preload("res://Scenes/Weapons/PlayerLaser.tscn")
-const weapon_pos = Vector2(32, -32)
+var weapon_pos
 var weapon
 
 var item_detector
@@ -39,6 +39,8 @@ func _ready():
 	set_process_input(true)
 	
 	animator = get_node("AnimationPlayer")
+	
+	weapon_pos = get_node("WeaponPosition").get_pos()
 	
 	item_detector = get_node("Pickup Detector")
 	_equip_weapon(start_weapon)
@@ -135,7 +137,8 @@ func damage(dmg):
 	
 
 func _fire_weapon():
-	weapon.fire()
+	var spawn_pos = get_node("ProjectileSpawnPosition").get_global_pos()
+	weapon.fire(spawn_pos)
 	# TODO: recoil things
 	
 
@@ -144,13 +147,13 @@ func _pick_up_item():
 	var possible_items = item_detector.get_overlapping_areas()
 	if debug_mode && possible_items.size() > 0: print(possible_items)
 	for item in possible_items:
-		if item.is_in_group("Weapon"):
+		if item.is_in_group("WeaponPickup"):
 			_equip_weapon(item.get_player_scene())
 			item.queue_free()
 			break
 		
 		# for extensibility in case we want to add abilities
-		if item.is_in_group("Ability"):
+		if item.is_in_group("AbilityPickup"):
 			# add ability to player/replace current one
 			if debug_mode: print("found an ability")
 			item.queue_free()
@@ -163,4 +166,5 @@ func _equip_weapon(new_weapon_scene):
 	weapon = new_weapon_scene.instance()
 	add_child(weapon)
 	weapon.set_pos(weapon_pos)
+	weapon.set_user(self)
 

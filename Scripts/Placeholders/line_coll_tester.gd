@@ -8,10 +8,6 @@ func _ready():
 	#set_fixed_process(true)
 	pass
 
-func _fixed_process(delta):
-	
-	pass
-
 func _detect_hit(body):
 	if body.is_in_group("SolidProjectile") || body.is_in_group("LightProjectile"): #&& !affected_bodies.has(body.get_instance_ID()):
 		print("deflecting ", body.get_name())
