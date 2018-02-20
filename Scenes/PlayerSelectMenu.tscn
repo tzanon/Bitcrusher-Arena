@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/player_select_menu.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/UI/ui_player_warning.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/UI/ui_setup_title.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Placeholder/ui_bar3.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/UI/ui_join_prompt.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/Placeholder/ui_icon1.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/UI/Buttons/BackButton.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/UI/Buttons/StartButton.tscn" type="PackedScene" id=7]
@@ -90,9 +90,6 @@ margin/top = 30.0
 margin/right = 1880.0
 margin/bottom = 1050.0
 alignment = 0
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="TitleArea" type="CenterContainer" parent="MainMargin/DisplayLayout"]
 
@@ -135,13 +132,9 @@ margin/top = 184.0
 margin/right = 1840.0
 margin/bottom = 856.0
 alignment = 1
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="JoinDisplays" type="VBoxContainer" parent="MainMargin/DisplayLayout/HBoxContainer"]
 
-editor/display_folded = true
 rect/min_size = Vector2( 672, 672 )
 focus/ignore_mouse = false
 focus/stop_mouse = false
@@ -153,9 +146,6 @@ margin/right = 1256.0
 margin/bottom = 672.0
 custom_constants/separation = 0
 alignment = 1
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Display1" type="Control" parent="MainMargin/DisplayLayout/HBoxContainer/JoinDisplays"]
 
@@ -168,9 +158,6 @@ margin/left = 0.0
 margin/top = 84.0
 margin/right = 672.0
 margin/bottom = 84.0
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="PlayerJoin" type="TextureFrame" parent="MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Display1"]
 
@@ -200,7 +187,6 @@ stretch_mode = 0
 
 [node name="Display2" type="Control" parent="MainMargin/DisplayLayout/HBoxContainer/JoinDisplays"]
 
-editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -209,9 +195,6 @@ margin/left = 0.0
 margin/top = 252.0
 margin/right = 672.0
 margin/bottom = 252.0
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="PlayerJoin" type="TextureFrame" parent="MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Display2"]
 
@@ -241,7 +224,6 @@ stretch_mode = 0
 
 [node name="Display3" type="Control" parent="MainMargin/DisplayLayout/HBoxContainer/JoinDisplays"]
 
-editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -250,9 +232,6 @@ margin/left = 0.0
 margin/top = 420.0
 margin/right = 672.0
 margin/bottom = 420.0
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="PlayerJoin" type="TextureFrame" parent="MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Display3"]
 
@@ -282,7 +261,6 @@ stretch_mode = 0
 
 [node name="Display4" type="Control" parent="MainMargin/DisplayLayout/HBoxContainer/JoinDisplays"]
 
-editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -291,9 +269,6 @@ margin/left = 0.0
 margin/top = 588.0
 margin/right = 672.0
 margin/bottom = 588.0
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="PlayerJoin" type="TextureFrame" parent="MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Display4"]
 

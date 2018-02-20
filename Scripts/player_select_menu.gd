@@ -8,10 +8,10 @@ const game_scene_path = "res://Scenes/level.tscn"
 const default_icon = preload("res://Sprites/Placeholder/ui_icon1.png")
 
 var player_info = [
-	{ name = "blue", pad_id = -1, icon_path = "res://Sprites/UI/ui_blue_icon.png" },
-	{ name = "red", pad_id = -1, icon_path = "res://Sprites/UI/ui_red_icon.png" },
-	{ name = "green", pad_id = -1, icon_path = "res://Sprites/UI/ui_green_icon.png" },
-	{ name = "yellow", pad_id = -1, icon_path = "res://Sprites/UI/ui_yellow_icon.png" }
+	{ name = "blue", pad_id = -1, icon_path = "res://Sprites/UI/player_blue_icon.png" },
+	{ name = "red", pad_id = -1, icon_path = "res://Sprites/UI/player_red_icon.png" },
+	{ name = "green", pad_id = -1, icon_path = "res://Sprites/UI/player_green_icon.png" },
+	{ name = "yellow", pad_id = -1, icon_path = "res://Sprites/UI/player_yellow_icon.png" }
 ]
 
 onready var player_icon_nodes = {
