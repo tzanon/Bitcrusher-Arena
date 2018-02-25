@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://Scripts/airburst_arc.gd" type="Script" id=1]
+[ext_resource path="res://Animations/Projectiles/AirburstArc.tres" type="Animation" id=2]
+[ext_resource path="res://Sprites/Projectiles/air_arc.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/airburst_arc_detector.gd" type="Script" id=4]
+
+[sub_resource type="SegmentShape2D" id=1]
+
+custom_solver_bias = 0.0
+a = Vector2( 40, 4 )
+b = Vector2( -40, 4 )
+
+[node name="AirburstArc" type="KinematicBody2D"]
+
+input/pickable = true
+collision/layers = 0
+collision/mask = 0
+collision/margin = 0.08
+script/script = ExtResource( 1 )
+debug_mode = true
+speed = 600.0
+_can_deflect = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/AirburstArc = ExtResource( 2 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = "AirburstArc"
+
+[node name="Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[node name="ArcSprite" type="Sprite" parent="."]
+
+texture = ExtResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, -8 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 4 )
+debug_mode = true
+push_strength = 20000.0
+
+[node name="SegmentCollider" type="CollisionShape2D" parent="Area2D"]
+
+transform/pos = Vector2( 0, -8 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+

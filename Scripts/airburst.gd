@@ -30,10 +30,10 @@ func _ready():
 	
 	if debug_mode: print("airburst spawned in tree: ", get_path())
 	
-	set_process(true)
-	
+	#set_process(true)
+	set_fixed_process(true)
 
-func _process(delta):
+func _fixed_process(delta):
 	if !is_affecting: return
 	var bodies = get_overlapping_bodies()
 	for body in bodies:
@@ -64,11 +64,6 @@ func _process(delta):
 		
 		affected_bodies[body_id] = ""
 	
-	
-
-func _in_range():
-	
-	pass
 
 func _detect_entry(body):
 	if !is_affecting: return

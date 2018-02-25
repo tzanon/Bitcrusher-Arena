@@ -1,0 +1,19 @@
+[gd_resource type="Animation" format=1]
+
+[resource]
+
+resource/name = "PlayerDamaged"
+length = 0.2
+loop = false
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodySprite:modulate")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.01, 0.2 ),
+"transitions": FloatArray( 0, 0, 0 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.714844, 0.0670166, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+

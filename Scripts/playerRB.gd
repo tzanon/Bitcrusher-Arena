@@ -34,20 +34,28 @@ const DIRECTION = {
 	DOWN = Vector2(0,1)
 }
 
+const proj_spawn_positions = {
+	"Laser" : Vector2(0, -44),
+	"Potato Launcher" : Vector2(0, -36),
+	"Airburst Gun" : Vector2(0, -24),
+	"Bombshot" : Vector2(0, -36)
+}
+
 func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
 	
 	animator = get_node("AnimationPlayer")
-	
 	weapon_pos = get_node("WeaponPosition").get_pos()
 	
-	item_detector = get_node("Pickup Detector")
+	item_detector = get_node("PickupDetector")
 	_equip_weapon(start_weapon)
 	
 	var manager = get_node("/root/Level/PlayerManager")
-	connect("health_changed", manager, "update_player_health")
-	connect("died", manager, "remove_player")
+	if manager:
+		connect("health_changed", manager, "update_player_health")
+		connect("died", manager, "remove_player")
+	
 
 func _fixed_process(delta):
 	# aiming is currently just rotating -- should we have some sort of reticle to move around instead?
@@ -137,9 +145,13 @@ func damage(dmg):
 	
 
 func _fire_weapon():
-	var spawn_pos = get_node("ProjectileSpawnPosition").get_global_pos()
+	var spawn_pos
+	if proj_spawn_positions.has(weapon.get_weapon_name()):
+		spawn_pos = get_global_transform().xform (proj_spawn_positions[weapon.get_weapon_name()])
+		#spawn_pos = get_global_transform().xform_inv(proj_spawn_positions[weapon.get_weapon_name()])
+	else:
+		spawn_pos = get_node("ProjectileSpawnPosition").get_global_pos()
 	weapon.fire(spawn_pos)
-	# TODO: recoil things
 	
 
 # looks for item in pickup radius and replaces current one with it if there is
@@ -165,6 +177,8 @@ func _equip_weapon(new_weapon_scene):
 	
 	weapon = new_weapon_scene.instance()
 	add_child(weapon)
-	weapon.set_pos(weapon_pos)
+	#weapon.set_pos(weapon_pos)
+	weapon.set_pos(weapon.get_hold_pos())
+	weapon.set_rotd(weapon.get_hold_rotd())
 	weapon.set_user(self)
 

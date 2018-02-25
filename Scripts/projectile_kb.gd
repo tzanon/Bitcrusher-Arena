@@ -22,14 +22,17 @@ func _ready():
 	var rot = get_global_rot()
 	_movement = Vector2(sin(rot), cos(rot)) * -speed
 
-
 func _fixed_process(delta):
 	if is_colliding():
 		_handle_collision(get_collider())
 	move(_movement * delta)
 
+func add_velocity(velocity):
+	_movement += velocity
 
 func _handle_collision(body):
+	if !body: return
+	
 	if debug_mode: print("hit something")
 	if body.is_in_group("Damageable"):
 			

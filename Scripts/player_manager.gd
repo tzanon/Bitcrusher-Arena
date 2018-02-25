@@ -1,6 +1,7 @@
 extends Node2D
 
 # different colours? orange, purple, grey, black, brown, white?
+# will need refactoring, players will most likely need separate scenes (sprite_path)
 onready var player_spawn_info = {
 	"blue" : { hud_pos = Vector2(0, 0), spawn_pos = get_node("BlueSpawnPoint").get_global_pos(), sprite_path = "" },
 	"red" : { hud_pos = Vector2(0, 0), spawn_pos = get_node("RedSpawnPoint").get_global_pos(), sprite_path = "" },
@@ -13,13 +14,12 @@ const hud_template = null #= preload("")
 
 const spawn_path = "/root/Level/Players"
 
-
 var match_player_refs = {}
 var player_huds = {}
 
 func _ready():
 	
-	# TODO: 
+	# TODO:
 	
 	# should HUDs already exist in the scene?
 	# ...should we not have HUDs? just have some health indicator on players?

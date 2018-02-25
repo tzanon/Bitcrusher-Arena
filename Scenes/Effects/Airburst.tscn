@@ -27,7 +27,7 @@ debug_mode = true
 short_range_limit = 2.0
 med_range_limit = 4.0
 long_range_limit = 6.0
-burst_strength = 15000.0
+burst_strength = 100000.0
 is_affecting = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

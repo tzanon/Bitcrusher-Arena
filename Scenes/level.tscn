@@ -5,18 +5,18 @@
 [ext_resource path="res://Scenes/WeaponSpawner.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/WeaponSpawnPoint.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/static_obstacle_ph.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Sprites/player.png" type="Texture" id=6]
-[ext_resource path="res://Scenes/moving_wall.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scripts/moving_wall.gd" type="Script" id=8]
-[ext_resource path="res://Scenes/Placeholders/LineCollTester.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Placeholders/LineCollTester.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Sprites/player.png" type="Texture" id=7]
+[ext_resource path="res://Scenes/moving_wall.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scripts/moving_wall.gd" type="Script" id=9]
 [ext_resource path="res://Scenes/wall_trap.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/floor_trap.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Scenes/Effects/Airburst.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Projectiles/PotatoKB.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/moveable_obstacle_ph.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Weapons/WorldLaser.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Weapons/WorldLauncher.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Weapons/WorldAirgun.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Scenes/playerRB.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/Players/YellowPlayer.tscn" type="PackedScene" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -49,8 +49,6 @@ transform/pos = Vector2( 1248, 160 )
 
 [node name="WeaponSpawner" parent="." instance=ExtResource( 3 )]
 
-editor/display_folded = true
-
 [node name="WeaponSpawnPoint" parent="WeaponSpawner" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 320, 256 )
@@ -69,7 +67,6 @@ transform/pos = Vector2( 96, 896 )
 
 [node name="Walls" type="Node2D" parent="."]
 
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -140,6 +137,10 @@ transform/pos = Vector2( 950, 660 )
 
 transform/pos = Vector2( 950, 910 )
 
+[node name="LineCollTester" parent="Walls" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 672, 320 )
+
 [node name="NorthWall" type="StaticBody2D" parent="Walls"]
 
 editor/display_folded = true
@@ -162,7 +163,7 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="Walls/NorthWall"]
 
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -198,7 +199,7 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="Walls/SouthWall"]
 
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -235,7 +236,7 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="Walls/EastWall"]
 
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -272,7 +273,7 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="Walls/WestWall"]
 
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -291,30 +292,26 @@ __meta__ = {
 editor/display_folded = true
 transform/pos = Vector2( 1632, 832 )
 
-[node name="Horizontal" parent="Walls/MovingWalls" instance=ExtResource( 7 )]
+[node name="Horizontal" parent="Walls/MovingWalls" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( -210, -30 )
 transform/scale = Vector2( 0.0937499, 2.98437 )
-script/script = ExtResource( 8 )
+script/script = ExtResource( 9 )
 period = 2.5
 dx = 320
 dy = 0
 paused = null
 
-[node name="Vertical" parent="Walls/MovingWalls" instance=ExtResource( 7 )]
+[node name="Vertical" parent="Walls/MovingWalls" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( -50, -190 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.0937499, 2.98437 )
-script/script = ExtResource( 8 )
+script/script = ExtResource( 9 )
 period = 2.5
 dx = 0
 dy = 320
 paused = true
-
-[node name="LineCollTester" parent="Walls" instance=ExtResource( 9 )]
-
-transform/pos = Vector2( 672, 320 )
 
 [node name="Traps" type="Node2D" parent="."]
 
@@ -379,6 +376,8 @@ projectile_scene = ExtResource( 12 )
 
 [node name="Obstacles" type="Node2D" parent="."]
 
+editor/display_folded = true
+
 [node name="MoveableObstacle" parent="Obstacles" instance=ExtResource( 13 )]
 
 transform/pos = Vector2( 672, 544 )
@@ -403,13 +402,19 @@ transform/pos = Vector2( 800, 576 )
 
 [node name="WorldAirgun" parent="Pickups" instance=ExtResource( 16 )]
 
-transform/pos = Vector2( 1248, 256 )
+transform/pos = Vector2( 1248, 704 )
 
 [node name="Players" type="Node2D" parent="."]
 
-[node name="Player" parent="Players" instance=ExtResource( 17 )]
+transform/pos = Vector2( 64, 0 )
 
-transform/pos = Vector2( 1152, 256 )
+[node name="YellowPlayer" parent="Players" instance=ExtResource( 17 )]
+
+transform/pos = Vector2( 1088, 480 )
+
+[node name="YellowPlayer1" parent="Players" instance=ExtResource( 17 )]
+
+transform/pos = Vector2( 1088, 736 )
 debug_mode = true
 
 [node name="Projectiles" type="Node2D" parent="."]
