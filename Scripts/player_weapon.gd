@@ -1,6 +1,8 @@
 extends Sprite
 # class for a player-held weapon
 
+export var debug_mode = false
+
 export var weapon_name = "" setget ,get_weapon_name
 
 var user setget set_user
@@ -19,7 +21,7 @@ var fire_timer
 export(float, 0.05, 2, 0.05) var fire_rate
 
 # how often a weapon fires
-export(int, 1, 45) var max_accuracy_loss = 5
+export(int, 0, 45) var max_accuracy_loss = 5
 export(int, 200, 10000, 100) var knockbox_strength = 600
 
 func _ready():
@@ -52,6 +54,8 @@ func get_hold_rotd():
 
 func fire(spawn_pos):
 	if fire_timer.get_time_left() <= 0:
+		if debug_mode: print("airgun firing")
+		
 		var projectile = projectile_scene.instance()
 		projectile.set_global_pos(spawn_pos)
 		projectile.set_global_rotd(user.get_global_rotd() + max_accuracy_loss * pow(2*randf() - 1, 3))
@@ -63,3 +67,8 @@ func fire(spawn_pos):
 		user.apply_impulse(Vector2(0,0), knockback_force)
 		
 		fire_timer.start()
+
+func _spawn_proj(spawn_pos):
+	
+	
+	pass

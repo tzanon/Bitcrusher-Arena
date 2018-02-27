@@ -50,6 +50,10 @@ func _handle_collision(body):
 			
 			if debug_mode: print("bounced off a(n) ", group)
 			bounced = true
+			
+			if group == "Airburst":
+				get_collider().collide_action()
+			
 			break
 	
 	if !bounced: # if not bouncing, exploding

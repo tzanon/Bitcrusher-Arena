@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://Scripts/air_barrier.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 28, 8 )
+
+[node name="AirBarrier" type="KinematicBody2D" groups=[
+"Airburst",
+]]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 4
+collision/mask = 0
+collision/margin = 0.08
+script/script = ExtResource( 1 )
+debug_mode = true
+lifetime = 0.2
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 0.35
+one_shot = false
+autostart = false
+
+

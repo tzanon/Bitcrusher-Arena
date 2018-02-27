@@ -43,6 +43,7 @@ autostart = false
 [node name="ArcSprite" type="Sprite" parent="."]
 
 texture = ExtResource( 3 )
+modulate = Color( 1, 1, 1, 0 )
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -56,7 +57,7 @@ linear_damp = 0.1
 angular_damp = 1.0
 script/script = ExtResource( 4 )
 debug_mode = true
-push_strength = 20000.0
+push_strength = 60000.0
 
 [node name="SegmentCollider" type="CollisionShape2D" parent="Area2D"]
 
