@@ -28,7 +28,8 @@ script/script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
-debug_mode = false
+debug_mode = true
+solo_test_mode = true
 
 [node name="MainMargin" type="MarginContainer" parent="."]
 

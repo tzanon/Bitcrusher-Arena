@@ -3,72 +3,81 @@ extends Node2D
 # different colours? orange, purple, grey, black, brown, white?
 # will need refactoring, players will most likely need separate scenes (sprite_path)
 onready var player_spawn_info = {
-	"blue" : { hud_pos = Vector2(0, 0), spawn_pos = get_node("BlueSpawnPoint").get_global_pos(), sprite_path = "" },
-	"red" : { hud_pos = Vector2(0, 0), spawn_pos = get_node("RedSpawnPoint").get_global_pos(), sprite_path = "" },
-	"green" : { hud_pos = Vector2(0, 0), spawn_pos = get_node("GreenSpawnPoint").get_global_pos(), sprite_path = "" },
-	"yellow" : { hud_pos = Vector2(0, 0), spawn_pos = get_node("YellowSpawnPoint").get_global_pos(), sprite_path = "" }
+	"blue" : { hud_pos = Vector2(5, 0), spawn_pos = get_node("BlueSpawnPoint").get_global_pos(), sprite_path = "" },
+	"red" : { hud_pos = Vector2(485, 0), spawn_pos = get_node("RedSpawnPoint").get_global_pos(), sprite_path = "" },
+	"green" : { hud_pos = Vector2(965, 0), spawn_pos = get_node("GreenSpawnPoint").get_global_pos(), sprite_path = "" },
+	"yellow" : { hud_pos = Vector2(1445, 0), spawn_pos = get_node("YellowSpawnPoint").get_global_pos(), sprite_path = "" }
 }
 
-const player_template = preload("res://Scenes/playerRB.tscn")
-const hud_template = null #= preload("")
+export var debug_mode = false
 
-const spawn_path = "/root/Level/Players"
+const player_template = preload("res://Scenes/playerRB.tscn")
+const hud_template = preload("res://Scenes/UI/PlayerInfoUI.tscn")
+
+export var spawn_path = "/root/Level/Layout/Players"
+export var hud_spawn_path = "/root/Level/UI/PlayerInfoPanel"
 
 var match_player_refs = {}
 var player_huds = {}
 
 func _ready():
-	
-	# TODO:
-	
-	# should HUDs already exist in the scene?
-	# ...should we not have HUDs? just have some health indicator on players?
-	
 	var player_info = GameInfo.get_info()
 	for info_entry in player_info:
-		print("spawning player ", info_entry.name)
-		#_enable_player_hud(info_entry)
+		if debug_mode: print("spawning player ", info_entry.name)
+		
+		_enable_player_hud(info_entry) # setup hud for current player
+		
 		var player = _spawn_player(info_entry.name)
 		player.gamepad_id = info_entry.pad_id
 		match_player_refs[info_entry.name] = weakref(player)
-		# connection MUST be made in player class...
 	
-	# this will be refactored
+	# this will be refactored (or not)
 	var children = get_children()
 	for child in children:
 		if child.is_in_group("PlayerSpawnPoint"):
 			child.hide()
 	
 
-func update_player_health(player_name, player_health):
-	# TODO: update player's HUD with new health value
-	pass
+func _spawn_player(player_name):
+	# set rotation?
+	var player = player_template.instance()
+	player.connect_to_hud(self)
+	
+	player.set_name(player_name)
+	player.set_global_pos(player_spawn_info[player_name].spawn_pos)
+	get_node(spawn_path).call_deferred("add_child", player)
+	
+	return player
+
 
 func remove_player(player_name):
-	# TODO: black out icon, erase player from ref tracker, check if one remaining
+	if debug_mode: print("player ", player_name, " died.")
+	
 	match_player_refs.erase(player_name)
-	print("player ", player_name, " died.")
+	player_huds[player_name].set_death_icon()
 	
 	if match_player_refs.size() == 1:
 		GameInfo.match_winner = match_player_refs.keys().front()
 		#get_tree().change_scene("res://Scenes/UI/results.tscn")
-		print("Winner is ", GameInfo.match_winner)
-	
-	
+		if debug_mode: print("Winner is ", GameInfo.match_winner)
 
-# WIP; do not call or it will crash
+
 func _enable_player_hud(info_entry):
-	# TODO: spawn player's respective hud at location, set icon, add to hud dictionary
-	var hud = hud_template.instance() # TODO: make hud node and script
+	var hud = hud_template.instance()
+	
+	get_node(hud_spawn_path).call_deferred("add_child", hud)
+	hud.call_deferred("set_icon_with_path", info_entry.icon_path)
+	
+	var position = player_spawn_info[info_entry.name].hud_pos
+	hud.set_pos(position)
 	
 	player_huds[info_entry.name] = hud
 	
 
-func _spawn_player(player_name):
-	# set rotation?
-	var player = player_template.instance()
-	player.name = player_name
-	player.set_global_pos(player_spawn_info[player_name].spawn_pos)
-	get_node(spawn_path).call_deferred("add_child", player)
-	return player
+func update_player_health(player_name, player_health):
+	if debug_mode: print("player name is ", player_name, " with health ", player_health)
+	var hud = player_huds[player_name]
+	hud.update_health(player_health)
+
+
 

@@ -4,7 +4,9 @@ export var debug_mode = false
 
 # gamepad device used to control this player
 var gamepad_id = -1 setget set_gamepad_id
-var name = "" setget set_name
+var name = "" #setget set_name
+
+export var manager_path = "/root/Level/Layout/PlayerManager"
 
 var health = 100
 signal health_changed(player_name, player_health)
@@ -50,11 +52,6 @@ func _ready():
 	
 	item_detector = get_node("PickupDetector")
 	_equip_weapon(start_weapon)
-	
-	var manager = get_node("/root/Level/PlayerManager")
-	if manager:
-		connect("health_changed", manager, "update_player_health")
-		connect("died", manager, "remove_player")
 	
 
 func _fixed_process(delta):
@@ -126,14 +123,23 @@ func _calculate_direction_analog(state):
 	
 	return directional_force
 
+func connect_to_hud(manager):
+	connect("health_changed", manager, "update_player_health")
+	connect("died", manager, "remove_player")
+	
+
+
 func set_name(player_name):
+	print("name is ", player_name)
 	name = player_name
+	print("name was set to ", name)
 
 func set_gamepad_id(id):
 	gamepad_id = id
 	#GameInfo.print_player_name(gamepad_id)
 
 func damage(dmg):
+	print("damaging player ", name)
 	health = clamp(health - dmg, 0, 100)
 	if debug_mode: print("player ", name, " health: ", health)
 	emit_signal("health_changed", name, health)

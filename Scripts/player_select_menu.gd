@@ -1,6 +1,7 @@
 extends Control
 
 export var debug_mode = false
+export var solo_test_mode = false
 
 const main_menu_path = "res://Scenes/main_menu.tscn"
 const game_scene_path = "res://Scenes/level.tscn"
@@ -28,7 +29,7 @@ onready var start_button = get_node("MainMargin/DisplayLayout/NavigationArea/Sta
 func _ready():
 	GameInfo.clear_info()
 	
-	if debug_mode:
+	if solo_test_mode:
 		_request_join(1) # add one "dummy" player to proceed with one gamepad
 	
 	player_warning.hide()
@@ -43,36 +44,36 @@ func _ready():
 
 func _input(event):
 	if Input.is_key_pressed(KEY_RETURN):
-		print("start key was pressed")
+		if debug_mode: print("start key was pressed")
 		if player_warning.is_visible():
 			player_warning.hide()
-			print("warning is now hidden")
+			if debug_mode: print("warning is now hidden")
 		else:
-			print("start key trying to start...")
+			if debug_mode: print("trying to start...")
 			_request_start_game()
 	
 	if Input.is_joy_button_pressed(event.device, JOY_XBOX_A): #JOY_XBOX_A == JOY_BUTTON_0
-		print("xbox A was pressed")
+		if debug_mode: print("xbox A was pressed")
 		if player_warning.is_visible():
 			player_warning.hide()
-			print("warning is now hidden")
+			if debug_mode: print("warning is now hidden")
 		else:
 			_request_join(event.device)
 	
 	if Input.is_joy_button_pressed(event.device, JOY_XBOX_B) || Input.is_key_pressed(KEY_BACKSPACE):
 		if player_warning.is_visible():
 			player_warning.hide()
-			print("warning is now hidden")
+			if debug_mode: print("warning is now hidden")
 		else:
 			_back()
 	
 	if Input.is_joy_button_pressed(event.device, JOY_START):
-		print("xbox START trying to start...")
+		if debug_mode: print("xbox START trying to start...")
 		_request_start_game()
 	
 
 func _back():
-	print("returning to menu")
+	if debug_mode: print("returning to menu")
 	get_tree().change_scene(main_menu_path)
 
 func _set_icon(info_entry):
@@ -87,11 +88,11 @@ func _clear_icon(info_entry):
 func _request_join(gamepad_id):
 	if GameInfo.is_id_registered(gamepad_id):
 		# do something with player's icon
-		print("controller ", gamepad_id, " is already registered")
+		if debug_mode: print("controller ", gamepad_id, " is already registered")
 	else:
 		_register_gamepad(gamepad_id)
 		# show icon and hide join text
-		# print("controller ", event.device, " registered")
+		#if debug_mode: print("controller ", event.device, " registered")
 
 func _register_gamepad(gamepad_id):
 	if player_info.size() == 0:
@@ -105,16 +106,16 @@ func _register_gamepad(gamepad_id):
 	_set_icon(info_entry)
 	
 	GameInfo.print_players()
-	print("remaining players: ", player_info)
+	if debug_mode: print("remaining players: ", player_info)
 	
 
 func _request_start_game():
 	if GameInfo.num_registered_players() < 2:
-		print("At least 2 players needed to play")
+		if debug_mode: print("At least 2 players needed to play")
 		# briefly show "need more players" message
 		player_warning.popup()
 	else:
-		print("starting game")
+		if debug_mode: print("starting game")
 		# change scene? autoloader?
 		get_tree().change_scene(game_scene_path)
 		pass

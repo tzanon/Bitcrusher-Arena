@@ -14,7 +14,7 @@ const power_weapon_scenes = [] # more powerful: spawned in harder places
 
 # TODO: exported enum and case statement to select spawn mode
 
-const spawn_path = "/root/Level/Pickups"
+export var spawn_path = "/root/Level/Layout/Pickups"
 var total_spawn_points = []
 
 var min_spawn
@@ -106,13 +106,13 @@ func _select_spawn_points():
 func _spawn_random_weapon(point):
 	var i = randi() % (weapon_scenes.size())
 	var weapon = weapon_scenes[i].instance()
-	weapon.set_global_pos(point.get_global_pos())
+	weapon.set_global_pos(point.get_pos())
 	get_node(spawn_path).call_deferred("add_child", weapon)
 	return weapon
 
 # spawns weapon at its matching position
 func _spawn_weapon_with_position(point):
 	var weapon = point.get_object_scene().instance()
-	weapon.set_pos(point.get_global_pos())
+	weapon.set_pos(point.get_pos())
 	get_node(spawn_path).call_deferred("add_child", weapon)
 	return weapon	
