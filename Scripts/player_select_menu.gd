@@ -4,7 +4,7 @@ export var debug_mode = false
 export var solo_test_mode = false
 
 const main_menu_path = "res://Scenes/main_menu.tscn"
-const game_scene_path = "res://Scenes/level.tscn"
+export var game_scene_path = "res://Scenes/level.tscn"
 
 const default_icon = preload("res://Sprites/Placeholder/ui_icon1.png")
 

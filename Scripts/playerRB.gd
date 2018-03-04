@@ -123,6 +123,9 @@ func _calculate_direction_analog(state):
 	
 	return directional_force
 
+func set_sprite_from_path(sprite_path):
+	get_node("BodySprite").set_texture(load(sprite_path))
+
 func connect_to_hud(manager):
 	connect("health_changed", manager, "update_player_health")
 	connect("died", manager, "remove_player")

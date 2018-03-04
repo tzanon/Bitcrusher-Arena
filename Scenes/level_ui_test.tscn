@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=1]
+[gd_scene load_steps=20 format=1]
 
 [ext_resource path="res://Scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/PlayerManager.tscn" type="PackedScene" id=2]
@@ -15,10 +15,9 @@
 [ext_resource path="res://Scenes/Weapons/WorldLaser.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Weapons/WorldLauncher.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Weapons/WorldAirgun.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Scenes/Players/YellowPlayer.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Sprites/UI/Gameplay/gameplay_ui_panel.png" type="Texture" id=17]
-[ext_resource path="res://Scenes/UI/PlayerInfoUI.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Sprites/UI/Gameplay/gameplay_ui_frame.png" type="Texture" id=19]
+[ext_resource path="res://Sprites/UI/Gameplay/gameplay_ui_frame.png" type="Texture" id=18]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -409,9 +408,7 @@ __meta__ = {
 
 [node name="Pickups" type="Node2D" parent="Layout"]
 
-editor/display_folded = true
 __meta__ = {
-"_edit_group_": true,
 "_edit_lock_": true
 }
 
@@ -425,25 +422,18 @@ transform/pos = Vector2( 800, 576 )
 
 [node name="WorldAirgun" parent="Layout/Pickups" instance=ExtResource( 15 )]
 
-transform/pos = Vector2( 1248, 704 )
+transform/pos = Vector2( 1296, 656 )
 
 [node name="Players" type="Node2D" parent="Layout"]
 
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="YellowPlayer" parent="Layout/Players" instance=ExtResource( 16 )]
 
-transform/pos = Vector2( 1216, 480 )
-manager_path = "/root/Level/Layout/PlayerManager"
-
-[node name="YellowPlayer1" parent="Layout/Players" instance=ExtResource( 16 )]
-
-transform/pos = Vector2( 1216, 736 )
+transform/pos = Vector2( 1184, 764 )
 debug_mode = true
-manager_path = "/root/Level/Layout/PlayerManager"
 
 [node name="UI" type="Control" parent="."]
 
@@ -469,30 +459,6 @@ margin/bottom = 1078.0
 texture = ExtResource( 17 )
 stretch_mode = 0
 
-[node name="BlueInfoUI" parent="UI/PlayerInfoPanel" instance=ExtResource( 18 )]
-
-visibility/visible = false
-margin/left = 5.0
-margin/right = 485.0
-
-[node name="RedInfoUI" parent="UI/PlayerInfoPanel" instance=ExtResource( 18 )]
-
-visibility/visible = false
-margin/left = 485.0
-margin/right = 965.0
-
-[node name="GreenInfoUI" parent="UI/PlayerInfoPanel" instance=ExtResource( 18 )]
-
-visibility/visible = false
-margin/left = 965.0
-margin/right = 1445.0
-
-[node name="YellowInfoUI" parent="UI/PlayerInfoPanel" instance=ExtResource( 18 )]
-
-visibility/visible = false
-margin/left = 1445.0
-margin/right = 1925.0
-
 [node name="InfoPanelFrame" type="TextureFrame" parent="UI"]
 
 focus/ignore_mouse = true
@@ -503,7 +469,7 @@ margin/left = 0.0
 margin/top = 928.0
 margin/right = 1920.0
 margin/bottom = 1078.0
-texture = ExtResource( 19 )
+texture = ExtResource( 18 )
 stretch_mode = 0
 __meta__ = {
 "_edit_lock_": true

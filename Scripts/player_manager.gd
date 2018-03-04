@@ -3,15 +3,15 @@ extends Node2D
 # different colours? orange, purple, grey, black, brown, white?
 # will need refactoring, players will most likely need separate scenes (sprite_path)
 onready var player_spawn_info = {
-	"blue" : { hud_pos = Vector2(5, 0), spawn_pos = get_node("BlueSpawnPoint").get_pos(), sprite_path = "" },
-	"red" : { hud_pos = Vector2(485, 0), spawn_pos = get_node("RedSpawnPoint").get_pos(), sprite_path = "" },
-	"green" : { hud_pos = Vector2(965, 0), spawn_pos = get_node("GreenSpawnPoint").get_pos(), sprite_path = "" },
-	"yellow" : { hud_pos = Vector2(1445, 0), spawn_pos = get_node("YellowSpawnPoint").get_pos(), sprite_path = "" }
+	"blue" : { hud_pos = Vector2(5, 0), spawn_pos = get_node("BlueSpawnPoint").get_pos(), sprite_path = "res://Sprites/Players/player_blue.png" },
+	"red" : { hud_pos = Vector2(485, 0), spawn_pos = get_node("RedSpawnPoint").get_pos(), sprite_path = "res://Sprites/Players/player_red.png" },
+	"green" : { hud_pos = Vector2(965, 0), spawn_pos = get_node("GreenSpawnPoint").get_pos(), sprite_path = "res://Sprites/Players/player_green.png" },
+	"yellow" : { hud_pos = Vector2(1445, 0), spawn_pos = get_node("YellowSpawnPoint").get_pos(), sprite_path = "res://Sprites/Players/player_yellow.png" }
 }
 
 export var debug_mode = false
 
-const player_template = preload("res://Scenes/playerRB.tscn")
+const player_template = preload("res://Scenes/Player.tscn")
 const hud_template = preload("res://Scenes/UI/PlayerInfoUI.tscn")
 
 export var spawn_path = "/root/Level/Layout/Players"
@@ -44,6 +44,7 @@ func _spawn_player(player_name):
 	player.connect_to_hud(self)
 	
 	player.set_name(player_name)
+	player.set_sprite_from_path(player_spawn_info[player_name].sprite_path)
 	player.set_global_pos(player_spawn_info[player_name].spawn_pos)
 	get_node(spawn_path).call_deferred("add_child", player)
 	
