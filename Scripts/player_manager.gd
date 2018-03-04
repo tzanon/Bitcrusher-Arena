@@ -3,10 +3,10 @@ extends Node2D
 # different colours? orange, purple, grey, black, brown, white?
 # will need refactoring, players will most likely need separate scenes (sprite_path)
 onready var player_spawn_info = {
-	"blue" : { hud_pos = Vector2(5, 0), spawn_pos = get_node("BlueSpawnPoint").get_global_pos(), sprite_path = "" },
-	"red" : { hud_pos = Vector2(485, 0), spawn_pos = get_node("RedSpawnPoint").get_global_pos(), sprite_path = "" },
-	"green" : { hud_pos = Vector2(965, 0), spawn_pos = get_node("GreenSpawnPoint").get_global_pos(), sprite_path = "" },
-	"yellow" : { hud_pos = Vector2(1445, 0), spawn_pos = get_node("YellowSpawnPoint").get_global_pos(), sprite_path = "" }
+	"blue" : { hud_pos = Vector2(5, 0), spawn_pos = get_node("BlueSpawnPoint").get_pos(), sprite_path = "" },
+	"red" : { hud_pos = Vector2(485, 0), spawn_pos = get_node("RedSpawnPoint").get_pos(), sprite_path = "" },
+	"green" : { hud_pos = Vector2(965, 0), spawn_pos = get_node("GreenSpawnPoint").get_pos(), sprite_path = "" },
+	"yellow" : { hud_pos = Vector2(1445, 0), spawn_pos = get_node("YellowSpawnPoint").get_pos(), sprite_path = "" }
 }
 
 export var debug_mode = false
