@@ -77,7 +77,6 @@ transform/pos = Vector2( 160, 832 )
 
 [node name="Structure" type="Node2D" parent="Layout"]
 
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -197,7 +196,6 @@ transform/pos = Vector2( 1248, 352 )
 
 [node name="Traps" type="Node2D" parent="Layout/Structure"]
 
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -237,19 +235,22 @@ transform/rot = -180.0
 transform/pos = Vector2( 230, 232 )
 transform/rot = -180.0
 
-[node name="FloorTrap" parent="Layout/Structure/Traps" instance=ExtResource( 10 )]
+[node name="FloorTrap 2" parent="Layout/Structure/Traps" instance=ExtResource( 10 )]
 
-transform/pos = Vector2( 350, 760 )
+transform/pos = Vector2( 352, 768 )
+period = 3.0
 damage_amount = 20
 
-[node name="FloorTrap1" parent="Layout/Structure/Traps" instance=ExtResource( 10 )]
+[node name="FloorTrap3" parent="Layout/Structure/Traps" instance=ExtResource( 10 )]
 
-transform/pos = Vector2( 540, 1002 )
+transform/pos = Vector2( 192, 992 )
+period = 3.0
 damage_amount = 20
 
-[node name="FloorTrap2" parent="Layout/Structure/Traps" instance=ExtResource( 10 )]
+[node name="FloorTrap4" parent="Layout/Structure/Traps" instance=ExtResource( 10 )]
 
-transform/pos = Vector2( 196, 1002 )
+transform/pos = Vector2( 544, 992 )
+period = 3.0
 damage_amount = 20
 
 [node name="WallTrap7" parent="Layout/Structure/Traps" instance=ExtResource( 9 )]
@@ -260,6 +261,7 @@ projectile_scene = ExtResource( 11 )
 
 [node name="BorderWalls" type="Node2D" parent="Layout/Structure"]
 
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -408,6 +410,7 @@ __meta__ = {
 
 [node name="Pickups" type="Node2D" parent="Layout"]
 
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
