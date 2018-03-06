@@ -3,6 +3,7 @@ extends Sprite
 export(PackedScene) var projectile_scene
 
 onready var proj_spawn_point = get_node("ProjectileSpawnPoint")
+const proj_spawn_path = "/root/Level/Projectiles"
 
 var fire_timer
 
@@ -21,4 +22,10 @@ func fire():
 	var projectile = projectile_scene.instance()
 	projectile.set_global_pos(proj_spawn_point.get_global_pos())
 	projectile.set_global_rot(get_global_rot())
-	get_tree().get_root().add_child(projectile)
+	
+	var proj_node = get_node(proj_spawn_path)
+	if proj_node:
+		get_node(proj_spawn_path).add_child(projectile)
+	else:
+		get_tree().get_root().add_child(projectile)
+	

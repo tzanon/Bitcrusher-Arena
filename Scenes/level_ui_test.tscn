@@ -202,38 +202,38 @@ __meta__ = {
 
 [node name="WallTrap" parent="Layout/Structure/Traps" instance=ExtResource( 9 )]
 
-transform/pos = Vector2( 290, 232 )
-transform/rot = -180.0
+transform/pos = Vector2( 282, 240 )
+transform/rot = 180.0
 
 [node name="WallTrap1" parent="Layout/Structure/Traps" instance=ExtResource( 9 )]
 
-transform/pos = Vector2( 40, 302 )
+transform/pos = Vector2( 48, 302 )
 transform/rot = -90.0
 
 [node name="WallTrap5" parent="Layout/Structure/Traps" instance=ExtResource( 9 )]
 
-transform/pos = Vector2( 32, 416 )
+transform/pos = Vector2( 48, 416 )
 transform/rot = -90.0
 
 [node name="WallTrap6" parent="Layout/Structure/Traps" instance=ExtResource( 9 )]
 
-transform/pos = Vector2( 40, 362 )
+transform/pos = Vector2( 48, 362 )
 transform/rot = -90.0
 
 [node name="WallTrap2" parent="Layout/Structure/Traps" instance=ExtResource( 9 )]
 
-transform/pos = Vector2( 110, 232 )
-transform/rot = -180.0
+transform/pos = Vector2( 102, 240 )
+transform/rot = 180.0
 
 [node name="WallTrap3" parent="Layout/Structure/Traps" instance=ExtResource( 9 )]
 
-transform/pos = Vector2( 170, 232 )
-transform/rot = -180.0
+transform/pos = Vector2( 162, 240 )
+transform/rot = 180.0
 
 [node name="WallTrap4" parent="Layout/Structure/Traps" instance=ExtResource( 9 )]
 
-transform/pos = Vector2( 230, 232 )
-transform/rot = -180.0
+transform/pos = Vector2( 222, 240 )
+transform/rot = 180.0
 
 [node name="FloorTrap 2" parent="Layout/Structure/Traps" instance=ExtResource( 10 )]
 
@@ -244,18 +244,20 @@ damage_amount = 20
 [node name="FloorTrap3" parent="Layout/Structure/Traps" instance=ExtResource( 10 )]
 
 transform/pos = Vector2( 192, 992 )
+transform/rot = 90.0
 period = 3.0
 damage_amount = 20
 
 [node name="FloorTrap4" parent="Layout/Structure/Traps" instance=ExtResource( 10 )]
 
 transform/pos = Vector2( 544, 992 )
+transform/rot = -180.0
 period = 3.0
 damage_amount = 20
 
 [node name="WallTrap7" parent="Layout/Structure/Traps" instance=ExtResource( 9 )]
 
-transform/pos = Vector2( 1056, 232 )
+transform/pos = Vector2( 1056, 240 )
 transform/rot = 180.0
 projectile_scene = ExtResource( 11 )
 

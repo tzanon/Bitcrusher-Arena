@@ -13,7 +13,7 @@ export(float) var hold_rotation
 export(PackedScene) var projectile_scene
 
 onready var proj_spawn_point = get_node("ProjectileSpawnPoint")
-var proj_spawn_path = "/root/Level/Projectiles"
+const proj_spawn_path = "/root/Level/Projectiles"
 
 var fire_timer
 
@@ -54,12 +54,15 @@ func get_hold_rotd():
 
 func fire(spawn_pos):
 	if fire_timer.get_time_left() <= 0:
-		if debug_mode: print("airgun firing")
-		
 		var projectile = projectile_scene.instance()
 		projectile.set_global_pos(spawn_pos)
 		projectile.set_global_rotd(user.get_global_rotd() + max_accuracy_loss * pow(2*randf() - 1, 3))
-		get_node(proj_spawn_path).add_child(projectile)
+		
+		var proj_node = get_node(proj_spawn_path)
+		if proj_node:
+			get_node(proj_spawn_path).add_child(projectile)
+		else:
+			get_tree().get_root().add_child(projectile)
 		
 		var rot = user.get_global_rot()
 		var knockback_direction = Vector2(sin(rot), cos(rot)).normalized()
