@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export (float) var period = 1
+export (float) var period = 2.5
 export (int) var dx = 0
 export (int) var dy = 0
 export (bool) var paused

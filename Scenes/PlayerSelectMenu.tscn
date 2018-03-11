@@ -30,7 +30,7 @@ __meta__ = {
 }
 debug_mode = true
 solo_test_mode = true
-game_scene_path = "res://Scenes/level_ui_test.tscn"
+game_scene_path = "res://Scenes/Level/level_ui_test.tscn"
 
 [node name="MainMargin" type="MarginContainer" parent="."]
 
@@ -189,6 +189,7 @@ stretch_mode = 0
 
 [node name="Display2" type="Control" parent="MainMargin/DisplayLayout/HBoxContainer/JoinDisplays"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -226,6 +227,7 @@ stretch_mode = 0
 
 [node name="Display3" type="Control" parent="MainMargin/DisplayLayout/HBoxContainer/JoinDisplays"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -263,6 +265,7 @@ stretch_mode = 0
 
 [node name="Display4" type="Control" parent="MainMargin/DisplayLayout/HBoxContainer/JoinDisplays"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2

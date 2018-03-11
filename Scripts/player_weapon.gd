@@ -50,8 +50,6 @@ func get_hold_rot():
 func get_hold_rotd():
 	return hold_rotation
 
-#func fire():
-
 func fire(spawn_pos):
 	if fire_timer.get_time_left() <= 0:
 		var projectile = projectile_scene.instance()
