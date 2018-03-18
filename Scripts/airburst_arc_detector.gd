@@ -10,7 +10,7 @@ var lifetime
 var timer
 
 func _ready():
-	#self.connect("body_enter", self, "_detect_entry")
+	self.connect("body_enter", self, "_detect_entry")
 	
 	var rot = get_global_rot()
 	_push_direction = -Vector2(sin(rot), cos(rot)).normalized()
@@ -20,7 +20,7 @@ func _ready():
 	timer.set_wait_time(lifetime)
 	timer.start()
 	
-	set_fixed_process(true)
+	#set_fixed_process(true)
 
 func _fixed_process(delta):
 	var bodies = get_overlapping_bodies()

@@ -8,6 +8,7 @@
 
 texture = ExtResource( 1 )
 script/script = ExtResource( 2 )
+debug_mode = false
 weapon_name = "Laser"
 hold_position = Vector2( 24, -28 )
 hold_rotation = 7.5

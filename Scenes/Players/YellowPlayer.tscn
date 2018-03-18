@@ -43,6 +43,7 @@ damp_override/linear = 3.0
 damp_override/angular = -1.0
 script/script = ExtResource( 1 )
 debug_mode = false
+manager_path = "/root/Level/Layout/PlayerManager"
 acceleration = 40
 top_speed = 300
 

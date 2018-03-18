@@ -43,7 +43,6 @@ autostart = false
 [node name="ArcSprite" type="Sprite" parent="."]
 
 texture = ExtResource( 3 )
-modulate = Color( 1, 1, 1, 0 )
 
 [node name="Area2D" type="Area2D" parent="."]
 

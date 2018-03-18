@@ -19,7 +19,7 @@ collision/layers = 4
 collision/mask = 0
 collision/margin = 0.08
 script/script = ExtResource( 1 )
-debug_mode = true
+debug_mode = false
 lifetime = 0.2
 
 [node name="Collider" type="CollisionShape2D" parent="."]

@@ -29,4 +29,3 @@ func _fixed_process(delta):
 func _despawn():
 	if debug_mode: print("airburst arc despawned")
 	self.queue_free()
-

@@ -1,0 +1,90 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Sprites/player_marker.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Weapons/WorldAirgun.tscn" type="PackedScene" id=3]
+
+[node name="Level" type="Node"]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+
+transform/pos = Vector2( 672, 160 )
+debug_mode = true
+keyboard_mode = true
+impact_invulnerability_period = 0.15
+
+[node name="StartMarkers" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="start1" type="Sprite" parent="StartMarkers"]
+
+transform/pos = Vector2( 992, 160 )
+texture = ExtResource( 2 )
+
+[node name="start2" type="Sprite" parent="StartMarkers"]
+
+transform/pos = Vector2( 992, 288 )
+texture = ExtResource( 2 )
+
+[node name="start3" type="Sprite" parent="StartMarkers"]
+
+transform/pos = Vector2( 992, 448 )
+texture = ExtResource( 2 )
+
+[node name="start4" type="Sprite" parent="StartMarkers"]
+
+transform/pos = Vector2( 992, 608 )
+texture = ExtResource( 2 )
+
+[node name="start5" type="Sprite" parent="StartMarkers"]
+
+transform/pos = Vector2( 992, 768 )
+texture = ExtResource( 2 )
+
+[node name="start6" type="Sprite" parent="StartMarkers"]
+
+transform/pos = Vector2( 992, 928 )
+texture = ExtResource( 2 )
+
+[node name="Dummies" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="Dummy1" parent="Dummies" instance=ExtResource( 1 )]
+
+transform/pos = Vector2( 992, 160 )
+impact_invulnerability_period = 0.15
+
+[node name="Dummy2" parent="Dummies" instance=ExtResource( 1 )]
+
+transform/pos = Vector2( 992, 288 )
+impact_invulnerability_period = 0.15
+
+[node name="Dummy3" parent="Dummies" instance=ExtResource( 1 )]
+
+transform/pos = Vector2( 992, 448 )
+impact_invulnerability_period = 0.15
+
+[node name="Dummy4" parent="Dummies" instance=ExtResource( 1 )]
+
+transform/pos = Vector2( 992, 608 )
+impact_invulnerability_period = 0.15
+
+[node name="Dummy5" parent="Dummies" instance=ExtResource( 1 )]
+
+transform/pos = Vector2( 992, 768 )
+impact_invulnerability_period = 0.15
+
+[node name="Dummy6" parent="Dummies" instance=ExtResource( 1 )]
+
+transform/pos = Vector2( 992, 928 )
+impact_invulnerability_period = 0.15
+
+[node name="WorldAirgun" parent="." instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 736, 160 )
+
+[node name="Projectiles" type="Node2D" parent="."]
+
+

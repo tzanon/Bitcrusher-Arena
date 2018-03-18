@@ -15,8 +15,9 @@ height = 38.5
 custom_solver_bias = 0.0
 radius = 48.0
 
-[node name="YellowPlayer" type="RigidBody2D" groups=[
+[node name="Player" type="RigidBody2D" groups=[
 "Damageable",
+"SpeedDamageable",
 ]]
 
 transform/pos = Vector2( 0, -4 )
@@ -33,8 +34,8 @@ bounce = 0.2
 gravity_scale = 1.0
 custom_integrator = false
 continuous_cd = 0
-contacts_reported = 0
-contact_monitor = false
+contacts_reported = 2
+contact_monitor = true
 sleeping = false
 can_sleep = true
 velocity/linear = Vector2( 0, 0 )
@@ -43,9 +44,13 @@ damp_override/linear = 3.0
 damp_override/angular = -1.0
 script/script = ExtResource( 1 )
 debug_mode = false
+keyboard_mode = false
 manager_path = "/root/Level/Layout/PlayerManager"
 acceleration = 40
 top_speed = 300
+speed_pain_threshold = 300
+base_impact_damage = 5
+impact_invulnerability_period = 0.5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
@@ -58,6 +63,13 @@ playback/speed = 1.0
 blend_times = [  ]
 autoplay = ""
 
+[node name="Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
 [node name="BodySprite" type="Sprite" parent="."]
 
 transform/pos = Vector2( -4, -8 )
@@ -65,6 +77,7 @@ texture = ExtResource( 3 )
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 
+visibility/visible = false
 transform/pos = Vector2( -0.75, 0 )
 transform/rot = 90.0
 shape = SubResource( 1 )
@@ -74,6 +87,7 @@ _update_shape_index = 0
 [node name="PickupDetector" type="Area2D" parent="."]
 
 editor/display_folded = true
+visibility/visible = false
 input/pickable = true
 shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, -8 )
@@ -96,6 +110,6 @@ transform/pos = Vector2( 24, -24 )
 
 [node name="ProjectileSpawnPosition" type="Position2D" parent="."]
 
-transform/pos = Vector2( 0, -28 )
+transform/pos = Vector2( 0, -40 )
 
 

@@ -1,7 +1,10 @@
 extends "res://Scripts/player_weapon.gd"
 
+export var debug_fire_mode = false
+
 export(PackedScene) var air_flash_scene
 export(PackedScene) var air_barrier_scene
+export(PackedScene) var marker_scene
 
 var ready_light
 
@@ -28,6 +31,12 @@ func fire(spawn_pos):
 		add_child(muzzle_flash)
 		muzzle_flash.set_global_pos(proj_spawn_point.get_global_pos())
 		muzzle_flash.set_global_rot(get_global_rot())
+		
+		# spawn marker
+		if debug_fire_mode:
+			var marker = marker_scene.instance()
+			get_node("//root/Level").add_child(marker)
+			marker.set_pos(spawn_pos)
 		
 		_toggle_reload_light()
 		

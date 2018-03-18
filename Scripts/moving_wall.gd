@@ -29,3 +29,12 @@ func _process(delta):
 		paused = !paused
 		if paused: reverse = !reverse
 
+func get_speed():
+	return 0
+
+func get_speed_sq():
+	return 0
+
+func get_impact_damage():
+	return 0
+

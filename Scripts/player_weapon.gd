@@ -71,5 +71,4 @@ func fire(spawn_pos):
 
 func _spawn_proj(spawn_pos):
 	
-	
 	pass

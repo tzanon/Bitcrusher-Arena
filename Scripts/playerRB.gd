@@ -1,10 +1,11 @@
 extends RigidBody2D
 
 export var debug_mode = false
+export var keyboard_mode = false
 
 # gamepad device used to control this player
 var gamepad_id = -1 setget set_gamepad_id
-var name = "" #setget set_name
+var name = "default" #setget set_name
 
 export var manager_path = "/root/Level/Layout/PlayerManager"
 
@@ -12,20 +13,24 @@ var health = 100
 signal health_changed(player_name, player_health)
 signal died(player_name)
 
-var animator
-
 const joystick_idle_limit = 0.15
 
 export var acceleration = 40
 export var top_speed = 200
-
 var rotd_speed = 180
+
+export var speed_pain_threshold = 300
+export var base_impact_damage = 5
+
+export var impact_invulnerability_period = 0.15
 
 const start_weapon = preload("res://Scenes/Weapons/PlayerLaser.tscn")
 var weapon_pos
 var weapon
 
+var animator
 var item_detector
+var impact_invulnerability_timer
 
 var directional_force = Vector2()
 const DIRECTION = {
@@ -38,7 +43,7 @@ const DIRECTION = {
 
 const proj_spawn_positions = {
 	"Laser" : Vector2(0, -44),
-	"Potato Launcher" : Vector2(0, -36),
+	"Potato Launcher" : Vector2(0, -40),
 	"Airburst Gun" : Vector2(0, -24),
 	"Bombshot" : Vector2(0, -36)
 }
@@ -47,8 +52,14 @@ func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
 	
+	self.connect("body_enter", self, "_detect_collision")
+	
 	animator = get_node("AnimationPlayer")
 	weapon_pos = get_node("WeaponPosition").get_pos()
+	
+	impact_invulnerability_timer = get_node("Timer")
+	impact_invulnerability_timer.set_one_shot(true)
+	impact_invulnerability_timer.set_wait_time(impact_invulnerability_period)
 	
 	item_detector = get_node("PickupDetector")
 	_equip_weapon(start_weapon)
@@ -56,13 +67,11 @@ func _ready():
 
 func _fixed_process(delta):
 	# aiming is currently just rotating -- should we have some sort of reticle to move around instead?
-	if debug_mode:
+	if keyboard_mode:
 		if Input.is_action_pressed("rotate_left"):
 			set_rotd(get_rotd() + rotd_speed * delta)
-		
 		if Input.is_action_pressed("rotate_right"):
 			set_rotd(get_rotd() + -rotd_speed * delta)
-		
 	else:
 		var axis_pos = -Input.get_joy_axis(gamepad_id, JOY_AXIS_2)
 		if abs(axis_pos) > joystick_idle_limit:
@@ -70,31 +79,34 @@ func _fixed_process(delta):
 	
 
 func _input(event):
-	
-	if debug_mode:
+	if keyboard_mode:
 		if event.is_action_pressed("fire_weapon"):
 			_fire_weapon()
-		
 		if event.is_action_pressed("pick_up_item"):
 			_pick_up_item()
 	else:
 		if event.is_action_pressed("joy_fire") && event.device == self.gamepad_id:
 			_fire_weapon()
-		
 		if event.is_action_pressed("joy_pickup") && event.device == self.gamepad_id:
 			_pick_up_item()
 
 # handles movement
 func _integrate_forces(state):
-	if debug_mode:
+	if keyboard_mode:
 		directional_force = _calculate_direction_digital(state)
 	else:
 		directional_force = _calculate_direction_analog(state)
 	
 	var final_velocity = state.get_linear_velocity() + (directional_force * acceleration)
-	final_velocity.x = clamp(final_velocity.x, -top_speed, top_speed)
-	final_velocity.y = clamp(final_velocity.y, -top_speed, top_speed)
+	
+	final_velocity = final_velocity.clamped(top_speed)
+	
+	#final_velocity.x = clamp(final_velocity.x, -top_speed, top_speed)
+	#final_velocity.y = clamp(final_velocity.y, -top_speed, top_speed)
+	
 	state.set_linear_velocity(final_velocity)
+	
+	#if debug_mode: print("final speed is ", self.get_speed())
 
 func _calculate_direction_digital(state):
 	directional_force = DIRECTION.ZERO
@@ -129,22 +141,58 @@ func set_sprite_from_path(sprite_path):
 func connect_to_hud(manager):
 	connect("health_changed", manager, "update_player_health")
 	connect("died", manager, "remove_player")
-	
-
 
 func set_name(player_name):
-	print("name is ", player_name)
+	if debug_mode: print("name is ", player_name)
 	name = player_name
-	print("name was set to ", name)
+	if debug_mode: print("name was set to ", name)
 
 func set_gamepad_id(id):
 	gamepad_id = id
-	#GameInfo.print_player_name(gamepad_id)
+
+func get_speed():
+	return self.get_linear_velocity().length()
+
+func get_speed_sq():
+	return self.get_linear_velocity().length_squared()
+
+func get_impact_damage():
+	var speed_factor = self.get_speed_sq() / pow(speed_pain_threshold, 2)
+	var dmg = speed_factor * base_impact_damage
+	return dmg
+	
+
+func _detect_collision(body):
+	
+	if impact_invulnerability_timer.get_time_left() > 0: return
+	
+	if debug_mode:
+		print("player ", name, " speed is ", self.get_speed(), ", squared is ", self.get_speed_sq())
+		print("damaging speed is ", speed_pain_threshold, " squared is ", pow(speed_pain_threshold, 2))
+	
+	if body.get_type() == "StaticBody2D" && self.get_speed_sq() > pow(speed_pain_threshold, 2): # walls can always damage
+		#if debug_mode: print("player ", name, " speed is ", self.get_speed())
+		self.damage(self.get_impact_damage())
+		impact_invulnerability_timer.start()
+	
+	if body.is_in_group("SpeedDamageable"): # every speed-damageable object must have a get_speed_sq() method
+		var other_speed_sq = body.get_speed_sq()
+		if other_speed_sq > pow(speed_pain_threshold, 2):
+			#if debug_mode: print("other ", name, " speed is ", self.get_speed())
+			self.damage(body.get_impact_damage())
+		
+		if self.get_speed_sq() > pow(speed_pain_threshold, 2):
+			#if debug_mode: print("player ", name, " speed is ", self.get_speed())
+			self.damage(self.get_impact_damage())
+		
+		impact_invulnerability_timer.start()
+		
+	
 
 func damage(dmg):
-	print("damaging player ", name)
+	
 	health = clamp(health - dmg, 0, 100)
-	if debug_mode: print("player ", name, " health: ", health)
+	if debug_mode: print("damaging player ", name, ". has health: ", health)
 	emit_signal("health_changed", name, health)
 	animator.play("PlayerDamaged")
 	
