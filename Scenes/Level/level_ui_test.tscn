@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=1]
+[gd_scene load_steps=27 format=1]
 
 [ext_resource path="res://Scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Level/ground1/floor.png" type="Texture" id=2]
@@ -24,9 +24,8 @@
 [ext_resource path="res://Scenes/floor_trap.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/Level/Boundary.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/Level/SouthBoundary.tscn" type="PackedScene" id=24]
-[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=25]
-[ext_resource path="res://Sprites/UI/Gameplay/gameplay_ui_panel.png" type="Texture" id=26]
-[ext_resource path="res://Sprites/UI/Gameplay/gameplay_ui_frame.png" type="Texture" id=27]
+[ext_resource path="res://Sprites/UI/Gameplay/gameplay_ui_panel.png" type="Texture" id=25]
+[ext_resource path="res://Sprites/UI/Gameplay/gameplay_ui_frame.png" type="Texture" id=26]
 
 [node name="Level" type="Node"]
 
@@ -146,6 +145,7 @@ transform/pos = Vector2( 1248, 416 )
 
 transform/pos = Vector2( 576, 272 )
 transform/rot = 89.9999
+collision/layers = 3
 
 [node name="LongWall" parent="Layout/Structure/Obstacles/Walls" instance=ExtResource( 17 )]
 
@@ -277,24 +277,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="TestPlayer" parent="Layout/Players" instance=ExtResource( 25 )]
-
-transform/pos = Vector2( 1248, 572 )
-debug_mode = true
-keyboard_mode = true
-speed_pain_threshold = 300
-base_impact_damage = 5
-impact_invulnerability_period = 0.15
-
-[node name="TestDummy" parent="Layout/Players" instance=ExtResource( 25 )]
-
-transform/pos = Vector2( 1120, 252 )
-debug_mode = true
-keyboard_mode = false
-speed_pain_threshold = 300
-base_impact_damage = 5
-impact_invulnerability_period = 0.15
-
 [node name="Projectiles" type="Node2D" parent="."]
 
 __meta__ = {
@@ -332,7 +314,7 @@ margin/left = 0.0
 margin/top = 928.0
 margin/right = 1920.0
 margin/bottom = 1078.0
-texture = ExtResource( 26 )
+texture = ExtResource( 25 )
 stretch_mode = 0
 
 [node name="InfoPanelFrame" type="TextureFrame" parent="UI"]
@@ -345,7 +327,7 @@ margin/left = 0.0
 margin/top = 928.0
 margin/right = 1920.0
 margin/bottom = 1078.0
-texture = ExtResource( 27 )
+texture = ExtResource( 26 )
 stretch_mode = 0
 __meta__ = {
 "_edit_lock_": true
