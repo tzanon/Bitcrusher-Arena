@@ -7,6 +7,7 @@ const main_menu_path = "res://Scenes/main_menu.tscn"
 export var game_scene_path = "res://Scenes/level.tscn"
 
 const default_icon = preload("res://Sprites/Placeholder/ui_icon1.png")
+const id_prompt = preload("res://Sprites/UI/SelectMenu/id_prompt.png")
 
 var player_info = [
 	{ name = "blue", pad_id = -1, icon_path = "res://Sprites/UI/player_blue_icon.png" },
@@ -15,11 +16,18 @@ var player_info = [
 	{ name = "yellow", pad_id = -1, icon_path = "res://Sprites/UI/player_yellow_icon.png" }
 ]
 
-onready var player_icon_nodes = {
-	"blue" : get_node("MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Display1/PlayerIcon"),
-	"red" : get_node("MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Display2/PlayerIcon"),
-	"green" : get_node("MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Display3/PlayerIcon"),
-	"yellow" : get_node("MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Display4/PlayerIcon")
+onready var player_display_nodes = {
+	"blue" : get_node("MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Display1"),
+	"red" : get_node("MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Display2"),
+	"green" : get_node("MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Display3"),
+	"yellow" : get_node("MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Display4")
+}
+
+onready var player_prompt_nodes = {
+	"blue" : get_node("MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Display1/PlayerJoin"),
+	"red" : get_node("MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Display2/PlayerJoin"),
+	"green" : get_node("MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Display3/PlayerJoin"),
+	"yellow" : get_node("MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Display4/PlayerJoin")
 }
 
 var player_warning
@@ -81,22 +89,26 @@ func _back():
 	get_tree().change_scene(main_menu_path)
 
 func _set_icon(info_entry):
-	var icon_node = player_icon_nodes[info_entry.name]
+	var icon_node = player_display_nodes[info_entry.name].get_node("PlayerIcon")
 	var icon = load(info_entry.icon_path)
 	icon_node.set_texture(icon)
 
 func _clear_icon(info_entry):
-	var icon_node = player_icon_nodes[info_entry.name]
+	var icon_node = player_display_nodes[info_entry.name].get_node("PlayerIcon")
 	icon_node.set_texture(default_icon)
+
+func _set_id_prompt(info_entry):
+	var prompt_node = player_display_nodes[info_entry.name].get_node("PlayerJoin")
+	prompt_node.set_texture(id_prompt)
 
 func _request_join(gamepad_id):
 	if GameInfo.is_id_registered(gamepad_id):
 		# do something with player's icon
+		# shoot laser out of side maybe
 		if debug_mode: print("controller ", gamepad_id, " is already registered")
 	else:
 		_register_gamepad(gamepad_id)
-		# show icon and hide join text
-		#if debug_mode: print("controller ", event.device, " registered")
+		if debug_mode: print("controller ", gamepad_id, " registered")
 
 func _register_gamepad(gamepad_id):
 	if player_info.size() == 0:
@@ -107,7 +119,9 @@ func _register_gamepad(gamepad_id):
 	info_entry.pad_id = gamepad_id
 	GameInfo.register_player(info_entry)
 	
+	# set icon and change join prompt text
 	_set_icon(info_entry)
+	_set_id_prompt(info_entry)
 	
 	GameInfo.print_players()
 	if debug_mode: print("remaining players: ", player_info)
