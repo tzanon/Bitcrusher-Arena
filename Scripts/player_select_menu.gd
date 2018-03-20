@@ -22,15 +22,19 @@ onready var player_icon_nodes = {
 	"yellow" : get_node("MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Display4/PlayerIcon")
 }
 
-onready var player_warning = get_node("MainMargin/PlayerWarning")
-onready var back_button = get_node("MainMargin/DisplayLayout/NavigationArea/BackButton")
-onready var start_button = get_node("MainMargin/DisplayLayout/NavigationArea/StartButton")
+var player_warning
+var back_button
+var start_button
 
 func _ready():
 	GameInfo.clear_info()
 	
 	if solo_test_mode:
 		_request_join(1) # add one "dummy" player to proceed with one gamepad
+	
+	player_warning = get_node("MainMargin/PlayerWarning")
+	back_button = get_node("MainMargin/DisplayLayout/NavigationArea/BackButton")
+	start_button = get_node("MainMargin/DisplayLayout/NavigationArea/StartButton")
 	
 	player_warning.hide()
 	
