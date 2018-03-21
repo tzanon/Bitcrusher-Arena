@@ -5,5 +5,5 @@ func _ready():
 	pass
 	
 func _on_pressed():
-	get_tree().change_scene("res://Scenes/level.tscn")
+	get_tree().change_scene("res://Scenes/Level/level_ui_test.tscn")
 	pass
