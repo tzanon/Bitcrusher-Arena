@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=1]
+[gd_scene load_steps=30 format=1]
 
 [ext_resource path="res://Scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Level/ground1/floor.png" type="Texture" id=2]
@@ -21,11 +21,14 @@
 [ext_resource path="res://Scenes/Level/MovingWall.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/Level/Pillar.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Scenes/wall_trap.tscn" type="PackedScene" id=21]
-[ext_resource path="res://Scenes/floor_trap.tscn" type="PackedScene" id=22]
-[ext_resource path="res://Scenes/Level/Boundary.tscn" type="PackedScene" id=23]
-[ext_resource path="res://Scenes/Level/SouthBoundary.tscn" type="PackedScene" id=24]
-[ext_resource path="res://Sprites/UI/Gameplay/gameplay_ui_panel.png" type="Texture" id=25]
-[ext_resource path="res://Sprites/UI/Gameplay/gameplay_ui_frame.png" type="Texture" id=26]
+[ext_resource path="res://Scenes/Projectiles/PotatoKB.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Scenes/Projectiles/AirburstArcRB.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Scenes/floor_trap.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Scenes/Level/Boundary.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Scenes/Level/SouthBoundary.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=27]
+[ext_resource path="res://Sprites/UI/Gameplay/gameplay_ui_panel.png" type="Texture" id=28]
+[ext_resource path="res://Sprites/UI/Gameplay/gameplay_ui_frame.png" type="Texture" id=29]
 
 [node name="Level" type="Node"]
 
@@ -211,6 +214,18 @@ __meta__ = {
 transform/pos = Vector2( 282, 48 )
 transform/rot = 180.0
 
+[node name="WallTrap2" parent="Layout/Structure/Traps" instance=ExtResource( 21 )]
+
+transform/pos = Vector2( 826, 48 )
+transform/rot = 180.0
+projectile_scene = ExtResource( 22 )
+
+[node name="WallTrap7" parent="Layout/Structure/Traps" instance=ExtResource( 21 )]
+
+transform/pos = Vector2( 1082, 48 )
+transform/rot = 180.0
+projectile_scene = ExtResource( 23 )
+
 [node name="WallTrap1" parent="Layout/Structure/Traps" instance=ExtResource( 21 )]
 
 transform/pos = Vector2( 48, 110 )
@@ -236,20 +251,20 @@ transform/rot = 180.0
 transform/pos = Vector2( 222, 48 )
 transform/rot = 180.0
 
-[node name="FloorTrap1" parent="Layout/Structure/Traps" instance=ExtResource( 22 )]
+[node name="FloorTrap1" parent="Layout/Structure/Traps" instance=ExtResource( 24 )]
 
 transform/pos = Vector2( 352, 576 )
 period = 3.0
 damage_amount = 20
 
-[node name="FloorTrap2" parent="Layout/Structure/Traps" instance=ExtResource( 22 )]
+[node name="FloorTrap2" parent="Layout/Structure/Traps" instance=ExtResource( 24 )]
 
 transform/pos = Vector2( 192, 800 )
 transform/rot = 90.0
 period = 3.0
 damage_amount = 20
 
-[node name="FloorTrap3" parent="Layout/Structure/Traps" instance=ExtResource( 22 )]
+[node name="FloorTrap3" parent="Layout/Structure/Traps" instance=ExtResource( 24 )]
 
 transform/pos = Vector2( 544, 800 )
 transform/rot = -180.0
@@ -263,11 +278,11 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Boundary" parent="Layout/Structure/BorderWalls" instance=ExtResource( 23 )]
+[node name="Boundary" parent="Layout/Structure/BorderWalls" instance=ExtResource( 25 )]
 
 transform/pos = Vector2( 960, 448 )
 
-[node name="SouthBoundary" parent="Layout/Structure/BorderWalls" instance=ExtResource( 24 )]
+[node name="SouthBoundary" parent="Layout/Structure/BorderWalls" instance=ExtResource( 26 )]
 
 transform/pos = Vector2( 960, 896 )
 
@@ -276,6 +291,12 @@ transform/pos = Vector2( 960, 896 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Player" parent="Layout/Players" instance=ExtResource( 27 )]
+
+transform/pos = Vector2( 1216, 604 )
+debug_mode = true
+keyboard_mode = true
 
 [node name="Projectiles" type="Node2D" parent="."]
 
@@ -314,7 +335,7 @@ margin/left = 0.0
 margin/top = 928.0
 margin/right = 1920.0
 margin/bottom = 1078.0
-texture = ExtResource( 25 )
+texture = ExtResource( 28 )
 stretch_mode = 0
 
 [node name="InfoPanelFrame" type="TextureFrame" parent="UI"]
@@ -327,7 +348,7 @@ margin/left = 0.0
 margin/top = 928.0
 margin/right = 1920.0
 margin/bottom = 1078.0
-texture = ExtResource( 26 )
+texture = ExtResource( 29 )
 stretch_mode = 0
 __meta__ = {
 "_edit_lock_": true

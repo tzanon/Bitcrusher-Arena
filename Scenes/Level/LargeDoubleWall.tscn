@@ -7,7 +7,9 @@
 custom_solver_bias = 0.0
 extents = Vector2( 152, 22 )
 
-[node name="LargeDoubleWall" type="StaticBody2D"]
+[node name="LargeDoubleWall" type="StaticBody2D" groups=[
+"Kinematic",
+]]
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
@@ -17,7 +19,7 @@ shapes/1/shape = SubResource( 1 )
 shapes/1/transform = Matrix32( 2.22127e-06, -1, 1, 2.22127e-06, -2, -128 )
 shapes/1/trigger = false
 collision/layers = 1
-collision/mask = 1
+collision/mask = 0
 constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
 friction = 1.0

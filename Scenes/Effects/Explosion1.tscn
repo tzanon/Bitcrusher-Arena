@@ -20,9 +20,10 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+collision/layers = 0
 script/script = ExtResource( 1 )
 debug_mode = false
-is_damaging = false
+is_damaging = true
 damage_amount = 10
 impact_force = 500.0
 max_force_range = 60
@@ -40,9 +41,8 @@ autoplay = "Explosion1"
 
 [node name="Explosion" type="Sprite" parent="."]
 
-transform/rot = 70.0
+transform/scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 3 )
-modulate = Color( 1, 1, 1, 0 )
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 

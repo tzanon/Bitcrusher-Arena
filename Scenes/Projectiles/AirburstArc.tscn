@@ -15,7 +15,7 @@ b = Vector2( -40, 4 )
 
 input/pickable = true
 collision/layers = 0
-collision/mask = 0
+collision/mask = 1
 collision/margin = 0.08
 script/script = ExtResource( 1 )
 debug_mode = true
