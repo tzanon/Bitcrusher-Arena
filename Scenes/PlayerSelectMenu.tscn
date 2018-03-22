@@ -104,7 +104,7 @@ size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 1840.0
-margin/bottom = 165.0
+margin/bottom = 168.0
 use_top_left = false
 __meta__ = {
 "_edit_group_": true,
@@ -117,10 +117,10 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 390.0
+margin/left = 280.0
 margin/top = 0.0
-margin/right = 1450.0
-margin/bottom = 165.0
+margin/right = 1560.0
+margin/bottom = 168.0
 texture = ExtResource( 3 )
 stretch_mode = 0
 
@@ -131,9 +131,9 @@ focus/stop_mouse = false
 size_flags/horizontal = 3
 size_flags/vertical = 1
 margin/left = 0.0
-margin/top = 186.0
+margin/top = 187.0
 margin/right = 1840.0
-margin/bottom = 858.0
+margin/bottom = 859.0
 alignment = 1
 __meta__ = {
 "_edit_group_": true,

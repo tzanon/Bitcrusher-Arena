@@ -2,10 +2,10 @@ extends Node
 
 # contains info for current game's players; initially null (on official release)
 var registered_player_info = [
-	{ name = "blue", pad_id = -1, icon_path = "res://Sprites/UI/player_blue_icon.png" },
-	{ name = "red", pad_id = -1, icon_path = "res://Sprites/UI/player_red_icon.png" },
-	{ name = "green", pad_id = 1, icon_path = "res://Sprites/UI/player_green_icon.png" },
-	{ name = "yellow", pad_id = 2, icon_path = "res://Sprites/UI/player_yellow_icon.png" }
+	{ name = "blue", pad_id = -1, icon_path = "res://Sprites/UI/player_blue_icon.png", icon_path_xl = "res://Sprites/UI/ResultsMenu/blue_profile_pic.png" },
+	{ name = "red", pad_id = -1, icon_path = "res://Sprites/UI/player_red_icon.png", icon_path_xl = "res://Sprites/UI/ResultsMenu/red_profile_pic.png" },
+	{ name = "green", pad_id = 1, icon_path = "res://Sprites/UI/player_green_icon.png", icon_path_xl = "res://Sprites/UI/ResultsMenu/green_profile_pic.png" },
+	{ name = "yellow", pad_id = 2, icon_path = "res://Sprites/UI/player_yellow_icon.png", icon_path_xl = "res://Sprites/UI/ResultsMenu/yellow_profile_pic.png" }
 ]
 
 var match_winner = null
