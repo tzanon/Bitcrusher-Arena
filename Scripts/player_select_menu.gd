@@ -9,6 +9,8 @@ export var game_scene_path = "res://Scenes/level.tscn"
 const default_icon = preload("res://Sprites/Placeholder/ui_icon1.png")
 const id_prompt = preload("res://Sprites/UI/SelectMenu/id_prompt.png")
 
+export(PackedScene) var player_id_scene
+
 var player_info = [
 	{ name = "blue", pad_id = -1, icon_path = "res://Sprites/UI/player_blue_icon.png" },
 	{ name = "red", pad_id = -1, icon_path = "res://Sprites/UI/player_red_icon.png" },
@@ -89,12 +91,12 @@ func _back():
 	get_tree().change_scene(main_menu_path)
 
 func _set_icon(info_entry):
-	var icon_node = player_display_nodes[info_entry.name].get_node("PlayerIcon")
+	var icon_node = player_display_nodes[info_entry.name].get_node("IconBack/PlayerIcon")
 	var icon = load(info_entry.icon_path)
 	icon_node.set_texture(icon)
 
 func _clear_icon(info_entry):
-	var icon_node = player_display_nodes[info_entry.name].get_node("PlayerIcon")
+	var icon_node = player_display_nodes[info_entry.name].get_node("IconBack/PlayerIcon")
 	icon_node.set_texture(default_icon)
 
 func _set_id_prompt(info_entry):
@@ -105,6 +107,14 @@ func _request_join(gamepad_id):
 	if GameInfo.is_id_registered(gamepad_id):
 		# do something with player's icon
 		# shoot laser out of side maybe
+		var player_name = GameInfo.get_player_name_with_id(gamepad_id)
+		var display_node = player_display_nodes[player_name].get_node("IconBack/PlayerIcon")
+		
+		var id_demo = player_id_scene.instance()
+		id_demo.set_pos(display_node.get_global_pos() + Vector2(120, 50))
+		id_demo.set_rotd(-90)
+		get_tree().get_root().add_child(id_demo)
+		
 		if debug_mode: print("controller ", gamepad_id, " is already registered")
 	else:
 		_register_gamepad(gamepad_id)

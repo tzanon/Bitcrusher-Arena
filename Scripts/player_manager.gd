@@ -58,10 +58,7 @@ func remove_player(player_name):
 	player_huds[player_name].set_death_icon()
 	
 	if match_player_refs.size() == 1:
-		GameInfo.match_winner = match_player_refs.keys().front()
-		get_tree().change_scene("res://Scenes/UI/results.tscn")
-		if debug_mode: print("Winner is ", GameInfo.match_winner)
-
+		_end_game()
 
 func _enable_player_hud(info_entry):
 	var hud = hud_template.instance()
@@ -80,5 +77,8 @@ func update_player_health(player_name, player_health):
 	var hud = player_huds[player_name]
 	hud.update_health(player_health)
 
-
-
+func _end_game():
+	GameInfo.match_winner = match_player_refs.keys().front()
+	if debug_mode: print("Winner is ", GameInfo.match_winner)
+	get_tree().change_scene("res://Scenes/UI/results.tscn")
+	

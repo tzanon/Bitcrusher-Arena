@@ -1,6 +1,14 @@
 extends Control
 
+onready var player_win_icons = {
+	"blue" : "res://Sprites/UI/ResultsMenu/winner_blue_icon.png",
+	"red" : "res://Sprites/UI/ResultsMenu/winner_red_icon.png",
+	"green" : "res://Sprites/UI/ResultsMenu/winner_green_icon.png",
+	"yellow" : "res://Sprites/UI/ResultsMenu/winner_yellow_icon.png"
+}
+
 export var debug_mode = false
+
 const main_scene_path = "res://Scenes/main_menu.tscn"
 export var game_scene_path = "res://Scenes/Level/level_ui_test.tscn"
 
@@ -11,7 +19,7 @@ var play_again_button
 var main_menu_button
 
 func _ready():
-	winner = GameInfo.get_info()[0]
+	winner = GameInfo.match_winner
 	_set_icon()
 	
 	main_menu_button = get_node("MainMargin/DisplayLayout/NavigationArea/MainMenu")
@@ -25,10 +33,8 @@ func _ready():
 	
 	set_process_input(true)
 
-
 func _set_icon():
-	var icon = load(winner.icon_path_xl)
-	print(winner.icon_path_xl)
+	var icon = load(player_win_icons[GameInfo.match_winner])
 	player_display_node.set_texture(icon)
 
 func _input(event):
@@ -39,9 +45,9 @@ func _input(event):
 	if Input.is_joy_button_pressed(event.device, JOY_XBOX_B) || Input.is_key_pressed(KEY_BACKSPACE):
 		_main_menu()
 
-func _play_again(event):
-	get_tree().change_scene(main_scene_path)
-
-
-func _main_menu(event):
+func _play_again():
 	get_tree().change_scene(game_scene_path)
+
+
+func _main_menu():
+	get_tree().change_scene(main_scene_path)
