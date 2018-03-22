@@ -9,7 +9,7 @@ onready var player_win_icons = {
 
 export var debug_mode = false
 
-const main_scene_path = "res://Scenes/main_menu.tscn"
+const main_scene_path = "res://Scenes/UI/MainMenuFinal.tscn"
 export var game_scene_path = "res://Scenes/Level/level_ui_test.tscn"
 
 onready var player_display_node = get_node("MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Picture/PlayerIcon")

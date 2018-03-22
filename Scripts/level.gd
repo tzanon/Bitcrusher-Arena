@@ -5,6 +5,6 @@ func _ready():
 
 func _input(event):
 	if Input.is_key_pressed(KEY_ESCAPE):
-		get_tree().change_scene("res://Scenes/main_menu.tscn")
+		get_tree().change_scene("res://Scenes/UI/MainMenuFinal.tscn")
 
 

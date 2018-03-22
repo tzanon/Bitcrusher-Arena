@@ -3,7 +3,7 @@ extends Control
 export var debug_mode = false
 export var solo_test_mode = false
 
-const main_menu_path = "res://Scenes/main_menu.tscn"
+const main_menu_path = "res://Scenes/UI/MainMenuFinal.tscn"
 export var game_scene_path = "res://Scenes/level.tscn"
 
 const default_icon = preload("res://Sprites/Placeholder/ui_icon1.png")
