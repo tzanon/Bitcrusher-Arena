@@ -13,11 +13,11 @@ var health = 100
 signal health_changed(player_name, player_health)
 signal died(player_name)
 
-const joystick_idle_limit = 0.15
+const joystick_idle_limit = 0.3
 
 export var acceleration = 40
-export var top_speed = 200
-var rotd_speed = 180
+export var top_speed = 300
+var rotd_speed = 270
 
 export var speed_pain_threshold = 300
 export var base_impact_damage = 5

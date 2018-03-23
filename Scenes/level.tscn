@@ -5,7 +5,7 @@
 [ext_resource path="res://Scenes/WeaponSpawnPoint.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/PlayerManager.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/static_obstacle_ph.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Placeholders/LineCollTester.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Level/Placeholders/LineCollTester.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Sprites/player.png" type="Texture" id=7]
 [ext_resource path="res://Scenes/moving_wall.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scripts/moving_wall.gd" type="Script" id=9]
@@ -17,6 +17,7 @@
 [ext_resource path="res://Scenes/Weapons/WorldLauncher.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Weapons/WorldAirgun.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/Players/YellowPlayer.tscn" type="PackedScene" id=17]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 

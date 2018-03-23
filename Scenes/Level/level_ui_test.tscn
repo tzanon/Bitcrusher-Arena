@@ -41,6 +41,10 @@ script/script = ExtResource( 1 )
 editor/display_folded = true
 transform/pos = Vector2( 960, 448 )
 texture = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="TopLeft" type="Sprite" parent="Layout/Ground"]
 
@@ -76,7 +80,6 @@ texture = ExtResource( 8 )
 
 editor/display_folded = true
 debug_mode = true
-hud_spawn_path = "/root/Level/UI/PlayerInfoPanel"
 
 [node name="BlueSpawnPoint" parent="Layout/PlayerManager"]
 
@@ -138,7 +141,11 @@ transform/pos = Vector2( 1104, 528 )
 
 [node name="Obstacles" type="Node2D" parent="Layout/Structure"]
 
+editor/display_folded = true
+
 [node name="Walls" type="Node2D" parent="Layout/Structure/Obstacles"]
+
+editor/display_folded = true
 
 [node name="LargeDoubleWall" parent="Layout/Structure/Obstacles/Walls" instance=ExtResource( 15 )]
 
@@ -146,13 +153,13 @@ transform/pos = Vector2( 1248, 416 )
 
 [node name="SmallDoubleWall" parent="Layout/Structure/Obstacles/Walls" instance=ExtResource( 16 )]
 
-transform/pos = Vector2( 576, 272 )
+transform/pos = Vector2( 576, 304 )
 transform/rot = 89.9999
 collision/layers = 3
 
 [node name="LongWall" parent="Layout/Structure/Obstacles/Walls" instance=ExtResource( 17 )]
 
-transform/pos = Vector2( 224, 424 )
+transform/pos = Vector2( 224, 456 )
 
 [node name="LongWall1" parent="Layout/Structure/Obstacles/Walls" instance=ExtResource( 17 )]
 
@@ -205,6 +212,7 @@ transform/pos = Vector2( 960, 736 )
 
 [node name="Traps" type="Node2D" parent="Layout/Structure"]
 
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -294,7 +302,7 @@ __meta__ = {
 
 [node name="Player" parent="Layout/Players" instance=ExtResource( 27 )]
 
-transform/pos = Vector2( 1216, 604 )
+transform/pos = Vector2( 1312, 540 )
 debug_mode = true
 keyboard_mode = true
 

@@ -36,7 +36,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 debug_mode = true
-solo_test_mode = true
+solo_test_mode = false
 game_scene_path = "res://Scenes/Level/level_ui_test.tscn"
 player_id_scene = ExtResource( 2 )
 

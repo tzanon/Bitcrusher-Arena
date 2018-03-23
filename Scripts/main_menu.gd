@@ -4,7 +4,7 @@ export var select_menu_path = "res://Scenes/PlayerSelectMenu.tscn"
 
 func _ready():
 	var start_button = get_node("/root/MainMenu/Control/StartButton")
-	self.connect("pressed", start_button, "_play_game")
+	start_button.connect("pressed", self, "_play_game")
 	
 	set_process_input(true)
 
