@@ -6,7 +6,10 @@
 [node name="PlayerManager" type="Node2D"]
 
 script/script = ExtResource( 1 )
+debug_mode = false
 spawn_path = "/root/Level/Layout/Players"
+hud_spawn_path = "/root/Level/UI/PlayerInfoPanel"
+game_end_time = 3.0
 
 [node name="BlueSpawnPoint" parent="." instance=ExtResource( 2 )]
 
@@ -23,5 +26,12 @@ transform/pos = Vector2( -32, 32 )
 [node name="YellowSpawnPoint" parent="." instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 32, -32 )
+
+[node name="EndTimer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
 
 

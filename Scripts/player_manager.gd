@@ -17,6 +17,9 @@ const hud_template = preload("res://Scenes/UI/PlayerInfoUI.tscn")
 export var spawn_path = "/root/Level/Layout/Players"
 export var hud_spawn_path = "/root/Level/UI/PlayerInfoPanel"
 
+export var game_end_time = 3.0
+var end_timer
+
 var match_player_refs = {}
 var player_huds = {}
 
@@ -30,6 +33,11 @@ func _ready():
 		var player = _spawn_player(info_entry.name)
 		player.gamepad_id = info_entry.pad_id
 		match_player_refs[info_entry.name] = weakref(player)
+	
+	end_timer = get_node("EndTimer")
+	end_timer.set_wait_time(game_end_time)
+	end_timer.set_one_shot(true)
+	end_timer.connect("timeout", self, "_show_results")
 	
 	# this will be refactored (or not)
 	var children = get_children()
@@ -80,5 +88,8 @@ func update_player_health(player_name, player_health):
 func _end_game():
 	GameInfo.match_winner = match_player_refs.keys().front()
 	if debug_mode: print("Winner is ", GameInfo.match_winner)
-	get_tree().change_scene("res://Scenes/UI/results.tscn")
+	end_timer.start()
 	
+
+func _show_results():
+	get_tree().change_scene("res://Scenes/UI/results.tscn")
