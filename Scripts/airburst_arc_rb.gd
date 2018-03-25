@@ -65,6 +65,10 @@ func _handle_collision(body):
 		body.apply_impulse(Vector2(0,0), push_vec)
 		
 		if debug_mode: print("force strength is ", push_vec.length())
+		
+		if body.is_in_group("ImpactVulnerable"):
+			body.enable_impact_vulnerability()
+		
 	elif body.get_type() == "StaticBody2D" || body.is_in_group("Kinematic"):
 		self._despawn()
 	

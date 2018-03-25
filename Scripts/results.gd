@@ -38,7 +38,7 @@ func _set_icon():
 	player_display_node.set_texture(icon)
 
 func _input(event):
-	if Input.is_joy_button_pressed(event.device, JOY_START):
+	if Input.is_joy_button_pressed(event.device, JOY_START) || Input.is_key_pressed(KEY_RETURN):
 		if debug_mode: print("xbox START trying to start...")
 		_play_again()
 

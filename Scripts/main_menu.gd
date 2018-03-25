@@ -9,7 +9,7 @@ func _ready():
 	set_process_input(true)
 
 func _input(event):
-	if Input.is_joy_button_pressed(event.device, JOY_START):
+	if Input.is_joy_button_pressed(event.device, JOY_START) || Input.is_key_pressed(KEY_RETURN):
 		_play_game()
 
 func _play_game():

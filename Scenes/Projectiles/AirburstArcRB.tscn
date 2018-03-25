@@ -10,7 +10,9 @@ custom_solver_bias = 0.0
 a = Vector2( -28, 2 )
 b = Vector2( 28, 2 )
 
-[node name="AirburstArcRB" type="RigidBody2D"]
+[node name="AirburstArcRB" type="RigidBody2D" groups=[
+"Projectile",
+]]
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
@@ -67,5 +69,8 @@ transform/pos = Vector2( 0, -4 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
+__meta__ = {
+"_edit_lock_": true
+}
 
 

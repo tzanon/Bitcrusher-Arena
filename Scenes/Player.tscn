@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://Scripts/playerRB.gd" type="Script" id=1]
 [ext_resource path="res://Animations/Effects/PlayerDamaged-Modulated.tres" type="Animation" id=2]
 [ext_resource path="res://Sprites/Players/player_grey.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Players/filter_impact_vulnerable.png" type="Texture" id=4]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 20, 28 )
@@ -15,13 +16,14 @@ custom_solver_bias = 0.0
 radius = 48.0
 
 [node name="Player" type="RigidBody2D" groups=[
-"Damageable",
 "SpeedDamageable",
+"Damageable",
+"ImpactVulnerable",
 ]]
 
 transform/pos = Vector2( 0, -4 )
 input/pickable = false
-shapes/0/shape = SubResource( 3 )
+shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( -4.37114e-08, -1, 1, -4.37114e-08, -0.75, 0 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -42,14 +44,16 @@ velocity/angular = 0.0
 damp_override/linear = 4.0
 damp_override/angular = -1.0
 script/script = ExtResource( 1 )
-debug_mode = false
+debug_mode = true
 keyboard_mode = false
 manager_path = "/root/Level/Layout/PlayerManager"
 acceleration = 40
 top_speed = 300
+base_collide_damage = 5
 speed_pain_threshold = 300
-base_impact_damage = 5
-impact_invulnerability_period = 0.5
+base_impact_damage = 20
+impact_vulnerability_period = 0.8
+impact_vulnerability_tint = Color( 0.117647, 0.807843, 0.54902, 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
@@ -62,7 +66,7 @@ playback/speed = 1.0
 blend_times = [  ]
 autoplay = ""
 
-[node name="Timer" type="Timer" parent="."]
+[node name="VulnerableTimer" type="Timer" parent="."]
 
 process_mode = 1
 wait_time = 1.0
@@ -74,11 +78,18 @@ autostart = false
 transform/pos = Vector2( -4, -8 )
 texture = ExtResource( 3 )
 
+[node name="VulnerableFilter" type="Sprite" parent="."]
+
+visibility/visible = false
+transform/pos = Vector2( -4, -8 )
+texture = ExtResource( 4 )
+
 [node name="Collider" type="CollisionShape2D" parent="."]
 
+visibility/visible = false
 transform/pos = Vector2( -0.75, 0 )
 transform/rot = 90.0
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 

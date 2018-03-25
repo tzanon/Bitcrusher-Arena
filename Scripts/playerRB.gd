@@ -19,10 +19,16 @@ export var acceleration = 40
 export var top_speed = 300
 var rotd_speed = 270
 
-export var speed_pain_threshold = 300
+export var base_collide_damage = 5
+
+export var speed_pain_threshold = 300 # keep this for damage from other objects!
 export var base_impact_damage = 5
 
-export var impact_invulnerability_period = 0.15
+export var impact_vulnerability_period = 0.3
+
+var impact_vulnerable
+
+var impact_vulnerable_filter
 
 const start_weapon = preload("res://Scenes/Weapons/PlayerLaser.tscn")
 var weapon_pos
@@ -30,7 +36,8 @@ var weapon
 
 var animator
 var item_detector
-var impact_invulnerability_timer
+var impact_vulnerability_timer
+var body_sprite
 
 var directional_force = Vector2()
 const DIRECTION = {
@@ -56,10 +63,17 @@ func _ready():
 	
 	animator = get_node("AnimationPlayer")
 	weapon_pos = get_node("WeaponPosition").get_pos()
+	impact_vulnerable_filter = get_node("VulnerableFilter")
 	
-	impact_invulnerability_timer = get_node("Timer")
-	impact_invulnerability_timer.set_one_shot(true)
-	impact_invulnerability_timer.set_wait_time(impact_invulnerability_period)
+	body_sprite = get_node("BodySprite")
+	
+	impact_vulnerability_timer = get_node("VulnerableTimer")
+	impact_vulnerability_timer.set_one_shot(true)
+	impact_vulnerability_timer.set_wait_time(impact_vulnerability_period)
+	impact_vulnerability_timer.connect("timeout", self, "disable_impact_vulnerability")
+	
+	impact_vulnerable = false
+	impact_vulnerable_filter.hide()
 	
 	item_detector = get_node("PickupDetector")
 	_equip_weapon(start_weapon)
@@ -156,43 +170,58 @@ func get_speed():
 func get_speed_sq():
 	return self.get_linear_velocity().length_squared()
 
-func get_impact_damage():
-	var speed_factor = self.get_speed_sq() / pow(speed_pain_threshold, 2)
-	var dmg = speed_factor * base_impact_damage
+func get_collide_damage():
+	var speed_factor = self.get_speed() / speed_pain_threshold
+	var dmg = speed_factor * base_collide_damage
 	return dmg
 	
 
 func _detect_collision(body):
-	
-	if impact_invulnerability_timer.get_time_left() > 0: return
-	
-	if debug_mode:
-		print("player ", name, " speed is ", self.get_speed(), ", squared is ", self.get_speed_sq())
-		print("damaging speed is ", speed_pain_threshold, " squared is ", pow(speed_pain_threshold, 2))
-	
-	if body.get_type() == "StaticBody2D" && self.get_speed_sq() > pow(speed_pain_threshold, 2): # walls can always damage
-		#if debug_mode: print("player ", name, " speed is ", self.get_speed())
-		self.damage(self.get_impact_damage())
-		impact_invulnerability_timer.start()
+	if !body.is_in_group("Projectile") && self.is_impact_vulnerable():
+		self.take_impact_damage()
 	
 	if body.is_in_group("SpeedDamageable"): # every speed-damageable object must have a get_speed_sq() method
 		var other_speed_sq = body.get_speed_sq()
 		if other_speed_sq > pow(speed_pain_threshold, 2):
-			#if debug_mode: print("other ", name, " speed is ", self.get_speed())
-			self.damage(body.get_impact_damage())
-		
-		if self.get_speed_sq() > pow(speed_pain_threshold, 2):
-			#if debug_mode: print("player ", name, " speed is ", self.get_speed())
-			self.damage(self.get_impact_damage())
-		
-		impact_invulnerability_timer.start()
+			if debug_mode: print("other speed is ", self.get_speed())
+			var collide_dmg = body.get_collide_damage()
+			self.damage(collide_dmg)
 		
 	
+
+func is_impact_vulnerable():
+	return impact_vulnerable && impact_vulnerability_timer.get_time_left() > 0
+	
+
+func take_impact_damage():
+	var vulnerability_factor = pow(impact_vulnerability_timer.get_time_left() / impact_vulnerability_timer.get_wait_time(), 2)
+	var dmg_amount = vulnerability_factor * base_impact_damage
+	
+	if self.get_speed() < speed_pain_threshold:
+		dmg_amount *= 0.5
+	
+	if debug_mode: print("player ", name, " takes ", dmg_amount, " impact damage")
+	
+	damage(dmg_amount)
+	disable_impact_vulnerability()
+	
+
+func enable_impact_vulnerability():
+	impact_vulnerability_timer.start()
+	impact_vulnerable = true
+	impact_vulnerable_filter.show()
+	
+
+# called when timer expires or when something is hit
+func disable_impact_vulnerability():
+	impact_vulnerability_timer.stop()
+	impact_vulnerable = false
+	impact_vulnerable_filter.hide()
 
 func damage(dmg):
 	
 	health = clamp(health - dmg, 0, 100)
-	if debug_mode: print("damaging player ", name, ". has health: ", health)
+	#if debug_mode: print("player ", name, " takes damage ", dmg)
 	emit_signal("health_changed", name, health)
 	animator.play("PlayerDamaged")
 	
