@@ -6,7 +6,8 @@ var refresh_timer
 const weapon_scenes = [
 	preload("res://Scenes/Weapons/WorldLaser.tscn"),
 	preload("res://Scenes/Weapons/WorldLauncher.tscn"),
-	preload("res://Scenes/Weapons/WorldAirgun.tscn")
+	preload("res://Scenes/Weapons/WorldAirgun.tscn"),
+	preload("res://Scenes/Weapons/WorldBombshot.tscn")
 ] # world weapon scenes to instantiate from
 
 const light_weapon_scenes = []

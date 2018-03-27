@@ -35,7 +35,6 @@ func _handle_collision(body):
 	
 	if debug_mode: print("hit something")
 	if body.is_in_group("Damageable"):
-			
 			body.damage(damage_amount)
 	
 	var bounced = false

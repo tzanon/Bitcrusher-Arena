@@ -8,6 +8,8 @@
 [ext_resource path="res://Scenes/Test/AirgunMarker.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Sprites/Weapons/airgun_light.png" type="Texture" id=7]
 
+
+
 [node name="PlayerAirgun" type="Sprite"]
 
 texture = ExtResource( 1 )
