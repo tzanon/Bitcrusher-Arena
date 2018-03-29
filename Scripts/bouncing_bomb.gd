@@ -8,6 +8,8 @@ export(float, 0.0, 10.0, 0.5) var lifetime = 5.0
 export(float, 0.0, 10.0, 0.5) var min_lifetime = 1.0
 export(float, 0.0, 10.0, 0.5) var max_lifetime = 10.0
 
+export var self_collision_time = 0.2
+
 export(PackedScene) var explosion_effect_scene
 export var effect_spawn_path = "/root/Level/Effects"
 
@@ -30,6 +32,17 @@ func _ready():
 	var rot = get_global_rot()
 	var vel = Vector2(sin(rot), cos(rot)) * -speed
 	self.set_linear_velocity(vel)
+	
+	set_collision_mask_bit(2, false)
+	
+	set_fixed_process(true)
+
+func _fixed_process(delta):
+	
+	if life_timer.get_wait_time() - life_timer.get_time_left() > self_collision_time:
+		set_collision_mask_bit(2, true)
+		set_fixed_process(false)
+	
 
 func _handle_collision(body):
 	if !body: return

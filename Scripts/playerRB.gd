@@ -52,7 +52,7 @@ const proj_spawn_positions = {
 	"Laser" : Vector2(0, -44),
 	"Potato Launcher" : Vector2(0, -40),
 	"Airburst Gun" : Vector2(0, -24),
-	"Bombshot" : Vector2(0, -36)
+	"Bombshot" : Vector2(0, -40)
 }
 
 func _ready():

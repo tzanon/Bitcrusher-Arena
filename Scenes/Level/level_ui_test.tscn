@@ -124,19 +124,19 @@ __meta__ = {
 
 [node name="WorldLaser" parent="Layout/Pickups" instance=ExtResource( 12 )]
 
-transform/pos = Vector2( 672, 448 )
+transform/pos = Vector2( 704, 224 )
 
 [node name="WorldLauncher" parent="Layout/Pickups" instance=ExtResource( 13 )]
 
-transform/pos = Vector2( 800, 576 )
+transform/pos = Vector2( 800, 704 )
 
 [node name="WorldAirgun" parent="Layout/Pickups" instance=ExtResource( 14 )]
 
-transform/pos = Vector2( 1104, 528 )
+transform/pos = Vector2( 976, 432 )
 
 [node name="WorldBombshot" parent="Layout/Pickups" instance=ExtResource( 15 )]
 
-transform/pos = Vector2( 1216, 672 )
+transform/pos = Vector2( 1312, 768 )
 
 [node name="Structure" type="Node2D" parent="Layout"]
 
@@ -286,19 +286,14 @@ transform/pos = Vector2( 960, 896 )
 
 [node name="Players" type="Node2D" parent="Layout"]
 
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlayerTest" parent="Layout/Players" instance=ExtResource( 26 )]
+[node name="Player" parent="Layout/Players" instance=ExtResource( 26 )]
 
-transform/pos = Vector2( 1088, 700 )
+transform/pos = Vector2( 1184, 636 )
 keyboard_mode = true
-
-[node name="Dummy" parent="Layout/Players" instance=ExtResource( 26 )]
-
-transform/pos = Vector2( 1184, 540 )
 
 [node name="Projectiles" type="Node2D" parent="."]
 
