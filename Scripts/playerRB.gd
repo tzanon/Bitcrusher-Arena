@@ -1,5 +1,6 @@
 extends RigidBody2D
 
+# in-dev modes
 export var debug_mode = false
 export var keyboard_mode = false
 
@@ -7,38 +8,17 @@ export var keyboard_mode = false
 var gamepad_id = -1 setget set_gamepad_id
 var name = "default" #setget set_name
 
-export var manager_path = "/root/Level/Layout/PlayerManager"
-
+# health-related
 var health = 100
+export(PackedScene) var death_animation_scene
 signal health_changed(player_name, player_health)
 signal died(player_name)
 
+# movement-related
 const joystick_idle_limit = 0.3
-
 export var acceleration = 40
 export var top_speed = 300
 var rotd_speed = 270
-
-export var base_collide_damage = 5
-
-export var speed_pain_threshold = 300 # keep this for damage from other objects!
-export var base_impact_damage = 5
-
-export var impact_vulnerability_period = 0.3
-
-var impact_vulnerable
-
-var impact_vulnerable_filter
-
-const start_weapon = preload("res://Scenes/Weapons/PlayerLaser.tscn")
-var weapon_pos
-var weapon
-
-var animator
-var item_detector
-var impact_vulnerability_timer
-var body_sprite
-
 var directional_force = Vector2()
 const DIRECTION = {
 	ZERO = Vector2(0,0),
@@ -48,6 +28,26 @@ const DIRECTION = {
 	DOWN = Vector2(0,1)
 }
 
+# collision-related
+export var base_collide_damage = 5
+export var speed_pain_threshold = 300 # keep this for damage from other objects!
+export var base_impact_damage = 5
+export var impact_vulnerability_period = 0.3
+var impact_vulnerable
+var impact_vulnerable_filter
+
+# node references
+var animator
+var item_detector
+var impact_vulnerability_timer
+var body_sprite
+
+export var effect_spawn_path = "/root/Level/Effects"
+
+# weapon-related
+const start_weapon = preload("res://Scenes/Weapons/PlayerLaser.tscn")
+var weapon_pos
+var weapon
 const proj_spawn_positions = {
 	"Laser" : Vector2(0, -44),
 	"Potato Launcher" : Vector2(0, -40),
@@ -225,10 +225,17 @@ func damage(dmg):
 	emit_signal("health_changed", name, health)
 	animator.play("PlayerDamaged")
 	
-	if health <= 0:
-		emit_signal("died", name)
-		queue_free()
+	if health <= 0: die()
+
+func die():
+	emit_signal("died", name)
 	
+	# spawn death anim
+	var death_anim = death_animation_scene.instance()
+	death_anim.set_pos(self.get_global_pos())
+	get_node(effect_spawn_path).add_child(death_anim)
+	
+	self.queue_free()
 
 func _fire_weapon():
 	var spawn_pos

@@ -5,7 +5,8 @@
 [node name="WeaponSpawner" type="Node2D"]
 
 script/script = ExtResource( 1 )
-refresh_interval = 4
+refresh_interval = 10
+spawn_path = "/root/Level/Layout/Pickups"
 
 [node name="RefreshTimer" type="Timer" parent="."]
 

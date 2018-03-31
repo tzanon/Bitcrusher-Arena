@@ -8,8 +8,6 @@
 [ext_resource path="res://Scenes/Test/AirgunMarker.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Sprites/Weapons/airgun_light.png" type="Texture" id=7]
 
-
-
 [node name="PlayerAirgun" type="Sprite"]
 
 texture = ExtResource( 1 )
@@ -19,7 +17,7 @@ weapon_name = "Airburst Gun"
 hold_position = Vector2( 29, -8 )
 hold_rotation = 7.0
 projectile_scene = ExtResource( 3 )
-fire_rate = 0.3
+fire_rate = 1.0
 max_accuracy_loss = 0
 knockbox_strength = 2800
 debug_fire_mode = false

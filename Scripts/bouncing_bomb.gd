@@ -4,9 +4,9 @@ export var damage_amount = 10
 export var speed = 300
 
 export var has_random_lifetime = false
-export(float, 0.0, 10.0, 0.5) var lifetime = 5.0
-export(float, 0.0, 10.0, 0.5) var min_lifetime = 1.0
-export(float, 0.0, 10.0, 0.5) var max_lifetime = 10.0
+export(float, 0.5, 10.0, 0.5) var lifetime = 5.0
+export(float, 0.5, 10.0, 0.5) var min_lifetime = 1.0
+export(float, 0.5, 10.0, 0.5) var max_lifetime = 10.0
 
 export var self_collision_time = 0.2
 

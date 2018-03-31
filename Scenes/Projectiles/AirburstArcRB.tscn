@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/airburst_arc_rb.gd" type="Script" id=1]
 [ext_resource path="res://Animations/Projectiles/AirburstArc.tres" type="Animation" id=2]
-[ext_resource path="res://Sprites/Projectiles/air_arc.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Projectiles/air_arc2.png" type="Texture" id=3]
 
 [sub_resource type="SegmentShape2D" id=1]
 

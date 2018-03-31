@@ -3,7 +3,7 @@
 [resource]
 
 resource/name = "AirburstArc"
-length = 0.3
+length = 0.4
 loop = false
 step = 0.05
 tracks/0/type = "value"
@@ -11,7 +11,7 @@ tracks/0/path = NodePath("ArcSprite:modulate")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
-"times": FloatArray( 0.05, 0.3 ),
+"times": FloatArray( 0.1, 0.4 ),
 "transitions": FloatArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]

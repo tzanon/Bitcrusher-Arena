@@ -1,13 +1,13 @@
 [gd_scene load_steps=29 format=1]
 
 [ext_resource path="res://Scripts/level.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Level/ground1/floor.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Level/ground1/top-left.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Level/ground1/bottom-left.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Level/ground1/top-middle.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Level/ground1/bottom-middle.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Level/ground1/top-right.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Level/ground1/bottom-right.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Level/ground2/floor.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Level/ground2/top-left.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Level/ground2/bottom-left.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Level/ground2/top-middle.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Level/ground2/bottom-middle.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Level/ground2/top-right.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Level/ground2/bottom-right.png" type="Texture" id=8]
 [ext_resource path="res://Scenes/PlayerManager.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/WeaponSpawner.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/WeaponSpawnPoint.tscn" type="PackedScene" id=11]
@@ -98,7 +98,7 @@ transform/pos = Vector2( 1088, 160 )
 [node name="WeaponSpawner" parent="Layout" instance=ExtResource( 10 )]
 
 editor/display_folded = true
-spawn_path = "/root/Level/Layout/Pickups"
+refresh_interval = 8
 
 [node name="WeaponSpawnPoint" parent="Layout/WeaponSpawner" instance=ExtResource( 11 )]
 
@@ -118,6 +118,7 @@ transform/pos = Vector2( 160, 640 )
 
 [node name="Pickups" type="Node2D" parent="Layout"]
 
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -294,6 +295,7 @@ __meta__ = {
 
 transform/pos = Vector2( 1184, 636 )
 keyboard_mode = true
+death_animation_scene = null
 
 [node name="Projectiles" type="Node2D" parent="."]
 
