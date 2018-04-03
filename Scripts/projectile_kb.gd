@@ -14,13 +14,20 @@ export(float, 0.1, 5, 0.1) var bounce_factor = 1.0 # maybe this should be in the
 export(PackedScene) var impact_effect_scene
 export var effect_spawn_path = "/root/Level/Effects"
 
+export(String) var impact_sound_name
+
 var _movement
+
+var sample_player
 
 func _ready():
 	set_fixed_process(true)
 	
 	var rot = get_global_rot()
 	_movement = Vector2(sin(rot), cos(rot)) * -speed
+	
+	if has_node("SamplePlayer"):
+		sample_player = get_node("SamplePlayer")
 
 func _fixed_process(delta):
 	if is_colliding():
@@ -78,6 +85,10 @@ func _explode():
 		effect.set_pos(self.get_global_pos())
 		
 		get_node(effect_spawn_path).add_child(effect)
+	
+	if sample_player != null && impact_sound_name != "":
+		if debug_mode: print("playing impact sound ", impact_sound_name)
+		var voice_id = sample_player.play(impact_sound_name)
 	
 	self.queue_free()
 

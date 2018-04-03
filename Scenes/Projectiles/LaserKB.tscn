@@ -28,6 +28,7 @@ bounce_groups = StringArray( "Reflective", "Bouncy" )
 bounce_factor = 1.0
 impact_effect_scene = null
 effect_spawn_path = "/root/Level/Effects"
+impact_sound_name = null
 
 [node name="Sprite" type="Sprite" parent="."]
 
