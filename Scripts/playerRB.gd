@@ -11,6 +11,7 @@ var name = "default" #setget set_name
 # health-related
 var health = 100
 export(PackedScene) var death_animation_scene
+export(String) var death_sound_name
 signal health_changed(player_name, player_health)
 signal died(player_name)
 
@@ -41,6 +42,7 @@ var animator
 var item_detector
 var impact_vulnerability_timer
 var body_sprite
+var sample_player
 
 export var effect_spawn_path = "/root/Level/Effects"
 
@@ -64,6 +66,8 @@ func _ready():
 	animator = get_node("AnimationPlayer")
 	weapon_pos = get_node("WeaponPosition").get_pos()
 	impact_vulnerable_filter = get_node("VulnerableFilter")
+	
+	sample_player = get_node("SamplePlayer")
 	
 	body_sprite = get_node("BodySprite")
 	
@@ -234,6 +238,8 @@ func die():
 	var death_anim = death_animation_scene.instance()
 	death_anim.set_pos(self.get_global_pos())
 	get_node(effect_spawn_path).add_child(death_anim)
+	
+	sample_player.play(death_sound_name)
 	
 	self.queue_free()
 

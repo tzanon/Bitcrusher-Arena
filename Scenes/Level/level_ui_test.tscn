@@ -296,6 +296,7 @@ __meta__ = {
 
 transform/pos = Vector2( 1216, 764 )
 keyboard_mode = true
+death_sound_name = null
 
 [node name="Projectiles" type="Node2D" parent="."]
 
