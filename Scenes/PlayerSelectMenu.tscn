@@ -415,6 +415,7 @@ textures/normal = ExtResource( 11 )
 
 [node name="LaserBlocker" type="StaticBody2D" parent="."]
 
+editor/display_folded = true
 transform/pos = Vector2( 1920, 576 )
 input/pickable = false
 shapes/0/shape = SubResource( 1 )

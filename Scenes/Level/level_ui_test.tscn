@@ -2,12 +2,12 @@
 
 [ext_resource path="res://Scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Level/ground2/floor.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Level/ground2/top-left.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Level/ground2/bottom-left.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Level/ground2/top-middle.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Level/ground2/bottom-middle.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Level/ground2/top-right.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Level/ground2/bottom-right.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Level/ground3/top-left.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Level/ground3/bottom-left.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Level/ground3/top-middle.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Level/ground3/bottom-middle.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Level/ground3/top-right.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Level/ground3/bottom-right.png" type="Texture" id=8]
 [ext_resource path="res://Scenes/PlayerManager.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/WeaponSpawner.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/WeaponSpawnPoint.tscn" type="PackedScene" id=11]
@@ -41,7 +41,6 @@ editor/display_folded = true
 transform/pos = Vector2( 960, 448 )
 texture = ExtResource( 2 )
 __meta__ = {
-"_edit_group_": true,
 "_edit_lock_": true
 }
 
@@ -118,11 +117,6 @@ transform/pos = Vector2( 160, 640 )
 
 [node name="Pickups" type="Node2D" parent="Layout"]
 
-editor/display_folded = true
-__meta__ = {
-"_edit_lock_": true
-}
-
 [node name="WorldLaser" parent="Layout/Pickups" instance=ExtResource( 12 )]
 
 transform/pos = Vector2( 704, 224 )
@@ -133,7 +127,7 @@ transform/pos = Vector2( 800, 704 )
 
 [node name="WorldAirgun" parent="Layout/Pickups" instance=ExtResource( 14 )]
 
-transform/pos = Vector2( 976, 432 )
+transform/pos = Vector2( 1104, 688 )
 
 [node name="WorldBombshot" parent="Layout/Pickups" instance=ExtResource( 15 )]
 
@@ -142,8 +136,14 @@ transform/pos = Vector2( 1312, 768 )
 [node name="Structure" type="Node2D" parent="Layout"]
 
 editor/display_folded = true
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="Obstacles" type="Node2D" parent="Layout/Structure"]
+
+editor/display_folded = true
 
 [node name="Walls" type="Node2D" parent="Layout/Structure/Obstacles"]
 
@@ -274,6 +274,7 @@ damage_amount = 20
 
 editor/display_folded = true
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
@@ -293,9 +294,8 @@ __meta__ = {
 
 [node name="Player" parent="Layout/Players" instance=ExtResource( 26 )]
 
-transform/pos = Vector2( 1184, 636 )
+transform/pos = Vector2( 1216, 764 )
 keyboard_mode = true
-death_animation_scene = null
 
 [node name="Projectiles" type="Node2D" parent="."]
 
