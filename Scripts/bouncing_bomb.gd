@@ -13,7 +13,10 @@ export var self_collision_time = 0.2
 export(PackedScene) var explosion_effect_scene
 export var effect_spawn_path = "/root/Level/Effects"
 
+export(String) var explode_sound_name
+
 var life_timer
+var sample_player
 
 func _ready():
 	life_timer = get_node("Timer")
@@ -53,7 +56,10 @@ func _handle_collision(body):
 	
 
 func _explode():
-	# spawn explosion
+	
+	if sample_player && explode_sound_name:
+		sample_player.play(explode_sound_name)
+	
 	var explosion = explosion_effect_scene.instance()
 	explosion.set_pos(self.get_global_pos())
 	get_node(effect_spawn_path).add_child(explosion)

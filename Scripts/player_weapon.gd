@@ -12,10 +12,13 @@ export(float) var hold_rotation
 
 export(PackedScene) var projectile_scene
 
+export(String) var fire_sound_name
+
 onready var proj_spawn_point = get_node("ProjectileSpawnPoint")
 const proj_spawn_path = "/root/Level/Projectiles"
 
 var fire_timer
+var sample_player
 
 # how often a weapon fires
 export(float, 0.05, 2, 0.05) var fire_rate
@@ -29,6 +32,9 @@ func _ready():
 	add_child(fire_timer)
 	fire_timer.set_wait_time(fire_rate)
 	fire_timer.set_one_shot(true)
+	
+	if has_node("SamplePlayer"):
+		sample_player = get_node("SamplePlayer")
 	
 
 func get_weapon_name():
@@ -52,6 +58,11 @@ func get_hold_rotd():
 
 func fire(spawn_pos):
 	if fire_timer.get_time_left() <= 0:
+		
+		if sample_player && fire_sound_name:
+			if debug_mode: print("playing fire sound ", fire_sound_name)
+			sample_player.play(fire_sound_name)
+		
 		var projectile = projectile_scene.instance()
 		projectile.set_global_pos(spawn_pos)
 		projectile.set_global_rotd(user.get_global_rotd() + max_accuracy_loss * pow(2*randf() - 1, 3))

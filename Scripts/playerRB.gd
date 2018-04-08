@@ -239,20 +239,21 @@ func die():
 	death_anim.set_pos(self.get_global_pos())
 	get_node(effect_spawn_path).add_child(death_anim)
 	
-	sample_player.play(death_sound_name)
+	if sample_player && death_sound_name:
+		sample_player.play(death_sound_name)
 	
 	self.queue_free()
 
 func _fire_weapon():
 	var spawn_pos
 	if proj_spawn_positions.has(weapon.get_weapon_name()):
-		spawn_pos = get_global_transform().xform (proj_spawn_positions[weapon.get_weapon_name()])
+		spawn_pos = get_global_transform().xform(proj_spawn_positions[weapon.get_weapon_name()])
 		#spawn_pos = get_global_transform().xform_inv(proj_spawn_positions[weapon.get_weapon_name()])
 	else:
 		spawn_pos = get_node("ProjectileSpawnPosition").get_global_pos()
 	weapon.fire(spawn_pos)
 	
-
+	
 # looks for item in pickup radius and replaces current one with it if there is
 func _pick_up_item():
 	var possible_items = item_detector.get_overlapping_areas()
