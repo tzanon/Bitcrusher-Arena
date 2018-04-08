@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://Scripts/projectile_kb.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Effects/Explosion1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Sprites/Projectiles/potato16x28.png" type="Texture" id=3]
 [ext_resource path="res://Samples/potato_expl2.smp" type="Sample" id=4]
+[ext_resource path="res://Scripts/Placeholders/proj_sound_test.gd" type="Script" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -21,8 +22,8 @@ samples/potato_expl2 = {
 }
 
 [node name="PotatoKB" type="KinematicBody2D" groups=[
-"Projectile",
 "SolidProjectileKB",
+"Projectile",
 ]]
 
 input/pickable = false
@@ -52,7 +53,7 @@ shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
-[node name="SamplePlayer" type="SamplePlayer" parent="."]
+[node name="SoundPlayer" type="SamplePlayer" parent="."]
 
 config/polyphony = 1
 config/samples = SubResource( 2 )
@@ -68,5 +69,6 @@ default/filter/gain = 1.0
 default/reverb_room = 2
 default/reverb_send = 0.0
 default/chorus_send = 0.0
+script/script = ExtResource( 5 )
 
 

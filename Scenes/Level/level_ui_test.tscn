@@ -20,12 +20,12 @@
 [ext_resource path="res://Scenes/Level/LongWall.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Sprites/Level/track_array.png" type="Texture" id=19]
 [ext_resource path="res://Scenes/Level/MovingWall.tscn" type="PackedScene" id=20]
-[ext_resource path="res://Scenes/Level/Pillar.tscn" type="PackedScene" id=21]
-[ext_resource path="res://Scenes/wall_trap.tscn" type="PackedScene" id=22]
-[ext_resource path="res://Scenes/floor_trap.tscn" type="PackedScene" id=23]
-[ext_resource path="res://Scenes/Level/Boundary.tscn" type="PackedScene" id=24]
-[ext_resource path="res://Scenes/Level/SouthBoundary.tscn" type="PackedScene" id=25]
-[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Scenes/wall_spike.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Scenes/Level/Pillar.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Scenes/wall_trap.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Scenes/floor_trap.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Scenes/Level/Boundary.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Scenes/Level/SouthBoundary.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Sprites/UI/Gameplay/gameplay_ui_panel.png" type="Texture" id=27]
 [ext_resource path="res://Sprites/UI/Gameplay/gameplay_ui_frame.png" type="Texture" id=28]
 
@@ -117,6 +117,8 @@ transform/pos = Vector2( 160, 640 )
 
 [node name="Pickups" type="Node2D" parent="Layout"]
 
+editor/display_folded = true
+
 [node name="WorldLaser" parent="Layout/Pickups" instance=ExtResource( 12 )]
 
 transform/pos = Vector2( 704, 224 )
@@ -135,19 +137,13 @@ transform/pos = Vector2( 1312, 768 )
 
 [node name="Structure" type="Node2D" parent="Layout"]
 
-editor/display_folded = true
 __meta__ = {
-"_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="Obstacles" type="Node2D" parent="Layout/Structure"]
 
-editor/display_folded = true
-
 [node name="Walls" type="Node2D" parent="Layout/Structure/Obstacles"]
-
-editor/display_folded = true
 
 [node name="LargeDoubleWall" parent="Layout/Structure/Obstacles/Walls" instance=ExtResource( 16 )]
 
@@ -169,7 +165,6 @@ transform/pos = Vector2( 500, 692 )
 
 [node name="MovingWalls" type="Node2D" parent="Layout/Structure/Obstacles/Walls"]
 
-editor/display_folded = true
 transform/pos = Vector2( 1600, 704 )
 
 [node name="TrackArray" type="Sprite" parent="Layout/Structure/Obstacles/Walls/MovingWalls"]
@@ -184,6 +179,16 @@ period = 2.0
 dy = 256
 paused = true
 
+[node name="WallSpike" parent="Layout/Structure/Obstacles/Walls/MovingWalls/VerticalMW" instance=ExtResource( 21 )]
+
+transform/pos = Vector2( -64, 32 )
+transform/rot = 180.0
+
+[node name="WallSpike1" parent="Layout/Structure/Obstacles/Walls/MovingWalls/VerticalMW" instance=ExtResource( 21 )]
+
+transform/pos = Vector2( 64, 32 )
+transform/rot = 180.0
+
 [node name="HorizontalMW" parent="Layout/Structure/Obstacles/Walls/MovingWalls" instance=ExtResource( 20 )]
 
 transform/pos = Vector2( -128, 0 )
@@ -195,19 +200,19 @@ dx = 256
 
 editor/display_folded = true
 
-[node name="Pillar1" parent="Layout/Structure/Obstacles/Pillars" instance=ExtResource( 21 )]
+[node name="Pillar1" parent="Layout/Structure/Obstacles/Pillars" instance=ExtResource( 22 )]
 
 transform/pos = Vector2( 960, 160 )
 
-[node name="Pillar2" parent="Layout/Structure/Obstacles/Pillars" instance=ExtResource( 21 )]
+[node name="Pillar2" parent="Layout/Structure/Obstacles/Pillars" instance=ExtResource( 22 )]
 
 transform/pos = Vector2( 960, 352 )
 
-[node name="Pillar3" parent="Layout/Structure/Obstacles/Pillars" instance=ExtResource( 21 )]
+[node name="Pillar3" parent="Layout/Structure/Obstacles/Pillars" instance=ExtResource( 22 )]
 
 transform/pos = Vector2( 960, 544 )
 
-[node name="Pillar4" parent="Layout/Structure/Obstacles/Pillars" instance=ExtResource( 21 )]
+[node name="Pillar4" parent="Layout/Structure/Obstacles/Pillars" instance=ExtResource( 22 )]
 
 transform/pos = Vector2( 960, 736 )
 
@@ -215,60 +220,88 @@ transform/pos = Vector2( 960, 736 )
 
 [node name="Traps" type="Node2D" parent="Layout/Structure"]
 
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="WallTrap" parent="Layout/Structure/Traps" instance=ExtResource( 22 )]
+[node name="WallTrap" parent="Layout/Structure/Traps" instance=ExtResource( 23 )]
 
 transform/pos = Vector2( 282, 48 )
 transform/rot = 180.0
 
-[node name="WallTrap1" parent="Layout/Structure/Traps" instance=ExtResource( 22 )]
+[node name="WallTrap1" parent="Layout/Structure/Traps" instance=ExtResource( 23 )]
 
 transform/pos = Vector2( 48, 110 )
 transform/rot = -90.0
 
-[node name="WallTrap5" parent="Layout/Structure/Traps" instance=ExtResource( 22 )]
+[node name="WallTrap5" parent="Layout/Structure/Traps" instance=ExtResource( 23 )]
 
 transform/pos = Vector2( 48, 224 )
 transform/rot = -90.0
 
-[node name="WallTrap6" parent="Layout/Structure/Traps" instance=ExtResource( 22 )]
+[node name="WallTrap6" parent="Layout/Structure/Traps" instance=ExtResource( 23 )]
 
 transform/pos = Vector2( 48, 170 )
 transform/rot = -90.0
 
-[node name="WallTrap3" parent="Layout/Structure/Traps" instance=ExtResource( 22 )]
+[node name="WallTrap3" parent="Layout/Structure/Traps" instance=ExtResource( 23 )]
 
 transform/pos = Vector2( 162, 48 )
 transform/rot = 180.0
 
-[node name="WallTrap4" parent="Layout/Structure/Traps" instance=ExtResource( 22 )]
+[node name="WallTrap4" parent="Layout/Structure/Traps" instance=ExtResource( 23 )]
 
 transform/pos = Vector2( 222, 48 )
 transform/rot = 180.0
 
-[node name="FloorTrap1" parent="Layout/Structure/Traps" instance=ExtResource( 23 )]
+[node name="FloorTrap1" parent="Layout/Structure/Traps" instance=ExtResource( 24 )]
 
 transform/pos = Vector2( 352, 576 )
 period = 3.0
 damage_amount = 20
 
-[node name="FloorTrap2" parent="Layout/Structure/Traps" instance=ExtResource( 23 )]
+[node name="FloorTrap2" parent="Layout/Structure/Traps" instance=ExtResource( 24 )]
 
 transform/pos = Vector2( 192, 800 )
 transform/rot = 90.0
 period = 3.0
 damage_amount = 20
 
-[node name="FloorTrap3" parent="Layout/Structure/Traps" instance=ExtResource( 23 )]
+[node name="FloorTrap3" parent="Layout/Structure/Traps" instance=ExtResource( 24 )]
 
 transform/pos = Vector2( 544, 800 )
 transform/rot = -180.0
 period = 3.0
 damage_amount = 20
+
+[node name="WallSpike" parent="Layout/Structure/Traps" instance=ExtResource( 21 )]
+
+transform/pos = Vector2( 1504, 384 )
+
+[node name="WallSpike3" parent="Layout/Structure/Traps" instance=ExtResource( 21 )]
+
+transform/pos = Vector2( 1280, 160 )
+transform/rot = -90.0
+
+[node name="WallSpike1" parent="Layout/Structure/Traps" instance=ExtResource( 21 )]
+
+transform/pos = Vector2( 896, 544 )
+transform/rot = 90.0
+
+[node name="WallSpike4 2" parent="Layout/Structure/Traps" instance=ExtResource( 21 )]
+
+transform/pos = Vector2( 896, 352 )
+transform/rot = 90.0
+
+[node name="WallSpike2" parent="Layout/Structure/Traps" instance=ExtResource( 21 )]
+
+transform/pos = Vector2( 1024, 544 )
+transform/rot = -90.0
+
+[node name="WallSpike4" parent="Layout/Structure/Traps" instance=ExtResource( 21 )]
+
+transform/pos = Vector2( 1024, 352 )
+transform/rot = -90.0
 
 [node name="BorderWalls" type="Node2D" parent="Layout/Structure"]
 
@@ -278,11 +311,11 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Boundary" parent="Layout/Structure/BorderWalls" instance=ExtResource( 24 )]
+[node name="Boundary" parent="Layout/Structure/BorderWalls" instance=ExtResource( 25 )]
 
 transform/pos = Vector2( 960, 448 )
 
-[node name="SouthBoundary" parent="Layout/Structure/BorderWalls" instance=ExtResource( 25 )]
+[node name="SouthBoundary" parent="Layout/Structure/BorderWalls" instance=ExtResource( 26 )]
 
 transform/pos = Vector2( 960, 896 )
 
@@ -291,12 +324,6 @@ transform/pos = Vector2( 960, 896 )
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="Player" parent="Layout/Players" instance=ExtResource( 26 )]
-
-transform/pos = Vector2( 1216, 764 )
-keyboard_mode = true
-death_sound_name = null
 
 [node name="Projectiles" type="Node2D" parent="."]
 

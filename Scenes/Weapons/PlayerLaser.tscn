@@ -13,6 +13,7 @@ weapon_name = "Laser"
 hold_position = Vector2( 24, -28 )
 hold_rotation = 7.5
 projectile_scene = ExtResource( 3 )
+fire_sound_name = null
 fire_rate = 0.2
 max_accuracy_loss = 10
 knockbox_strength = 700

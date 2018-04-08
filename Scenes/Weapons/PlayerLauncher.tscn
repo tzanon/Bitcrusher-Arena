@@ -8,10 +8,12 @@
 
 texture = ExtResource( 1 )
 script/script = ExtResource( 2 )
+debug_mode = false
 weapon_name = "Potato Launcher"
 hold_position = Vector2( 24, -12 )
 hold_rotation = 4.8
 projectile_scene = ExtResource( 3 )
+fire_sound_name = null
 fire_rate = 1.0
 max_accuracy_loss = 5
 knockbox_strength = 1600
