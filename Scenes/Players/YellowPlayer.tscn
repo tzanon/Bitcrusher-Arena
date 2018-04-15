@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/playerRB.gd" type="Script" id=1]
 [ext_resource path="res://Animations/Effects/PlayerDamaged-Modulated.tres" type="Animation" id=2]
@@ -19,13 +19,13 @@ radius = 48.0
 "Damageable",
 ]]
 
-transform/pos = Vector2( 0, -4 )
-input/pickable = false
+position = Vector2( 0, -4 )
+input_pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( -4.37114e-08, -1, 1, -4.37114e-08, -0.75, 0 )
+shapes/0/transform = Transform2D( -4.37114e-08, -1, 1, -4.37114e-08, -0.75, 0 )
 shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
+collision_layer = 1
+collision_mask = 1
 mode = 2
 mass = 120.0
 friction = 0.6
@@ -37,11 +37,11 @@ contacts_reported = 0
 contact_monitor = false
 sleeping = false
 can_sleep = true
-velocity/linear = Vector2( 0, 0 )
-velocity/angular = 0.0
+linear_velocity = Vector2( 0, 0 )
+angular_velocity = 0.0
 damp_override/linear = 3.0
 damp_override/angular = -1.0
-script/script = ExtResource( 1 )
+script = ExtResource( 1 )
 debug_mode = false
 manager_path = "/root/Level/Layout/PlayerManager"
 acceleration = 40
@@ -49,9 +49,9 @@ top_speed = 300
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
-playback/process_mode = 1
-playback/default_blend_time = 0.0
-root/root = NodePath("..")
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+root_node = NodePath("..")
 anims/PlayerDamaged = ExtResource( 2 )
 playback/active = true
 playback/speed = 1.0
@@ -60,13 +60,13 @@ autoplay = ""
 
 [node name="BodySprite" type="Sprite" parent="."]
 
-transform/pos = Vector2( -4, -8 )
+position = Vector2( -4, -8 )
 texture = ExtResource( 3 )
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 
-transform/pos = Vector2( -0.75, 0 )
-transform/rot = 90.0
+position = Vector2( -0.75, 0 )
+rotation_deg = -90.0
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
@@ -74,10 +74,10 @@ _update_shape_index = 0
 [node name="PickupDetector" type="Area2D" parent="."]
 
 editor/display_folded = true
-visibility/visible = false
-input/pickable = true
+visible = false
+input_pickable = true
 shapes/0/shape = SubResource( 2 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, -8 )
+shapes/0/transform = Transform2D( 1, 0, 0, 1, 0, -8 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -86,17 +86,15 @@ angular_damp = 1.0
 
 [node name="DetectorRadius" type="CollisionShape2D" parent="PickupDetector"]
 
-transform/pos = Vector2( 0, -8 )
+position = Vector2( 0, -8 )
 shape = SubResource( 2 )
 trigger = false
 _update_shape_index = 0
 
 [node name="WeaponPosition" type="Position2D" parent="."]
 
-transform/pos = Vector2( 24, -24 )
+position = Vector2( 24, -24 )
 
 [node name="ProjectileSpawnPosition" type="Position2D" parent="."]
 
-transform/pos = Vector2( 0, -28 )
-
-
+position = Vector2( 0, -28 )

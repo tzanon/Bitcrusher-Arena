@@ -1,32 +1,19 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/bouncing_bomb.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Effects/Explosion1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Sprites/Projectiles/time_bomb24x24.png" type="Texture" id=3]
-[ext_resource path="res://Samples/Weapons/bomb_expl2.smp" type="Sample" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 
 custom_solver_bias = 0.0
 radius = 12.0
 
-[sub_resource type="SampleLibrary" id=2]
-
-samples/bomb_expl2 = {
-"db": 0.0,
-"pitch": 1.0,
-"priority": 0,
-"sample": ExtResource( 4 )
-}
-
 [node name="BouncingBomb" type="RigidBody2D"]
 
-input/pickable = false
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
-collision/layers = 4
-collision/mask = 1
+input_pickable = false
+collision_layer = 4
+collision_mask = 1
 mode = 0
 mass = 60.0
 friction = 1.0
@@ -38,11 +25,11 @@ contacts_reported = 1
 contact_monitor = true
 sleeping = false
 can_sleep = true
-velocity/linear = Vector2( 0, 0 )
-velocity/angular = 0.0
-damp_override/linear = -1.0
-damp_override/angular = -1.0
-script/script = ExtResource( 1 )
+linear_velocity = Vector2( 0, 0 )
+linear_damp = -1.0
+angular_velocity = 0.0
+angular_damp = -1.0
+script = ExtResource( 1 )
 damage_amount = 7
 speed = 500
 has_random_lifetime = true
@@ -54,39 +41,28 @@ explosion_effect_scene = ExtResource( 2 )
 effect_spawn_path = "/root/Level/Effects"
 explode_sound_name = "bomb_expl2"
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." index="0"]
 
 process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = false
 
-[node name="Collider" type="CollisionShape2D" parent="."]
+[node name="Collider" type="CollisionShape2D" parent="." index="1"]
 
-visibility/visible = false
+visible = false
 shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite" type="Sprite" parent="." index="2"]
 
 texture = ExtResource( 3 )
 
-[node name="SamplePlayer" type="SamplePlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="3"]
 
-config/polyphony = 1
-config/samples = SubResource( 2 )
-default/volume_db = 0.0
-default/pitch_scale = 1.0
-default/pan = 0.0
-default/depth = 0.0
-default/height = 0.0
-default/filter/type = 0
-default/filter/cutoff = 5000.0
-default/filter/resonance = 1.0
-default/filter/gain = 1.0
-default/reverb_room = 2
-default/reverb_send = 0.0
-default/chorus_send = 0.0
+stream = null
+volume_db = 0.0
+autoplay = false
+mix_target = 0
+bus = "Master"
 
 

@@ -20,8 +20,8 @@ func _ready():
 
 func fire():
 	var projectile = projectile_scene.instance()
-	projectile.set_global_pos(proj_spawn_point.get_global_pos())
-	projectile.set_global_rot(get_global_rot())
+	projectile.global_position = proj_spawn_point.global_position
+	projectile.global_rotation = global_rotation
 	
 	var proj_node = get_node(proj_spawn_path)
 	if proj_node:

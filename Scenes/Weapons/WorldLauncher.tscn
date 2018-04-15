@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/world_weapon.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Weapons/PlayerLauncher.tscn" type="PackedScene" id=2]
@@ -9,26 +9,23 @@
 custom_solver_bias = 0.0
 extents = Vector2( 32, 12 )
 
-[node name="WorldLauncher" type="Area2D"]
+[node name="WorldLauncher" type="Area2D" index="0"]
 
-input/pickable = false
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
+input_pickable = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-script/script = ExtResource( 1 )
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 1 )
 player_weapon_scene = ExtResource( 2 )
 
-[node name="Collider" type="CollisionShape2D" parent="."]
+[node name="Collider" type="CollisionShape2D" parent="." index="0"]
 
 shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
 
-[node name="WorldSprite" type="Sprite" parent="."]
+[node name="WorldSprite" type="Sprite" parent="." index="1"]
 
 texture = ExtResource( 3 )
 

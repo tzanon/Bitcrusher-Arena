@@ -18,7 +18,7 @@ func _ready():
 	set_mass(initial_mass)
 	
 	animator = get_node("AnimationPlayer")
-	animator.connect("finished", self, "_despawn")
+	animator.connect("animation_finished", self, "_airburst_finish")
 	lifetime = animator.get_animation("AirburstArc").get_length()
 	
 	timer = get_node("Timer")
@@ -27,16 +27,16 @@ func _ready():
 	time_left = timer.get_time_left()
 	time_passed = lifetime - time_left
 	
-	self.connect("body_enter", self, "_handle_collision")
+	self.connect("body_entered", self, "_handle_collision")
 	
-	var rot = get_global_rot()
-	var vel = Vector2(sin(rot), cos(rot)) * -speed
+	var rot = global_rotation
+	var vel = Vector2(-sin(rot), cos(rot)) * -speed
 	self.set_linear_velocity(vel)
 	
-	set_fixed_process(true)
+	set_physics_process(true)
 	
 
-func _fixed_process(delta):
+func _physics_process(delta):
 	time_left = timer.get_time_left()
 	time_passed = lifetime - time_left
 	
@@ -53,8 +53,8 @@ func _fixed_process(delta):
 func _handle_collision(body):
 	if debug_mode: print("current mass is ", get_mass())
 	
-	if body.get_type() == "RigidBody2D":
-		var rot = get_global_rot()
+	if body.get_class() == "RigidBody2D":
+		var rot = global_rotation
 		var direction = Vector2(sin(rot), cos(rot)).normalized()
 		
 		var time_factor = (lifetime - time_passed) / lifetime
@@ -69,9 +69,12 @@ func _handle_collision(body):
 		if body.is_in_group("ImpactVulnerable"):
 			body.enable_impact_vulnerability()
 		
-	elif body.get_type() == "StaticBody2D" || body.is_in_group("Kinematic"):
+	elif body.get_class() == "StaticBody2D" || body.is_in_group("Kinematic"):
 		self._despawn()
 	
+
+func _airburst_finish(name):
+	self._despawn()
 
 func _despawn():
 	if debug_mode: print("airburst arc despawned")

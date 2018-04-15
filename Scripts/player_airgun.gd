@@ -23,20 +23,20 @@ func fire(spawn_pos):
 		# spawn deflection barrier
 		var barrier = air_barrier_scene.instance()
 		add_child(barrier)
-		barrier.set_global_pos(spawn_pos)
-		barrier.set_global_rot(user.get_global_rot())
+		barrier.global_position = spawn_pos
+		barrier.global_rotation = user.global_rotation
 		
 		# spawn muzzle flash effect
 		var muzzle_flash = air_flash_scene.instance()
 		add_child(muzzle_flash)
-		muzzle_flash.set_global_pos(proj_spawn_point.get_global_pos())
-		muzzle_flash.set_global_rot(get_global_rot())
+		muzzle_flash.global_position = proj_spawn_point.global_position
+		muzzle_flash.global_rotation = global_rotation
 		
 		# spawn marker
 		if debug_fire_mode:
 			var marker = marker_scene.instance()
 			get_node("//root/Level").add_child(marker)
-			marker.set_pos(spawn_pos)
+			marker.position = spawn_pos
 		
 		_toggle_reload_light()
 		

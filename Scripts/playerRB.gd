@@ -6,7 +6,7 @@ export var keyboard_mode = false
 
 # gamepad device used to control this player
 var gamepad_id = -1 setget set_gamepad_id
-var name = "default" #setget set_name
+var player_name = "default" setget set_name
 
 # health-related
 var health = 100
@@ -58,13 +58,13 @@ const proj_spawn_positions = {
 }
 
 func _ready():
-	set_fixed_process(true)
+	set_physics_process(true)
 	set_process_input(true)
 	
-	self.connect("body_enter", self, "_detect_collision")
+	self.connect("body_entered", self, "_detect_collision")
 	
 	animator = get_node("AnimationPlayer")
-	weapon_pos = get_node("WeaponPosition").get_pos()
+	weapon_pos = get_node("WeaponPosition").position
 	impact_vulnerable_filter = get_node("VulnerableFilter")
 	
 	sample_player = get_node("SamplePlayer")
@@ -83,17 +83,17 @@ func _ready():
 	_equip_weapon(start_weapon)
 	
 
-func _fixed_process(delta):
+func _physics_process(delta):
 	# aiming is currently just rotating -- should we have some sort of reticle to move around instead?
 	if keyboard_mode:
 		if Input.is_action_pressed("rotate_left"):
-			set_rotd(get_rotd() + rotd_speed * delta)
+			rotation_degrees = (rotation_degrees + -rotd_speed * delta)
 		if Input.is_action_pressed("rotate_right"):
-			set_rotd(get_rotd() + -rotd_speed * delta)
+			rotation_degrees = (rotation_degrees + rotd_speed * delta)
 	else:
-		var axis_pos = -Input.get_joy_axis(gamepad_id, JOY_AXIS_2)
+		var axis_pos = Input.get_joy_axis(gamepad_id, JOY_AXIS_2)
 		if abs(axis_pos) > joystick_idle_limit:
-			set_rotd(get_rotd() + axis_pos * rotd_speed * delta)
+			rotation_degrees = rotation_degrees + axis_pos * rotd_speed * delta
 	
 
 func _input(event):
@@ -118,9 +118,6 @@ func _integrate_forces(state):
 	var final_velocity = state.get_linear_velocity() + (directional_force * acceleration)
 	
 	final_velocity = final_velocity.clamped(top_speed)
-	
-	#final_velocity.x = clamp(final_velocity.x, -top_speed, top_speed)
-	#final_velocity.y = clamp(final_velocity.y, -top_speed, top_speed)
 	
 	state.set_linear_velocity(final_velocity)
 	
@@ -160,10 +157,10 @@ func connect_to_hud(manager):
 	connect("health_changed", manager, "update_player_health")
 	connect("died", manager, "remove_player")
 
-func set_name(player_name):
-	if debug_mode: print("name is ", player_name)
-	name = player_name
-	if debug_mode: print("name was set to ", name)
+func set_name(new_name):
+	if debug_mode: print("player_name is ", player_name)
+	player_name = new_name
+	if debug_mode: print("player_name was set to ", player_name)
 
 func set_gamepad_id(id):
 	gamepad_id = id
@@ -204,7 +201,7 @@ func take_impact_damage():
 	if self.get_speed() < speed_pain_threshold:
 		dmg_amount *= 0.5
 	
-	if debug_mode: print("player ", name, " takes ", dmg_amount, " impact damage")
+	if debug_mode: print("player ", player_name, " takes ", dmg_amount, " impact damage")
 	
 	damage(dmg_amount)
 	disable_impact_vulnerability()
@@ -225,19 +222,23 @@ func disable_impact_vulnerability():
 func damage(dmg):
 	
 	health = clamp(health - dmg, 0, 100)
-	#if debug_mode: print("player ", name, " takes damage ", dmg)
-	emit_signal("health_changed", name, health)
+	#if debug_mode: print("player ", player_name, " takes damage ", dmg)
+	emit_signal("health_changed", player_name, health)
 	animator.play("PlayerDamaged")
 	
 	if health <= 0: die()
 
 func die():
-	emit_signal("died", name)
+	emit_signal("died", player_name)
 	
 	# spawn death anim
 	var death_anim = death_animation_scene.instance()
-	death_anim.set_pos(self.get_global_pos())
-	get_node(effect_spawn_path).add_child(death_anim)
+	death_anim.position = self.global_position
+	
+	if has_node(effect_spawn_path):
+		get_node(effect_spawn_path).add_child(death_anim)
+	else:
+		get_tree().get_root().add_child(death_anim)
 	
 	if sample_player && death_sound_name:
 		sample_player.play(death_sound_name)
@@ -250,7 +251,7 @@ func _fire_weapon():
 		spawn_pos = get_global_transform().xform(proj_spawn_positions[weapon.get_weapon_name()])
 		#spawn_pos = get_global_transform().xform_inv(proj_spawn_positions[weapon.get_weapon_name()])
 	else:
-		spawn_pos = get_node("ProjectileSpawnPosition").get_global_pos()
+		spawn_pos = get_node("ProjectileSpawnPosition").global_position
 	weapon.fire(spawn_pos)
 	
 	
@@ -277,8 +278,7 @@ func _equip_weapon(new_weapon_scene):
 	
 	weapon = new_weapon_scene.instance()
 	add_child(weapon)
-	#weapon.set_pos(weapon_pos)
-	weapon.set_pos(weapon.get_hold_pos())
-	weapon.set_rotd(weapon.get_hold_rotd())
+	weapon.position = weapon.get_hold_pos()
+	weapon.rotation_degrees = weapon.get_hold_rotd()
 	weapon.set_user(self)
 

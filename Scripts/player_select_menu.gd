@@ -19,17 +19,17 @@ var player_info = [
 ]
 
 onready var player_display_nodes = {
-	"blue" : get_node("MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Display1"),
-	"red" : get_node("MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Display2"),
-	"green" : get_node("MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Display3"),
-	"yellow" : get_node("MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Display4")
+	"blue" : get_node("Layout/JoinDisplays/Display1"),
+	"red" : get_node("Layout/JoinDisplays/Display2"),
+	"green" : get_node("Layout/JoinDisplays/Display3"),
+	"yellow" : get_node("Layout/JoinDisplays/Display4")
 }
 
 onready var player_prompt_nodes = {
-	"blue" : get_node("MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Display1/PlayerJoin"),
-	"red" : get_node("MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Display2/PlayerJoin"),
-	"green" : get_node("MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Display3/PlayerJoin"),
-	"yellow" : get_node("MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Display4/PlayerJoin")
+	"blue" : get_node("Layout/JoinDisplays/Display1/PlayerJoin"),
+	"red" : get_node("Layout/JoinDisplays/Display2/PlayerJoin"),
+	"green" : get_node("Layout/JoinDisplays/Display3/PlayerJoin"),
+	"yellow" : get_node("Layout/JoinDisplays/Display4/PlayerJoin")
 }
 
 var player_warning
@@ -42,22 +42,22 @@ func _ready():
 	if solo_test_mode:
 		_request_join(1) # add one "dummy" player to proceed with one gamepad
 	
-	player_warning = get_node("MainMargin/PlayerWarning")
-	back_button = get_node("MainMargin/DisplayLayout/NavigationArea/BackButton")
-	start_button = get_node("MainMargin/DisplayLayout/NavigationArea/StartButton")
+	player_warning = get_node("Layout/PlayerWarning")
+	back_button = get_node("Layout/BackButton")
+	start_button = get_node("Layout/StartButton")
 	
 	player_warning.hide()
 	
 	back_button.connect("pressed", self, "_back")
-	back_button.set_enabled_focus_mode(FOCUS_NONE)
+	back_button.enabled_focus_mode = FOCUS_NONE
 	
 	start_button.connect("pressed", self, "_request_start_game")
-	start_button.set_enabled_focus_mode(FOCUS_NONE)
+	start_button.enabled_focus_mode = FOCUS_NONE
 	
 	set_process_input(true)
 
 func _input(event):
-	if Input.is_key_pressed(KEY_RETURN):
+	if Input.is_key_pressed(KEY_ENTER):
 		if debug_mode: print("start key was pressed")
 		if player_warning.is_visible():
 			player_warning.hide()
@@ -111,8 +111,8 @@ func _request_join(gamepad_id):
 		var display_node = player_display_nodes[player_name].get_node("IconBack/PlayerIcon")
 		
 		var id_demo = player_id_scene.instance()
-		id_demo.set_pos(display_node.get_global_pos() + Vector2(120, 50))
-		id_demo.set_rotd(-90)
+		id_demo.position = display_node.rect_global_position + Vector2(120, 50)
+		id_demo.rotation_degrees = 90
 		get_tree().get_root().add_child(id_demo)
 		
 		if debug_mode: print("controller ", gamepad_id, " is already registered")
@@ -135,7 +135,6 @@ func _register_gamepad(gamepad_id):
 	
 	GameInfo.print_players()
 	if debug_mode: print("remaining players: ", player_info)
-	
 
 func _request_start_game():
 	if GameInfo.num_registered_players() < 2:

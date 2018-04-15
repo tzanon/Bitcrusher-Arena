@@ -107,13 +107,13 @@ func _select_spawn_points():
 func _spawn_random_weapon(point):
 	var i = randi() % (weapon_scenes.size())
 	var weapon = weapon_scenes[i].instance()
-	weapon.set_global_pos(point.get_pos())
+	weapon.position = point.position
 	get_node(spawn_path).call_deferred("add_child", weapon)
 	return weapon
 
 # spawns weapon at its matching position
 func _spawn_weapon_with_position(point):
 	var weapon = point.get_object_scene().instance()
-	weapon.set_pos(point.get_pos())
+	weapon.position = point.position
 	get_node(spawn_path).call_deferred("add_child", weapon)
 	return weapon	

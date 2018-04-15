@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/potato_expl2.wav-bce840ae45418ebdcc16ec7096f9be51.sample"
+
+[deps]
+
+source_file="res://Sounds/Weapons/potato_expl2.wav"
+source_md5="2b109ea693b97649ce69301fa9dba998"
+
+dest_files=[ "res://.import/potato_expl2.wav-bce840ae45418ebdcc16ec7096f9be51.sample" ]
+dest_md5="03638ff446d7ddfe938cf57b012e7e10"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

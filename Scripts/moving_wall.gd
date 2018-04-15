@@ -11,7 +11,7 @@ var reverse = false
 
 func _ready():
 	print(paused)
-	initial_pos = get_pos()
+	initial_pos = position
 	set_process(true)
 
 func _process(delta):
@@ -22,7 +22,7 @@ func _process(delta):
 		if reverse: 
 			_dx = dx - _dx
 			_dy = dy - _dy
-		set_pos(Vector2(initial_pos.x + _dx, initial_pos.y + _dy))
+		self.position = (Vector2(initial_pos.x + _dx, initial_pos.y + _dy))
 	
 	if time > period:
 		time = 0

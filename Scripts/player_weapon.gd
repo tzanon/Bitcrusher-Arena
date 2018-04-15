@@ -61,19 +61,19 @@ func fire(spawn_pos):
 		
 		if sample_player && fire_sound_name:
 			if debug_mode: print("playing fire sound ", fire_sound_name)
-			sample_player.play(fire_sound_name)
+			# play sound
 		
 		var projectile = projectile_scene.instance()
-		projectile.set_global_pos(spawn_pos)
-		projectile.set_global_rotd(user.get_global_rotd() + max_accuracy_loss * pow(2*randf() - 1, 3))
+		projectile.global_position = spawn_pos
+		projectile.rotation_degrees = user.global_rotation_degrees + max_accuracy_loss * pow(2*randf() - 1, 3)
 		
-		var proj_node = get_node(proj_spawn_path)
-		if proj_node:
+		#var proj_node = get_node(proj_spawn_path)
+		if has_node(proj_spawn_path):
 			get_node(proj_spawn_path).add_child(projectile)
 		else:
 			get_tree().get_root().add_child(projectile)
 		
-		var rot = user.get_global_rot()
+		var rot = user.global_rotation
 		var knockback_direction = Vector2(sin(rot), cos(rot)).normalized()
 		var knockback_force = knockbox_strength * knockback_direction
 		user.apply_impulse(Vector2(0,0), knockback_force)

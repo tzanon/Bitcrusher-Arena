@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=1 format=2]
 
 [ext_resource path="res://Sprites/weapon_marker.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/spawn_point.gd" type="Script" id=2]
@@ -8,8 +8,6 @@
 ]]
 
 texture = ExtResource( 1 )
-script/script = ExtResource( 2 )
+script = ExtResource( 2 )
 world_object_scene = null
 possible_object_scenes = [  ]
-
-

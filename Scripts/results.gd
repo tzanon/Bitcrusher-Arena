@@ -4,7 +4,8 @@ onready var player_win_icons = {
 	"blue" : "res://Sprites/UI/ResultsMenu/winner_blue_icon.png",
 	"red" : "res://Sprites/UI/ResultsMenu/winner_red_icon.png",
 	"green" : "res://Sprites/UI/ResultsMenu/winner_green_icon.png",
-	"yellow" : "res://Sprites/UI/ResultsMenu/winner_yellow_icon.png"
+	"yellow" : "res://Sprites/UI/ResultsMenu/winner_yellow_icon.png",
+	"default" : "res://Sprites/UI/player_default_icon.png"
 }
 
 export var debug_mode = false
@@ -12,7 +13,7 @@ export var debug_mode = false
 const main_scene_path = "res://Scenes/UI/MainMenuFinal.tscn"
 export var game_scene_path = "res://Scenes/Level/level_ui_test.tscn"
 
-onready var player_display_node = get_node("MainMargin/DisplayLayout/HBoxContainer/JoinDisplays/Picture/PlayerIcon")
+onready var player_display_node = get_node("Picture/PlayerIcon")
 
 var winner
 var play_again_button
@@ -22,8 +23,8 @@ func _ready():
 	winner = GameInfo.match_winner
 	_set_icon()
 	
-	main_menu_button = get_node("MainMargin/DisplayLayout/NavigationArea/MainMenu")
-	play_again_button = get_node("MainMargin/DisplayLayout/NavigationArea/PlayAgain")
+	main_menu_button = get_node("MainMenu")
+	play_again_button = get_node("PlayAgain")
 	
 	play_again_button.connect("pressed", self, "_play_again")
 	play_again_button.set_enabled_focus_mode(FOCUS_NONE)
@@ -34,11 +35,13 @@ func _ready():
 	set_process_input(true)
 
 func _set_icon():
-	var icon = load(player_win_icons[GameInfo.match_winner])
-	player_display_node.set_texture(icon)
+	if GameInfo.match_winner:
+		var icon = load(player_win_icons[GameInfo.match_winner])
+		player_display_node.texture = icon
+	
 
 func _input(event):
-	if Input.is_joy_button_pressed(event.device, JOY_START) || Input.is_key_pressed(KEY_RETURN):
+	if Input.is_joy_button_pressed(event.device, JOY_START) || Input.is_key_pressed(KEY_ENTER):
 		if debug_mode: print("xbox START trying to start...")
 		_play_again()
 

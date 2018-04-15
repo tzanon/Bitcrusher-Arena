@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/airgun_fire1.wav-0f9c0873d087c1f427914288b749d1ed.sample"
+
+[deps]
+
+source_file="res://Sounds/Weapons/airgun_fire1.wav"
+source_md5="89bf9d33865fe37526c2dd996ed259a1"
+
+dest_files=[ "res://.import/airgun_fire1.wav-0f9c0873d087c1f427914288b749d1ed.sample" ]
+dest_md5="6b82dc92480ee1ec3108d6cff346c631"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

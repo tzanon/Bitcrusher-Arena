@@ -1,4 +1,4 @@
-extends TextureFrame
+extends TextureRect
 
 const default_icon = preload("res://Sprites/UI/player_default_icon.png")
 const dead_icon = preload("res://Sprites/UI/player_dead_icon.png")
@@ -24,7 +24,7 @@ func set_death_icon():
 	set_icon(dead_icon)
 
 func set_icon_with_path(icon_path):
-	icon.set_texture(load(icon_path))
+	icon.texture = load(icon_path)
 
 func set_icon(icon_texture):
-	icon.set_texture(icon_texture)
+	icon.texture = icon_texture

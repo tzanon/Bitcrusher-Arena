@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/moving_wall.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Level/moving_wall1.png" type="Texture" id=2]
@@ -8,33 +8,27 @@
 custom_solver_bias = 0.0
 extents = Vector2( 110, 16 )
 
-[node name="MovingWall" type="KinematicBody2D" groups=[
+[node name="MovingWall" type="KinematicBody2D" index="0" groups=[
 "Kinematic",
 "SpeedDamageable",
 ]]
 
-input/pickable = false
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 0
-collision/margin = 0.08
-script/script = ExtResource( 1 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 0
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
 period = 2.5
 dx = 0
 dy = 0
 paused = null
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite" type="Sprite" parent="." index="0"]
 
 texture = ExtResource( 2 )
 
-[node name="Collider" type="CollisionShape2D" parent="."]
+[node name="Collider" type="CollisionShape2D" parent="." index="1"]
 
-visibility/visible = false
 shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
 
 

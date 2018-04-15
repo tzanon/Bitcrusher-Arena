@@ -30,21 +30,21 @@ func _ready():
 	life_timer.start()
 	life_timer.connect("timeout", self, "_explode")
 	
-	self.connect("body_enter", self, "_handle_collision")
+	self.connect("body_entered", self, "_handle_collision")
 	
-	var rot = get_global_rot()
+	var rot = global_rotation
 	var vel = Vector2(sin(rot), cos(rot)) * -speed
 	self.set_linear_velocity(vel)
 	
 	set_collision_mask_bit(2, false)
 	
-	set_fixed_process(true)
+	set_physics_process(true)
 
-func _fixed_process(delta):
+func _physics_process(delta):
 	
 	if life_timer.get_wait_time() - life_timer.get_time_left() > self_collision_time:
 		set_collision_mask_bit(2, true)
-		set_fixed_process(false)
+		set_physics_process(false)
 	
 
 func _handle_collision(body):
@@ -61,8 +61,13 @@ func _explode():
 		sample_player.play(explode_sound_name)
 	
 	var explosion = explosion_effect_scene.instance()
-	explosion.set_pos(self.get_global_pos())
-	get_node(effect_spawn_path).add_child(explosion)
+	explosion.position = self.global_position
+	
+	if has_node(effect_spawn_path):
+		get_node(effect_spawn_path).add_child(explosion)
+	else:
+		get_tree().get_root().add_child(explosion)
+	
 	self._despawn()
 
 

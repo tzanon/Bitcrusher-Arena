@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/laser_fire1.wav-e2fc7a7fd59ac09b72f14b097db2dd49.sample"
+
+[deps]
+
+source_file="res://Sounds/Weapons/laser_fire1.wav"
+source_md5="5eef526f017cec831aa6650deb9c9c6e"
+
+dest_files=[ "res://.import/laser_fire1.wav-e2fc7a7fd59ac09b72f14b097db2dd49.sample" ]
+dest_md5="0a8752675d1da0e11c7c243e13001c44"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/player_manager.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/PlayerSpawnPoint.tscn" type="PackedScene" id=2]
 
 [node name="PlayerManager" type="Node2D"]
 
-script/script = ExtResource( 1 )
+script = ExtResource( 1 )
 debug_mode = false
 spawn_path = "/root/Level/Layout/Players"
 hud_spawn_path = "/root/Level/UI/PlayerInfoPanel"
@@ -13,19 +13,19 @@ game_end_time = 3.0
 
 [node name="BlueSpawnPoint" parent="." instance=ExtResource( 2 )]
 
-transform/pos = Vector2( -32, -32 )
+position = Vector2( -32, -32 )
 
 [node name="RedSpawnPoint" parent="." instance=ExtResource( 2 )]
 
-transform/pos = Vector2( 32, 32 )
+position = Vector2( 32, 32 )
 
 [node name="GreenSpawnPoint" parent="." instance=ExtResource( 2 )]
 
-transform/pos = Vector2( -32, 32 )
+position = Vector2( -32, 32 )
 
 [node name="YellowSpawnPoint" parent="." instance=ExtResource( 2 )]
 
-transform/pos = Vector2( 32, -32 )
+position = Vector2( 32, -32 )
 
 [node name="EndTimer" type="Timer" parent="."]
 
@@ -33,5 +33,3 @@ process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = false
-
-

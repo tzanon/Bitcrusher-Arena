@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/airburst_arc_rb.gd" type="Script" id=1]
 [ext_resource path="res://Animations/Projectiles/AirburstArc.tres" type="Animation" id=2]
@@ -14,12 +14,9 @@ b = Vector2( 28, 2 )
 "Projectile",
 ]]
 
-input/pickable = false
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, -4 )
-shapes/0/trigger = false
-collision/layers = 0
-collision/mask = 5
+input_pickable = false
+collision_layer = 0
+collision_mask = 5
 mode = 2
 mass = 60.0
 friction = 1.0
@@ -31,44 +28,41 @@ contacts_reported = 1
 contact_monitor = true
 sleeping = false
 can_sleep = true
-velocity/linear = Vector2( 0, 0 )
-velocity/angular = 0.0
-damp_override/linear = -1.0
-damp_override/angular = -1.0
-script/script = ExtResource( 1 )
-debug_mode = false
+linear_velocity = Vector2( 0, 0 )
+linear_damp = -1.0
+angular_velocity = 0.0
+angular_damp = -1.0
+script = ExtResource( 1 )
+debug_mode = true
 speed = 800
 initial_mass = 3000
 max_push_strength = 6000.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0"]
 
-playback/process_mode = 1
-playback/default_blend_time = 0.0
-root/root = NodePath("..")
-anims/AirburstArc = ExtResource( 2 )
-playback/active = true
-playback/speed = 1.0
-blend_times = [  ]
+root_node = NodePath("..")
 autoplay = "AirburstArc"
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/AirburstArc = ExtResource( 2 )
+blend_times = [  ]
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." index="1"]
 
 process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = false
 
-[node name="ArcSprite" type="Sprite" parent="."]
+[node name="ArcSprite" type="Sprite" parent="." index="2"]
 
 texture = ExtResource( 3 )
 
-[node name="SegmentCollider" type="CollisionShape2D" parent="."]
+[node name="SegmentCollider" type="CollisionShape2D" parent="." index="3"]
 
-transform/pos = Vector2( 0, -4 )
+position = Vector2( 0, -4 )
 shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
 __meta__ = {
 "_edit_lock_": true
 }

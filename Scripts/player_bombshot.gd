@@ -6,7 +6,7 @@ export var num_projectiles = 4
 var fire_angle_incr
 
 func _ready():
-	fire_angle_incr = 2 * arc_radius / (num_projectiles)
+	fire_angle_incr = 2 * arc_radius / num_projectiles
 
 # fire bombs spread over an arc
 func fire(spawn_pos):
@@ -16,8 +16,8 @@ func fire(spawn_pos):
 	
 	while fire_angle < arc_radius:
 		var projectile = projectile_scene.instance()
-		projectile.set_global_pos(spawn_pos)
-		projectile.set_global_rotd(user.get_global_rotd() + fire_angle)
+		projectile.global_position = spawn_pos
+		projectile.global_rotation_degrees = -user.global_rotation_degrees + fire_angle
 		
 		var proj_node = get_node(proj_spawn_path)
 		if proj_node:
@@ -27,7 +27,7 @@ func fire(spawn_pos):
 		
 		fire_angle += fire_angle_incr
 	
-	var rot = user.get_global_rot()
+	var rot = user.global_rotation
 	var knockback_direction = Vector2(sin(rot), cos(rot)).normalized()
 	var knockback_force = knockbox_strength * knockback_direction
 	user.apply_impulse(Vector2(0,0), knockback_force)
