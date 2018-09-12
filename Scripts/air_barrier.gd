@@ -1,18 +1,20 @@
 extends KinematicBody2D
 
 export var debug_mode = false
-export var lifetime = 0.35
+export var _lifetime = 0.35
 
 func _ready():
-	var timer = get_node("Timer")
-	timer.set_wait_time(lifetime)
-	timer.connect("timeout", self, "_despawn")
-	timer.start()
+	var LifeTimer = get_node("Timer")
+	LifeTimer.wait_time = _lifetime
+	LifeTimer.connect("timeout", self, "_despawn")
+	LifeTimer.start()
 
 func collide_action():
-	if debug_mode: print("barrier hit")
+	if debug_mode:
+		print("barrier hit")
 	_despawn()
 
 func _despawn():
-	if debug_mode: print("barrier despawned")
+	if debug_mode:
+		print("barrier despawned")
 	self.queue_free()

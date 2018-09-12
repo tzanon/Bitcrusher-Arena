@@ -7,7 +7,7 @@
 [node name="MainMenu" type="Node"]
 
 script = ExtResource( 1 )
-select_menu_path = "res://Scenes/PlayerSelectMenu.tscn"
+select_menu_path = "res://Scenes/UI/PlayerSelectMenu.tscn"
 
 [node name="Control" type="Control" parent="." index="0"]
 

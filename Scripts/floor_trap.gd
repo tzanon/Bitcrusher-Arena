@@ -1,72 +1,71 @@
 extends Area2D
 
-export (float) var period = 1.0
-export (int, 1, 100) var damage_amount = 1
+export (float) var _period = 1.0
+export (int, 1, 100) var _damage_amount = 1
 
-var paused = false
+var _paused = false
 
-export var off_texture = preload("res://Sprites/trap_off.png")
-export var on_texture = preload("res://Sprites/trap_on.png")
+export var _off_texture = preload("res://Sprites/Traps/floor_trap_off.png")
+export var _on_texture = preload("res://Sprites/Traps/floor_trap_on.png")
 
-var sprite
-var pause_timer
-var damage_timer
+var Sprite
+var PauseTimer
+var DamageTimer
 
-
-var flame_group1
-var flame_group2
-var last_flame_group
+var FlameGroup1
+var FlameGroup2
+var LastFlameGroup
 
 func _ready():
-	sprite = get_node("TrapSprite")
-	pause_timer = Timer.new()
-	damage_timer = Timer.new()
-	add_child(pause_timer)
-	add_child(damage_timer)
-	pause_timer.set_wait_time(period)
-	damage_timer.set_wait_time(float(period) / (damage_amount + 1))
-	pause_timer.connect("timeout", self, "_interval")
-	damage_timer.connect("timeout", self, "_damage")
-	pause_timer.start()
+	Sprite = get_node("TrapSprite")
+	PauseTimer = Timer.new()
+	DamageTimer = Timer.new()
+	add_child(PauseTimer)
+	add_child(DamageTimer)
+	PauseTimer.set_wait_time(_period)
+	DamageTimer.set_wait_time(float(_period) / (_damage_amount + 1))
+	PauseTimer.connect("timeout", self, "_interval")
+	DamageTimer.connect("timeout", self, "_damage")
+	PauseTimer.start()
 	
-	flame_group1 = get_node("FlameGroup1")
-	flame_group2 = get_node("FlameGroup2")
-	last_flame_group = flame_group1
-	flame_group1.hide()
-	flame_group2.hide()
+	FlameGroup1 = get_node("FlameGroup1")
+	FlameGroup2 = get_node("FlameGroup2")
+	LastFlameGroup = FlameGroup1
+	FlameGroup1.hide()
+	FlameGroup2.hide()
 	
 
 func _switch_flame_group():
-	if flame_group1.is_visible() || !flame_group2.is_visible():
-		flame_group1.hide()
-		flame_group2.show()
-	elif flame_group2.is_visible() || !flame_group1.is_visible():
-		flame_group2.hide()
-		flame_group1.show()
+	if FlameGroup1.is_visible() || !FlameGroup2.is_visible():
+		FlameGroup1.hide()
+		FlameGroup2.show()
+	elif FlameGroup2.is_visible() || !FlameGroup1.is_visible():
+		FlameGroup2.hide()
+		FlameGroup1.show()
 	
 
 func _interval():
-	paused = !paused
-	if paused:
-		sprite.set_texture(off_texture)
+	_paused = !_paused
+	if _paused:
+		Sprite.set_texture(_off_texture)
 		
-		if flame_group1.is_visible():
-			last_flame_group = flame_group1
-		elif flame_group2.is_visible():
-			last_flame_group = flame_group2
-		flame_group1.hide()
-		flame_group2.hide()
+		if FlameGroup1.is_visible():
+			LastFlameGroup = FlameGroup1
+		elif FlameGroup2.is_visible():
+			LastFlameGroup = FlameGroup2
+		FlameGroup1.hide()
+		FlameGroup2.hide()
 		
-		damage_timer.stop()
-	if !paused: 
-		sprite.set_texture(on_texture)
+		DamageTimer.stop()
+	if !_paused: 
+		Sprite.set_texture(_on_texture)
 		
-		if last_flame_group == flame_group1:
-			flame_group2.show()
-		elif last_flame_group == flame_group2:
-			flame_group1.show()
+		if LastFlameGroup == FlameGroup1:
+			FlameGroup2.show()
+		elif LastFlameGroup == FlameGroup2:
+			FlameGroup1.show()
 		
-		damage_timer.start()
+		DamageTimer.start()
 
 func _damage():
 	var bodies = get_overlapping_bodies()

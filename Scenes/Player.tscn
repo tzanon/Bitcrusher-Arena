@@ -16,10 +16,10 @@ extents = Vector2( 20, 28 )
 custom_solver_bias = 0.0
 radius = 48.0
 
-[node name="Player" type="RigidBody2D" groups=[
-"ImpactVulnerable",
+[node name="Player" type="RigidBody2D" index="0" groups=[
 "SpeedDamageable",
 "Damageable",
+"ImpactVulnerable",
 ]]
 
 position = Vector2( 0, -4 )

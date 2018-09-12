@@ -5,22 +5,22 @@ export var debug_mode = false
 export var keyboard_mode = false
 
 # gamepad device used to control this player
-var gamepad_id = -1 setget set_gamepad_id
-var player_name = "default" setget set_name
+var _gamepad_id = -1 setget set_gamepad_id
+var _player_name = "default" setget set_name
 
-# health-related
-var health = 100
-export(PackedScene) var death_animation_scene
+# _health-related
+var _health = 100
+export(PackedScene) var DeathAnimation
 export(String) var death_sound_name
-signal health_changed(player_name, player_health)
-signal died(player_name)
+signal health_changed(_player_name, player_health)
+signal died(_player_name)
 
 # movement-related
-const joystick_idle_limit = 0.3
-export var acceleration = 40
-export var top_speed = 300
-var rotd_speed = 270
-var directional_force = Vector2()
+const JOYSTICK_IDLE_LIMIT = 0.3
+export var _acceleration = 40
+export var _top_speed = 300
+var _rotd_speed = 270
+var _directional_force = Vector2()
 const DIRECTION = {
 	ZERO = Vector2(0,0),
 	LEFT = Vector2(-1,0),
@@ -30,27 +30,26 @@ const DIRECTION = {
 }
 
 # collision-related
-export var base_collide_damage = 5
-export var speed_pain_threshold = 300 # keep this for damage from other objects!
-export var base_impact_damage = 5
-export var impact_vulnerability_period = 0.3
-var impact_vulnerable
-var impact_vulnerable_filter
+export var _base_collide_damage = 5
+export var _speed_pain_threshold = 300 # keep this for damage from other objects!
+export var _base_impact_damage = 5
+export var _impact_vulnerability_period = 0.3
+var _impact_vulnerable
+var ImpactVulnerableFilter
 
 # node references
-var animator
-var item_detector
-var impact_vulnerability_timer
-var body_sprite
-var sample_player
+var Animator
+var ItemDetector
+var ImpactVulnerabilityTimer
+var BodySprite
 
-export var effect_spawn_path = "/root/Level/Effects"
+const var DEFAULT_EFFECT_SPAWN_PATH = "/root/Level/Effects"
 
-# weapon-related
-const start_weapon = preload("res://Scenes/Weapons/PlayerLaser.tscn")
-var weapon_pos
-var weapon
-const proj_spawn_positions = {
+# _weapon-related
+const START_WEAPON = preload("res://Scenes/Weapons/PlayerLaser.tscn")
+var WeaponPos
+var _weapon
+const PROJ_SPAWN_POSITIONS = {
 	"Laser" : Vector2(0, -44),
 	"Potato Launcher" : Vector2(0, -40),
 	"Airburst Gun" : Vector2(0, -24),
@@ -63,37 +62,35 @@ func _ready():
 	
 	self.connect("body_entered", self, "_detect_collision")
 	
-	animator = get_node("AnimationPlayer")
-	weapon_pos = get_node("WeaponPosition").position
-	impact_vulnerable_filter = get_node("VulnerableFilter")
+	Animator = get_node("AnimationPlayer")
+	WeaponPos = get_node("WeaponPosition").position
+	ImpactVulnerableFilter = get_node("VulnerableFilter")
 	
-	sample_player = get_node("SamplePlayer")
+	BodySprite = get_node("BodySprite")
 	
-	body_sprite = get_node("BodySprite")
+	ImpactVulnerabilityTimer = get_node("VulnerableTimer")
+	ImpactVulnerabilityTimer.set_one_shot(true)
+	ImpactVulnerabilityTimer.set_wait_time(_impact_vulnerability_period)
+	ImpactVulnerabilityTimer.connect("timeout", self, "disable_impact_vulnerability")
 	
-	impact_vulnerability_timer = get_node("VulnerableTimer")
-	impact_vulnerability_timer.set_one_shot(true)
-	impact_vulnerability_timer.set_wait_time(impact_vulnerability_period)
-	impact_vulnerability_timer.connect("timeout", self, "disable_impact_vulnerability")
+	_impact_vulnerable = false
+	ImpactVulnerableFilter.hide()
 	
-	impact_vulnerable = false
-	impact_vulnerable_filter.hide()
-	
-	item_detector = get_node("PickupDetector")
-	_equip_weapon(start_weapon)
+	ItemDetector = get_node("PickupDetector")
+	_equip_weapon(START_WEAPON)
 	
 
 func _physics_process(delta):
 	# aiming is currently just rotating -- should we have some sort of reticle to move around instead?
 	if keyboard_mode:
 		if Input.is_action_pressed("rotate_left"):
-			rotation_degrees = (rotation_degrees + -rotd_speed * delta)
+			rotation_degrees = (rotation_degrees + -_rotd_speed * delta)
 		if Input.is_action_pressed("rotate_right"):
-			rotation_degrees = (rotation_degrees + rotd_speed * delta)
+			rotation_degrees = (rotation_degrees + _rotd_speed * delta)
 	else:
-		var axis_pos = Input.get_joy_axis(gamepad_id, JOY_AXIS_2)
-		if abs(axis_pos) > joystick_idle_limit:
-			rotation_degrees = rotation_degrees + axis_pos * rotd_speed * delta
+		var axis_pos = Input.get_joy_axis(_gamepad_id, JOY_AXIS_2)
+		if abs(axis_pos) > JOYSTICK_IDLE_LIMIT:
+			rotation_degrees = rotation_degrees + axis_pos * _rotd_speed * delta
 	
 
 func _input(event):
@@ -103,52 +100,52 @@ func _input(event):
 		if event.is_action_pressed("pick_up_item"):
 			_pick_up_item()
 	else:
-		if event.is_action_pressed("joy_fire") && event.device == self.gamepad_id:
+		if event.is_action_pressed("joy_fire") && event.device == self._gamepad_id:
 			_fire_weapon()
-		if event.is_action_pressed("joy_pickup") && event.device == self.gamepad_id:
+		if event.is_action_pressed("joy_pickup") && event.device == self._gamepad_id:
 			_pick_up_item()
 
 # handles movement
 func _integrate_forces(state):
 	if keyboard_mode:
-		directional_force = _calculate_direction_digital(state)
+		_directional_force = _calculate_direction_digital(state)
 	else:
-		directional_force = _calculate_direction_analog(state)
+		_directional_force = _calculate_direction_analog(state)
 	
-	var final_velocity = state.get_linear_velocity() + (directional_force * acceleration)
+	var final_velocity = state.get_linear_velocity() + (_directional_force * _acceleration)
 	
-	final_velocity = final_velocity.clamped(top_speed)
+	final_velocity = final_velocity.clamped(_top_speed)
 	
 	state.set_linear_velocity(final_velocity)
 	
 	#if debug_mode: print("final speed is ", self.get_speed())
 
 func _calculate_direction_digital(state):
-	directional_force = DIRECTION.ZERO
+	_directional_force = DIRECTION.ZERO
 	
 	if Input.is_action_pressed("move_left"):
-		directional_force += DIRECTION.LEFT
+		_directional_force += DIRECTION.LEFT
 	if Input.is_action_pressed("move_right"):
-		directional_force += DIRECTION.RIGHT
+		_directional_force += DIRECTION.RIGHT
 	if Input.is_action_pressed("move_up"):
-		directional_force += DIRECTION.UP
+		_directional_force += DIRECTION.UP
 	if Input.is_action_pressed("move_down"):
-		directional_force += DIRECTION.DOWN
+		_directional_force += DIRECTION.DOWN
 	
-	return directional_force
+	return _directional_force
 
 func _calculate_direction_analog(state):
-	directional_force = DIRECTION.ZERO
+	_directional_force = DIRECTION.ZERO
 	
-	var horizontal_axis_pos = Input.get_joy_axis(gamepad_id, JOY_AXIS_0)
-	var vertical_axis_pos = Input.get_joy_axis(gamepad_id, JOY_AXIS_1)
+	var horizontal_axis_pos = Input.get_joy_axis(_gamepad_id, JOY_AXIS_0)
+	var vertical_axis_pos = Input.get_joy_axis(_gamepad_id, JOY_AXIS_1)
 	
-	if abs(horizontal_axis_pos) > joystick_idle_limit:
-		directional_force += horizontal_axis_pos * DIRECTION.RIGHT
-	if abs(vertical_axis_pos) > joystick_idle_limit:
-		directional_force += vertical_axis_pos * DIRECTION.DOWN
+	if abs(horizontal_axis_pos) > JOYSTICK_IDLE_LIMIT:
+		_directional_force += horizontal_axis_pos * DIRECTION.RIGHT
+	if abs(vertical_axis_pos) > JOYSTICK_IDLE_LIMIT:
+		_directional_force += vertical_axis_pos * DIRECTION.DOWN
 	
-	return directional_force
+	return _directional_force
 
 func set_sprite_from_path(sprite_path):
 	get_node("BodySprite").set_texture(load(sprite_path))
@@ -158,12 +155,14 @@ func connect_to_hud(manager):
 	connect("died", manager, "remove_player")
 
 func set_name(new_name):
-	if debug_mode: print("player_name is ", player_name)
-	player_name = new_name
-	if debug_mode: print("player_name was set to ", player_name)
+	if debug_mode:
+		print("_player_name is ", _player_name)
+	_player_name = new_name
+	if debug_mode:
+		print("_player_name was set to ", _player_name)
 
 func set_gamepad_id(id):
-	gamepad_id = id
+	_gamepad_id = id
 
 func get_speed():
 	return self.get_linear_velocity().length()
@@ -171,94 +170,97 @@ func get_speed():
 func get_speed_sq():
 	return self.get_linear_velocity().length_squared()
 
-func get_collide_damage():
-	var speed_factor = self.get_speed() / speed_pain_threshold
-	var dmg = speed_factor * base_collide_damage
+func _calculate_collide_damage():
+	var speed_factor = self.get_speed() / _speed_pain_threshold
+	var dmg = speed_factor * _base_collide_damage
 	return dmg
 	
 
 func _detect_collision(body):
 	if !body.is_in_group("Projectile") && self.is_impact_vulnerable():
-		self.take_impact_damage()
+		self._take_impact_damage()
 	
 	if body.is_in_group("SpeedDamageable"): # every speed-damageable object must have a get_speed_sq() method
 		var other_speed_sq = body.get_speed_sq()
-		if other_speed_sq > pow(speed_pain_threshold, 2):
-			if debug_mode: print("other speed is ", self.get_speed())
-			var collide_dmg = body.get_collide_damage()
+		if other_speed_sq > pow(_speed_pain_threshold, 2):
+			if debug_mode:
+				print("other speed is ", self.get_speed())
+			var collide_dmg = body._calculate_collide_damage()
 			self.damage(collide_dmg)
 		
 	
 
 func is_impact_vulnerable():
-	return impact_vulnerable && impact_vulnerability_timer.get_time_left() > 0
+	return _impact_vulnerable && ImpactVulnerabilityTimer.get_time_left() > 0
 	
 
-func take_impact_damage():
-	var vulnerability_factor = pow(impact_vulnerability_timer.get_time_left() / impact_vulnerability_timer.get_wait_time(), 2)
-	var dmg_amount = vulnerability_factor * base_impact_damage
+func _take_impact_damage():
+	var vulnerability_factor = pow(ImpactVulnerabilityTimer.get_time_left() / ImpactVulnerabilityTimer.get_wait_time(), 2)
+	var dmg_amount = vulnerability_factor * _base_impact_damage
 	
-	if self.get_speed() < speed_pain_threshold:
+	if self.get_speed() < _speed_pain_threshold:
 		dmg_amount *= 0.5
 	
-	if debug_mode: print("player ", player_name, " takes ", dmg_amount, " impact damage")
+	if debug_mode:
+		print("player ", _player_name, " takes ", dmg_amount, " impact damage")
 	
 	damage(dmg_amount)
 	disable_impact_vulnerability()
 	
 
 func enable_impact_vulnerability():
-	impact_vulnerability_timer.start()
-	impact_vulnerable = true
-	impact_vulnerable_filter.show()
+	ImpactVulnerabilityTimer.start()
+	_impact_vulnerable = true
+	ImpactVulnerableFilter.show()
 	
 
 # called when timer expires or when something is hit
 func disable_impact_vulnerability():
-	impact_vulnerability_timer.stop()
-	impact_vulnerable = false
-	impact_vulnerable_filter.hide()
+	ImpactVulnerabilityTimer.stop()
+	_impact_vulnerable = false
+	ImpactVulnerableFilter.hide()
 
 func damage(dmg):
 	
-	health = clamp(health - dmg, 0, 100)
-	#if debug_mode: print("player ", player_name, " takes damage ", dmg)
-	emit_signal("health_changed", player_name, health)
-	animator.play("PlayerDamaged")
+	_health = clamp(_health - dmg, 0, 100)
+	#if debug_mode: print("player ", _player_name, " takes damage ", dmg)
+	emit_signal("health_changed", _player_name, _health)
+	Animator.play("PlayerDamaged")
 	
-	if health <= 0: die()
+	if _health <= 0:
+		_die()
 
-func die():
-	emit_signal("died", player_name)
+func _die():
+	emit_signal("died", _player_name)
 	
 	# spawn death anim
-	var death_anim = death_animation_scene.instance()
+	var death_anim = DeathAnimation.instance()
 	death_anim.position = self.global_position
 	
-	if has_node(effect_spawn_path):
-		get_node(effect_spawn_path).add_child(death_anim)
+	if has_node(DEFAULT_EFFECT_SPAWN_PATH):
+		get_node(DEFAULT_EFFECT_SPAWN_PATH).add_child(death_anim)
 	else:
 		get_tree().get_root().add_child(death_anim)
 	
-	if sample_player && death_sound_name:
-		sample_player.play(death_sound_name)
+	# TODO: play death sound
 	
 	self.queue_free()
 
 func _fire_weapon():
 	var spawn_pos
-	if proj_spawn_positions.has(weapon.get_weapon_name()):
-		spawn_pos = get_global_transform().xform(proj_spawn_positions[weapon.get_weapon_name()])
-		#spawn_pos = get_global_transform().xform_inv(proj_spawn_positions[weapon.get_weapon_name()])
+	if PROJ_SPAWN_POSITIONS.has(_weapon.get_weapon_name()):
+		spawn_pos = get_global_transform().xform(PROJ_SPAWN_POSITIONS[_weapon.get_weapon_name()])
+		#spawn_pos = get_global_transform().xform_inv(PROJ_SPAWN_POSITIONS[_weapon.get_weapon_name()])
 	else:
 		spawn_pos = get_node("ProjectileSpawnPosition").global_position
-	weapon.fire(spawn_pos)
+	_weapon._fire(spawn_pos)
 	
 	
 # looks for item in pickup radius and replaces current one with it if there is
 func _pick_up_item():
-	var possible_items = item_detector.get_overlapping_areas()
-	if debug_mode && possible_items.size() > 0: print(possible_items)
+	var possible_items = ItemDetector.get_overlapping_areas()
+	if debug_mode && possible_items.size() > 0:
+		print(possible_items)
 	for item in possible_items:
 		if item.is_in_group("WeaponPickup"):
 			_equip_weapon(item.get_player_scene())
@@ -268,17 +270,18 @@ func _pick_up_item():
 		# for extensibility in case we want to add abilities
 		if item.is_in_group("AbilityPickup"):
 			# add ability to player/replace current one
-			if debug_mode: print("found an ability")
+			if debug_mode:
+				print("found an ability")
 			item.queue_free()
 			break
 
 func _equip_weapon(new_weapon_scene):
-	if weapon != null:
-		weapon.queue_free()
+	if _weapon != null:
+		_weapon.queue_free()
 	
-	weapon = new_weapon_scene.instance()
-	add_child(weapon)
-	weapon.position = weapon.get_hold_pos()
-	weapon.rotation_degrees = weapon.get_hold_rotd()
-	weapon.set_user(self)
+	_weapon = new_weapon_scene.instance()
+	add_child(_weapon)
+	_weapon.position = _weapon.get_hold_pos()
+	_weapon.rotation_degrees = _weapon.get_hold_rotd()
+	_weapon.set_user(self)
 

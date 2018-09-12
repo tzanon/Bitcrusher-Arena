@@ -33,7 +33,7 @@ func _detect_hit(body):
 		var normal = body.get_collision_normal()
 		
 		
-		pass
+		
 	
 	
 

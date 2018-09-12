@@ -10,7 +10,7 @@ custom_solver_bias = 0.0
 a = Vector2( -28, 2 )
 b = Vector2( 28, 2 )
 
-[node name="AirburstArcRB" type="RigidBody2D" groups=[
+[node name="AirburstArcRB" type="RigidBody2D" index="0" groups=[
 "Projectile",
 ]]
 
@@ -34,9 +34,9 @@ angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
 debug_mode = true
-speed = 800
-initial_mass = 3000
-max_push_strength = 6000.0
+_speed = 800
+_initial_mass = 3000
+_max_push_strength = 6000.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0"]
 

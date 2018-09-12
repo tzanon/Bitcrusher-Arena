@@ -1,9 +1,20 @@
 extends Node
 
+# TODO: replace scene paths in other scripts with references to this dictionary
+const SCENE_PATHS = {
+	main_menu = "res://Scenes/UI/MainMenuFinal.tscn",
+	player_select = "res://Scenes/UI/PlayerSelectMenu.tscn",
+	results = "res://Scenes/UI/results.tscn",
+	arena1 = "res://Scenes/Level/level_ui_test.tscn"
+}
+
+# TODO: default node paths
+const NODE_PATHS = {}
+
 # contains info for current game's players; initially null (on official release)
 var registered_player_info = [
 	{ name = "blue", pad_id = -1, icon_path = "res://Sprites/UI/player_blue_icon.png" },
-	{ name = "red", pad_id = -1, icon_path = "res://Sprites/UI/player_red_icon.png" },
+	{ name = "red", pad_id = -1, icon_path = "res://Sprites/UI/player_red_icon.png" }
 ]
 
 var match_winner = null
@@ -47,7 +58,7 @@ func get_player_name_with_id(id):
 	for info_entry in registered_player_info:
 		if info_entry.pad_id == id:
 			return info_entry.name
-	
+	print("ERROR: player id ", id, " is not registered!")
 	return ""
 	
 

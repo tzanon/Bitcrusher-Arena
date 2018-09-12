@@ -1,33 +1,33 @@
 extends KinematicBody2D
 
-export (float) var period = 2.5
-export (int) var dx = 0
-export (int) var dy = 0
-export (bool) var paused
+export (float) var _period = 2.5
+export (int) var _speed_factor_x = 0
+export (int) var _speed_factor_y = 0
+export (bool) var _paused
 
-var initial_pos
-var time = 0
-var reverse = false
+var _initial_pos
+var _time = 0
+var _reverse = false
 
 func _ready():
-	print(paused)
-	initial_pos = position
+	print(_paused)
+	_initial_pos = self.position
 	set_process(true)
 
 func _process(delta):
-	time += delta
-	if !paused:
-		var _dx = (time / period) * dx
-		var _dy = (time / period) * dy
-		if reverse: 
-			_dx = dx - _dx
-			_dy = dy - _dy
-		self.position = (Vector2(initial_pos.x + _dx, initial_pos.y + _dy))
+	_time += delta
+	if !_paused:
+		var x_pos_incr = (_time / _period) * _speed_factor_x
+		var y_pos_incr = (_time / _period) * _speed_factor_y
+		if _reverse: 
+			x_pos_incr = _speed_factor_x - x_pos_incr
+			y_pos_incr = _speed_factor_y - y_pos_incr
+		self.position = (Vector2(_initial_pos.x + x_pos_incr, _initial_pos.y + y_pos_incr))
 	
-	if time > period:
-		time = 0
-		paused = !paused
-		if paused: reverse = !reverse
+	if _time > _period:
+		_time = 0
+		_paused = !_paused
+		if _paused: _reverse = !_reverse
 
 func get_speed():
 	return 0

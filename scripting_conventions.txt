@@ -1,0 +1,21 @@
+NAMING CONVENTIONS
+
+Classes and Nodes: PascalCase
+var MyNode = preload("path1")
+const MySecondNode = preload("path2")
+
+Functions and Variables: snake_case
+func get_node()
+
+-underscore for virtual methods, private functions/vars
+var _health
+func _deal_damage()
+
+Signals: past tense
+signal door_opened
+signal door_changed
+
+Constants: CONSTANT_CASE
+const MAX_SPEED = 200
+
+

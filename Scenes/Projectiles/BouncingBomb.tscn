@@ -30,16 +30,15 @@ linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
-damage_amount = 7
-speed = 500
-has_random_lifetime = true
-lifetime = 5.0
-min_lifetime = 2.5
-max_lifetime = 4.5
-self_collision_time = 0.2
-explosion_effect_scene = ExtResource( 2 )
-effect_spawn_path = "/root/Level/Effects"
-explode_sound_name = "bomb_expl2"
+_sections_unfolded = [ "Collision" ]
+_damage_amount = 10
+_speed = 300
+_has_random_lifetime = false
+_lifetime = 5.0
+_min_lifetime = 1.0
+_max_lifetime = 10.0
+_self_collision_time = 0.2
+ExplosionEffect = ExtResource( 2 )
 
 [node name="Timer" type="Timer" parent="." index="0"]
 
@@ -50,7 +49,6 @@ autostart = false
 
 [node name="Collider" type="CollisionShape2D" parent="." index="1"]
 
-visible = false
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="." index="2"]

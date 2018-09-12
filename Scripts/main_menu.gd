@@ -1,7 +1,5 @@
 extends Node
 
-export var select_menu_path = "res://Scenes/PlayerSelectMenu.tscn"
-
 func _ready():
 	var start_button = get_node("/root/MainMenu/Control/StartButton")
 	start_button.connect("pressed", self, "_play_game")
@@ -13,4 +11,4 @@ func _input(event):
 		_play_game()
 
 func _play_game():
-	get_tree().change_scene(select_menu_path)
+	get_tree().change_scene(GameInfo.SCENE_PATHS.player_select)

@@ -1,10 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Sprites/Weapons/player_laser_final.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/player_weapon.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/Projectiles/LaserKB.tscn" type="PackedScene" id=3]
 
-[node name="PlayerLaser" type="Sprite"]
+[node name="PlayerLaser" type="Sprite" index="0"]
 
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
@@ -12,8 +11,7 @@ debug_mode = false
 weapon_name = "Laser"
 hold_position = Vector2( 24, -28 )
 hold_rotation = -7.5
-projectile_scene = ExtResource( 3 )
-fire_sound_name = null
+Projectile = null
 fire_rate = 0.2
 max_accuracy_loss = 10
 knockbox_strength = 700
@@ -21,6 +19,7 @@ knockbox_strength = 700
 [node name="ProjectileSpawnPoint" type="Position2D" parent="." index="0"]
 
 position = Vector2( 0, -16 )
+_sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_edit_lock_": true
 }

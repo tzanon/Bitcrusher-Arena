@@ -1,9 +1,9 @@
 extends Sprite
 
 func _ready():
-	get_node("AnimationPlayer").connect("animation_finished", self, "_flash_finished")
+	get_node("AnimationPlayer").connect("animation_finished", self, "_end_flash")
 
-func _flash_finished(name):
+func _end_flash(name):
 	_despawn()
 
 func _despawn():

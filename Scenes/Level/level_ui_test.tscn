@@ -1,7 +1,7 @@
 [gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Scripts/level.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Level/ground2/floor.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Level/ground3/floor.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Level/ground3/top-left.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Level/ground3/bottom-left.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/Level/ground3/top-middle.png" type="Texture" id=5]
@@ -9,23 +9,23 @@
 [ext_resource path="res://Sprites/Level/ground3/top-right.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/Level/ground3/bottom-right.png" type="Texture" id=8]
 [ext_resource path="res://Scenes/PlayerManager.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/WeaponSpawner.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/WeaponSpawnPoint.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Level/WeaponSpawner.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Level/WeaponSpawnPoint.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Weapons/WorldLaser.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Weapons/WorldLauncher.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Weapons/WorldAirgun.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Weapons/WorldBombshot.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Scenes/Level/LargeDoubleWall.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Scenes/Level/SmallDoubleWall.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Scenes/Level/LongWall.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/Level/Arena1-Blue/LargeDoubleWall.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Level/Arena1-Blue/SmallDoubleWall.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/Level/Arena1-Blue/LongWall.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Sprites/Level/track_array.png" type="Texture" id=19]
-[ext_resource path="res://Scenes/Level/MovingWall.tscn" type="PackedScene" id=20]
-[ext_resource path="res://Scenes/wall_spike.tscn" type="PackedScene" id=21]
-[ext_resource path="res://Scenes/Level/Pillar.tscn" type="PackedScene" id=22]
-[ext_resource path="res://Scenes/wall_trap.tscn" type="PackedScene" id=23]
-[ext_resource path="res://Scenes/floor_trap.tscn" type="PackedScene" id=24]
-[ext_resource path="res://Scenes/Level/Boundary.tscn" type="PackedScene" id=25]
-[ext_resource path="res://Scenes/Level/SouthBoundary.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Scenes/Level/Arena1-Blue/MovingWall.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Scenes/Hazards/wall_spike.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Scenes/Level/Arena1-Blue/Pillar.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Scenes/Hazards/wall_trap.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Scenes/Hazards/floor_trap.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Scenes/Level/Arena1-Blue/Boundary.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Scenes/Level/Arena1-Blue/SouthBoundary.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Sprites/UI/Gameplay/gameplay_ui_panel.png" type="Texture" id=28]
 [ext_resource path="res://Sprites/UI/Gameplay/gameplay_ui_frame.png" type="Texture" id=29]
@@ -38,7 +38,6 @@ script = ExtResource( 1 )
 
 [node name="Ground" type="Sprite" parent="Layout" index="0"]
 
-editor/display_folded = true
 position = Vector2( 960, 448 )
 texture = ExtResource( 2 )
 __meta__ = {
@@ -47,7 +46,7 @@ __meta__ = {
 
 [node name="TopLeft" type="Sprite" parent="Layout/Ground" index="0"]
 
-position = Vector2( -608, -192 )
+position = Vector2( -608, -208 )
 texture = ExtResource( 3 )
 
 [node name="BottomLeft" type="Sprite" parent="Layout/Ground" index="1"]
@@ -99,7 +98,7 @@ position = Vector2( 1088, 160 )
 [node name="WeaponSpawner" parent="Layout" index="2" instance=ExtResource( 10 )]
 
 editor/display_folded = true
-refresh_interval = 8
+_sections_unfolded = [ "Transform" ]
 
 [node name="WeaponSpawnPoint" parent="Layout/WeaponSpawner" index="1" instance=ExtResource( 11 )]
 
@@ -119,11 +118,10 @@ position = Vector2( 160, 640 )
 
 [node name="Pickups" type="Node2D" parent="Layout" index="3"]
 
-editor/display_folded = true
-
 [node name="WorldLaser" parent="Layout/Pickups" index="0" instance=ExtResource( 12 )]
 
 position = Vector2( 704, 224 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="WorldLauncher" parent="Layout/Pickups" index="1" instance=ExtResource( 13 )]
 
@@ -145,20 +143,27 @@ __meta__ = {
 
 [node name="Obstacles" type="Node2D" parent="Layout/Structure" index="0"]
 
-editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Walls" type="Node2D" parent="Layout/Structure/Obstacles" index="0"]
 
-editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="LargeDoubleWall" parent="Layout/Structure/Obstacles/Walls" index="0" instance=ExtResource( 16 )]
 
-position = Vector2( 1248, 416 )
+position = Vector2( 1248, 414.33 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="SmallDoubleWall" parent="Layout/Structure/Obstacles/Walls" index="1" instance=ExtResource( 17 )]
 
-position = Vector2( 576, 304 )
+position = Vector2( 572, 280 )
+rotation = -1.5708
 collision_layer = 3
+_sections_unfolded = [ "Transform" ]
 
 [node name="LongWall" parent="Layout/Structure/Obstacles/Walls" index="2" instance=ExtResource( 18 )]
 
@@ -170,7 +175,6 @@ position = Vector2( 500, 692 )
 
 [node name="MovingWalls" type="Node2D" parent="Layout/Structure/Obstacles/Walls" index="4"]
 
-editor/display_folded = true
 position = Vector2( 1600, 704 )
 
 [node name="TrackArray" type="Sprite" parent="Layout/Structure/Obstacles/Walls/MovingWalls" index="0"]
@@ -180,7 +184,6 @@ texture = ExtResource( 19 )
 
 [node name="VerticalMW" parent="Layout/Structure/Obstacles/Walls/MovingWalls" index="1" instance=ExtResource( 20 )]
 
-editor/display_folded = true
 position = Vector2( 0, -128 )
 period = 2.0
 dy = 256
@@ -256,7 +259,6 @@ rotation = 1.57079
 
 position = Vector2( 162, 48 )
 rotation = 3.14159
-_sections_unfolded = [ "Transform" ]
 
 [node name="WallTrap4" parent="Layout/Structure/Traps" index="5" instance=ExtResource( 23 )]
 
@@ -266,20 +268,14 @@ rotation = 3.14159
 [node name="FloorTrap1" parent="Layout/Structure/Traps" index="6" instance=ExtResource( 24 )]
 
 position = Vector2( 352, 576 )
-period = 3.0
-damage_amount = 20
 
 [node name="FloorTrap2" parent="Layout/Structure/Traps" index="7" instance=ExtResource( 24 )]
 
 position = Vector2( 192, 800 )
-period = 3.0
-damage_amount = 20
 
 [node name="FloorTrap3" parent="Layout/Structure/Traps" index="8" instance=ExtResource( 24 )]
 
 position = Vector2( 544, 800 )
-period = 3.0
-damage_amount = 20
 
 [node name="WallSpike" parent="Layout/Structure/Traps" index="9" instance=ExtResource( 21 )]
 
@@ -410,3 +406,4 @@ stretch_mode = 0
 
 
 [editable path="Layout/PlayerManager"]
+[editable path="Layout/WeaponSpawner"]

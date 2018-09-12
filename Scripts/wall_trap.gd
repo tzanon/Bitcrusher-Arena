@@ -1,31 +1,47 @@
 extends Sprite
 
-export(PackedScene) var projectile_scene
+export var debug_mode = false;
 
-onready var proj_spawn_point = get_node("ProjectileSpawnPoint")
-const proj_spawn_path = "/root/Level/Projectiles"
+export(PackedScene) var Projectile
 
-var fire_timer
+onready var ProjSpawnPoint = get_node("ProjectileSpawnPoint")
+const DEFAULT_PROJ_SPAWN_PATH = "/root/Level/Projectiles"
 
-# how often a weapon fires
-export(float, 0.05, 10, 0.05) var fire_rate = 3
+var ProjSpawnNode
+
+# how often the trap fires
+export(float, 0.05, 10, 0.05) var _fire_rate = 3
 
 func _ready():
-	fire_timer = Timer.new()
-	add_child(fire_timer)
-	fire_timer.set_wait_time(fire_rate)
-	fire_timer.connect("timeout", self, "fire")
-	fire_timer.start()
+	
+	if has_node(DEFAULT_PROJ_SPAWN_PATH):
+		ProjSpawnNode = get_node(DEFAULT_PROJ_SPAWN_PATH)
+	else:
+		ProjSpawnNode = get_tree().get_root()
+	
+	if debug_mode:
+		print("spawn node is ", ProjSpawnNode)
+	
+	var FireTimer = Timer.new()
+	self.add_child(FireTimer)
+	FireTimer.set_wait_time(_fire_rate)
+	FireTimer.connect("timeout", self, "fire")
+	FireTimer.start()
 	
 
 func fire():
-	var projectile = projectile_scene.instance()
-	projectile.global_position = proj_spawn_point.global_position
-	projectile.global_rotation = global_rotation
 	
-	var proj_node = get_node(proj_spawn_path)
-	if proj_node:
-		get_node(proj_spawn_path).add_child(projectile)
+	# this needs refactoring...
+	# timing of firing (and hence sound effects) should be handled in central controller node/class
+	
+	var projectile = Projectile.instance()
+	projectile.global_position = ProjSpawnPoint.global_position
+	projectile.global_rotation = self.global_rotation
+	
+	if has_node(DEFAULT_PROJ_SPAWN_PATH):
+		get_node(DEFAULT_PROJ_SPAWN_PATH).add_child(projectile)
 	else:
 		get_tree().get_root().add_child(projectile)
+	
+	#ProjSpawnNode.add_child(projectile)
 	

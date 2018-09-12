@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/weapon_spawner.gd" type="Script" id=1]
+
+[node name="WeaponSpawner" type="Node2D" index="0"]
+
+script = ExtResource( 1 )
+debug_mode = false
+_refresh_interval = 10
+_initial_spawn_mode = 1
+
+[node name="RefreshTimer" type="Timer" parent="." index="0"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+

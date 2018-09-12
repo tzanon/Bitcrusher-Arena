@@ -9,7 +9,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 32, 16 )
 
-[node name="WorldBombshot" type="Area2D" index="0"]
+[node name="WorldBombshot" type="Area2D"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -19,7 +19,7 @@ angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
-player_weapon_scene = ExtResource( 2 )
+PlayerWeapon = ExtResource( 2 )
 
 [node name="Collider" type="CollisionShape2D" parent="." index="0"]
 

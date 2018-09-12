@@ -12,8 +12,8 @@ radius = 7.5
 height = 12.0
 
 [node name="PotatoKB" type="KinematicBody2D" groups=[
-"SolidProjectileKB",
 "Projectile",
+"SolidProjectileKB",
 ]]
 
 input_pickable = false
