@@ -11,10 +11,9 @@ export(Vector2) var _hold_position
 export(float) var _hold_rotation
 
 export(PackedScene) var Projectile
-
 # in case we want to _fire from the barrel
 onready var ProjSpawnPoint = get_node("ProjectileSpawnPoint")
-const PROJ_SPAWN_PATH = "/root/Level/Projectiles"
+const DEFAULT_PROJ_SPAWN_PATH = "/root/Level/Projectiles"
 
 var FireTimer
 
@@ -27,10 +26,11 @@ export(int, 200, 10000, 100) var _knockbox_strength = 600
 
 func _ready():
 	FireTimer = Timer.new()
-	self.add_child(FireTimer)
-	FireTimer.set_wait_time(_fire_rate)
-	FireTimer.set_one_shot(true)
-	
+	if !FireTimer:
+		print("could not create fire timer!")
+	add_child(FireTimer)
+	FireTimer.wait_time = _fire_rate
+	FireTimer.one_shot = true
 
 func get_weapon_name():
 	return weapon_name
@@ -48,7 +48,7 @@ func get_hold_rotd():
 	return _hold_rotation
 
 func _fire(spawn_pos):
-	if FireTimer.get_time_left() <= 0:
+	if FireTimer.time_left <= 0:
 		
 		# TODO: play _fire sound
 		
@@ -56,9 +56,9 @@ func _fire(spawn_pos):
 		projectile.global_position = spawn_pos
 		projectile.rotation_degrees = _user.global_rotation_degrees + _max_accuracy_loss * pow(2*randf() - 1, 3)
 		
-		#var proj_node = get_node(PROJ_SPAWN_PATH)
-		if has_node(PROJ_SPAWN_PATH):
-			get_node(PROJ_SPAWN_PATH).add_child(projectile)
+		#var proj_node = get_node(DEFAULT_PROJ_SPAWN_PATH)
+		if has_node(DEFAULT_PROJ_SPAWN_PATH):
+			get_node(DEFAULT_PROJ_SPAWN_PATH).add_child(projectile)
 		else:
 			get_tree().get_root().add_child(projectile)
 		

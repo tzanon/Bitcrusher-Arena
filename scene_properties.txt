@@ -1,0 +1,61 @@
+Values for exported variables (in case they get lost)
+
+Laser
+Hold position: 
+Hold rotation: 
+Fire rate: 
+Max accuracy loss: 
+Knockback strength: 
+
+Launcher
+Hold position: 
+Hold rotation: 
+Fire rate: 
+Max accuracy loss: 
+Knockback strength: 
+
+Airgun
+Hold position: 
+Hold rotation: 
+Fire rate: 
+Max accuracy loss: N/A
+Knockback strength: 
+
+Bombshot
+Hold position: 
+Hold rotation: 
+Fire rate: 
+Max accuracy loss: 
+Knockback strength: 
+Arc radius: 
+Number of projectiles: 
+
+
+Laser Bolt
+Damage amount: 10
+Speed: 800
+Bounce groups: Reflective
+Bounce factor: 1
+
+Potato
+Damage amount: 15 (explosion 10)
+Speed: 600
+Bounce groups: Airburst
+Bounce factor: 1 (?)
+
+Bomb
+Damage amount: 10 (explosion 10)
+Speed: 300
+Has random lifetime: default off
+(fixed) Lifetime: 5
+Min lifetime: 1
+Max lifetime: 10
+Self collision time: 0.2
+
+Airburst arc
+Speed: 800
+Initial mass: 3000
+Max push strength: 6000
+
+
+

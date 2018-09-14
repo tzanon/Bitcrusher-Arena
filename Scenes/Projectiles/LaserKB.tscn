@@ -19,13 +19,12 @@ collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
 debug_mode = false
-damage_amount = 10
-speed = 900.0
-bounce_groups = PoolStringArray( "Reflective", "Bouncy" )
-bounce_factor = 1.0
-impact_effect_scene = null
-effect_spawn_path = "/root/Level/Effects"
-impact_sound_name = "laser_fire1"
+_damage_amount = 10
+_speed = 800.0
+_bounce_groups = PoolStringArray( "Reflective" )
+_bounce_factor = 1.0
+ImpactEffectScene = null
+_impact_sound_name = null
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 

@@ -1,7 +1,5 @@
 extends Node2D
 
-# different colours? orange, purple, grey, black, brown, white?
-# will need refactoring, players will most likely need separate scenes (sprite_path)
 onready var _player_spawn_info = {
 	"blue" : { hud_pos = Vector2(5, 0), spawn_pos = get_node("BlueSpawnPoint").position, sprite_path = "res://Sprites/Players/player_blue.png" },
 	"red" : { hud_pos = Vector2(485, 0), spawn_pos = get_node("RedSpawnPoint").position, sprite_path = "res://Sprites/Players/player_red.png" },
@@ -32,12 +30,12 @@ func _ready():
 		_enable_player_hud(info_entry) # setup hud for current player
 		
 		var player = _spawn_player(info_entry.name)
-		player.gamepad_id = info_entry.pad_id
+		player.set_gamepad_id(info_entry.pad_id)
 		_match_player_refs[info_entry.name] = weakref(player)
 	
 	EndTimer = get_node("EndTimer")
-	EndTimer.set_wait_time(_game_end_time)
-	EndTimer.set_one_shot(true)
+	EndTimer.wait_time = _game_end_time
+	EndTimer.one_shot = true
 	EndTimer.connect("timeout", self, "_show_results")
 	
 	# this will be refactored (or not)
@@ -95,4 +93,4 @@ func _end_game():
 	
 
 func _show_results():
-	get_tree().change_scene(SCENE_PATHS.results)
+	get_tree().change_scene(GameInfo.SCENE_PATHS.results)

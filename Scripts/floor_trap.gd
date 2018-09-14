@@ -22,8 +22,8 @@ func _ready():
 	DamageTimer = Timer.new()
 	add_child(PauseTimer)
 	add_child(DamageTimer)
-	PauseTimer.set_wait_time(_period)
-	DamageTimer.set_wait_time(float(_period) / (_damage_amount + 1))
+	PauseTimer.wait_time = _period
+	DamageTimer.wait_time = float(_period) / (_damage_amount + 1)
 	PauseTimer.connect("timeout", self, "_interval")
 	DamageTimer.connect("timeout", self, "_damage")
 	PauseTimer.start()

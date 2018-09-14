@@ -10,13 +10,14 @@ var HarmTimer
 onready var _time = 0
 
 func _ready():
+	# TODO: get rid of this physics process once current method is tested
 	#set_physics_process(true)
 	
 	self.connect("body_entered", self, "_handle_collision")
 	
 	HarmTimer = get_node("Timer")
-	HarmTimer.set_wait_time(_timeout)
-	HarmTimer.set_one_shot(true)
+	HarmTimer.wait_time = _timeout
+	HarmTimer.one_shot = true
 	
 
 func _physics_process(delta):
@@ -35,7 +36,7 @@ func _physics_process(delta):
 	
 
 func _handle_collision(body):
-	if HarmTimer.get_time_left() == 0 && body.is_in_group("Damageable"):
+	if HarmTimer.time_left == 0 && body.is_in_group("Damageable"):
 		body.damage(_damage_amount)
 		HarmTimer.start()
 	

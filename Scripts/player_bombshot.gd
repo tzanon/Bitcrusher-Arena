@@ -15,22 +15,22 @@ func _fire(spawn_pos):
 	var fire_angle = -_arc_radius
 	
 	while fire_angle < _arc_radius:
-		var projectile = projectile_scene.instance()
+		var projectile = Projectile.instance()
 		projectile.global_position = spawn_pos
-		projectile.global_rotation_degrees = -user.global_rotation_degrees + fire_angle
+		projectile.global_rotation_degrees = -_user.global_rotation_degrees + fire_angle
 		
-		#var proj_node = get_node(PROJ_SPAWN_PATH)
-		if has_node(PROJ_SPAWN_PATH):
-			get_node(PROJ_SPAWN_PATH).add_child(projectile)
+		#var proj_node = get_node(DEFAULT_PROJ_SPAWN_PATH)
+		if has_node(DEFAULT_PROJ_SPAWN_PATH):
+			get_node(DEFAULT_PROJ_SPAWN_PATH).add_child(projectile)
 		else:
 			get_tree().get_root().add_child(projectile)
 		
 		fire_angle += _fire_angle_incr
 	
-	var rot = user.global_rotation
+	var rot = _user.global_rotation
 	var knockback_direction = Vector2(sin(rot), cos(rot)).normalized()
-	var knockback_force = knockbox_strength * knockback_direction
-	user.apply_impulse(Vector2(0,0), knockback_force)
+	var knockback_force = _knockbox_strength * knockback_direction
+	_user.apply_impulse(Vector2(0,0), knockback_force)
 	
 	FireTimer.start()
 	

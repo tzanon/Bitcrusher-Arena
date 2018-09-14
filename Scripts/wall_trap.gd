@@ -24,14 +24,14 @@ func _ready():
 	
 	var FireTimer = Timer.new()
 	self.add_child(FireTimer)
-	FireTimer.set_wait_time(_fire_rate)
+	FireTimer.wait_time = _fire_rate
 	FireTimer.connect("timeout", self, "fire")
 	FireTimer.start()
 	
 
 func fire():
 	
-	# this needs refactoring...
+	# TODO: refactor
 	# timing of firing (and hence sound effects) should be handled in central controller node/class
 	
 	var projectile = Projectile.instance()
@@ -44,4 +44,3 @@ func fire():
 		get_tree().get_root().add_child(projectile)
 	
 	#ProjSpawnNode.add_child(projectile)
-	

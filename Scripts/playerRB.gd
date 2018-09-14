@@ -43,7 +43,7 @@ var ItemDetector
 var ImpactVulnerabilityTimer
 var BodySprite
 
-const var DEFAULT_EFFECT_SPAWN_PATH = "/root/Level/Effects"
+const DEFAULT_EFFECT_SPAWN_PATH = "/root/Level/Effects"
 
 # _weapon-related
 const START_WEAPON = preload("res://Scenes/Weapons/PlayerLaser.tscn")
@@ -69,8 +69,8 @@ func _ready():
 	BodySprite = get_node("BodySprite")
 	
 	ImpactVulnerabilityTimer = get_node("VulnerableTimer")
-	ImpactVulnerabilityTimer.set_one_shot(true)
-	ImpactVulnerabilityTimer.set_wait_time(_impact_vulnerability_period)
+	ImpactVulnerabilityTimer.one_shot = true
+	ImpactVulnerabilityTimer.wait_time = _impact_vulnerability_period
 	ImpactVulnerabilityTimer.connect("timeout", self, "disable_impact_vulnerability")
 	
 	_impact_vulnerable = false
@@ -112,7 +112,7 @@ func _integrate_forces(state):
 	else:
 		_directional_force = _calculate_direction_analog(state)
 	
-	var final_velocity = state.get_linear_velocity() + (_directional_force * _acceleration)
+	var final_velocity = state.linear_velocity + (_directional_force * _acceleration)
 	
 	final_velocity = final_velocity.clamped(_top_speed)
 	
@@ -165,10 +165,10 @@ func set_gamepad_id(id):
 	_gamepad_id = id
 
 func get_speed():
-	return self.get_linear_velocity().length()
+	return self.linear_velocity.length()
 
 func get_speed_sq():
-	return self.get_linear_velocity().length_squared()
+	return self.linear_velocity.length_squared()
 
 func _calculate_collide_damage():
 	var speed_factor = self.get_speed() / _speed_pain_threshold
@@ -191,11 +191,11 @@ func _detect_collision(body):
 	
 
 func is_impact_vulnerable():
-	return _impact_vulnerable && ImpactVulnerabilityTimer.get_time_left() > 0
+	return _impact_vulnerable && ImpactVulnerabilityTimer.time_left > 0
 	
 
 func _take_impact_damage():
-	var vulnerability_factor = pow(ImpactVulnerabilityTimer.get_time_left() / ImpactVulnerabilityTimer.get_wait_time(), 2)
+	var vulnerability_factor = pow(ImpactVulnerabilityTimer.time_left / ImpactVulnerabilityTimer.wait_time, 2)
 	var dmg_amount = vulnerability_factor * _base_impact_damage
 	
 	if self.get_speed() < _speed_pain_threshold:

@@ -12,8 +12,8 @@ radius = 7.5
 height = 12.0
 
 [node name="PotatoKB" type="KinematicBody2D" groups=[
-"Projectile",
 "SolidProjectileKB",
+"Projectile",
 ]]
 
 input_pickable = false
@@ -22,13 +22,12 @@ collision_mask = 3
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
 debug_mode = false
-damage_amount = 15
-speed = 750.0
-bounce_groups = PoolStringArray( "Airburst", "Bouncy" )
-bounce_factor = 1.0
-impact_effect_scene = ExtResource( 2 )
-effect_spawn_path = "/root/Level/Effects"
-impact_sound_name = null
+_damage_amount = 15
+_speed = 600.0
+_bounce_groups = PoolStringArray( "Airburst" )
+_bounce_factor = 1.0
+ImpactEffectScene = ExtResource( 2 )
+_impact_sound_name = null
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 

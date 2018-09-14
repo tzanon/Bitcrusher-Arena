@@ -15,16 +15,16 @@ var _time_passed
 var _time_left
 
 func _ready():
-	set_mass(_initial_mass)
+	self.mass = _initial_mass
 	
 	Animator = get_node("AnimationPlayer")
 	Animator.connect("animation_finished", self, "_airburst_finish")
-	_lifetime = Animator.get_animation("AirburstArc").get_length()
+	_lifetime = Animator.get_animation("AirburstArc").length
 	
 	LifeTimer = get_node("Timer")
-	LifeTimer.set_wait_time(_lifetime)
+	LifeTimer.wait_time = _lifetime
 	LifeTimer.start()
-	_time_left = LifeTimer.get_time_left()
+	_time_left = LifeTimer.time_left
 	_time_passed = _lifetime - _time_left
 	
 	self.connect("body_entered", self, "_handle_collision")
@@ -37,18 +37,18 @@ func _ready():
 	
 
 func _physics_process(delta):
-	_time_left = LifeTimer.get_time_left()
+	_time_left = LifeTimer.time_left
 	_time_passed = _lifetime - _time_left
 	
 	# logarithmic decrease
-	var new_mass = _time_left / _lifetime * get_mass() * (1 + _time_passed / _lifetime)
+	var new_mass = _time_left / _lifetime * self.mass * (1 + _time_passed / _lifetime)
 	
-	set_mass(new_mass)
+	self.mass = new_mass
 	
 
 func _handle_collision(body):
 	if debug_mode:
-		print("current mass is ", get_mass())
+		print("current mass is ", self.mass)
 	
 	if body.get_class() == "RigidBody2D":
 		var rot = global_rotation

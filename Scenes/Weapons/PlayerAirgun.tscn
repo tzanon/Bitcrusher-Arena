@@ -14,17 +14,16 @@ texture = ExtResource( 1 )
 script = ExtResource( 2 )
 debug_mode = false
 weapon_name = "Airburst Gun"
-hold_position = Vector2( 29, -8 )
-hold_rotation = -7.0
-projectile_scene = ExtResource( 3 )
-fire_sound_name = ""
-fire_rate = 1.0
-max_accuracy_loss = 0
-knockbox_strength = 2800
+_hold_position = Vector2( 28, -18 )
+_hold_rotation = -5.0
+Projectile = ExtResource( 3 )
+_fire_rate = 0.7
+_max_accuracy_loss = 5
+_knockbox_strength = 600
 debug_fire_mode = false
-air_flash_scene = ExtResource( 4 )
-air_barrier_scene = ExtResource( 5 )
-marker_scene = ExtResource( 6 )
+AirFlash = ExtResource( 4 )
+AirBarrier = ExtResource( 5 )
+Marker = ExtResource( 6 )
 
 [node name="ReadyLight" type="Sprite" parent="." index="0"]
 

@@ -4,19 +4,18 @@
 [ext_resource path="res://Scripts/player_weapon.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Projectiles/PotatoKB.tscn" type="PackedScene" id=3]
 
-[node name="PlayerLauncher" type="Sprite" index="0"]
+[node name="PlayerLauncher" type="Sprite"]
 
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 debug_mode = false
 weapon_name = "Potato Launcher"
-hold_position = Vector2( 24, -12 )
-hold_rotation = -4.8
-projectile_scene = ExtResource( 3 )
-fire_sound_name = null
-fire_rate = 1.0
-max_accuracy_loss = 5
-knockbox_strength = 1600
+_hold_position = Vector2( 24, -12 )
+_hold_rotation = -5.0
+Projectile = ExtResource( 3 )
+_fire_rate = 0.4
+_max_accuracy_loss = 5
+_knockbox_strength = 600
 
 [node name="ProjectileSpawnPoint" type="Position2D" parent="." index="0"]
 

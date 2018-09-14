@@ -20,9 +20,9 @@ func _ready():
 	
 	if _has_random_lifetime:
 		var rand_lt = rand_range(_min_lifetime, _max_lifetime)
-		LifeTimer.set_wait_time(rand_lt)
+		LifeTimer.wait_time = rand_lt
 	else:
-		LifeTimer.set_wait_time(_lifetime)
+		LifeTimer.wait_time = _lifetime
 	
 	LifeTimer.connect("timeout", self, "_explode")
 	LifeTimer.start()
@@ -31,14 +31,14 @@ func _ready():
 	
 	var rot = self.global_rotation
 	var vel = Vector2(sin(rot), cos(rot)) * -_speed
-	self.set_linear_velocity(vel)
+	self.linear_velocity = vel
 	
 	set_collision_mask_bit(2, false)
 	
 	set_physics_process(true)
 
 func _physics_process(delta):
-	if LifeTimer.get_wait_time() - LifeTimer.get_time_left() > _self_collision_time:
+	if LifeTimer.wait_time - LifeTimer.time_left > _self_collision_time:
 		set_collision_mask_bit(2, true)
 		set_physics_process(false)
 	

@@ -24,12 +24,12 @@ func _fire(spawn_pos):
 		var barrier = AirBarrier.instance()
 		add_child(barrier)
 		barrier.global_position = spawn_pos
-		barrier.global_rotation = user.global_rotation
+		barrier.global_rotation = _user.global_rotation
 		
 		# spawn muzzle flash effect
 		var muzzle_flash = AirFlash.instance()
 		add_child(muzzle_flash)
-		muzzle_flash.global_position = proj_spawn_point.global_position
+		muzzle_flash.global_position = ProjSpawnPoint.global_position
 		muzzle_flash.global_rotation = global_rotation
 		
 		# spawn marker

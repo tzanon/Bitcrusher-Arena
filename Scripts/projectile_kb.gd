@@ -5,7 +5,7 @@ export var debug_mode = false
 export var _damage_amount = 0
 export var _speed = 0.0 setget ,get_speed
 
-# Bounce groups: Airbust, Reflective (for potato)
+# Bounce groups: Airbust, Reflective (for potato, laser)
 export var _bounce_groups = PoolStringArray()
 
 # Speed multiplier for how faster/slower this projectile gets after bouncing

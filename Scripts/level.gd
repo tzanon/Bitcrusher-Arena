@@ -5,6 +5,6 @@ func _ready():
 
 func _input(event):
 	if Input.is_key_pressed(KEY_ESCAPE):
-		get_tree().change_scene(SCENE_PATHS.main_menu)
+		get_tree().change_scene(GameInfo.SCENE_PATHS.main_menu)
 
 

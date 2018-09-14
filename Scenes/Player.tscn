@@ -16,10 +16,10 @@ extents = Vector2( 20, 28 )
 custom_solver_bias = 0.0
 radius = 48.0
 
-[node name="Player" type="RigidBody2D" index="0" groups=[
-"SpeedDamageable",
+[node name="Player" type="RigidBody2D" groups=[
 "Damageable",
 "ImpactVulnerable",
+"SpeedDamageable",
 ]]
 
 position = Vector2( 0, -4 )
@@ -45,15 +45,14 @@ script = ExtResource( 1 )
 _sections_unfolded = [ "Angular", "Applied Forces", "Linear" ]
 debug_mode = true
 keyboard_mode = false
-death_animation_scene = ExtResource( 2 )
+DeathAnimation = ExtResource( 2 )
 death_sound_name = ""
-acceleration = 40
-top_speed = 300
-base_collide_damage = 5
-speed_pain_threshold = 300
-base_impact_damage = 20
-impact_vulnerability_period = 0.8
-effect_spawn_path = "/root/Level/Effects"
+_acceleration = 40
+_top_speed = 300
+_base_collide_damage = 5
+_speed_pain_threshold = 300
+_base_impact_damage = 5
+_impact_vulnerability_period = 0.3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0"]
 

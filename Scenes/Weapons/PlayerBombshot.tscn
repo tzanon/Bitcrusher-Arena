@@ -10,15 +10,14 @@ texture = ExtResource( 1 )
 script = ExtResource( 2 )
 debug_mode = false
 weapon_name = "Bombshot"
-hold_position = Vector2( 26, -20 )
-hold_rotation = -5.0
-projectile_scene = ExtResource( 3 )
-fire_sound_name = null
-fire_rate = 1.2
-max_accuracy_loss = 0
-knockbox_strength = 600
-arc_radius = 30.0
-num_projectiles = 4
+_hold_position = Vector2( 25, -25 )
+_hold_rotation = -5.0
+Projectile = ExtResource( 3 )
+_fire_rate = 0.8
+_max_accuracy_loss = 5
+_knockbox_strength = 600
+_arc_radius = 30.0
+_num_projectiles = 4
 
 [node name="ProjectileSpawnPoint" type="Position2D" parent="." index="0"]
 

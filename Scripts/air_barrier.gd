@@ -4,6 +4,8 @@ export var debug_mode = false
 export var _lifetime = 0.35
 
 func _ready():
+	# TODO: add to Airburst group in code?
+	
 	var LifeTimer = get_node("Timer")
 	LifeTimer.wait_time = _lifetime
 	LifeTimer.connect("timeout", self, "_despawn")

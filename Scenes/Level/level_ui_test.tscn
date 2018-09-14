@@ -78,6 +78,9 @@ texture = ExtResource( 8 )
 
 editor/display_folded = true
 debug_mode = true
+_spawn_path = "/root/Level/Layout/Players"
+_hud_spawn_path = "/root/Level/UI/PlayerInfoPanel"
+_game_end_time = 3.0
 
 [node name="BlueSpawnPoint" parent="Layout/PlayerManager" index="0"]
 
@@ -185,9 +188,10 @@ texture = ExtResource( 19 )
 [node name="VerticalMW" parent="Layout/Structure/Obstacles/Walls/MovingWalls" index="1" instance=ExtResource( 20 )]
 
 position = Vector2( 0, -128 )
-period = 2.0
-dy = 256
-paused = true
+_period = 2.5
+_speed_factor_x = 0
+_speed_factor_y = 0
+_paused = null
 
 [node name="WallSpike" parent="Layout/Structure/Obstacles/Walls/MovingWalls/VerticalMW" index="2" instance=ExtResource( 21 )]
 
@@ -203,8 +207,10 @@ rotation = -3.14159
 
 position = Vector2( -128, 0 )
 rotation = 1.57079
-period = 2.0
-dx = 256
+_period = 2.5
+_speed_factor_x = 0
+_speed_factor_y = 0
+_paused = null
 
 [node name="Pillars" type="Node2D" parent="Layout/Structure/Obstacles" index="1"]
 
@@ -334,7 +340,9 @@ __meta__ = {
 [node name="Player" parent="Layout/Players" index="0" instance=ExtResource( 27 )]
 
 position = Vector2( 1152, 640 )
+debug_mode = false
 keyboard_mode = true
+death_sound_name = null
 
 [node name="Projectiles" type="Node2D" parent="." index="1"]
 
