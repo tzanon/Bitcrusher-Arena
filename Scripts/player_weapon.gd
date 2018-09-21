@@ -13,7 +13,7 @@ export(float) var _hold_rotation
 export(PackedScene) var Projectile
 # in case we want to _fire from the barrel
 onready var ProjSpawnPoint = get_node("ProjectileSpawnPoint")
-const DEFAULT_PROJ_SPAWN_PATH = "/root/Level/Projectiles"
+var DEFAULT_PROJ_SPAWN_PATH = GameInfo.NODE_SPAWN_PATHS.projectile # originally "/root/Level/Projectiles"
 
 var FireTimer
 
@@ -63,7 +63,7 @@ func _fire(spawn_pos):
 			get_tree().get_root().add_child(projectile)
 		
 		var rot = _user.global_rotation
-		var knockback_direction = Vector2(sin(rot), cos(rot)).normalized()
+		var knockback_direction = Vector2(-sin(rot), cos(rot)).normalized()
 		var knockback_force = _knockbox_strength * knockback_direction
 		_user.apply_impulse(Vector2(0,0), knockback_force)
 		

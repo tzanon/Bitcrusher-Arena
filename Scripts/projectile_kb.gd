@@ -12,8 +12,8 @@ export var _bounce_groups = PoolStringArray()
 # maybe this should be in the class that bounces the projectile?
 export(float, 0.1, 5, 0.1) var _bounce_factor = 1.0
 
-export(PackedScene) var ImpactEffectScene
-const DEFAULT_EFFECT_PATH = "/root/Level/Effects"
+export(PackedScene) var ImpactEffect
+var DEFAULT_EFFECT_SPAWN_PATH = GameInfo.NODE_SPAWN_PATHS.effect #"/root/Level/Effects"
 
 # TBD
 export(String) var _impact_sound_name
@@ -78,13 +78,13 @@ func get_speed():
 	return _speed
 
 func _explode():
-	if ImpactEffectScene != null:
+	if ImpactEffect != null:
 		# spawn effect and delete
-		var effect = ImpactEffectScene.instance()
+		var effect = ImpactEffect.instance()
 		effect.position = self.global_position
 		
-		if has_node(DEFAULT_EFFECT_PATH):
-			get_node(DEFAULT_EFFECT_PATH).add_child(effect)
+		if has_node(DEFAULT_EFFECT_SPAWN_PATH):
+			get_node(DEFAULT_EFFECT_SPAWN_PATH).add_child(effect)
 		else:
 			get_tree().get_root().add_child(effect)
 	

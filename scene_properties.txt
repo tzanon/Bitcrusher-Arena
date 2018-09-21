@@ -1,34 +1,34 @@
 Values for exported variables (in case they get lost)
 
 Laser
-Hold position: 
-Hold rotation: 
-Fire rate: 
-Max accuracy loss: 
-Knockback strength: 
+Hold position: (24, -32)
+Hold rotation: -7
+Fire rate: 0.1
+Max accuracy loss: 5 (default)
+Knockback strength: 1500
 
 Launcher
-Hold position: 
-Hold rotation: 
-Fire rate: 
-Max accuracy loss: 
-Knockback strength: 
+Hold position: (24, -12)
+Hold rotation: -5
+Fire rate: 0.4
+Max accuracy loss: 5
+Knockback strength: 4500
 
 Airgun
-Hold position: 
-Hold rotation: 
-Fire rate: 
+Hold position: (28, -18)
+Hold rotation: -5
+Fire rate: 0.7
 Max accuracy loss: N/A
-Knockback strength: 
+Knockback strength: 8000
 
 Bombshot
-Hold position: 
-Hold rotation: 
-Fire rate: 
-Max accuracy loss: 
-Knockback strength: 
-Arc radius: 
-Number of projectiles: 
+Hold position: (25, -25)
+Hold rotation: -5
+Fire rate: 0.8
+Max accuracy loss: N/A
+Knockback strength: 6000
+Arc radius: 30
+Number of projectiles: 4
 
 
 Laser Bolt

@@ -5,7 +5,7 @@ export var debug_mode = false;
 export(PackedScene) var Projectile
 
 onready var ProjSpawnPoint = get_node("ProjectileSpawnPoint")
-const DEFAULT_PROJ_SPAWN_PATH = "/root/Level/Projectiles"
+var DEFAULT_PROJ_SPAWN_PATH = GameInfo.NODE_SPAWN_PATHS.projectile # "/root/Level/Projectiles"
 
 var ProjSpawnNode
 

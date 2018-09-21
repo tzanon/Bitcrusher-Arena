@@ -15,7 +15,7 @@ _hold_rotation = -5.0
 Projectile = ExtResource( 3 )
 _fire_rate = 0.8
 _max_accuracy_loss = 5
-_knockbox_strength = 600
+_knockbox_strength = 6000
 _arc_radius = 30.0
 _num_projectiles = 4
 

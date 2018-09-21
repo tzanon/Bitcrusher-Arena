@@ -17,8 +17,8 @@ custom_solver_bias = 0.0
 radius = 48.0
 
 [node name="Player" type="RigidBody2D" groups=[
-"Damageable",
 "ImpactVulnerable",
+"Damageable",
 "SpeedDamageable",
 ]]
 
@@ -43,10 +43,10 @@ angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
 _sections_unfolded = [ "Angular", "Applied Forces", "Linear" ]
-debug_mode = true
+debug_mode = false
 keyboard_mode = false
 DeathAnimation = ExtResource( 2 )
-death_sound_name = ""
+death_sound_name = null
 _acceleration = 40
 _top_speed = 300
 _base_collide_damage = 5
@@ -90,6 +90,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="PickupDetector" type="Area2D" parent="." index="5"]
 
+editor/display_folded = true
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -113,13 +114,5 @@ position = Vector2( 24, -24 )
 
 position = Vector2( 0, -44 )
 _sections_unfolded = [ "Transform" ]
-
-[node name="SamplePlayer" type="AudioStreamPlayer" parent="." index="8"]
-
-stream = null
-volume_db = 0.0
-autoplay = false
-mix_target = 0
-bus = "Master"
 
 

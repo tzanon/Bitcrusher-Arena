@@ -12,8 +12,8 @@ export var debug_mode = false
 const PLAYER_TEMPLATE = preload("res://Scenes/Player.tscn")
 const HUD_TEMPLATE = preload("res://Scenes/UI/PlayerInfoUI.tscn")
 
-export var _spawn_path = "/root/Level/Layout/Players"
-export var _hud_spawn_path = "/root/Level/UI/PlayerInfoPanel"
+var DEFAULT_PLAYER_SPAWN_PATH = GameInfo.NODE_SPAWN_PATHS.player # "/root/Level/Layout/Players"
+var DEFAULT_HUD_SPAWN_PATH = GameInfo.NODE_SPAWN_PATHS.hud # "/root/Level/UI/PlayerInfoPanel"
 
 export var _game_end_time = 3.0
 var EndTimer
@@ -52,7 +52,7 @@ func _spawn_player(player_name):
 	player.set_name(player_name)
 	player.set_sprite_from_path(_player_spawn_info[player_name].sprite_path)
 	player.global_position = _player_spawn_info[player_name].spawn_pos
-	get_node(_spawn_path).call_deferred("add_child", player)
+	get_node(DEFAULT_PLAYER_SPAWN_PATH).call_deferred("add_child", player)
 	
 	return player
 
@@ -70,7 +70,7 @@ func remove_player(player_name):
 func _enable_player_hud(info_entry):
 	var hud = HUD_TEMPLATE.instance()
 	
-	get_node(_hud_spawn_path).call_deferred("add_child", hud)
+	get_node(DEFAULT_HUD_SPAWN_PATH).call_deferred("add_child", hud)
 	hud.call_deferred("set_icon_with_path", info_entry.icon_path)
 	
 	var hud_position = _player_spawn_info[info_entry.name].hud_pos

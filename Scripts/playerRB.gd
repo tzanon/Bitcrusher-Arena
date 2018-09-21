@@ -4,6 +4,8 @@ extends RigidBody2D
 export var debug_mode = false
 export var keyboard_mode = false
 
+var DEFAULT_EFFECT_SPAWN_PATH = GameInfo.NODE_SPAWN_PATHS.effect
+
 # gamepad device used to control this player
 var _gamepad_id = -1 setget set_gamepad_id
 var _player_name = "default" setget set_name
@@ -42,8 +44,6 @@ var Animator
 var ItemDetector
 var ImpactVulnerabilityTimer
 var BodySprite
-
-const DEFAULT_EFFECT_SPAWN_PATH = "/root/Level/Effects"
 
 # _weapon-related
 const START_WEAPON = preload("res://Scenes/Weapons/PlayerLaser.tscn")

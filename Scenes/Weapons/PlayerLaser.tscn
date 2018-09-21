@@ -16,7 +16,7 @@ _hold_rotation = -7.0
 Projectile = ExtResource( 3 )
 _fire_rate = 0.1
 _max_accuracy_loss = 5
-_knockbox_strength = 600
+_knockbox_strength = 1500
 
 [node name="ProjectileSpawnPoint" type="Position2D" parent="." index="0"]
 

@@ -9,7 +9,13 @@ const SCENE_PATHS = {
 }
 
 # TODO: default node paths
-const NODE_PATHS = {}
+const NODE_SPAWN_PATHS = {
+	effect = "/root/Level/Effects",
+	projectile = "/root/Level/Projectiles",
+	player = "/root/Level/Layout/Players",
+	hud = "/root/Level/UI/PlayerInfoPanel",
+	pickup = "/root/Level/Layout/Pickups"
+}
 
 # contains info for current game's players; initially null (on official release)
 var registered_player_info = [

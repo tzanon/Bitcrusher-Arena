@@ -20,7 +20,7 @@ export(SpawnMode) var _initial_spawn_mode = 1
 # funcref to the current spawn function
 var _spawn_func_ref = funcref(self, "_spawn_static_random")
 
-const DEFAULT_SPAWN_PATH = "/root/Level/Layout/Pickups"
+var DEFAULT_SPAWN_PATH = GameInfo.NODE_SPAWN_PATHS.pickup #"/root/Level/Layout/Pickups"
 var _total_spawn_points = []
 
 var _min_spawn

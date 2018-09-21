@@ -11,7 +11,6 @@ export(float, 0.5, 10.0, 0.5) var _max_lifetime = 10.0
 export var _self_collision_time = 0.2 # period when bombs can't collide with each other
 
 export(PackedScene) var ExplosionEffect
-const DEFAULT_EFFECT_SPAWN_PATH = "/root/Level/Effects"
 
 var LifeTimer
 
@@ -59,8 +58,8 @@ func _explode():
 	var explosion = ExplosionEffect.instance()
 	explosion.position = self.global_position
 	
-	if has_node(DEFAULT_EFFECT_SPAWN_PATH):
-		get_node(DEFAULT_EFFECT_SPAWN_PATH).add_child(explosion)
+	if has_node(GameInfo.NODE_SPAWN_PATHS.effect):
+		get_node(GameInfo.NODE_SPAWN_PATHS.effect).add_child(explosion)
 	else:
 		get_tree().get_root().add_child(explosion)
 	

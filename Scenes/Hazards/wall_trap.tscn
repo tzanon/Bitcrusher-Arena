@@ -4,7 +4,7 @@
 [ext_resource path="res://Scripts/wall_trap.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Projectiles/LaserKB.tscn" type="PackedScene" id=3]
 
-[node name="WallTrap" type="Sprite"]
+[node name="WallTrap" type="Sprite" index="0"]
 
 texture = ExtResource( 1 )
 script = ExtResource( 2 )

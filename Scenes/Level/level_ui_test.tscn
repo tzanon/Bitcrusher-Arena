@@ -77,9 +77,6 @@ texture = ExtResource( 8 )
 [node name="PlayerManager" parent="Layout" index="1" instance=ExtResource( 9 )]
 
 editor/display_folded = true
-debug_mode = true
-_spawn_path = "/root/Level/Layout/Players"
-_hud_spawn_path = "/root/Level/UI/PlayerInfoPanel"
 _game_end_time = 3.0
 
 [node name="BlueSpawnPoint" parent="Layout/PlayerManager" index="0"]
@@ -245,31 +242,37 @@ __meta__ = {
 
 position = Vector2( 282, 48 )
 rotation = -3.14159
+debug_mode = false
 
 [node name="WallTrap1" parent="Layout/Structure/Traps" index="1" instance=ExtResource( 23 )]
 
 position = Vector2( 48, 110 )
 rotation = 1.57079
+debug_mode = false
 
 [node name="WallTrap5" parent="Layout/Structure/Traps" index="2" instance=ExtResource( 23 )]
 
 position = Vector2( 48, 224 )
 rotation = 1.57079
+debug_mode = false
 
 [node name="WallTrap6" parent="Layout/Structure/Traps" index="3" instance=ExtResource( 23 )]
 
 position = Vector2( 48, 170 )
 rotation = 1.57079
+debug_mode = false
 
 [node name="WallTrap3" parent="Layout/Structure/Traps" index="4" instance=ExtResource( 23 )]
 
 position = Vector2( 162, 48 )
 rotation = 3.14159
+debug_mode = false
 
 [node name="WallTrap4" parent="Layout/Structure/Traps" index="5" instance=ExtResource( 23 )]
 
 position = Vector2( 222, 48 )
 rotation = 3.14159
+debug_mode = false
 
 [node name="FloorTrap1" parent="Layout/Structure/Traps" index="6" instance=ExtResource( 24 )]
 
@@ -340,9 +343,7 @@ __meta__ = {
 [node name="Player" parent="Layout/Players" index="0" instance=ExtResource( 27 )]
 
 position = Vector2( 1152, 640 )
-debug_mode = false
 keyboard_mode = true
-death_sound_name = null
 
 [node name="Projectiles" type="Node2D" parent="." index="1"]
 

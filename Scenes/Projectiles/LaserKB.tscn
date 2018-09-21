@@ -23,7 +23,7 @@ _damage_amount = 10
 _speed = 800.0
 _bounce_groups = PoolStringArray( "Reflective" )
 _bounce_factor = 1.0
-ImpactEffectScene = null
+ImpactEffect = null
 _impact_sound_name = null
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
