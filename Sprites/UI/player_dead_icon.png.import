@@ -7,10 +7,7 @@ path="res://.import/player_dead_icon.png-edf1c68488d2e25031dbbd07efb06ba3.stex"
 [deps]
 
 source_file="res://Sprites/UI/player_dead_icon.png"
-source_md5="3547a09c5a2bec5e5960fd0016459041"
-
 dest_files=[ "res://.import/player_dead_icon.png-edf1c68488d2e25031dbbd07efb06ba3.stex" ]
-dest_md5="e888e711999632dd92f6fbf57fa92d02"
 
 [params]
 

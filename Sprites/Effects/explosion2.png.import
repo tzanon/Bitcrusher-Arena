@@ -7,10 +7,7 @@ path="res://.import/explosion2.png-20d169266fd01abb1bb1146b149bb27a.stex"
 [deps]
 
 source_file="res://Sprites/Effects/explosion2.png"
-source_md5="181b04006a57e45fbd9d7c42728dfdc2"
-
 dest_files=[ "res://.import/explosion2.png-20d169266fd01abb1bb1146b149bb27a.stex" ]
-dest_md5="d4412f420cbc7736c61080d2f7070148"
 
 [params]
 

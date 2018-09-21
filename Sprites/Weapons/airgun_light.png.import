@@ -7,10 +7,7 @@ path="res://.import/airgun_light.png-fe51fc42a48db9f0c234460a784ef710.stex"
 [deps]
 
 source_file="res://Sprites/Weapons/airgun_light.png"
-source_md5="bb2383419f7bfc393c480dbac12ba947"
-
 dest_files=[ "res://.import/airgun_light.png-fe51fc42a48db9f0c234460a784ef710.stex" ]
-dest_md5="9e8145b1dd2cecb7f42ef05dc4947544"
 
 [params]
 

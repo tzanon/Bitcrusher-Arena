@@ -7,10 +7,7 @@ path="res://.import/play_game_button.png-38ee385ed837c75114e28e19394dcaf6.stex"
 [deps]
 
 source_file="res://Sprites/UI/MainMenu/play_game_button.png"
-source_md5="d7e538322065aeb34d7b599c427a9bc1"
-
 dest_files=[ "res://.import/play_game_button.png-38ee385ed837c75114e28e19394dcaf6.stex" ]
-dest_md5="6f13913d8776b4d627b3ae7039077f41"
 
 [params]
 

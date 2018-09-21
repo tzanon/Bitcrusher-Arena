@@ -7,10 +7,7 @@ path="res://.import/player_red_icon.png-c2500e17d871650cbf601c5be75a8871.stex"
 [deps]
 
 source_file="res://Sprites/UI/player_red_icon.png"
-source_md5="67c41b7c988f776db313ebcc072e4ef8"
-
 dest_files=[ "res://.import/player_red_icon.png-c2500e17d871650cbf601c5be75a8871.stex" ]
-dest_md5="033efcdf439f2617eda523a8cd8bfaf3"
 
 [params]
 

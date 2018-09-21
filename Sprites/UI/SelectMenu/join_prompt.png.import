@@ -7,10 +7,7 @@ path="res://.import/join_prompt.png-a82fabeb64792fbd13200c319e73a38a.stex"
 [deps]
 
 source_file="res://Sprites/UI/SelectMenu/join_prompt.png"
-source_md5="7876afebf08e4ecac3347256bb4b0ca0"
-
 dest_files=[ "res://.import/join_prompt.png-a82fabeb64792fbd13200c319e73a38a.stex" ]
-dest_md5="50e5a3e35240c633951c2ab6c9eee3d3"
 
 [params]
 

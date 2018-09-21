@@ -7,10 +7,7 @@ path="res://.import/wall_spike24x48.png-715f79779dfb36858fc2c138a4be354d.stex"
 [deps]
 
 source_file="res://Sprites/Traps/wall_spike24x48.png"
-source_md5="3d0b0f675306df2b556bacfc4d6cf256"
-
 dest_files=[ "res://.import/wall_spike24x48.png-715f79779dfb36858fc2c138a4be354d.stex" ]
-dest_md5="6d078058036407796674ee7d5185a97b"
 
 [params]
 

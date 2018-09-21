@@ -7,10 +7,7 @@ path="res://.import/flame2.png-1cc6cf10bc0fdd7b979bd57194f0ec9f.stex"
 [deps]
 
 source_file="res://Sprites/Traps/flame2.png"
-source_md5="ede0f9bda2757756242dd8484b852ef2"
-
 dest_files=[ "res://.import/flame2.png-1cc6cf10bc0fdd7b979bd57194f0ec9f.stex" ]
-dest_md5="c1e6fb35776a8d7737692533d291a57d"
 
 [params]
 

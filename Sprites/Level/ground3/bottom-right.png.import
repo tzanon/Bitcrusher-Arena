@@ -7,10 +7,7 @@ path="res://.import/bottom-right.png-5ba73ffbef00601b921a4e13d13f37e3.stex"
 [deps]
 
 source_file="res://Sprites/Level/ground3/bottom-right.png"
-source_md5="fb439a1390e1ae7a1ad07376bffa2f88"
-
 dest_files=[ "res://.import/bottom-right.png-5ba73ffbef00601b921a4e13d13f37e3.stex" ]
-dest_md5="aefb80777207fcf570f843448a113d52"
 
 [params]
 

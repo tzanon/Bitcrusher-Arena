@@ -7,10 +7,7 @@ path="res://.import/bombshot_fire1.wav-ee39a0e986f2c277644996451a9d69d6.sample"
 [deps]
 
 source_file="res://Sounds/Weapons/bombshot_fire1.wav"
-source_md5="d0dc362a32d916f8d863aa42b725bb41"
-
 dest_files=[ "res://.import/bombshot_fire1.wav-ee39a0e986f2c277644996451a9d69d6.sample" ]
-dest_md5="b121cada82ed5fe24dc3537ad74f2d95"
 
 [params]
 

@@ -7,10 +7,7 @@ path="res://.import/ui_player_warning.png-1a5becfab21d33a49c4d42bd1e550632.stex"
 [deps]
 
 source_file="res://Sprites/UI/SelectMenu/ui_player_warning.png"
-source_md5="1772d4f56255aa3bc0c03ab99ac595ce"
-
 dest_files=[ "res://.import/ui_player_warning.png-1a5becfab21d33a49c4d42bd1e550632.stex" ]
-dest_md5="84067ce84386abbdea2d04d9f946b590"
 
 [params]
 

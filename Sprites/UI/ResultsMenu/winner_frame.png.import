@@ -7,10 +7,7 @@ path="res://.import/winner_frame.png-e11ba77b4221e2a8b408c47764390f2f.stex"
 [deps]
 
 source_file="res://Sprites/UI/ResultsMenu/winner_frame.png"
-source_md5="2847e4853b6a6256523020e529e0c970"
-
 dest_files=[ "res://.import/winner_frame.png-e11ba77b4221e2a8b408c47764390f2f.stex" ]
-dest_md5="be482f9ad0c000dac55597ceeda20eae"
 
 [params]
 

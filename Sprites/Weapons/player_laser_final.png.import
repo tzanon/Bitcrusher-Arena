@@ -7,10 +7,7 @@ path="res://.import/player_laser_final.png-886d7ea12e470ef3cccf203bdf769acd.stex
 [deps]
 
 source_file="res://Sprites/Weapons/player_laser_final.png"
-source_md5="ccc2def7ed4c794db4eb1b7cc0552b24"
-
 dest_files=[ "res://.import/player_laser_final.png-886d7ea12e470ef3cccf203bdf769acd.stex" ]
-dest_md5="79dfabc82c379a91fe9bd47bc75f3c2e"
 
 [params]
 

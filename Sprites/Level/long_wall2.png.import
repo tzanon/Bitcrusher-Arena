@@ -7,10 +7,7 @@ path="res://.import/long_wall2.png-1b7315c452017a4fc7994c6c4be6bac5.stex"
 [deps]
 
 source_file="res://Sprites/Level/long_wall2.png"
-source_md5="7d89930617b585b38270c08d49240bc5"
-
 dest_files=[ "res://.import/long_wall2.png-1b7315c452017a4fc7994c6c4be6bac5.stex" ]
-dest_md5="8cf6623ddb51bb4d8122a473515b69d7"
 
 [params]
 

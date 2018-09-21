@@ -7,10 +7,7 @@ path="res://.import/time_bomb24x24.png-c124c6a78a6569213c1f8c970110ac98.stex"
 [deps]
 
 source_file="res://Sprites/Projectiles/time_bomb24x24.png"
-source_md5="58ddd9fb72209a156b1967397d7c949a"
-
 dest_files=[ "res://.import/time_bomb24x24.png-c124c6a78a6569213c1f8c970110ac98.stex" ]
-dest_md5="01946f3b539f80fbb67d523669c1d482"
 
 [params]
 

@@ -7,10 +7,7 @@ path="res://.import/weapon_marker.png-9c619bfd5bb19bbee0e509bbe331e90a.stex"
 [deps]
 
 source_file="res://Sprites/weapon_marker.png"
-source_md5="0c424ba10f364cd97ffdaf18e4270ec9"
-
 dest_files=[ "res://.import/weapon_marker.png-9c619bfd5bb19bbee0e509bbe331e90a.stex" ]
-dest_md5="757cbf9332838fec9f3d4ad897c894bd"
 
 [params]
 

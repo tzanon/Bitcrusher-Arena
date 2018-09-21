@@ -7,10 +7,7 @@ path="res://.import/basic_menu_background1.png-2b84b2011fd76573b0ee914e7ec8e3a9.
 [deps]
 
 source_file="res://Sprites/UI/basic_menu_background1.png"
-source_md5="71bef89a5cf327f47448cc5d1433c28e"
-
 dest_files=[ "res://.import/basic_menu_background1.png-2b84b2011fd76573b0ee914e7ec8e3a9.stex" ]
-dest_md5="ff1f96ce1644d2b2447c4be10a310563"
 
 [params]
 

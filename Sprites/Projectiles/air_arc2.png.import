@@ -7,10 +7,7 @@ path="res://.import/air_arc2.png-f8bba5177f33309728d56c6ca47115cc.stex"
 [deps]
 
 source_file="res://Sprites/Projectiles/air_arc2.png"
-source_md5="7c643d50512e1a98cb58f4060675374e"
-
 dest_files=[ "res://.import/air_arc2.png-f8bba5177f33309728d56c6ca47115cc.stex" ]
-dest_md5="103198abaa3ba2307ad0a3a67b0cba21"
 
 [params]
 

@@ -7,10 +7,7 @@ path="res://.import/gameplay_ui_frame.png-3c65f38ce27dfbb73032c6eecc75011b.stex"
 [deps]
 
 source_file="res://Sprites/UI/Gameplay/gameplay_ui_frame.png"
-source_md5="1798c9340cb549ab20ee8417b47d794d"
-
 dest_files=[ "res://.import/gameplay_ui_frame.png-3c65f38ce27dfbb73032c6eecc75011b.stex" ]
-dest_md5="6b70c63fac0c480198f918ad84775619"
 
 [params]
 

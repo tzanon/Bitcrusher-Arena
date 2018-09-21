@@ -7,10 +7,7 @@ path="res://.import/bomb_expl2.wav-30923bd49d81efb7fd2a41c13cb028b9.sample"
 [deps]
 
 source_file="res://Sounds/Weapons/bomb_expl2.wav"
-source_md5="5940cbd0d46b6bf4786b9ba3ce2e88c8"
-
 dest_files=[ "res://.import/bomb_expl2.wav-30923bd49d81efb7fd2a41c13cb028b9.sample" ]
-dest_md5="4bf7fb97ba54b398f4f5cfa92dde7328"
 
 [params]
 

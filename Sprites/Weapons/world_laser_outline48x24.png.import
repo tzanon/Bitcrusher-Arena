@@ -7,10 +7,7 @@ path="res://.import/world_laser_outline48x24.png-94c56127a7073715f5f8f8eda740bb4
 [deps]
 
 source_file="res://Sprites/Weapons/world_laser_outline48x24.png"
-source_md5="59648ca579fc3df5e91d1271bb7beaee"
-
 dest_files=[ "res://.import/world_laser_outline48x24.png-94c56127a7073715f5f8f8eda740bb42.stex" ]
-dest_md5="2ae5ab1d49d42f2223f39ff4f70b5c33"
 
 [params]
 

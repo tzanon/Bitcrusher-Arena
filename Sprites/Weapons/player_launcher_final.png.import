@@ -7,10 +7,7 @@ path="res://.import/player_launcher_final.png-ece499682118de2b979a42c32e343a69.s
 [deps]
 
 source_file="res://Sprites/Weapons/player_launcher_final.png"
-source_md5="9a7b1ab4114b8a0db4282b4b66ae981d"
-
 dest_files=[ "res://.import/player_launcher_final.png-ece499682118de2b979a42c32e343a69.stex" ]
-dest_md5="ba354941a1b09a5f37c53c839262261f"
 
 [params]
 

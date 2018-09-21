@@ -7,10 +7,7 @@ path="res://.import/world_launcher_outline64x25.png-1094d6bffa4c893fea2f23c12af0
 [deps]
 
 source_file="res://Sprites/Weapons/world_launcher_outline64x25.png"
-source_md5="9aabbf640fef7a4209b0d226bd49e0af"
-
 dest_files=[ "res://.import/world_launcher_outline64x25.png-1094d6bffa4c893fea2f23c12af0dbca.stex" ]
-dest_md5="13833a44124f1942fd1897bb67e6207d"
 
 [params]
 

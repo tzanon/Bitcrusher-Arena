@@ -7,10 +7,7 @@ path="res://.import/player_health_bar.png-6650e7d4d80fde35836facf8fd31fe55.stex"
 [deps]
 
 source_file="res://Sprites/UI/Gameplay/player_health_bar.png"
-source_md5="d0aec19c8768845a575b255aa6feb388"
-
 dest_files=[ "res://.import/player_health_bar.png-6650e7d4d80fde35836facf8fd31fe55.stex" ]
-dest_md5="95a149aeffa95b6edccbc10353e7bd69"
 
 [params]
 

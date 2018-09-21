@@ -7,10 +7,7 @@ path="res://.import/ui_small_display1.png-b89eba1781e2f44f05bd576c539430ff.stex"
 [deps]
 
 source_file="res://Sprites/Placeholder/ui_small_display1.png"
-source_md5="920e83d3efd58364794443aa48699fca"
-
 dest_files=[ "res://.import/ui_small_display1.png-b89eba1781e2f44f05bd576c539430ff.stex" ]
-dest_md5="851c4351a6fb8a5026dee036abdd2e44"
 
 [params]
 

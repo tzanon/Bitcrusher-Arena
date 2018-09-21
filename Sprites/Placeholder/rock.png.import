@@ -7,10 +7,7 @@ path="res://.import/rock.png-fe6356f649580194d269e87a36f4c373.stex"
 [deps]
 
 source_file="res://Sprites/Placeholder/rock.png"
-source_md5="4efba113ba2d4a6594df7a418034d66c"
-
 dest_files=[ "res://.import/rock.png-fe6356f649580194d269e87a36f4c373.stex" ]
-dest_md5="dbefad51633efb47b74e5be29dffe6a8"
 
 [params]
 

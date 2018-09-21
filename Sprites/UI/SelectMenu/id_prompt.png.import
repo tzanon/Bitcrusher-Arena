@@ -7,10 +7,7 @@ path="res://.import/id_prompt.png-88cb31c62020fe4b8ac54d2b3de06631.stex"
 [deps]
 
 source_file="res://Sprites/UI/SelectMenu/id_prompt.png"
-source_md5="5ae000bde2d8a4e52d2eff6e9311dea2"
-
 dest_files=[ "res://.import/id_prompt.png-88cb31c62020fe4b8ac54d2b3de06631.stex" ]
-dest_md5="2a38c33acc46af2fa72815fa69ae4989"
 
 [params]
 

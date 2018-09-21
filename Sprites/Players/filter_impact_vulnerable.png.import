@@ -7,10 +7,7 @@ path="res://.import/filter_impact_vulnerable.png-0a3080ae9a35cd25c80436c953b71c5
 [deps]
 
 source_file="res://Sprites/Players/filter_impact_vulnerable.png"
-source_md5="4b097384a5b3fbc401f9438105eeb21b"
-
 dest_files=[ "res://.import/filter_impact_vulnerable.png-0a3080ae9a35cd25c80436c953b71c58.stex" ]
-dest_md5="f98fa5153726314877e9eef7888800c8"
 
 [params]
 

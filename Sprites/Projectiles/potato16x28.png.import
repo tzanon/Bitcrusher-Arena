@@ -7,10 +7,7 @@ path="res://.import/potato16x28.png-7984e25be3862c4723e476baa01fae48.stex"
 [deps]
 
 source_file="res://Sprites/Projectiles/potato16x28.png"
-source_md5="c68e91316086bfdcedf15f89c2a950f1"
-
 dest_files=[ "res://.import/potato16x28.png-7984e25be3862c4723e476baa01fae48.stex" ]
-dest_md5="98f01b92c09e909e896c33f01a665344"
 
 [params]
 

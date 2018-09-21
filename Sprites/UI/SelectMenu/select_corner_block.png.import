@@ -7,10 +7,7 @@ path="res://.import/select_corner_block.png-6ee94a17655231f60ac8d2820d3d55d8.ste
 [deps]
 
 source_file="res://Sprites/UI/SelectMenu/select_corner_block.png"
-source_md5="2875535a79892e33a6f28fb6a7b15462"
-
 dest_files=[ "res://.import/select_corner_block.png-6ee94a17655231f60ac8d2820d3d55d8.stex" ]
-dest_md5="1aa93f1ea723589dc3ebdf2c66e4621e"
 
 [params]
 

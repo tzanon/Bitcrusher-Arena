@@ -7,10 +7,7 @@ path="res://.import/replay_button.png-1343cf54fbea467a8421e45625c548ea.stex"
 [deps]
 
 source_file="res://Sprites/UI/ResultsMenu/replay_button.png"
-source_md5="6d60561c98ce358d3a1ee2cf7fc98ad2"
-
 dest_files=[ "res://.import/replay_button.png-1343cf54fbea467a8421e45625c548ea.stex" ]
-dest_md5="1bcb587d6285ad3d7e7e776f53c8d08b"
 
 [params]
 

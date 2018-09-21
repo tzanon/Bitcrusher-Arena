@@ -7,10 +7,7 @@ path="res://.import/player_bombshot14x64.png-2c23fb1523b7522f0ab52d25d7a01009.st
 [deps]
 
 source_file="res://Sprites/Weapons/player_bombshot14x64.png"
-source_md5="f768efabb14d0ac2c012e11469ec2f5c"
-
 dest_files=[ "res://.import/player_bombshot14x64.png-2c23fb1523b7522f0ab52d25d7a01009.stex" ]
-dest_md5="fe1b23c834ac65c6847b8dc5d706e8ec"
 
 [params]
 

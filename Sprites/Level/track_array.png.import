@@ -7,10 +7,7 @@ path="res://.import/track_array.png-0f991c00a3ecbc4a512e94bb0eb26cb2.stex"
 [deps]
 
 source_file="res://Sprites/Level/track_array.png"
-source_md5="25da0070ade8267386e988c7ae979da5"
-
 dest_files=[ "res://.import/track_array.png-0f991c00a3ecbc4a512e94bb0eb26cb2.stex" ]
-dest_md5="da5160b29435d59fc48ac70b241890f8"
 
 [params]
 

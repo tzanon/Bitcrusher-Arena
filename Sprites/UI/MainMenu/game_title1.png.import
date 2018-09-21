@@ -7,10 +7,7 @@ path="res://.import/game_title1.png-7f3e0c33cd30b2f64fc9aab5bd93e228.stex"
 [deps]
 
 source_file="res://Sprites/UI/MainMenu/game_title1.png"
-source_md5="536cffe99e5b64de6743a8227096f113"
-
 dest_files=[ "res://.import/game_title1.png-7f3e0c33cd30b2f64fc9aab5bd93e228.stex" ]
-dest_md5="19de4cecca0b27054c2d13e827c8f8de"
 
 [params]
 

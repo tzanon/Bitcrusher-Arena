@@ -7,10 +7,7 @@ path="res://.import/double_wall1.png-62944ff9b996a9418edd2be763e0fb81.stex"
 [deps]
 
 source_file="res://Sprites/Level/double_wall1.png"
-source_md5="d9a1b5af756991169c01e0a50c839a0b"
-
 dest_files=[ "res://.import/double_wall1.png-62944ff9b996a9418edd2be763e0fb81.stex" ]
-dest_md5="64b5e814c98d140cc1a3c126ea712fe4"
 
 [params]
 

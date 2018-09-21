@@ -7,10 +7,7 @@ path="res://.import/pillar1.png-b318ee6e1e1690cd0d541c58e7d4b345.stex"
 [deps]
 
 source_file="res://Sprites/Level/pillar1.png"
-source_md5="4b4a52030dcf62d4187c59bce22d167c"
-
 dest_files=[ "res://.import/pillar1.png-b318ee6e1e1690cd0d541c58e7d4b345.stex" ]
-dest_md5="2a375ef7a98607390ff0c1f241534bf6"
 
 [params]
 

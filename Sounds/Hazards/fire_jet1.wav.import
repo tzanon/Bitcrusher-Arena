@@ -7,10 +7,7 @@ path="res://.import/fire_jet1.wav-55bb8cf2f1d49d57bb8a40febde8ce96.sample"
 [deps]
 
 source_file="res://Sounds/Hazards/fire_jet1.wav"
-source_md5="a6342a0ca7d73e26b205f818dd7c9f4f"
-
 dest_files=[ "res://.import/fire_jet1.wav-55bb8cf2f1d49d57bb8a40febde8ce96.sample" ]
-dest_md5="26c9f77b8e4d1979f5b8b66b483ac976"
 
 [params]
 

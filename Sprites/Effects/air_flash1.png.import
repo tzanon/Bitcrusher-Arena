@@ -7,10 +7,7 @@ path="res://.import/air_flash1.png-feaa40f23c84154bab8edff4c643e6eb.stex"
 [deps]
 
 source_file="res://Sprites/Effects/air_flash1.png"
-source_md5="5cd01bc8b2bc8fe7a44b5bbda14f261c"
-
 dest_files=[ "res://.import/air_flash1.png-feaa40f23c84154bab8edff4c643e6eb.stex" ]
-dest_md5="db4b9c36ab66c0dc80b19f55b97f73eb"
 
 [params]
 

@@ -7,10 +7,7 @@ path="res://.import/player_blue.png-cb2b8f35a5a61f245f796fb13c18ec39.stex"
 [deps]
 
 source_file="res://Sprites/Players/player_blue.png"
-source_md5="4c17920c8f22e8e8f19d3e6d008e4e49"
-
 dest_files=[ "res://.import/player_blue.png-cb2b8f35a5a61f245f796fb13c18ec39.stex" ]
-dest_md5="13c27d0b9e4808d38b46d402c21b886d"
 
 [params]
 

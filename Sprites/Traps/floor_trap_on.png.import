@@ -7,10 +7,7 @@ path="res://.import/floor_trap_on.png-d0d72f2be9095f1a6001c67dd98b2148.stex"
 [deps]
 
 source_file="res://Sprites/Traps/floor_trap_on.png"
-source_md5="c58c50edc55613f39ac97720ca3dcd8e"
-
 dest_files=[ "res://.import/floor_trap_on.png-d0d72f2be9095f1a6001c67dd98b2148.stex" ]
-dest_md5="c6749d9078d193078ec92df099930870"
 
 [params]
 

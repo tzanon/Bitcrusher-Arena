@@ -7,10 +7,7 @@ path="res://.import/world_airgun64x26.png-096bcd4b562bc026b7f657eb30588c19.stex"
 [deps]
 
 source_file="res://Sprites/Weapons/world_airgun64x26.png"
-source_md5="391b81077117f68bcd553c134bbc966e"
-
 dest_files=[ "res://.import/world_airgun64x26.png-096bcd4b562bc026b7f657eb30588c19.stex" ]
-dest_md5="195655ce876b52d8c1ce3038d17a7afe"
 
 [params]
 

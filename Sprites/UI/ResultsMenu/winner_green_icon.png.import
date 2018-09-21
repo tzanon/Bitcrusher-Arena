@@ -7,10 +7,7 @@ path="res://.import/winner_green_icon.png-94d6b99eca89ae2b2b0887cb38021e6e.stex"
 [deps]
 
 source_file="res://Sprites/UI/ResultsMenu/winner_green_icon.png"
-source_md5="6289c7e9c01d4d22a71adcb91cc9035f"
-
 dest_files=[ "res://.import/winner_green_icon.png-94d6b99eca89ae2b2b0887cb38021e6e.stex" ]
-dest_md5="dfff71cfb9be22bb4f883f042d952bcb"
 
 [params]
 

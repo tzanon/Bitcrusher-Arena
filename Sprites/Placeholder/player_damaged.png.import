@@ -7,10 +7,7 @@ path="res://.import/player_damaged.png-d8995244887f43c51c287dd4f49f13b2.stex"
 [deps]
 
 source_file="res://Sprites/Placeholder/player_damaged.png"
-source_md5="66a8743875139f908a6bcb5a924bd79b"
-
 dest_files=[ "res://.import/player_damaged.png-d8995244887f43c51c287dd4f49f13b2.stex" ]
-dest_md5="0fceba6bcadf07ac3b53f8cb0808cb01"
 
 [params]
 

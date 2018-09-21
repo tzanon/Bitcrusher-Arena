@@ -7,10 +7,7 @@ path="res://.import/long_wall_shadow.png-80886a626ff5ea2722c0fccc228588c3.stex"
 [deps]
 
 source_file="res://Sprites/Level/long_wall_shadow.png"
-source_md5="2572ee35ac1eca5039075cb4c2a1ffcc"
-
 dest_files=[ "res://.import/long_wall_shadow.png-80886a626ff5ea2722c0fccc228588c3.stex" ]
-dest_md5="647803135c07e1a648f4dfb5dc582444"
 
 [params]
 

@@ -7,10 +7,7 @@ path="res://.import/back_button.png-44a7e9b16dd71968769a9c3f5a4bb0ef.stex"
 [deps]
 
 source_file="res://Sprites/UI/SelectMenu/back_button.png"
-source_md5="182ea51a14bb4bbbddf9bcbf7a747c19"
-
 dest_files=[ "res://.import/back_button.png-44a7e9b16dd71968769a9c3f5a4bb0ef.stex" ]
-dest_md5="02974f1a97d86ba78c590e9d58e17f2e"
 
 [params]
 

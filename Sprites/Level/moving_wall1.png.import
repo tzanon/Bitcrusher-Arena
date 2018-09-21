@@ -7,10 +7,7 @@ path="res://.import/moving_wall1.png-67f5abc9668765426edf2d875df5975e.stex"
 [deps]
 
 source_file="res://Sprites/Level/moving_wall1.png"
-source_md5="d5ececffa581d53313de74e2480728b0"
-
 dest_files=[ "res://.import/moving_wall1.png-67f5abc9668765426edf2d875df5975e.stex" ]
-dest_md5="26a7aeb907de0be9b22eb1bedc5c5b72"
 
 [params]
 
