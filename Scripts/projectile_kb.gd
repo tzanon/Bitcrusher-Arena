@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 export var debug_mode = false
 
+enum bounceable_groups { NONE, REFLECTIVE, AIRBURST }
+
 export var _damage_amount = 0
 export var _speed = 0.0 setget ,get_speed
 
@@ -42,7 +44,8 @@ func add_velocity(vel):
 	_movement += vel
 
 func _handle_collision(body):
-	if !body: return
+	if !body:
+		return
 	
 	if debug_mode:
 		print("hit something")

@@ -10,7 +10,7 @@ custom_solver_bias = 0.0
 a = Vector2( -28, 2 )
 b = Vector2( 28, 2 )
 
-[node name="AirburstArcRB" type="RigidBody2D" groups=[
+[node name="AirburstArcRB" type="RigidBody2D" index="0" groups=[
 "Projectile",
 ]]
 

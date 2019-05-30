@@ -11,9 +11,9 @@ custom_solver_bias = 0.0
 radius = 7.5
 height = 12.0
 
-[node name="PotatoKB" type="KinematicBody2D" groups=[
-"SolidProjectileKB",
+[node name="PotatoKB" type="KinematicBody2D" index="0" groups=[
 "Projectile",
+"SolidProjectileKB",
 ]]
 
 input_pickable = false
@@ -41,6 +41,7 @@ shape = SubResource( 1 )
 
 stream = ExtResource( 4 )
 volume_db = 0.0
+pitch_scale = 1.0
 autoplay = false
 mix_target = 0
 bus = "Master"

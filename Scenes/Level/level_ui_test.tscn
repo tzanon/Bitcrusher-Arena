@@ -41,6 +41,7 @@ script = ExtResource( 1 )
 position = Vector2( 960, 448 )
 texture = ExtResource( 2 )
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
@@ -97,7 +98,6 @@ position = Vector2( 1088, 160 )
 
 [node name="WeaponSpawner" parent="Layout" index="2" instance=ExtResource( 10 )]
 
-editor/display_folded = true
 _sections_unfolded = [ "Transform" ]
 
 [node name="WeaponSpawnPoint" parent="Layout/WeaponSpawner" index="1" instance=ExtResource( 11 )]
@@ -211,8 +211,6 @@ _paused = null
 
 [node name="Pillars" type="Node2D" parent="Layout/Structure/Obstacles" index="1"]
 
-editor/display_folded = true
-
 [node name="Pillar1" parent="Layout/Structure/Obstacles/Pillars" index="0" instance=ExtResource( 22 )]
 
 position = Vector2( 960, 160 )
@@ -233,7 +231,6 @@ position = Vector2( 960, 736 )
 
 [node name="Traps" type="Node2D" parent="Layout/Structure" index="2"]
 
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }

@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 4, 18 )
 
-[node name="LaserKB" type="KinematicBody2D" groups=[
+[node name="LaserKB" type="KinematicBody2D" index="0" groups=[
 "Projectile",
 "LightProjectileKB",
 ]]
@@ -18,7 +18,7 @@ collision_layer = 0
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
-debug_mode = false
+debug_mode = true
 _damage_amount = 10
 _speed = 800.0
 _bounce_groups = PoolStringArray( "Reflective" )
@@ -32,12 +32,14 @@ texture = ExtResource( 2 )
 
 [node name="Collider" type="CollisionShape2D" parent="." index="1"]
 
+visible = false
 shape = SubResource( 1 )
 
 [node name="SoundPlayer" type="AudioStreamPlayer" parent="." index="2"]
 
 stream = null
 volume_db = 0.0
+pitch_scale = 1.0
 autoplay = false
 mix_target = 0
 bus = "Master"
