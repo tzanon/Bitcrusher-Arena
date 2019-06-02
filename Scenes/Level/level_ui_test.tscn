@@ -270,7 +270,6 @@ __meta__ = {
 position = Vector2( 1152, 640 )
 physics_material_override = SubResource( 1 )
 keyboard_mode = true
-death_sound_name = ""
 
 [node name="Projectiles" type="Node2D" parent="."]
 __meta__ = {

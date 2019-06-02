@@ -11,11 +11,14 @@ export(float, 0.5, 10.0, 0.5) var _max_lifetime = 10.0
 export var _self_collision_time = 0.2 # period when bombs can't collide with each other
 
 export(PackedScene) var ExplosionEffect
+export(AudioStreamSample) var _explosion_sound
 
 var LifeTimer
+var AudioPlayer
 
 func _ready():
 	LifeTimer = get_node("Timer")
+	AudioPlayer = get_node("SoundPlayer")
 	
 	if _has_random_lifetime:
 		var rand_lt = rand_range(_min_lifetime, _max_lifetime)
@@ -26,6 +29,9 @@ func _ready():
 	LifeTimer.connect("timeout", self, "_explode")
 	LifeTimer.start()
 	
+	if _explosion_sound:
+		AudioPlayer.stream = _explosion_sound
+	
 	self.connect("body_entered", self, "_handle_collision")
 	
 	var rot = self.global_rotation
@@ -33,7 +39,6 @@ func _ready():
 	self.linear_velocity = vel
 	
 	set_collision_mask_bit(2, false)
-	
 	set_physics_process(true)
 
 func _physics_process(delta):
@@ -49,11 +54,11 @@ func _handle_collision(body):
 	if body.is_in_group("Damageable"):
 		body.damage(_damage_amount)
 		self._despawn()
-	
 
 func _explode():
-	
-	# play sound (centralize somehow?)
+	# TODO: replace with call to sound manager
+	if AudioPlayer and AudioPlayer.stream:
+		AudioPlayer.play()
 	
 	var explosion = ExplosionEffect.instance()
 	explosion.position = self.global_position
@@ -64,7 +69,6 @@ func _explode():
 		get_tree().get_root().add_child(explosion)
 	
 	self._despawn()
-
 
 func _despawn():
 	self.queue_free()

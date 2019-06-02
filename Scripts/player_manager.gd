@@ -21,7 +21,20 @@ var EndTimer
 var _match_player_refs = {}
 var _player_huds = {}
 
+var SoundManager
+
 func _ready():
+	SoundManager = get_node("/root/Level/SoundManager")
+	if SoundManager:
+		print("SOUND MANAGER: OK")
+	else:
+		print("SOUND MANAGER: NOT FOUND")
+	
+	EndTimer = get_node("EndTimer")
+	EndTimer.wait_time = _game_end_time
+	EndTimer.one_shot = true
+	EndTimer.connect("timeout", self, "_show_results")
+	
 	var player_info = GameInfo.get_info()
 	for info_entry in player_info:
 		if debug_mode:
@@ -33,21 +46,16 @@ func _ready():
 		player.set_gamepad_id(info_entry.pad_id)
 		_match_player_refs[info_entry.name] = weakref(player)
 	
-	EndTimer = get_node("EndTimer")
-	EndTimer.wait_time = _game_end_time
-	EndTimer.one_shot = true
-	EndTimer.connect("timeout", self, "_show_results")
-	
 	# this will be refactored (or not)
 	var children = get_children()
 	for child in children:
 		if child.is_in_group("PlayerSpawnPoint"):
 			child.hide()
-	
 
 func _spawn_player(player_name):
 	var player = PLAYER_TEMPLATE.instance()
 	player.connect_to_hud(self)
+	player.connect_to_sound_manager(SoundManager)
 	
 	player.set_name(player_name)
 	player.set_sprite_from_path(_player_spawn_info[player_name].sprite_path)
@@ -55,7 +63,6 @@ func _spawn_player(player_name):
 	get_node(DEFAULT_PLAYER_SPAWN_PATH).call_deferred("add_child", player)
 	
 	return player
-
 
 func remove_player(player_name):
 	if debug_mode:

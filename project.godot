@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Bitcrusher Arena G3 Git version"
+config/name="Bitcrusher Arena (GitHub Version)"
 run/main_scene="res://Scenes/UI/MainMenuFinal.tscn"
 icon="res://icon.png"
 main_scene="res://Scenes/UI/MainMenuFinal.tscn"

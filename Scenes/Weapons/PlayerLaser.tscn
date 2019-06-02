@@ -4,26 +4,18 @@
 [ext_resource path="res://Scripts/player_weapon.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Projectiles/LaserKB.tscn" type="PackedScene" id=3]
 
-[node name="PlayerLaser" type="Sprite" index="0"]
-
+[node name="PlayerLaser" type="Sprite"]
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
-debug_mode = false
 weapon_name = "Laser"
 _hold_position = Vector2( 24, -32 )
 _hold_rotation = -7.0
 Projectile = ExtResource( 3 )
 _fire_rate = 0.1
-_max_accuracy_loss = 5
 _knockbox_strength = 1500
 
-[node name="ProjectileSpawnPoint" type="Position2D" parent="." index="0"]
-
+[node name="ProjectileSpawnPoint" type="Position2D" parent="."]
 position = Vector2( 0, -16 )
-_sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_edit_lock_": true
 }
-
-

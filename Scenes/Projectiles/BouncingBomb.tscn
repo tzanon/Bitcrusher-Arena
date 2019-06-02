@@ -1,67 +1,30 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/bouncing_bomb.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Effects/Explosion1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Sprites/Projectiles/time_bomb24x24.png" type="Texture" id=3]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="PhysicsMaterial" id=1]
+bounce = 0.4
 
-custom_solver_bias = 0.0
+[sub_resource type="CircleShape2D" id=2]
 radius = 12.0
 
-[node name="BouncingBomb" type="RigidBody2D" index="0"]
-
-input_pickable = false
+[node name="BouncingBomb" type="RigidBody2D"]
 collision_layer = 4
-collision_mask = 1
-mode = 0
 mass = 60.0
-friction = 1.0
-bounce = 0.4
-gravity_scale = 1.0
-custom_integrator = false
-continuous_cd = 0
+physics_material_override = SubResource( 1 )
 contacts_reported = 1
 contact_monitor = true
-sleeping = false
-can_sleep = true
-linear_velocity = Vector2( 0, 0 )
-linear_damp = -1.0
-angular_velocity = 0.0
-angular_damp = -1.0
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision" ]
-_damage_amount = 10
-_speed = 300
-_has_random_lifetime = false
-_lifetime = 5.0
-_min_lifetime = 1.0
-_max_lifetime = 10.0
-_self_collision_time = 0.2
 ExplosionEffect = ExtResource( 2 )
 
-[node name="Timer" type="Timer" parent="." index="0"]
+[node name="Timer" type="Timer" parent="."]
 
-process_mode = 1
-wait_time = 1.0
-one_shot = false
-autostart = false
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
 
-[node name="Collider" type="CollisionShape2D" parent="." index="1"]
-
-shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="." index="2"]
-
+[node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 3 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="3"]
-
-stream = null
-volume_db = 0.0
-pitch_scale = 1.0
-autoplay = false
-mix_target = 0
-bus = "Master"
-
-
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

@@ -10,7 +10,10 @@ func _ready():
 
 # _fire bombs spread over an arc
 func _fire(spawn_pos):
-	if FireTimer.get_time_left() > 0: return
+	if FireTimer.get_time_left() > 0:
+		return
+	
+	._play_fire_sound()
 	
 	var fire_angle = -_arc_radius
 	

@@ -10,17 +10,22 @@ var _user_ref
 export(Vector2) var _hold_position
 export(float) var _hold_rotation
 
+export(AudioStreamSample) var _fire_sound
+export(float) var _fire_volume
+
 export(PackedScene) var Projectile
 # in case we want to _fire from the barrel
 onready var ProjSpawnPoint = get_node("ProjectileSpawnPoint")
 var DEFAULT_PROJ_SPAWN_PATH = GameInfo.NODE_SPAWN_PATHS.projectile # originally "/root/Level/Projectiles"
 
 var FireTimer
+var AudioPlayer
 
 # how often a weapon fires
 export(float, 0.05, 2, 0.05) var _fire_rate
+export(float) var _accuracy_reset_time
 
-# how often a weapon fires
+# accuracy and knockback
 export(int, 0, 45) var _max_accuracy_loss = 5
 export(int, 200, 10000, 100) var _knockbox_strength = 600
 
@@ -31,6 +36,13 @@ func _ready():
 	add_child(FireTimer)
 	FireTimer.wait_time = _fire_rate
 	FireTimer.one_shot = true
+	
+	# TODO: test this
+	AudioPlayer = AudioStreamPlayer2D.new()
+	self.add_child(AudioPlayer)
+	#AudioPlayer = get_node("AudioStreamPlayer2D")
+	AudioPlayer.stream = _fire_sound
+	
 
 func get_weapon_name():
 	return weapon_name
@@ -38,7 +50,6 @@ func get_weapon_name():
 func set_user(weap_user):
 	_user = weap_user
 	_user_ref = weakref(weap_user)
-	
 
 func get_hold_pos():
 	return _hold_position
@@ -47,16 +58,22 @@ func get_hold_pos():
 func get_hold_rotd():
 	return _hold_rotation
 
+func _play_fire_sound():
+	if AudioPlayer.stream != null:
+			print("playing sound ", AudioPlayer.stream)
+			AudioPlayer.play()
+	
+
 func _fire(spawn_pos):
 	if FireTimer.time_left <= 0:
-		
-		# TODO: play _fire sound
+		# play _fire sound
+		self._play_fire_sound()
 		
 		var projectile = Projectile.instance()
 		projectile.global_position = spawn_pos
+		# TODO: refactor accuracy calculation
 		projectile.rotation_degrees = _user.global_rotation_degrees + _max_accuracy_loss * pow(2*randf() - 1, 3)
 		
-		#var proj_node = get_node(DEFAULT_PROJ_SPAWN_PATH)
 		if has_node(DEFAULT_PROJ_SPAWN_PATH):
 			get_node(DEFAULT_PROJ_SPAWN_PATH).add_child(projectile)
 		else:

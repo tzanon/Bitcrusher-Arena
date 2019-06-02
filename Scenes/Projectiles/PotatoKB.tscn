@@ -6,44 +6,26 @@
 [ext_resource path="res://Sounds/Weapons/potato_expl2.wav" type="AudioStream" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
-
-custom_solver_bias = 0.0
 radius = 7.5
 height = 12.0
 
-[node name="PotatoKB" type="KinematicBody2D" index="0" groups=[
+[node name="PotatoKB" type="KinematicBody2D" groups=[
 "Projectile",
 "SolidProjectileKB",
 ]]
-
-input_pickable = false
 collision_layer = 0
 collision_mask = 3
-collision/safe_margin = 0.08
 script = ExtResource( 1 )
-debug_mode = false
 _damage_amount = 15
 _speed = 600.0
 _bounce_groups = PoolStringArray( "Airburst" )
-_bounce_factor = 1.0
 ImpactEffect = ExtResource( 2 )
-_impact_sound_name = null
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
-
+[node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
-
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
-[node name="SoundPlayer" type="AudioStreamPlayer" parent="." index="2"]
-
+[node name="SoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
-volume_db = 0.0
-pitch_scale = 1.0
-autoplay = false
-mix_target = 0
-bus = "Master"
-
-

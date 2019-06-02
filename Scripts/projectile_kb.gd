@@ -2,8 +2,6 @@ extends KinematicBody2D
 
 export var debug_mode = false
 
-enum bounceable_groups { NONE, REFLECTIVE, AIRBURST }
-
 export var _damage_amount = 0
 export var _speed = 0.0 setget ,get_speed
 
@@ -17,13 +15,13 @@ export(float, 0.1, 5, 0.1) var _bounce_factor = 1.0
 export(PackedScene) var ImpactEffect
 var DEFAULT_EFFECT_SPAWN_PATH = GameInfo.NODE_SPAWN_PATHS.effect #"/root/Level/Effects"
 
-# TBD
-export(String) var _impact_sound_name
+# sound effect
+export(AudioStreamSample) var _impact_sound
 
 var _movement
 
 # look up new sound playing
-#var sample_player
+var AudioPlayer
 
 func _ready():
 	set_physics_process(true)
@@ -31,35 +29,43 @@ func _ready():
 	var rot = global_rotation
 	_movement = Vector2(-sin(rot), cos(rot)) * -_speed
 	
+	AudioPlayer = get_node("SoundPlayer")
+	if _impact_sound:
+		AudioPlayer.stream = _impact_sound
+	
 
 func _physics_process(delta):
 	
 	var collision = move_and_collide(_movement * delta)
 	
 	if collision:
-		_handle_collision(collision.collider)
-	
+		print("collided with ", collision.collider.name)
+		_handle_collision(collision)
 
 func add_velocity(vel):
 	_movement += vel
 
-func _handle_collision(body):
-	if !body:
-		return
+func _handle_collision(collision):
+	var body = collision.collider
 	
 	if debug_mode:
-		print("hit something")
+		print("hit something: ", body.name)
+	
 	if body.is_in_group("Damageable"):
+		if (debug_mode): print("damaging ", body.name)
 		body.damage(_damage_amount)
 	
 	var bounced = false
 	
 	for group in _bounce_groups:
 		if body.is_in_group(group):
-			
 			if debug_mode:
-				print("bounced off a(n) ", group)
-			self.bounce()
+				print("bounced off: ", group)
+			
+			#self.bounce()
+			_movement = _movement.bounce(collision.normal)
+			global_rotation = atan(_movement.x / _movement.y)
+			
 			bounced = true
 			
 			if group == "Airburst":
@@ -71,7 +77,8 @@ func _handle_collision(body):
 		self._explode()
 
 func bounce():
-	var normal = get_collision_normal()
+	var normal = Vector2() #get_collision_normal()
+	
 	_movement = normal.reflect(_movement) * _bounce_factor
 	
 	var angle = atan(_movement.x / _movement.y)
@@ -91,13 +98,11 @@ func _explode():
 		else:
 			get_tree().get_root().add_child(effect)
 	
-	# do sound later
-	#if sample_player != null && impact_sound_name != null:
-		#if debug_mode: print("playing impact sound ", impact_sound_name)
-		#var voice_id = sample_player.play(impact_sound_name, true)
-		#sample_player.play(impact_sound_name)
-		#sample_player.play_sound()
-		
+	# play impact sound if there is one
+	if AudioPlayer.stream:
+		if debug_mode:
+			print("playing impact sound")
+		AudioPlayer.play()
 	
 	self.queue_free()
 

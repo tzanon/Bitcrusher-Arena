@@ -13,9 +13,11 @@ var _player_name = "default" setget set_name
 # _health-related
 var _health = 100
 export(PackedScene) var DeathAnimation
-export(String) var death_sound_name
+export(AudioStreamSample) var _death_sound
+const DEATH_SOUND_TAG = "player_die"
 signal health_changed(_player_name, player_health)
 signal died(_player_name)
+signal explode(sound_tag)
 
 # movement-related
 const JOYSTICK_IDLE_LIMIT = 0.3
@@ -44,6 +46,7 @@ var Animator
 var ItemDetector
 var ImpactVulnerabilityTimer
 var BodySprite
+var AudioPlayer
 
 # _weapon-related
 const START_WEAPON = preload("res://Scenes/Weapons/PlayerLaser.tscn")
@@ -65,20 +68,21 @@ func _ready():
 	Animator = get_node("AnimationPlayer")
 	WeaponPos = get_node("WeaponPosition").position
 	ImpactVulnerableFilter = get_node("VulnerableFilter")
-	
 	BodySprite = get_node("BodySprite")
+	ItemDetector = get_node("PickupDetector")
+	AudioPlayer = get_node("AudioStreamPlayer2D")
 	
 	ImpactVulnerabilityTimer = get_node("VulnerableTimer")
 	ImpactVulnerabilityTimer.one_shot = true
 	ImpactVulnerabilityTimer.wait_time = _impact_vulnerability_period
 	ImpactVulnerabilityTimer.connect("timeout", self, "disable_impact_vulnerability")
-	
-	_impact_vulnerable = false
 	ImpactVulnerableFilter.hide()
+	_impact_vulnerable = false
 	
-	ItemDetector = get_node("PickupDetector")
+	if _death_sound:
+		AudioPlayer.stream = _death_sound
+	
 	_equip_weapon(START_WEAPON)
-	
 
 func _physics_process(delta):
 	# aiming is currently just rotating -- should we have some sort of reticle to move around instead?
@@ -117,8 +121,9 @@ func _integrate_forces(state):
 	final_velocity = final_velocity.clamped(_top_speed)
 	
 	state.set_linear_velocity(final_velocity)
-	
-	#if debug_mode: print("final speed is ", self.get_speed())
+	if debug_mode:
+		#print("final speed is ", self.get_speed())
+		pass
 
 func _calculate_direction_digital(state):
 	_directional_force = DIRECTION.ZERO
@@ -154,6 +159,11 @@ func connect_to_hud(manager):
 	connect("health_changed", manager, "update_player_health")
 	connect("died", manager, "remove_player")
 
+func connect_to_sound_manager(manager):
+	if !manager:
+		print("sound manager is null!")
+	connect("explode", manager, "play_sound_by_tag")
+
 func set_name(new_name):
 	if debug_mode:
 		print("_player_name is ", _player_name)
@@ -174,7 +184,6 @@ func _calculate_collide_damage():
 	var speed_factor = self.get_speed() / _speed_pain_threshold
 	var dmg = speed_factor * _base_collide_damage
 	return dmg
-	
 
 func _detect_collision(body):
 	if !body.is_in_group("Projectile") && self.is_impact_vulnerable():
@@ -187,12 +196,9 @@ func _detect_collision(body):
 				print("other speed is ", self.get_speed())
 			var collide_dmg = body._calculate_collide_damage()
 			self.damage(collide_dmg)
-		
-	
 
 func is_impact_vulnerable():
 	return _impact_vulnerable && ImpactVulnerabilityTimer.time_left > 0
-	
 
 func _take_impact_damage():
 	var vulnerability_factor = pow(ImpactVulnerabilityTimer.time_left / ImpactVulnerabilityTimer.wait_time, 2)
@@ -206,13 +212,11 @@ func _take_impact_damage():
 	
 	damage(dmg_amount)
 	disable_impact_vulnerability()
-	
 
 func enable_impact_vulnerability():
 	ImpactVulnerabilityTimer.start()
 	_impact_vulnerable = true
 	ImpactVulnerableFilter.show()
-	
 
 # called when timer expires or when something is hit
 func disable_impact_vulnerability():
@@ -221,7 +225,6 @@ func disable_impact_vulnerability():
 	ImpactVulnerableFilter.hide()
 
 func damage(dmg):
-	
 	_health = clamp(_health - dmg, 0, 100)
 	#if debug_mode: print("player ", _player_name, " takes damage ", dmg)
 	emit_signal("health_changed", _player_name, _health)
@@ -242,7 +245,10 @@ func _die():
 	else:
 		get_tree().get_root().add_child(death_anim)
 	
-	# TODO: play death sound
+	# play death sound
+	emit_signal("explode", DEATH_SOUND_TAG)
+	#if AudioPlayer.stream:
+	#	AudioPlayer.play()
 	
 	self.queue_free()
 
@@ -250,12 +256,10 @@ func _fire_weapon():
 	var spawn_pos
 	if PROJ_SPAWN_POSITIONS.has(_weapon.get_weapon_name()):
 		spawn_pos = get_global_transform().xform(PROJ_SPAWN_POSITIONS[_weapon.get_weapon_name()])
-		#spawn_pos = get_global_transform().xform_inv(PROJ_SPAWN_POSITIONS[_weapon.get_weapon_name()])
 	else:
 		spawn_pos = get_node("ProjectileSpawnPosition").global_position
 	_weapon._fire(spawn_pos)
-	
-	
+
 # looks for item in pickup radius and replaces current one with it if there is
 func _pick_up_item():
 	var possible_items = ItemDetector.get_overlapping_areas()

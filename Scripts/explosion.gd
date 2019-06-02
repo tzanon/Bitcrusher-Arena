@@ -9,6 +9,7 @@ export var _impact_force = 0.0
 export var _max_force_range = 100
 
 var Animator
+var AudioPlayer
 
 # only damage a given body once
 var _damaged_bodies = []
@@ -19,6 +20,15 @@ func _ready():
 	Animator.connect("animation_finished", self, "_done_explosion")
 	
 	self.connect("body_entered", self, "_detect_entry")
+	
+	# TODO: replace with call to sound manager
+	AudioPlayer = get_node("AudioStreamPlayer2D")
+	#if !AudioPlayer:
+	#	AudioPlayer = AudioStreamPlayer2D.new()
+	#	self.add_child(AudioPlayer)
+	
+	if AudioPlayer and AudioPlayer.stream:
+		AudioPlayer.play()
 	
 	if debug_mode:
 		print("explosion spawned")

@@ -57,6 +57,7 @@ func is_id_registered(id):
 	for info_entry in registered_player_info:
 		if info_entry.pad_id == id:
 			return true
+	
 	return false
 
 func get_player_name_with_id(id):
@@ -65,4 +66,5 @@ func get_player_name_with_id(id):
 			return info_entry.name
 	print("ERROR: player id ", id, " is not registered!")
 	return ""
+	
 
