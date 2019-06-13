@@ -55,7 +55,8 @@ func _ready():
 func _spawn_player(player_name):
 	var player = PLAYER_TEMPLATE.instance()
 	player.connect_to_hud(self)
-	player.connect_to_sound_manager(SoundManager)
+	if (SoundManager):
+		player.connect_to_sound_manager(SoundManager)
 	
 	player.set_name(player_name)
 	player.set_sprite_from_path(_player_spawn_info[player_name].sprite_path)

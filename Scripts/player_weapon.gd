@@ -66,7 +66,7 @@ func _play_fire_sound():
 
 func _fire(spawn_pos):
 	if FireTimer.time_left <= 0:
-		# play _fire sound
+		
 		self._play_fire_sound()
 		
 		var projectile = Projectile.instance()

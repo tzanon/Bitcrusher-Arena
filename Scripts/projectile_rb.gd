@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends RigidBody2D
 
 export var debug_mode = false
 
@@ -18,8 +18,6 @@ const DEFAULT_EFFECT_SPAWN_PATH = GameInfo.NODE_SPAWN_PATHS.effect #"/root/Level
 # sound effect
 export(AudioStreamSample) var _impact_sound
 
-var _movement
-
 # look up new sound playing
 var AudioPlayer
 
@@ -27,24 +25,27 @@ func _ready():
 	set_physics_process(true)
 	
 	var rot = global_rotation
-	_movement = Vector2(-sin(rot), cos(rot)) * -_speed
 	
-	if has_node("SoundPlayer"):
-		AudioPlayer = get_node("SoundPlayer")
-		if _impact_sound:
-			AudioPlayer.stream = _impact_sound
+	var direction = Vector2(-sin(rot), cos(rot)).normalized()
+	var movement = direction * -_speed
+	self.linear_velocity = movement
+	
+	AudioPlayer = get_node("SoundPlayer")
+	if _impact_sound:
+		AudioPlayer.stream = _impact_sound
 	
 
 func _physics_process(delta):
 	
-	var collision = move_and_collide(_movement * delta)
+	var collision #= move_and_collide(_movement * delta)
 	
 	if collision:
 		print("collided with ", collision.collider.name)
 		_handle_collision(collision)
 
 func add_velocity(vel):
-	_movement += vel
+	self.linear_velocity += vel
+	#_movement += vel
 
 func _handle_collision(collision):
 	var body = collision.collider
@@ -63,9 +64,11 @@ func _handle_collision(collision):
 			if debug_mode:
 				print("bounced off: ", group)
 			
+			# TODO: update bouncing
 			#self.bounce()
-			_movement = _movement.bounce(collision.normal)
-			global_rotation = atan(_movement.x / _movement.y)
+			
+			#_movement = _movement.bounce(collision.normal)
+			#global_rotation = atan(_movement.x / _movement.y)
 			
 			bounced = true
 			
@@ -79,12 +82,12 @@ func _handle_collision(collision):
 
 func bounce():
 	var normal = Vector2() #get_collision_normal()
-	# TODO: update bouncing with 3.1 normals
+	# TODO: update bouncing
 	
-	_movement = normal.reflect(_movement) * _bounce_factor
+	#_movement = normal.reflect(_movement) * _bounce_factor
 	
-	var angle = atan(_movement.x / _movement.y)
-	global_rotation = angle
+	#var angle = atan(_movement.x / _movement.y)
+	#global_rotation = angle
 
 func get_speed():
 	return _speed
@@ -101,7 +104,7 @@ func _explode():
 			get_tree().get_root().add_child(effect)
 	
 	# play impact sound if there is one
-	if AudioPlayer:
+	if AudioPlayer.stream:
 		if debug_mode:
 			print("playing impact sound")
 		AudioPlayer.play()

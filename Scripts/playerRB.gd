@@ -186,7 +186,7 @@ func _calculate_collide_damage():
 	return dmg
 
 func _detect_collision(body):
-	if !body.is_in_group("Projectile") && self.is_impact_vulnerable():
+	if !body.is_in_group("Projectile") and self.is_impact_vulnerable():
 		self._take_impact_damage()
 	
 	if body.is_in_group("SpeedDamageable"): # every speed-damageable object must have a get_speed_sq() method
@@ -198,7 +198,7 @@ func _detect_collision(body):
 			self.damage(collide_dmg)
 
 func is_impact_vulnerable():
-	return _impact_vulnerable && ImpactVulnerabilityTimer.time_left > 0
+	return _impact_vulnerable and ImpactVulnerabilityTimer.time_left > 0
 
 func _take_impact_damage():
 	var vulnerability_factor = pow(ImpactVulnerabilityTimer.time_left / ImpactVulnerabilityTimer.wait_time, 2)

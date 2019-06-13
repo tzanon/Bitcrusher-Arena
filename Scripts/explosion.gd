@@ -8,6 +8,8 @@ export var _damage_amount = 10
 export var _impact_force = 0.0
 export var _max_force_range = 100
 
+export var sound_tag = ""
+
 var Animator
 var AudioPlayer
 
@@ -22,7 +24,8 @@ func _ready():
 	self.connect("body_entered", self, "_detect_entry")
 	
 	# TODO: replace with call to sound manager
-	AudioPlayer = get_node("AudioStreamPlayer2D")
+	if has_node("AudioStreamPlayer2D"):
+		AudioPlayer = get_node("AudioStreamPlayer2D")
 	#if !AudioPlayer:
 	#	AudioPlayer = AudioStreamPlayer2D.new()
 	#	self.add_child(AudioPlayer)

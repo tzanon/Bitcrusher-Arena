@@ -1,21 +1,16 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Scripts/projectile_kb.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/projectile_rb.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Projectiles/laser9x43.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 18 )
 
-[node name="LaserKB" type="KinematicBody2D" groups=[
+[node name="LaserRB" type="RigidBody2D" groups=[
 "Projectile",
 "LightProjectileKB",
 ]]
-collision_layer = 0
 script = ExtResource( 1 )
-debug_mode = true
-_damage_amount = 10
-_speed = 800.0
-_bounce_groups = PoolStringArray( "Reflective" )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )

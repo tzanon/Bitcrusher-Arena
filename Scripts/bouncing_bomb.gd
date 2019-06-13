@@ -18,7 +18,11 @@ var AudioPlayer
 
 func _ready():
 	LifeTimer = get_node("Timer")
-	AudioPlayer = get_node("SoundPlayer")
+	
+	if has_node("SoundPlayer"):
+		AudioPlayer = get_node("SoundPlayer")
+		if _explosion_sound:
+			AudioPlayer.stream = _explosion_sound
 	
 	if _has_random_lifetime:
 		var rand_lt = rand_range(_min_lifetime, _max_lifetime)
@@ -28,9 +32,6 @@ func _ready():
 	
 	LifeTimer.connect("timeout", self, "_explode")
 	LifeTimer.start()
-	
-	if _explosion_sound:
-		AudioPlayer.stream = _explosion_sound
 	
 	self.connect("body_entered", self, "_handle_collision")
 	
@@ -57,7 +58,7 @@ func _handle_collision(body):
 
 func _explode():
 	# TODO: replace with call to sound manager
-	if AudioPlayer and AudioPlayer.stream:
+	if AudioPlayer:
 		AudioPlayer.play()
 	
 	var explosion = ExplosionEffect.instance()
