@@ -27,7 +27,8 @@ func _ready():
 	_time_left = LifeTimer.time_left
 	_time_passed = _lifetime - _time_left
 	
-	self.connect("body_entered", self, "_handle_collision")
+	if self.connect("body_entered", self, "_handle_collision") != 0:
+		printerr("could not connect collision detection signal")
 	
 	var rot = global_rotation
 	var vel = Vector2(-sin(rot), cos(rot)) * -_speed

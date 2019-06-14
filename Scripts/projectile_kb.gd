@@ -17,6 +17,7 @@ const DEFAULT_EFFECT_SPAWN_PATH = GameInfo.NODE_SPAWN_PATHS.effect #"/root/Level
 
 # sound effect
 export(AudioStreamSample) var _impact_sound
+export var _sound_tag = ""
 
 var _movement
 
@@ -36,7 +37,6 @@ func _ready():
 	
 
 func _physics_process(delta):
-	
 	var collision = move_and_collide(_movement * delta)
 	
 	if collision:
@@ -48,9 +48,6 @@ func add_velocity(vel):
 
 func _handle_collision(collision):
 	var body = collision.collider
-	
-	if debug_mode:
-		print("hit something: ", body.name)
 	
 	if body.is_in_group("Damageable"):
 		if (debug_mode): print("damaging ", body.name)
@@ -71,7 +68,6 @@ func _handle_collision(collision):
 			
 			if group == "Airburst":
 				body.collide_action()
-			
 			break
 	
 	if !bounced: # if not bouncing, exploding
@@ -99,6 +95,9 @@ func _explode():
 			get_node(DEFAULT_EFFECT_SPAWN_PATH).add_child(effect)
 		else:
 			get_tree().get_root().add_child(effect)
+	
+	if _sound_tag:
+		AudioManager.play_sound_by_tag(_sound_tag)
 	
 	# play impact sound if there is one
 	if AudioPlayer:

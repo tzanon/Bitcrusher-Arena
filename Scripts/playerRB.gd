@@ -63,7 +63,9 @@ func _ready():
 	set_physics_process(true)
 	set_process_input(true)
 	
-	self.connect("body_entered", self, "_detect_collision")
+	if self.connect("body_entered", self, "_detect_collision") != 0:
+		printerr("could not connect collision detection signal")
+		
 	
 	Animator = get_node("AnimationPlayer")
 	WeaponPos = get_node("WeaponPosition").position
@@ -112,9 +114,9 @@ func _input(event):
 # handles movement
 func _integrate_forces(state):
 	if keyboard_mode:
-		_directional_force = _calculate_direction_digital(state)
+		_directional_force = _calculate_direction_digital()
 	else:
-		_directional_force = _calculate_direction_analog(state)
+		_directional_force = _calculate_direction_analog()
 	
 	var final_velocity = state.linear_velocity + (_directional_force * _acceleration)
 	
@@ -125,7 +127,7 @@ func _integrate_forces(state):
 		#print("final speed is ", self.get_speed())
 		pass
 
-func _calculate_direction_digital(state):
+func _calculate_direction_digital():
 	_directional_force = DIRECTION.ZERO
 	
 	if Input.is_action_pressed("move_left"):
@@ -139,7 +141,7 @@ func _calculate_direction_digital(state):
 	
 	return _directional_force
 
-func _calculate_direction_analog(state):
+func _calculate_direction_analog():
 	_directional_force = DIRECTION.ZERO
 	
 	var horizontal_axis_pos = Input.get_joy_axis(_gamepad_id, JOY_AXIS_0)
@@ -156,13 +158,20 @@ func set_sprite_from_path(sprite_path):
 	get_node("BodySprite").set_texture(load(sprite_path))
 
 func connect_to_hud(manager):
-	connect("health_changed", manager, "update_player_health")
-	connect("died", manager, "remove_player")
+	var health_err = connect("health_changed", manager, "update_player_health")
+	var death_err = connect("died", manager, "remove_player")
+	
+	if health_err != 0:
+		printerr("could not connect health change signal")
+	if death_err != 0:
+		printerr("could not connect death signal")
 
 func connect_to_sound_manager(manager):
+	# TODO: if SM stays as singleton, refactor/get rid of this function
 	if !manager:
 		print("sound manager is null!")
-	connect("explode", manager, "play_sound_by_tag")
+	if connect("explode", manager, "play_sound_by_tag") != 0:
+		printerr("could not connect player to audio manager")
 
 func set_name(new_name):
 	if debug_mode:
@@ -186,6 +195,10 @@ func _calculate_collide_damage():
 	return dmg
 
 func _detect_collision(body):
+	if body.is_in_group("Projectile") and debug_mode:
+		#print("hit a projectile")
+		pass
+	
 	if !body.is_in_group("Projectile") and self.is_impact_vulnerable():
 		self._take_impact_damage()
 	

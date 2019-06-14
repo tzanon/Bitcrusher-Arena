@@ -33,20 +33,21 @@ func _ready():
 	LifeTimer.connect("timeout", self, "_explode")
 	LifeTimer.start()
 	
-	self.connect("body_entered", self, "_handle_collision")
+	if self.connect("body_entered", self, "_handle_collision") != 0:
+		printerr("bomb could not connect collision detect signal")
 	
 	var rot = self.global_rotation
 	var vel = Vector2(sin(rot), cos(rot)) * -_speed
 	self.linear_velocity = vel
 	
 	set_collision_mask_bit(2, false)
-	set_physics_process(true)
+	set_process(true)
 
-func _physics_process(delta):
+func _process(delta):
 	if LifeTimer.wait_time - LifeTimer.time_left > _self_collision_time:
 		set_collision_mask_bit(2, true)
-		set_physics_process(false)
-	
+		set_process(false)
+
 
 func _handle_collision(body):
 	if !body:

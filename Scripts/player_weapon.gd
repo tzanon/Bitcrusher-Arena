@@ -4,14 +4,13 @@ extends Sprite
 export var debug_mode = false
 
 export var weapon_name = "" setget ,get_weapon_name
-
 var _user setget set_user # these used for score tracking?
 var _user_ref
 export(Vector2) var _hold_position
 export(float) var _hold_rotation
 
+export var fire_sound_tag = 3
 export(AudioStreamSample) var _fire_sound
-export(float) var _fire_volume
 
 export(PackedScene) var Projectile
 # in case we want to _fire from the barrel
@@ -60,9 +59,9 @@ func get_hold_rotd():
 
 func _play_fire_sound():
 	if AudioPlayer.stream != null:
+		if debug_mode:
 			print("playing sound ", AudioPlayer.stream)
-			AudioPlayer.play()
-	
+		AudioPlayer.play()
 
 func _fire(spawn_pos):
 	if FireTimer.time_left <= 0:

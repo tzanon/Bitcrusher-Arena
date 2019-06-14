@@ -73,6 +73,7 @@ position = Vector2( 736, 336 )
 texture = ExtResource( 8 )
 
 [node name="PlayerManager" parent="Layout" instance=ExtResource( 9 )]
+editor/display_folded = true
 
 [node name="BlueSpawnPoint" parent="Layout/PlayerManager" index="0"]
 position = Vector2( 448, 368 )
@@ -117,7 +118,6 @@ position = Vector2( 1104, 688 )
 position = Vector2( 1312, 768 )
 
 [node name="Structure" type="Node2D" parent="Layout"]
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -128,6 +128,7 @@ __meta__ = {
 }
 
 [node name="Walls" type="Node2D" parent="Layout/Structure/Obstacles"]
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -169,6 +170,7 @@ position = Vector2( -128, 0 )
 rotation = 1.57079
 
 [node name="Pillars" type="Node2D" parent="Layout/Structure/Obstacles"]
+editor/display_folded = true
 
 [node name="Pillar1" parent="Layout/Structure/Obstacles/Pillars" instance=ExtResource( 22 )]
 position = Vector2( 960, 160 )

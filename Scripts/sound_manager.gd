@@ -1,6 +1,21 @@
 extends Node
 
-const _sound_map = {
+# TODO: make this a singleton; other scenes need audio
+
+export var debug_mode = false
+var muted = false
+
+# order: UI, player, weapon firing, weapon hit/effect, traps
+enum SoundTags {
+	NONE,
+	MENU_CONFIRM, MENU_BACK, START_GAME,
+	PLAYER_HIT, PLAYER_EXPL,
+	LASER_FIRE, SPUD_FIRE, AIR_FIRE, BOMB_FIRE,
+	LASER_HIT, SPUD_EXPL, BOMB_EXPL,
+	FIRE_JET
+}
+
+const SOUND_MAP = {
 	"laser_fire" : preload("res://Sounds/Weapons/laser_fire1.wav"),
 	"potato_fire" : preload("res://Sounds/Weapons/potato_fire1.wav"),
 	"airgun_fire" : preload("res://Sounds/Weapons/airgun_fire1.wav"),
@@ -9,17 +24,29 @@ const _sound_map = {
 	"bomb_explode" : preload("res://Sounds/Weapons/bomb_expl2.wav"), # need to make a better one
 	"player_die" : preload("res://Sounds/Player/player_expl1.wav"),
 	"fire_jet" : preload("res://Sounds/Hazards/fire_jet1.wav"),
+	# TODO: sounds for menu button presses
 	#"" : preload(""),
 }
 
+#export var max_audio_players = 32
+
 var AudioPlayer
 
+# min number of sounds to play:
+# 1 AP for each player (weapon firing, death)
+# 1 AP for each type of trap
+
 func _ready():
-	AudioPlayer = $AudioStreamPlayer
+	AudioPlayer = AudioStreamPlayer.new()
+	self.add_child(AudioPlayer)
 	
 func play_sound_by_tag(sound_tag):
-	print("playing sound with tag ", sound_tag)
-	var effect = _sound_map[sound_tag]
+	if muted:
+		return
+	
+	if debug_mode:
+		print("playing sound with tag ", sound_tag)
+	var effect = SOUND_MAP[sound_tag]
 	if effect:
 		AudioPlayer.stream = effect
 		AudioPlayer.play()

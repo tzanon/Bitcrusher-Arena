@@ -24,6 +24,7 @@ name="LevelUp2018"
 [autoload]
 
 GameInfo="*res://Scripts/game_info.gd"
+AudioManager="*res://Scripts/sound_manager.gd"
 
 [display]
 
