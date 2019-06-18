@@ -16,6 +16,7 @@ enum SoundTags {
 }
 
 const SOUND_MAP = {
+	# put dummy placeholder/debug sound for "" for testing
 	"laser_fire" : preload("res://Sounds/Weapons/laser_fire1.wav"),
 	"potato_fire" : preload("res://Sounds/Weapons/potato_fire1.wav"),
 	"airgun_fire" : preload("res://Sounds/Weapons/airgun_fire1.wav"),
@@ -37,15 +38,28 @@ var AudioPlayer
 # 1 AP for each type of trap
 
 func _ready():
+	debug_mode = true
+	
 	AudioPlayer = AudioStreamPlayer.new()
 	self.add_child(AudioPlayer)
-	
+
+func get_sound_by_tag(sound_tag):
+	if !SOUND_MAP.has(sound_tag):
+		printerr("Sound tag '", sound_tag, "' not recognized")
+		return
+	return SOUND_MAP[sound_tag]
+
 func play_sound_by_tag(sound_tag):
 	if muted:
 		return
 	
+	if !SOUND_MAP.has(sound_tag):
+		printerr("Sound tag '", sound_tag, "' not recognized")
+		return
+	
 	if debug_mode:
 		print("playing sound with tag ", sound_tag)
+	
 	var effect = SOUND_MAP[sound_tag]
 	if effect:
 		AudioPlayer.stream = effect

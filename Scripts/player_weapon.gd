@@ -58,6 +58,8 @@ func get_hold_rotd():
 	return _hold_rotation
 
 func _play_fire_sound():
+	
+	
 	if AudioPlayer.stream != null:
 		if debug_mode:
 			print("playing sound ", AudioPlayer.stream)

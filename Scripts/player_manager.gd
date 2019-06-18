@@ -21,15 +21,8 @@ var EndTimer
 var _match_player_refs = {}
 var _player_huds = {}
 
-var SoundManager
-
 func _ready():
-	if has_node("/root/Level/SoundManager"):
-		print("SOUND MANAGER: OK")
-		SoundManager = get_node("/root/Level/SoundManager")
-	else:
-		print("SOUND MANAGER: NOT FOUND")
-	
+	# time after last player's death before displaying results
 	EndTimer = get_node("EndTimer")
 	EndTimer.wait_time = _game_end_time
 	EndTimer.one_shot = true
@@ -55,9 +48,6 @@ func _ready():
 func _spawn_player(player_name):
 	var player = PLAYER_TEMPLATE.instance()
 	player.connect_to_hud(self)
-	#if (SoundManager):
-	#	player.connect_to_sound_manager(SoundManager)
-	player.connect_to_sound_manager(AudioManager) # refactor this
 	
 	player.set_name(player_name)
 	player.set_sprite_from_path(_player_spawn_info[player_name].sprite_path)

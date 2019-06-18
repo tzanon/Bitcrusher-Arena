@@ -15,9 +15,10 @@ export(float, 0.1, 5, 0.1) var _bounce_factor = 1.0
 export(PackedScene) var ImpactEffect
 const DEFAULT_EFFECT_SPAWN_PATH = GameInfo.NODE_SPAWN_PATHS.effect #"/root/Level/Effects"
 
-# sound effect
-export(AudioStreamSample) var _impact_sound
-export var _sound_tag = ""
+# audio-related
+export var using_audio_manager = false
+export var _impact_sound_tag = ""
+signal play_sound(sound_tag) # need this?
 
 var _movement
 
@@ -32,15 +33,14 @@ func _ready():
 	
 	if has_node("SoundPlayer"):
 		AudioPlayer = get_node("SoundPlayer")
-		if _impact_sound:
-			AudioPlayer.stream = _impact_sound
+		if _impact_sound_tag != "":
+			AudioPlayer.stream = AudioManager.get_sound_by_tag(_impact_sound_tag)
 	
 
 func _physics_process(delta):
-	var collision = move_and_collide(_movement * delta)
+	var collision = move_and_collide(_movement * delta, false)
 	
 	if collision:
-		print("collided with ", collision.collider.name)
 		_handle_collision(collision)
 
 func add_velocity(vel):
@@ -50,7 +50,8 @@ func _handle_collision(collision):
 	var body = collision.collider
 	
 	if body.is_in_group("Damageable"):
-		if (debug_mode): print("damaging ", body.name)
+		if (debug_mode):
+			print("damaging ", body.name)
 		body.damage(_damage_amount)
 	
 	var bounced = false
@@ -96,14 +97,14 @@ func _explode():
 		else:
 			get_tree().get_root().add_child(effect)
 	
-	if _sound_tag:
-		AudioManager.play_sound_by_tag(_sound_tag)
-	
-	# play impact sound if there is one
-	if AudioPlayer:
-		if debug_mode:
-			print("playing impact sound")
-		AudioPlayer.play()
+	# play sound effect
+	if using_audio_manager:
+		AudioManager.play_sound_by_tag(_impact_sound_tag)
+	else:
+		if AudioPlayer:
+			if debug_mode:
+				print("playing impact sound")
+			AudioPlayer.play()
 	
 	self.queue_free()
 

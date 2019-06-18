@@ -37,6 +37,7 @@ func fire():
 	var projectile = Projectile.instance()
 	projectile.global_position = ProjSpawnPoint.global_position
 	projectile.global_rotation = self.global_rotation
+	projectile.debug_mode = false
 	
 	if has_node(DEFAULT_PROJ_SPAWN_PATH):
 		get_node(DEFAULT_PROJ_SPAWN_PATH).add_child(projectile)

@@ -8,7 +8,7 @@ var _fire_angle_incr
 func _ready():
 	_fire_angle_incr = 2 * _arc_radius / _num_projectiles
 
-# _fire bombs spread over an arc
+# bombs fired over an arc
 func _fire(spawn_pos):
 	if FireTimer.get_time_left() > 0:
 		return
@@ -22,7 +22,8 @@ func _fire(spawn_pos):
 		projectile.global_position = spawn_pos
 		projectile.global_rotation_degrees = -_user.global_rotation_degrees + fire_angle
 		
-		#var proj_node = get_node(DEFAULT_PROJ_SPAWN_PATH)
+		# TODO: give bombs different lifetimes
+		
 		if has_node(DEFAULT_PROJ_SPAWN_PATH):
 			get_node(DEFAULT_PROJ_SPAWN_PATH).add_child(projectile)
 		else:
@@ -30,6 +31,7 @@ func _fire(spawn_pos):
 		
 		fire_angle += _fire_angle_incr
 	
+	# player recoil
 	var rot = _user.global_rotation
 	var knockback_direction = Vector2(sin(rot), cos(rot)).normalized()
 	var knockback_force = _knockbox_strength * knockback_direction

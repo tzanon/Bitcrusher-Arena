@@ -4,17 +4,11 @@
 [ext_resource path="res://Scripts/wall_trap.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Projectiles/LaserKB.tscn" type="PackedScene" id=3]
 
-[node name="WallTrap" type="Sprite" index="0"]
-
+[node name="WallTrap" type="Sprite"]
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
 debug_mode = true
 Projectile = ExtResource( 3 )
-_fire_rate = 3
 
-[node name="ProjectileSpawnPoint" type="Position2D" parent="." index="0"]
-
+[node name="ProjectileSpawnPoint" type="Position2D" parent="."]
 position = Vector2( 0, -24 )
-
-

@@ -10,14 +10,17 @@ var DEFAULT_EFFECT_SPAWN_PATH = GameInfo.NODE_SPAWN_PATHS.effect
 var _gamepad_id = -1 setget set_gamepad_id
 var _player_name = "default" setget set_name
 
-# _health-related
+# health-related
 var _health = 100
 export(PackedScene) var DeathAnimation
-export(AudioStreamSample) var _death_sound
-const DEATH_SOUND_TAG = "player_die"
 signal health_changed(_player_name, player_health)
 signal died(_player_name)
-signal explode(sound_tag)
+
+# audio-related 
+export var using_audio_manager = false
+const DEATH_SOUND_TAG = "player_die"
+const PICKUP_SOUND_TAG = "pickup" # maybe
+signal play_sound(sound_tag)
 
 # movement-related
 const JOYSTICK_IDLE_LIMIT = 0.3
@@ -48,7 +51,7 @@ var ImpactVulnerabilityTimer
 var BodySprite
 var AudioPlayer
 
-# _weapon-related
+# weapon-related
 const START_WEAPON = preload("res://Scenes/Weapons/PlayerLaser.tscn")
 var WeaponPos
 var _weapon
@@ -67,12 +70,19 @@ func _ready():
 		printerr("could not connect collision detection signal")
 		
 	
+	# getting nodes
 	Animator = get_node("AnimationPlayer")
 	WeaponPos = get_node("WeaponPosition").position
 	ImpactVulnerableFilter = get_node("VulnerableFilter")
 	BodySprite = get_node("BodySprite")
 	ItemDetector = get_node("PickupDetector")
-	AudioPlayer = get_node("AudioStreamPlayer2D")
+	
+	# audio setup
+	if connect("play_sound", AudioManager, "play_sound_by_tag") != 0:
+		printerr("could not connect player to audio manager")
+	if has_node("AudioStreamPlayer2D"):
+		AudioPlayer = get_node("AudioStreamPlayer2D")
+		AudioPlayer.stream = AudioManager.get_sound_by_tag(DEATH_SOUND_TAG)
 	
 	ImpactVulnerabilityTimer = get_node("VulnerableTimer")
 	ImpactVulnerabilityTimer.one_shot = true
@@ -80,9 +90,6 @@ func _ready():
 	ImpactVulnerabilityTimer.connect("timeout", self, "disable_impact_vulnerability")
 	ImpactVulnerableFilter.hide()
 	_impact_vulnerable = false
-	
-	if _death_sound:
-		AudioPlayer.stream = _death_sound
 	
 	_equip_weapon(START_WEAPON)
 
@@ -165,13 +172,6 @@ func connect_to_hud(manager):
 		printerr("could not connect health change signal")
 	if death_err != 0:
 		printerr("could not connect death signal")
-
-func connect_to_sound_manager(manager):
-	# TODO: if SM stays as singleton, refactor/get rid of this function
-	if !manager:
-		print("sound manager is null!")
-	if connect("explode", manager, "play_sound_by_tag") != 0:
-		printerr("could not connect player to audio manager")
 
 func set_name(new_name):
 	if debug_mode:
@@ -259,9 +259,11 @@ func _die():
 		get_tree().get_root().add_child(death_anim)
 	
 	# play death sound
-	emit_signal("explode", DEATH_SOUND_TAG)
-	#if AudioPlayer.stream:
-	#	AudioPlayer.play()
+	if using_audio_manager:
+		emit_signal("play_sound", DEATH_SOUND_TAG)
+	else:
+		if AudioPlayer and AudioPlayer.stream:
+			AudioPlayer.play()
 	
 	self.queue_free()
 
@@ -275,6 +277,8 @@ func _fire_weapon():
 
 # looks for item in pickup radius and replaces current one with it if there is
 func _pick_up_item():
+	# TODO: add pickup sound?
+	
 	var possible_items = ItemDetector.get_overlapping_areas()
 	if debug_mode && possible_items.size() > 0:
 		print(possible_items)

@@ -7,7 +7,9 @@ export var _damage_amount = 10
 export var _impact_force = 0.0
 export var _max_force_range = 100
 
-export var sound_tag = ""
+# audio-related
+export var using_audio_manager = false
+export var _sound_tag = ""
 
 var Animator
 var AudioPlayer
@@ -23,22 +25,24 @@ func _ready():
 	if self.connect("body_entered", self, "_detect_entry") != 0:
 		printerr("could not connect body entered signal")
 	
-	# TODO: replace with call to sound manager
-	if has_node("AudioStreamPlayer2D"):
-		AudioPlayer = get_node("AudioStreamPlayer2D")
-	if AudioPlayer and AudioPlayer.stream:
-		AudioPlayer.play()
-	
-	if sound_tag != "":
-		AudioManager.play_sound_by_tag(sound_tag)
+	# play sound effect
+	if using_audio_manager:
+		AudioManager.play_sound_by_tag(_sound_tag)
+	else:
+		if has_node("AudioStreamPlayer2D"):
+			AudioPlayer = get_node("AudioStreamPlayer2D")
+			AudioPlayer.stream = AudioManager.get_sound_by_tag(_sound_tag)
+			AudioPlayer.play()
 	
 	if debug_mode:
 		print("explosion spawned")
-	
+
 
 func _detect_entry(body):
 	if !_is_damaging:
 		return
+	
+	# TODO: completely refactor this farce into a simple "if in blast, do fixed damage"
 	
 	if debug_mode:
 		print("expl hit ", body)
@@ -67,7 +71,7 @@ func _detect_entry(body):
 		var impulse = _impact_force * strength_factor * direction
 		body.apply_impulse(Vector2(0,0), impulse)
 		_pushed_bodies.append(body_id)
-	
+
 
 func _despawn(name):
 	if debug_mode:

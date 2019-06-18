@@ -31,6 +31,7 @@ contact_monitor = true
 linear_damp = 4.0
 script = ExtResource( 1 )
 DeathAnimation = ExtResource( 2 )
+using_audio_manager = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/PlayerDamaged = ExtResource( 3 )
