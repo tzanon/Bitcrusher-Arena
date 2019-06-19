@@ -5,23 +5,18 @@
 [ext_resource path="res://Scenes/Projectiles/PotatoKB.tscn" type="PackedScene" id=3]
 
 [node name="PlayerLauncher" type="Sprite"]
-
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
-debug_mode = false
 weapon_name = "Potato Launcher"
 _hold_position = Vector2( 24, -12 )
 _hold_rotation = -5.0
+_fire_sound_tag = "potato_fire"
 Projectile = ExtResource( 3 )
 _fire_rate = 0.4
-_max_accuracy_loss = 5
 _knockbox_strength = 4500
 
-[node name="ProjectileSpawnPoint" type="Position2D" parent="." index="0"]
-
+[node name="ProjectileSpawnPoint" type="Position2D" parent="."]
 position = Vector2( 1, -32 )
 __meta__ = {
 "_edit_lock_": true
 }
-
-

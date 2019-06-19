@@ -9,8 +9,9 @@ var _user_ref
 export(Vector2) var _hold_position
 export(float) var _hold_rotation
 
-export var fire_sound_tag = 3
-export(AudioStreamSample) var _fire_sound
+export var using_audio_manager = true
+export var _fire_sound_tag = ""
+
 
 export(PackedScene) var Projectile
 # in case we want to _fire from the barrel
@@ -39,8 +40,7 @@ func _ready():
 	# TODO: test this
 	AudioPlayer = AudioStreamPlayer2D.new()
 	self.add_child(AudioPlayer)
-	#AudioPlayer = get_node("AudioStreamPlayer2D")
-	AudioPlayer.stream = _fire_sound
+	AudioPlayer.stream = AudioManager.get_sound_by_tag(_fire_sound_tag)
 	
 
 func get_weapon_name():
@@ -58,11 +58,9 @@ func get_hold_rotd():
 	return _hold_rotation
 
 func _play_fire_sound():
-	
-	
-	if AudioPlayer.stream != null:
-		if debug_mode:
-			print("playing sound ", AudioPlayer.stream)
+	if using_audio_manager:
+		AudioManager.play_sound_by_tag(_fire_sound_tag)
+	else:
 		AudioPlayer.play()
 
 func _fire(spawn_pos):

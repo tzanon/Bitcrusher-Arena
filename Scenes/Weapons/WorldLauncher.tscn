@@ -5,28 +5,15 @@
 [ext_resource path="res://Sprites/Weapons/world_launcher_outline64x25.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-
-custom_solver_bias = 0.0
 extents = Vector2( 32, 12 )
 
-[node name="WorldLauncher" type="Area2D" index="0"]
-
+[node name="WorldLauncher" type="Area2D"]
 input_pickable = false
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
 script = ExtResource( 1 )
 PlayerWeapon = ExtResource( 2 )
 
-[node name="Collider" type="CollisionShape2D" parent="." index="0"]
-
+[node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
-[node name="WorldSprite" type="Sprite" parent="." index="1"]
-
+[node name="WorldSprite" type="Sprite" parent="."]
 texture = ExtResource( 3 )
-
-

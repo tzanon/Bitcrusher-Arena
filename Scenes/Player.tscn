@@ -18,8 +18,8 @@ radius = 48.0
 
 [node name="Player" type="RigidBody2D" groups=[
 "SpeedDamageable",
-"Damageable",
 "ImpactVulnerable",
+"Damageable",
 ]]
 position = Vector2( 0, -4 )
 collision_mask = 9
@@ -31,12 +31,15 @@ contact_monitor = true
 linear_damp = 4.0
 script = ExtResource( 1 )
 DeathAnimation = ExtResource( 2 )
-using_audio_manager = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/PlayerDamaged = ExtResource( 3 )
 
 [node name="VulnerableTimer" type="Timer" parent="."]
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource( 2 )
 
 [node name="BodySprite" type="Sprite" parent="."]
 position = Vector2( -4, -8 )
@@ -46,10 +49,6 @@ texture = ExtResource( 4 )
 visible = false
 position = Vector2( -4, -8 )
 texture = ExtResource( 5 )
-
-[node name="Collider" type="CollisionShape2D" parent="."]
-rotation = 1.5708
-shape = SubResource( 2 )
 
 [node name="PickupDetector" type="Area2D" parent="."]
 editor/display_folded = true

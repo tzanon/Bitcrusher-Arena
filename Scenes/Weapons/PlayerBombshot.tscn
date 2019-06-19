@@ -10,6 +10,7 @@ script = ExtResource( 2 )
 weapon_name = "Bombshot"
 _hold_position = Vector2( 25, -25 )
 _hold_rotation = -5.0
+_fire_sound_tag = "bombshot_fire"
 Projectile = ExtResource( 3 )
 _fire_rate = 0.8
 _knockbox_strength = 6000

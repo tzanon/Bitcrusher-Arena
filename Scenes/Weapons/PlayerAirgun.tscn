@@ -9,37 +9,22 @@
 [ext_resource path="res://Sprites/Weapons/airgun_light.png" type="Texture" id=7]
 
 [node name="PlayerAirgun" type="Sprite"]
-
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
-debug_mode = false
 weapon_name = "Airburst Gun"
 _hold_position = Vector2( 28, -18 )
 _hold_rotation = -5.0
+_fire_sound_tag = "airgun_fire"
 Projectile = ExtResource( 3 )
 _fire_rate = 0.7
-_max_accuracy_loss = 5
 _knockbox_strength = 8000
-debug_fire_mode = false
 AirFlash = ExtResource( 4 )
 AirBarrier = ExtResource( 5 )
 Marker = ExtResource( 6 )
 
-[node name="ReadyLight" type="Sprite" parent="." index="0"]
-
+[node name="ReadyLight" type="Sprite" parent="."]
 position = Vector2( -2, -17 )
 texture = ExtResource( 7 )
 
-[node name="ProjectileSpawnPoint" type="Position2D" parent="." index="1"]
-
+[node name="ProjectileSpawnPoint" type="Position2D" parent="."]
 position = Vector2( -2, -40 )
-
-[node name="SamplePlayer" type="AudioStreamPlayer" parent="." index="2"]
-
-stream = null
-volume_db = 0.0
-autoplay = false
-mix_target = 0
-bus = "Master"
-
-

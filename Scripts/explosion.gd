@@ -26,13 +26,14 @@ func _ready():
 		printerr("could not connect body entered signal")
 	
 	# play sound effect
-	if using_audio_manager:
-		AudioManager.play_sound_by_tag(_sound_tag)
-	else:
-		if has_node("AudioStreamPlayer2D"):
-			AudioPlayer = get_node("AudioStreamPlayer2D")
-			AudioPlayer.stream = AudioManager.get_sound_by_tag(_sound_tag)
-			AudioPlayer.play()
+	if _sound_tag != "":
+		if using_audio_manager:
+			AudioManager.play_sound_by_tag(_sound_tag)
+		else:
+			if has_node("AudioStreamPlayer2D"):
+				AudioPlayer = get_node("AudioStreamPlayer2D")
+				AudioPlayer.stream = AudioManager.get_sound_by_tag(_sound_tag)
+				AudioPlayer.play()
 	
 	if debug_mode:
 		print("explosion spawned")

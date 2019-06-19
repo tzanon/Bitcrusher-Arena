@@ -2,7 +2,9 @@ extends RigidBody2D
 
 # in-dev modes
 export var debug_mode = false
-export var keyboard_mode = false
+
+enum InputMode { GAMEPAD, KEYBOARD, KEYMOUSE }
+export(InputMode) var input_mode = InputMode.GAMEPAD
 
 var DEFAULT_EFFECT_SPAWN_PATH = GameInfo.NODE_SPAWN_PATHS.effect
 
@@ -16,10 +18,10 @@ export(PackedScene) var DeathAnimation
 signal health_changed(_player_name, player_health)
 signal died(_player_name)
 
-# audio-related 
-export var using_audio_manager = false
+# audio-related
+export var using_audio_manager = true
 const DEATH_SOUND_TAG = "player_die"
-const PICKUP_SOUND_TAG = "pickup" # maybe
+const PICKUP_SOUND_TAG = "weapopn_pickup" # maybe
 signal play_sound(sound_tag)
 
 # movement-related
@@ -68,7 +70,6 @@ func _ready():
 	
 	if self.connect("body_entered", self, "_detect_collision") != 0:
 		printerr("could not connect collision detection signal")
-		
 	
 	# getting nodes
 	Animator = get_node("AnimationPlayer")
@@ -95,35 +96,40 @@ func _ready():
 
 func _physics_process(delta):
 	# aiming is currently just rotating -- should we have some sort of reticle to move around instead?
-	if keyboard_mode:
+	if input_mode == InputMode.KEYBOARD:
 		if Input.is_action_pressed("rotate_left"):
 			rotation_degrees = (rotation_degrees + -_rotd_speed * delta)
 		if Input.is_action_pressed("rotate_right"):
 			rotation_degrees = (rotation_degrees + _rotd_speed * delta)
-	else:
+	elif input_mode == InputMode.GAMEPAD:
 		var axis_pos = Input.get_joy_axis(_gamepad_id, JOY_AXIS_2)
 		if abs(axis_pos) > JOYSTICK_IDLE_LIMIT:
 			rotation_degrees = rotation_degrees + axis_pos * _rotd_speed * delta
-	
+	else:
+		# TODO: rotate player to face mouse pointer (begone tank controls!)
+		pass
 
 func _input(event):
-	if keyboard_mode:
+	if input_mode == InputMode.KEYBOARD:
 		if event.is_action_pressed("fire_weapon"):
 			_fire_weapon()
 		if event.is_action_pressed("pick_up_item"):
 			_pick_up_item()
-	else:
+	elif input_mode == InputMode.GAMEPAD:
 		if event.is_action_pressed("joy_fire") && event.device == self._gamepad_id:
 			_fire_weapon()
 		if event.is_action_pressed("joy_pickup") && event.device == self._gamepad_id:
 			_pick_up_item()
+	else:
+		# TODO: keyboard + mouse controls
+		pass
 
 # handles movement
 func _integrate_forces(state):
-	if keyboard_mode:
-		_directional_force = _calculate_direction_digital()
-	else:
+	if input_mode == InputMode.GAMEPAD:
 		_directional_force = _calculate_direction_analog()
+	else:
+		_directional_force = _calculate_direction_digital()
 	
 	var final_velocity = state.linear_velocity + (_directional_force * _acceleration)
 	
@@ -174,11 +180,18 @@ func connect_to_hud(manager):
 		printerr("could not connect death signal")
 
 func set_name(new_name):
-	if debug_mode:
-		print("_player_name is ", _player_name)
 	_player_name = new_name
 	if debug_mode:
 		print("_player_name was set to ", _player_name)
+
+func set_input_to_gamepad():
+	input_mode = InputMode.GAMEPAD
+
+func set_input_to_keyboard():
+	input_mode = InputMode.KEYBOARD
+
+func set_input_to_keymouse():
+	input_mode = InputMode.KEYMOUSE
 
 func set_gamepad_id(id):
 	_gamepad_id = id

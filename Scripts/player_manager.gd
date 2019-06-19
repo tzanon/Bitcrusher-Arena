@@ -9,11 +9,14 @@ onready var _player_spawn_info = {
 
 export var debug_mode = false
 
-const PLAYER_TEMPLATE = preload("res://Scenes/Player.tscn")
-const HUD_TEMPLATE = preload("res://Scenes/UI/PlayerInfoUI.tscn")
+export var spawn_keyboard_player = false
+onready var keyboard_player_spawn_point = get_node("TestSpawnPoint").position
 
-var DEFAULT_PLAYER_SPAWN_PATH = GameInfo.NODE_SPAWN_PATHS.player # "/root/Level/Layout/Players"
-var DEFAULT_HUD_SPAWN_PATH = GameInfo.NODE_SPAWN_PATHS.hud # "/root/Level/UI/PlayerInfoPanel"
+const PlayerTemplate = preload("res://Scenes/Player.tscn")
+const HudTemplate = preload("res://Scenes/UI/PlayerInfoUI.tscn")
+
+const DEFAULT_PLAYER_SPAWN_PATH = GameInfo.NODE_SPAWN_PATHS.player # "/root/Level/Layout/Players"
+const DEFAULT_HUD_SPAWN_PATH = GameInfo.NODE_SPAWN_PATHS.hud # "/root/Level/UI/PlayerInfoPanel"
 
 export var _game_end_time = 3.0
 var EndTimer
@@ -27,6 +30,13 @@ func _ready():
 	EndTimer.wait_time = _game_end_time
 	EndTimer.one_shot = true
 	EndTimer.connect("timeout", self, "_show_results")
+	
+	if (spawn_keyboard_player):
+		var test_player = PlayerTemplate.instance()
+		test_player.set_input_to_keyboard()
+		test_player.set_name("keyboard tester")
+		test_player.global_position = keyboard_player_spawn_point
+		get_node(DEFAULT_PLAYER_SPAWN_PATH).call_deferred("add_child", test_player)
 	
 	var player_info = GameInfo.get_info()
 	for info_entry in player_info:
@@ -46,7 +56,7 @@ func _ready():
 			child.hide()
 
 func _spawn_player(player_name):
-	var player = PLAYER_TEMPLATE.instance()
+	var player = PlayerTemplate.instance()
 	player.connect_to_hud(self)
 	
 	player.set_name(player_name)
@@ -67,7 +77,7 @@ func remove_player(player_name):
 		_end_game()
 
 func _enable_player_hud(info_entry):
-	var hud = HUD_TEMPLATE.instance()
+	var hud = HudTemplate.instance()
 	
 	get_node(DEFAULT_HUD_SPAWN_PATH).call_deferred("add_child", hud)
 	hud.call_deferred("set_icon_with_path", info_entry.icon_path)

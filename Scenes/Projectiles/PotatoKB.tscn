@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/projectile_kb.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Effects/Explosion1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Sprites/Projectiles/potato16x28.png" type="Texture" id=3]
-[ext_resource path="res://Sounds/Weapons/potato_expl2.wav" type="AudioStream" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 7.5
@@ -20,12 +19,10 @@ _damage_amount = 15
 _speed = 600.0
 _bounce_groups = PoolStringArray( "Airburst" )
 ImpactEffect = ExtResource( 2 )
+_impact_sound_tag = "potato_explode"
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
-
-[node name="SoundPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )

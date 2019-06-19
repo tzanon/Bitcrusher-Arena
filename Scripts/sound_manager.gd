@@ -2,7 +2,7 @@ extends Node
 
 # TODO: make this a singleton; other scenes need audio
 
-export var debug_mode = false
+var debug_mode = false
 var muted = false
 
 # order: UI, player, weapon firing, weapon hit/effect, traps
@@ -16,7 +16,7 @@ enum SoundTags {
 }
 
 const SOUND_MAP = {
-	# put dummy placeholder/debug sound for "" for testing
+	# TODO: put dummy placeholder/debug sound for "" for testing
 	"laser_fire" : preload("res://Sounds/Weapons/laser_fire1.wav"),
 	"potato_fire" : preload("res://Sounds/Weapons/potato_fire1.wav"),
 	"airgun_fire" : preload("res://Sounds/Weapons/airgun_fire1.wav"),
@@ -29,12 +29,14 @@ const SOUND_MAP = {
 	#"" : preload(""),
 }
 
+var sound_info = {}
+
 #export var max_audio_players = 32
 
 var AudioPlayer
 
 # min number of sounds to play:
-# 1 AP for each player (weapon firing, death)
+# 1 AP for each player (death, maybe pickup sound later)
 # 1 AP for each type of trap
 
 func _ready():
@@ -58,7 +60,7 @@ func play_sound_by_tag(sound_tag):
 		return
 	
 	if debug_mode:
-		print("playing sound with tag ", sound_tag)
+		print("playing sound with tag '", sound_tag, "'")
 	
 	var effect = SOUND_MAP[sound_tag]
 	if effect:

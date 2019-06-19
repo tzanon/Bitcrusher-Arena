@@ -18,6 +18,7 @@ contacts_reported = 1
 contact_monitor = true
 script = ExtResource( 1 )
 ExplosionEffect = ExtResource( 2 )
+_explosion_sound_tag = "bomb_explode"
 
 [node name="Timer" type="Timer" parent="."]
 
@@ -26,5 +27,3 @@ shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 3 )
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

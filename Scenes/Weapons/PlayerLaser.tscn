@@ -10,6 +10,7 @@ script = ExtResource( 2 )
 weapon_name = "Laser"
 _hold_position = Vector2( 24, -32 )
 _hold_rotation = -7.0
+_fire_sound_tag = "laser_fire"
 Projectile = ExtResource( 3 )
 _fire_rate = 0.1
 _knockbox_strength = 1500

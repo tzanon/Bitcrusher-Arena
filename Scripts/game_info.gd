@@ -35,7 +35,7 @@ func print_player_name(id):
 		if info_entry.pad_id == id:
 			print(info_entry.name, " standing by!")
 			break
-
+	
 func print_players():
 	print("registered players: ", registered_player_info)
 

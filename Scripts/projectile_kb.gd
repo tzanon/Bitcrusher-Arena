@@ -16,9 +16,7 @@ export(PackedScene) var ImpactEffect
 const DEFAULT_EFFECT_SPAWN_PATH = GameInfo.NODE_SPAWN_PATHS.effect #"/root/Level/Effects"
 
 # audio-related
-export var using_audio_manager = false
 export var _impact_sound_tag = ""
-signal play_sound(sound_tag) # need this?
 
 var _movement
 
@@ -30,12 +28,6 @@ func _ready():
 	
 	var rot = global_rotation
 	_movement = Vector2(-sin(rot), cos(rot)) * -_speed
-	
-	if has_node("SoundPlayer"):
-		AudioPlayer = get_node("SoundPlayer")
-		if _impact_sound_tag != "":
-			AudioPlayer.stream = AudioManager.get_sound_by_tag(_impact_sound_tag)
-	
 
 func _physics_process(delta):
 	var collision = move_and_collide(_movement * delta, false)
@@ -98,13 +90,7 @@ func _explode():
 			get_tree().get_root().add_child(effect)
 	
 	# play sound effect
-	if using_audio_manager:
-		AudioManager.play_sound_by_tag(_impact_sound_tag)
-	else:
-		if AudioPlayer:
-			if debug_mode:
-				print("playing impact sound")
-			AudioPlayer.play()
+	AudioManager.play_sound_by_tag(_impact_sound_tag)
 	
 	self.queue_free()
 
