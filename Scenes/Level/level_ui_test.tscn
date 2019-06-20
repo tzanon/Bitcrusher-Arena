@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Level/ground3/floor.png" type="Texture" id=2]
@@ -26,13 +26,8 @@
 [ext_resource path="res://Scenes/Hazards/floor_trap.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Scenes/Level/Arena1-Blue/Boundary.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Scenes/Level/Arena1-Blue/SouthBoundary.tscn" type="PackedScene" id=26]
-[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=27]
-[ext_resource path="res://Sprites/UI/Gameplay/gameplay_ui_panel.png" type="Texture" id=28]
-[ext_resource path="res://Sprites/UI/Gameplay/gameplay_ui_frame.png" type="Texture" id=29]
-
-[sub_resource type="PhysicsMaterial" id=1]
-friction = 0.6
-bounce = 0.3
+[ext_resource path="res://Sprites/UI/Gameplay/gameplay_ui_panel.png" type="Texture" id=27]
+[ext_resource path="res://Sprites/UI/Gameplay/gameplay_ui_frame.png" type="Texture" id=28]
 
 [node name="Level" type="Node"]
 script = ExtResource( 1 )
@@ -277,11 +272,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Player" parent="Layout/Players" instance=ExtResource( 27 )]
-position = Vector2( 1280, 697 )
-physics_material_override = SubResource( 1 )
-input_mode = 1
-
 [node name="Projectiles" type="Node2D" parent="."]
 __meta__ = {
 "_edit_lock_": true
@@ -309,7 +299,7 @@ margin_right = 1920.0
 margin_bottom = 1078.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 28 )
+texture = ExtResource( 27 )
 
 [node name="InfoPanelFrame" type="TextureRect" parent="UI"]
 margin_top = 928.0
@@ -317,7 +307,7 @@ margin_right = 1920.0
 margin_bottom = 1078.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 29 )
+texture = ExtResource( 28 )
 
 [editable path="Layout/PlayerManager"]
 

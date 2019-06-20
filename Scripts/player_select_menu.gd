@@ -108,6 +108,8 @@ func _request_join(gamepad_id):
 		var player_name = GameInfo.get_player_name_with_id(gamepad_id)
 		var display_node = _player_display_nodes[player_name].get_node("IconBack/PlayerIcon")
 		
+		# TODO: play unique sound for each player
+		
 		var id_demo = _player_id_scene.instance()
 		id_demo.position = display_node.rect_global_position + Vector2(120, 50)
 		id_demo.rotation_degrees = 90

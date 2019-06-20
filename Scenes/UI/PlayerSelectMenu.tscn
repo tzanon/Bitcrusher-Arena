@@ -1,416 +1,196 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/player_select_menu.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/Projectiles/LaserKB.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Sprites/UI/SelectMenu/setup_title1.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/UI/SelectMenu/join_prompt.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/UI/player_blank_icon.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Placeholder/ui_icon1.png" type="Texture" id=6]
-[ext_resource path="res://Scenes/UI/Buttons/BackButton.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/UI/Buttons/StartButton.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Sprites/UI/SelectMenu/ui_player_warning.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/UI/SelectMenu/setup_title1.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/UI/SelectMenu/join_prompt.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/UI/player_blank_icon.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Placeholder/ui_icon1.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/UI/Buttons/BackButton.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/UI/Buttons/StartButton.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Sprites/UI/SelectMenu/ui_player_warning.png" type="Texture" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
-
-custom_solver_bias = 0.0
 extents = Vector2( 64, 448 )
 
 [node name="PlayerSelectMenu" type="Control"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_top = -4.0
 margin_bottom = -4.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 script = ExtResource( 1 )
-_sections_unfolded = [ "Anchor", "Margin", "Rect" ]
 debug_mode = true
 solo_test_mode = true
-game_scene_path = "res://Scenes/Level/level_ui_test.tscn"
-player_id_scene = ExtResource( 2 )
 
-[node name="Layout" type="Control" parent="." index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Layout" type="Control" parent="."]
 margin_right = 1920.0
 margin_bottom = 1080.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-_sections_unfolded = [ "Rect" ]
 
-[node name="TitleDisplay" type="TextureRect" parent="Layout" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="TitleDisplay" type="TextureRect" parent="Layout"]
 margin_left = 392.0
 margin_top = 53.0
 margin_right = 1452.0
 margin_bottom = 218.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 3 )
-stretch_mode = 0
+texture = ExtResource( 2 )
 
-[node name="JoinDisplays" type="Control" parent="Layout" index="1"]
-
+[node name="JoinDisplays" type="Control" parent="Layout"]
 editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 984.0
 margin_top = 537.0
 margin_right = 1024.0
 margin_bottom = 577.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 
-[node name="Display1" type="Control" parent="Layout/JoinDisplays" index="0"]
-
+[node name="Display1" type="Control" parent="Layout/JoinDisplays"]
 editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = -360.0
 margin_top = -222.0
 margin_right = 312.0
 margin_bottom = -126.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="PlayerJoin" type="TextureRect" parent="Layout/JoinDisplays/Display1" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="PlayerJoin" type="TextureRect" parent="Layout/JoinDisplays/Display1"]
 margin_right = 537.0
 margin_bottom = 89.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 4 )
-stretch_mode = 0
-_sections_unfolded = [ "Rect" ]
+texture = ExtResource( 3 )
 
-[node name="IconBack" type="TextureRect" parent="Layout/JoinDisplays/Display1" index="1"]
-
+[node name="IconBack" type="TextureRect" parent="Layout/JoinDisplays/Display1"]
 editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 568.0
 margin_top = 1.0
 margin_right = 680.0
 margin_bottom = 113.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 5 )
-stretch_mode = 0
+texture = ExtResource( 4 )
 
-[node name="PlayerIcon" type="TextureRect" parent="Layout/JoinDisplays/Display1/IconBack" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="PlayerIcon" type="TextureRect" parent="Layout/JoinDisplays/Display1/IconBack"]
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 99.0
 margin_bottom = 99.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 6 )
-stretch_mode = 0
+texture = ExtResource( 5 )
 
-[node name="Display2" type="Control" parent="Layout/JoinDisplays" index="1"]
-
+[node name="Display2" type="Control" parent="Layout/JoinDisplays"]
 editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = -360.0
 margin_top = -62.0
 margin_right = 312.0
 margin_bottom = 34.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="PlayerJoin" type="TextureRect" parent="Layout/JoinDisplays/Display2" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="PlayerJoin" type="TextureRect" parent="Layout/JoinDisplays/Display2"]
 margin_right = 537.0
 margin_bottom = 89.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 4 )
-stretch_mode = 0
-_sections_unfolded = [ "Rect" ]
+texture = ExtResource( 3 )
 
-[node name="IconBack" type="TextureRect" parent="Layout/JoinDisplays/Display2" index="1"]
-
+[node name="IconBack" type="TextureRect" parent="Layout/JoinDisplays/Display2"]
 editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 568.0
 margin_top = 1.0
 margin_right = 680.0
 margin_bottom = 113.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 5 )
-stretch_mode = 0
+texture = ExtResource( 4 )
 
-[node name="PlayerIcon" type="TextureRect" parent="Layout/JoinDisplays/Display2/IconBack" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="PlayerIcon" type="TextureRect" parent="Layout/JoinDisplays/Display2/IconBack"]
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 99.0
 margin_bottom = 99.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 6 )
-stretch_mode = 0
+texture = ExtResource( 5 )
 
-[node name="Display3" type="Control" parent="Layout/JoinDisplays" index="2"]
-
+[node name="Display3" type="Control" parent="Layout/JoinDisplays"]
 editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = -360.0
 margin_top = 98.0
 margin_right = 312.0
 margin_bottom = 194.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="PlayerJoin" type="TextureRect" parent="Layout/JoinDisplays/Display3" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="PlayerJoin" type="TextureRect" parent="Layout/JoinDisplays/Display3"]
 margin_right = 537.0
 margin_bottom = 89.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 4 )
-stretch_mode = 0
-_sections_unfolded = [ "Rect" ]
+texture = ExtResource( 3 )
 
-[node name="IconBack" type="TextureRect" parent="Layout/JoinDisplays/Display3" index="1"]
-
+[node name="IconBack" type="TextureRect" parent="Layout/JoinDisplays/Display3"]
 editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 568.0
 margin_top = 1.0
 margin_right = 680.0
 margin_bottom = 113.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 5 )
-stretch_mode = 0
+texture = ExtResource( 4 )
 
-[node name="PlayerIcon" type="TextureRect" parent="Layout/JoinDisplays/Display3/IconBack" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="PlayerIcon" type="TextureRect" parent="Layout/JoinDisplays/Display3/IconBack"]
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 99.0
 margin_bottom = 99.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 6 )
-stretch_mode = 0
+texture = ExtResource( 5 )
 
-[node name="Display4" type="Control" parent="Layout/JoinDisplays" index="3"]
-
+[node name="Display4" type="Control" parent="Layout/JoinDisplays"]
 editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = -360.0
 margin_top = 258.0
 margin_right = 312.0
 margin_bottom = 354.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="PlayerJoin" type="TextureRect" parent="Layout/JoinDisplays/Display4" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="PlayerJoin" type="TextureRect" parent="Layout/JoinDisplays/Display4"]
 margin_right = 537.0
 margin_bottom = 89.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 4 )
-stretch_mode = 0
-_sections_unfolded = [ "Rect" ]
+texture = ExtResource( 3 )
 
-[node name="IconBack" type="TextureRect" parent="Layout/JoinDisplays/Display4" index="1"]
-
+[node name="IconBack" type="TextureRect" parent="Layout/JoinDisplays/Display4"]
 editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 568.0
 margin_top = 1.0
 margin_right = 680.0
 margin_bottom = 113.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 5 )
-stretch_mode = 0
+texture = ExtResource( 4 )
 
-[node name="PlayerIcon" type="TextureRect" parent="Layout/JoinDisplays/Display4/IconBack" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="PlayerIcon" type="TextureRect" parent="Layout/JoinDisplays/Display4/IconBack"]
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 99.0
 margin_bottom = 99.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 6 )
-stretch_mode = 0
+texture = ExtResource( 5 )
 
-[node name="BackButton" parent="Layout" index="2" instance=ExtResource( 7 )]
-
+[node name="BackButton" parent="Layout" instance=ExtResource( 6 )]
 margin_left = 40.0
 margin_top = 893.0
 margin_right = 361.0
 margin_bottom = 1034.0
 size_flags_horizontal = 2
 
-[node name="StartButton" parent="Layout" index="3" instance=ExtResource( 8 )]
-
+[node name="StartButton" parent="Layout" instance=ExtResource( 7 )]
 margin_left = 1516.0
 margin_top = 893.0
 margin_right = 1869.0
@@ -419,10 +199,8 @@ focus_mode = 0
 size_flags_horizontal = 2
 enabled_focus_mode = 0
 
-[node name="PlayerWarning" type="PopupPanel" parent="Layout" index="4"]
-
+[node name="PlayerWarning" type="PopupPanel" parent="Layout"]
 editor/display_folded = true
-visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -432,52 +210,25 @@ margin_top = -128.0
 margin_right = 512.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 1024, 256 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-popup_exclusive = false
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="WarningDisplay" type="TextureRect" parent="Layout/PlayerWarning" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 1024.0
-margin_bottom = 256.0
+[node name="WarningDisplay" type="TextureRect" parent="Layout/PlayerWarning"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 1028.0
+margin_bottom = 260.0
 rect_min_size = Vector2( 1024, 256 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-texture = ExtResource( 9 )
-stretch_mode = 0
+texture = ExtResource( 8 )
 
-[node name="LaserBlocker" type="StaticBody2D" parent="Layout" index="5"]
-
+[node name="LaserBlocker" type="StaticBody2D" parent="Layout"]
 editor/display_folded = true
 position = Vector2( 1912, 541 )
-input_pickable = false
-collision_layer = 1
 collision_mask = 0
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Collider" type="CollisionShape2D" parent="Layout/LaserBlocker" index="0"]
-
+[node name="Collider" type="CollisionShape2D" parent="Layout/LaserBlocker"]
 shape = SubResource( 1 )
-
-
