@@ -10,8 +10,10 @@ const SCENE_PATHS = {
 
 # TODO: default node paths
 const NODE_SPAWN_PATHS = {
-	effect = "/root/Level/Effects",
-	projectile = "/root/Level/Projectiles",
+	#effect = "/root/Level/Effects",
+	effect = "/root/Level/Layout/Effects",
+	#projectile = "/root/Level/Projectiles",
+	projectile = "/root/Level/Layout/Projectiles",
 	player = "/root/Level/Layout/Players",
 	hud = "/root/Level/UI/PlayerInfoPanel",
 	pickup = "/root/Level/Layout/Pickups"

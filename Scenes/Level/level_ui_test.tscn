@@ -128,7 +128,6 @@ __meta__ = {
 }
 
 [node name="Walls" type="Node2D" parent="Layout/Structure/Obstacles"]
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -272,18 +271,17 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Projectiles" type="Node2D" parent="."]
+[node name="Projectiles" type="Node2D" parent="Layout"]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Effects" type="Node2D" parent="."]
+[node name="Effects" type="Node2D" parent="Layout"]
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="UI" type="Control" parent="."]
-editor/display_folded = true
 margin_right = 40.0
 margin_bottom = 40.0
 size_flags_horizontal = 2

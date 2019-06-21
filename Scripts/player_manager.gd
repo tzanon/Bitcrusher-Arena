@@ -31,6 +31,7 @@ func _ready():
 	EndTimer.one_shot = true
 	EndTimer.connect("timeout", self, "_show_results")
 	
+	# spawn keyboard-controllable player for debugging purposes
 	if (spawn_keyboard_player):
 		var test_player = PlayerTemplate.instance()
 		test_player.set_input_to_keyboard()
@@ -38,6 +39,7 @@ func _ready():
 		test_player.global_position = keyboard_player_spawn_point
 		get_node(DEFAULT_PLAYER_SPAWN_PATH).call_deferred("add_child", test_player)
 	
+	# spawn each player in this game
 	var player_info = GameInfo.get_info()
 	for info_entry in player_info:
 		if debug_mode:
@@ -49,7 +51,7 @@ func _ready():
 		player.set_gamepad_id(info_entry.pad_id)
 		_match_player_refs[info_entry.name] = weakref(player)
 	
-	# this will be refactored (or not)
+	# hide spawn points for players
 	var children = get_children()
 	for child in children:
 		if child.is_in_group("PlayerSpawnPoint"):
@@ -86,7 +88,6 @@ func _enable_player_hud(info_entry):
 	hud.rect_position = hud_position
 	
 	_player_huds[info_entry.name] = hud
-	
 
 func update_player_health(player_name, player_health):
 	if debug_mode:
@@ -99,7 +100,6 @@ func _end_game():
 	if debug_mode:
 		print("Winner is ", GameInfo.match_winner)
 	EndTimer.start()
-	
 
 func _show_results():
 	get_tree().change_scene(GameInfo.SCENE_PATHS.results)
