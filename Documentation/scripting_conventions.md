@@ -1,4 +1,4 @@
-NAMING CONVENTIONS
+# Code Conventions
 
 Classes and Nodes: PascalCase
 var MyNode = preload("path1")
@@ -10,11 +10,11 @@ enum Directions { NORTH, SOUTH, EAST, WEST }
 Functions and Variables: snake_case
 func get_node()
 
--underscore for virtual methods, private functions/vars
+Leading underscore for virtual methods, private functions/vars
 var _health
 func _deal_damage()
 
-Signals: past tense
+Signals: snake_case with past tense name
 signal door_opened
 signal door_changed
 
