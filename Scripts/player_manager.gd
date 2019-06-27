@@ -57,6 +57,8 @@ func _ready():
 		if child.is_in_group("PlayerSpawnPoint"):
 			child.hide()
 
+# end ready
+
 func _spawn_player(player_name):
 	var player = PlayerTemplate.instance()
 	player.connect_to_hud(self)

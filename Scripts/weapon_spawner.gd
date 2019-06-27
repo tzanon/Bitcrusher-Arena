@@ -14,7 +14,7 @@ const WEAPON_SCENES = [
 
 # TODO: exported enum and case statement to select spawn mode
 
-enum SpawnMode {STATIC_FIXED, STATIC_RANDOM, SELECT_FIXED, SELECT_RANDOM}
+enum SpawnMode { STATIC_FIXED, STATIC_RANDOM, SELECT_FIXED, SELECT_RANDOM }
 export(SpawnMode) var _initial_spawn_mode = 1
 
 # funcref to the current spawn function
