@@ -3,9 +3,14 @@ extends Area2D
 export var debug_mode = false
 
 export var _is_damaging = true
+export var _is_pushing = true
+
 export var _damage_amount = 10
 export var _impact_force = 0.0
 export var _max_force_range = 100
+
+# for new damage model
+export(float) var _damage_interval = 200 # milliseconds!
 
 # audio-related
 export var using_audio_manager = false
@@ -13,17 +18,40 @@ export var _sound_tag = ""
 
 var Animator
 var AudioPlayer
+var DamageTimer
 
 # only damage a given body once
 var _damaged_bodies = []
 var _pushed_bodies = []
 
+# new functionality: explosion acts as damaging area
+# i.e. every x milliseconds it applies damage to anything
+# in its radius
+# only push away bodies when first spawned, no repeats
+
 func _ready():
 	Animator = get_node("AnimationPlayer")
 	Animator.connect("animation_finished", self, "_despawn")
 	
-	if self.connect("body_entered", self, "_detect_entry") != 0:
-		printerr("could not connect body entered signal")
+	if _is_damaging:
+		# set up damage timer
+		if has_node("DamageTimer"):
+			DamageTimer = get_node("DamageTimer")
+		else:
+			DamageTimer = Timer.new()
+			self.add_child(DamageTimer)
+		DamageTimer.one_shot = true
+		DamageTimer.wait_time = _damage_interval / 1000
+		DamageTimer.connect("timeout", self, "_apply_damage")
+		
+		# deal initial damage and impulse force
+		self._apply_damage()
+	
+	if _is_pushing:
+		self._apply_push_force()
+	
+	#if self.connect("body_entered", self, "_detect_entry") != 0:
+	#	printerr("could not connect body entered signal")
 	
 	# play sound effect
 	if _sound_tag != "":
@@ -37,7 +65,6 @@ func _ready():
 	
 	if debug_mode:
 		print("explosion spawned")
-
 
 func _detect_entry(body):
 	if !_is_damaging:
@@ -70,9 +97,33 @@ func _detect_entry(body):
 		var strength_factor = _max_force_range / distance.length()
 		
 		var impulse = _impact_force * strength_factor * direction
-		body.apply_impulse(Vector2(0,0), impulse)
+		body.apply_impulse(Vector2(0, 0), impulse)
 		_pushed_bodies.append(body_id)
 
+func _apply_push_force():
+	var overlapping_bodies = get_overlapping_bodies()
+	for body in overlapping_bodies:
+		if body.is_class("RigidBody2D"):
+			if debug_mode:
+				print("explosion pushing ", body.name)
+			var direction = (body.global_position - self.global_position).normalized()
+			var impulse = _impact_force * direction
+			body.apply_impulse(Vector2(0, 0), impulse)
+		
+		# for future redesign of player and player-related physics
+		if body.is_in_group("KBCustomPhysics"):
+			# TODO: apply custom "force" to non-rb player
+			# TODO: make parent script for KBs with custom forces?
+			pass
+
+func _apply_damage():
+	var overlapping_bodies = get_overlapping_bodies()
+	for body in overlapping_bodies:
+		if body.is_in_group("Damageable"):
+			if debug_mode:
+				print("explosion damaging ", body.name)
+			body.damage(_damage_amount)
+	DamageTimer.start()
 
 func _despawn(name):
 	if debug_mode:

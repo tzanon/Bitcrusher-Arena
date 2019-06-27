@@ -78,7 +78,7 @@ func get_sound_by_tag(sound_tag):
 	return SOUND_MAP[sound_tag].sound
 
 func play_sound_by_tag(sound_tag):
-	if muted:
+	if muted or sound_tag == "None":
 		return
 	
 	if !SOUND_MAP.has(sound_tag):
