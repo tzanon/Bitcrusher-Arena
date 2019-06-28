@@ -19,15 +19,18 @@ onready var ProjSpawnPoint = get_node("ProjectileSpawnPoint")
 var DEFAULT_PROJ_SPAWN_PATH = GameInfo.NODE_SPAWN_PATHS.projectile # originally "/root/Level/Projectiles"
 
 var FireTimer
+var AccuracyResetTimer
 var AudioPlayer
 
 # how often a weapon fires
 export(float, 0.05, 2, 0.05) var _fire_rate
 export(float) var _accuracy_reset_time
 
+
 # accuracy and knockback
 export(int, 0, 45) var _max_accuracy_loss = 5
 export(int, 200, 10000, 100) var _knockbox_strength = 600
+export var _fire_arc_incr = 1.0f
 
 func _ready():
 	FireTimer = Timer.new()
@@ -63,6 +66,44 @@ func _play_fire_sound():
 	else:
 		AudioPlayer.play()
 
+func _increase_firing_arc():
+	
+	pass
+
+func get_rotation_in_arc():
+	
+	pass
+
+func _fire_decr_acc(spawn_pos):
+	if FireTimer.time_left > 0:
+		return
+	
+	self._play_fire_sound()
+	
+	var projectile = Projectile.instance()
+	projectile.global_position = spawn_pos
+	
+	# perfect accuracy if cooldown done, increasingly inaccurate if not
+	if AccuracyResetTimer.time_left <= 0:
+		projectile.rotation_degrees = _user.global_rotation_degrees
+	else:
+		projectile.rotation_degrees = self.get_rotation_in_arc()
+	
+	if has_node(DEFAULT_PROJ_SPAWN_PATH):
+		get_node(DEFAULT_PROJ_SPAWN_PATH).add_child(projectile)
+	else:
+		get_tree().get_root().add_child(projectile)
+	self._increase_firing_arc()
+	AccuracyResetTimer.start()
+	
+	var rot = _user.global_rotation
+	var knockback_direction = Vector2(-sin(rot), cos(rot)).normalized()
+	var knockback_force = _knockbox_strength * knockback_direction
+	_user.apply_impulse(Vector2(0,0), knockback_force)
+	
+	FireTimer.start()
+	
+
 func _fire(spawn_pos):
 	if FireTimer.time_left <= 0:
 		
@@ -70,6 +111,7 @@ func _fire(spawn_pos):
 		
 		var projectile = Projectile.instance()
 		projectile.global_position = spawn_pos
+		
 		# TODO: refactor accuracy calculation
 		projectile.rotation_degrees = _user.global_rotation_degrees + _max_accuracy_loss * pow(2*randf() - 1, 3)
 		
