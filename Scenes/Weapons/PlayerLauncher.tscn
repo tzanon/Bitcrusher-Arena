@@ -13,7 +13,10 @@ _hold_rotation = -5.0
 _fire_sound_tag = "potato_fire"
 Projectile = ExtResource( 3 )
 _fire_rate = 0.4
-_knockbox_strength = 4500
+_accuracy_reset_time = 1.2
+_fire_arc_incr = 3.0
+max_arc_angle = 12.0
+knockbox_strength = 4500
 
 [node name="ProjectileSpawnPoint" type="Position2D" parent="."]
 position = Vector2( 1, -32 )

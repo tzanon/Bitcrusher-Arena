@@ -31,12 +31,7 @@ func _fire(spawn_pos):
 		
 		fire_angle += _fire_angle_incr
 	
-	# player recoil
-	var rot = _user.global_rotation
-	var knockback_direction = Vector2(sin(rot), cos(rot)).normalized()
-	var knockback_force = _knockbox_strength * knockback_direction
-	_user.apply_impulse(Vector2(0,0), knockback_force)
+	# player recoil GONE
+	
 	
 	FireTimer.start()
-	
-

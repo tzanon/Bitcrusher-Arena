@@ -2,6 +2,7 @@ extends RigidBody2D
 
 # in-dev modes
 export var debug_mode = false
+export var accuracy_debug = false
 
 enum InputMode { GAMEPAD, KEYBOARD, KEYMOUSE }
 export(InputMode) var input_mode = InputMode.GAMEPAD
@@ -52,6 +53,7 @@ var ItemDetector
 var ImpactVulnerabilityTimer
 var BodySprite
 var AudioPlayer
+var DefaultProjSpawnPosition
 
 # weapon-related
 const START_WEAPON = preload("res://Scenes/Weapons/PlayerLaser.tscn")
@@ -63,6 +65,9 @@ const PROJ_SPAWN_POSITIONS = {
 	"Airburst Gun" : Vector2(0, -24),
 	"Bombshot" : Vector2(0, -40)
 }
+
+# accuracy debugging
+export var accuracy_arc_length = 10.0
 
 func _ready():
 	set_physics_process(true)
@@ -77,6 +82,7 @@ func _ready():
 	ImpactVulnerableFilter = get_node("VulnerableFilter")
 	BodySprite = get_node("BodySprite")
 	ItemDetector = get_node("PickupDetector")
+	DefaultProjSpawnPosition = get_node("ProjectileSpawnPosition")
 	
 	# audio setup
 	if connect("play_sound", AudioManager, "play_sound_by_tag") != 0:
@@ -94,6 +100,7 @@ func _ready():
 	
 	_equip_weapon(START_WEAPON)
 
+# movement input
 func _physics_process(delta):
 	# aiming is currently just rotating -- should we have some sort of reticle to move around instead?
 	if input_mode == InputMode.KEYBOARD:
@@ -109,6 +116,16 @@ func _physics_process(delta):
 		# TODO: rotate player to face mouse pointer (begone tank controls!)
 		pass
 
+# handle drawning
+func _process(delta):
+	update()
+
+# debug drawing
+func _draw():
+	if accuracy_debug:
+		_draw_weapon_accuracy_arc()
+
+# handle non-movement input
 func _input(event):
 	if input_mode == InputMode.KEYBOARD:
 		if event.is_action_pressed("fire_weapon"):
@@ -140,6 +157,7 @@ func _integrate_forces(state):
 		#print("final speed is ", self.get_speed())
 		pass
 
+# calculate movement direction based on WASD keys
 func _calculate_direction_digital():
 	_directional_force = DIRECTION.ZERO
 	
@@ -154,6 +172,7 @@ func _calculate_direction_digital():
 	
 	return _directional_force
 
+# calculate movement direction based on analog stick
 func _calculate_direction_analog():
 	_directional_force = DIRECTION.ZERO
 	
@@ -167,9 +186,11 @@ func _calculate_direction_analog():
 	
 	return _directional_force
 
+# set sprite of player body
 func set_sprite_from_path(sprite_path):
 	get_node("BodySprite").set_texture(load(sprite_path))
 
+# connect health-related signals to HUD manager
 func connect_to_hud(manager):
 	var health_err = connect("health_changed", manager, "update_player_health")
 	var death_err = connect("died", manager, "remove_player")
@@ -179,11 +200,13 @@ func connect_to_hud(manager):
 	if death_err != 0:
 		printerr("could not connect death signal")
 
+# set player's name
 func set_name(new_name):
 	_player_name = new_name
 	if debug_mode:
 		print("_player_name was set to ", _player_name)
 
+# different input modes
 func set_input_to_gamepad():
 	input_mode = InputMode.GAMEPAD
 
@@ -193,14 +216,26 @@ func set_input_to_keyboard():
 func set_input_to_keymouse():
 	input_mode = InputMode.KEYMOUSE
 
+# set which gamepad the player reads input from
 func set_gamepad_id(id):
 	_gamepad_id = id
 
+# current speed of player
 func get_speed():
 	return self.linear_velocity.length()
 
+# squared speed for comparisons
 func get_speed_sq():
 	return self.linear_velocity.length_squared()
+
+func get_weapon_proj_spawn_pos(weapon_name):
+	if PROJ_SPAWN_POSITIONS.has(weapon_name):
+		return get_global_transform().xform(PROJ_SPAWN_POSITIONS[weapon_name])
+	else:
+		return get_default_proj_spawn_pos()
+
+func get_default_proj_spawn_pos():
+	return DefaultProjSpawnPosition.global_position
 
 func _calculate_collide_damage():
 	var speed_factor = self.get_speed() / _speed_pain_threshold
@@ -280,13 +315,50 @@ func _die():
 	
 	self.queue_free()
 
+# debugging
+func _draw_weapon_accuracy_arc():
+	var current_col = Color.yellow
+	var max_col = Color.red
+	
+	var right_angle = deg2rad(_weapon.arc_angle)
+	var left_angle = -deg2rad(_weapon.arc_angle)
+	var max_right_angle = deg2rad(_weapon.max_arc_angle)
+	var max_left_angle = -deg2rad(_weapon.max_arc_angle)
+	
+	var right_limit = accuracy_arc_length * Vector2(sin(right_angle), -cos(right_angle))
+	var left_limit = accuracy_arc_length * Vector2(sin(left_angle), -cos(left_angle))
+	var max_right_limit = accuracy_arc_length * Vector2(sin(max_right_angle), -cos(max_right_angle))
+	var max_left_limit = accuracy_arc_length * Vector2(sin(max_left_angle), -cos(max_left_angle))
+	
+	var spawn_pos = PROJ_SPAWN_POSITIONS[_weapon.get_weapon_name()]
+	
+	# draw max size arc
+	draw_line(spawn_pos, max_right_limit, max_col)
+	draw_line(spawn_pos, max_left_limit, max_col)
+	
+	# draw current arc
+	draw_line(spawn_pos, right_limit, current_col)
+	draw_line(spawn_pos, left_limit, current_col)
+
 func _fire_weapon():
-	var spawn_pos
-	if PROJ_SPAWN_POSITIONS.has(_weapon.get_weapon_name()):
-		spawn_pos = get_global_transform().xform(PROJ_SPAWN_POSITIONS[_weapon.get_weapon_name()])
-	else:
-		spawn_pos = get_node("ProjectileSpawnPosition").global_position
+	var spawn_pos = get_weapon_proj_spawn_pos(_weapon.get_weapon_name())
+	
+	#if PROJ_SPAWN_POSITIONS.has(_weapon.get_weapon_name()):
+	#	spawn_pos = get_global_transform().xform(PROJ_SPAWN_POSITIONS[_weapon.get_weapon_name()])
+	#else:
+	#	spawn_pos = DefaultProjSpawnPosition.global_position
+	
+	#var spawn_pos = get_default_proj_spawn_pos()
+	#spawn_pos = self.global_position
+	
 	_weapon._fire(spawn_pos)
+	self._apply_recoil()
+
+func _apply_recoil():
+	var rot = self.global_rotation
+	var knockback_direction = Vector2(-sin(rot), cos(rot)).normalized()
+	var knockback_force = _weapon.knockbox_strength * knockback_direction
+	self.apply_impulse(Vector2(0,0), knockback_force)
 
 # looks for item in pickup radius and replaces current one with it if there is
 func _pick_up_item():

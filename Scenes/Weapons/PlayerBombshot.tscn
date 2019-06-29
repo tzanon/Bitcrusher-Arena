@@ -13,7 +13,8 @@ _hold_rotation = -5.0
 _fire_sound_tag = "bombshot_fire"
 Projectile = ExtResource( 3 )
 _fire_rate = 0.8
-_knockbox_strength = 6000
+max_arc_angle = 0.0
+knockbox_strength = 6000
 
 [node name="ProjectileSpawnPoint" type="Position2D" parent="."]
 position = Vector2( 0, -32 )

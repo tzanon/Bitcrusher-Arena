@@ -18,8 +18,8 @@ radius = 48.0
 
 [node name="Player" type="RigidBody2D" groups=[
 "SpeedDamageable",
-"ImpactVulnerable",
 "Damageable",
+"ImpactVulnerable",
 ]]
 position = Vector2( 0, -4 )
 collision_mask = 9
@@ -30,7 +30,9 @@ contacts_reported = 3
 contact_monitor = true
 linear_damp = 4.0
 script = ExtResource( 1 )
+accuracy_debug = true
 DeathAnimation = ExtResource( 2 )
+accuracy_arc_length = 100.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/PlayerDamaged = ExtResource( 3 )

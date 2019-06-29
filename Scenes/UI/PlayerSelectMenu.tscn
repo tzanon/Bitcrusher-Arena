@@ -1,13 +1,14 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/player_select_menu.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/UI/SelectMenu/setup_title1.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/UI/SelectMenu/join_prompt.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/UI/player_blank_icon.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Placeholder/ui_icon1.png" type="Texture" id=5]
-[ext_resource path="res://Scenes/UI/Buttons/BackButton.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/UI/Buttons/StartButton.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Sprites/UI/SelectMenu/ui_player_warning.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/Projectiles/LaserKB.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Sprites/UI/SelectMenu/setup_title1.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/UI/SelectMenu/join_prompt.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/UI/player_blank_icon.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Placeholder/ui_icon1.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/UI/Buttons/BackButton.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/UI/Buttons/StartButton.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Sprites/UI/SelectMenu/ui_player_warning.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 64, 448 )
@@ -17,7 +18,7 @@ margin_top = -4.0
 margin_bottom = -4.0
 script = ExtResource( 1 )
 debug_mode = true
-solo_test_mode = true
+_player_id_scene = ExtResource( 2 )
 
 [node name="Layout" type="Control" parent="."]
 margin_right = 1920.0
@@ -30,7 +31,7 @@ margin_right = 1452.0
 margin_bottom = 218.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="JoinDisplays" type="Control" parent="Layout"]
 editor/display_folded = true
@@ -54,7 +55,7 @@ margin_right = 537.0
 margin_bottom = 89.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 
 [node name="IconBack" type="TextureRect" parent="Layout/JoinDisplays/Display1"]
 editor/display_folded = true
@@ -64,7 +65,7 @@ margin_right = 680.0
 margin_bottom = 113.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 
 [node name="PlayerIcon" type="TextureRect" parent="Layout/JoinDisplays/Display1/IconBack"]
 margin_left = 3.0
@@ -73,7 +74,7 @@ margin_right = 99.0
 margin_bottom = 99.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="Display2" type="Control" parent="Layout/JoinDisplays"]
 editor/display_folded = true
@@ -90,7 +91,7 @@ margin_right = 537.0
 margin_bottom = 89.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 
 [node name="IconBack" type="TextureRect" parent="Layout/JoinDisplays/Display2"]
 editor/display_folded = true
@@ -100,7 +101,7 @@ margin_right = 680.0
 margin_bottom = 113.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 
 [node name="PlayerIcon" type="TextureRect" parent="Layout/JoinDisplays/Display2/IconBack"]
 margin_left = 3.0
@@ -109,7 +110,7 @@ margin_right = 99.0
 margin_bottom = 99.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="Display3" type="Control" parent="Layout/JoinDisplays"]
 editor/display_folded = true
@@ -126,7 +127,7 @@ margin_right = 537.0
 margin_bottom = 89.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 
 [node name="IconBack" type="TextureRect" parent="Layout/JoinDisplays/Display3"]
 editor/display_folded = true
@@ -136,7 +137,7 @@ margin_right = 680.0
 margin_bottom = 113.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 
 [node name="PlayerIcon" type="TextureRect" parent="Layout/JoinDisplays/Display3/IconBack"]
 margin_left = 3.0
@@ -145,7 +146,7 @@ margin_right = 99.0
 margin_bottom = 99.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="Display4" type="Control" parent="Layout/JoinDisplays"]
 editor/display_folded = true
@@ -162,7 +163,7 @@ margin_right = 537.0
 margin_bottom = 89.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 
 [node name="IconBack" type="TextureRect" parent="Layout/JoinDisplays/Display4"]
 editor/display_folded = true
@@ -172,7 +173,7 @@ margin_right = 680.0
 margin_bottom = 113.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 
 [node name="PlayerIcon" type="TextureRect" parent="Layout/JoinDisplays/Display4/IconBack"]
 margin_left = 3.0
@@ -181,16 +182,16 @@ margin_right = 99.0
 margin_bottom = 99.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
-[node name="BackButton" parent="Layout" instance=ExtResource( 6 )]
+[node name="BackButton" parent="Layout" instance=ExtResource( 7 )]
 margin_left = 40.0
 margin_top = 893.0
 margin_right = 361.0
 margin_bottom = 1034.0
 size_flags_horizontal = 2
 
-[node name="StartButton" parent="Layout" instance=ExtResource( 7 )]
+[node name="StartButton" parent="Layout" instance=ExtResource( 8 )]
 margin_left = 1516.0
 margin_top = 893.0
 margin_right = 1869.0
@@ -220,7 +221,7 @@ margin_top = 4.0
 margin_right = 1028.0
 margin_bottom = 260.0
 rect_min_size = Vector2( 1024, 256 )
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 
 [node name="LaserBlocker" type="StaticBody2D" parent="Layout"]
 editor/display_folded = true
