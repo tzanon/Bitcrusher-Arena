@@ -48,11 +48,21 @@ var AudioPlayer
 
 func _ready():
 	debug_mode = true
+	set_process_input(true)
 	
 	AudioPlayer = AudioStreamPlayer.new()
 	self.add_child(AudioPlayer)
 	
 	_init_audio_arrays()
+
+func _input(event):
+	if event.is_action_pressed("mute_sound_effects"):
+		muted = not muted
+		if debug_mode:
+			if muted:
+				print("sound effects muted")
+			else:
+				print("sound effects unmuted")
 
 func _init_audio_arrays():
 	for tag in SOUND_MAP.keys():
@@ -98,6 +108,9 @@ func play_sound_by_tag(sound_tag):
 	
 
 func play_sound(sound_tag):
+	if muted:
+		return
+	
 	var effect = SOUND_MAP[sound_tag].sound
 	if effect:
 		AudioPlayer.stream = effect

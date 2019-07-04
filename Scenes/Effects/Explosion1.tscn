@@ -60,10 +60,13 @@ tracks/3/keys = {
 radius = 50.0
 
 [node name="Fireball1" type="Area2D"]
+gravity_vec = Vector2( 0, 0 )
 collision_layer = 0
 script = ExtResource( 1 )
 debug_mode = true
+raycast_debug = true
 _impact_force = 5000.0
+_raycast_range = 100
 using_audio_manager = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -82,3 +85,6 @@ __meta__ = {
 }
 
 [node name="DamageTimer" type="Timer" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+cast_to = Vector2( 0, 0 )
