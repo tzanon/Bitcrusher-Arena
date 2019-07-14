@@ -1,5 +1,8 @@
 extends Area2D
 
+enum States { ON, OFF }
+	
+
 export (float) var _period = 1.0
 export (int, 1, 100) var _damage_amount = 1
 
@@ -72,3 +75,4 @@ func _damage():
 	if bodies.size() > 0:
 		if bodies[0].is_in_group("Damageable"):
 			bodies[0].damage(1)
+
