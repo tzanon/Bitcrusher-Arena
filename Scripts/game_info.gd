@@ -25,6 +25,8 @@ var registered_player_info = [
 
 var match_winner = null
 
+onready var game_start_time = OS.get_unix_time()
+
 #debugging
 func notify():
 	print("singleton Global here!")

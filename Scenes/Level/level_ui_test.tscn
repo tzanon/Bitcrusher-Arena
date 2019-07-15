@@ -33,6 +33,9 @@
 script = ExtResource( 1 )
 
 [node name="Layout" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Ground" type="Sprite" parent="Layout"]
 editor/display_folded = true
@@ -123,11 +126,13 @@ __meta__ = {
 }
 
 [node name="Obstacles" type="Node2D" parent="Layout/Structure"]
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Walls" type="Node2D" parent="Layout/Structure/Obstacles"]
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -254,7 +259,6 @@ position = Vector2( 1025.43, 353.792 )
 rotation = 1.5708
 
 [node name="BorderWalls" type="Node2D" parent="Layout/Structure"]
-editor/display_folded = true
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true

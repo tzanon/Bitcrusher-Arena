@@ -16,6 +16,7 @@ debug_mode = true
 _damage_amount = 10
 _speed = 800.0
 _bounce_groups = PoolStringArray( "Reflective" )
+_impact_sound_tag = "None"
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )

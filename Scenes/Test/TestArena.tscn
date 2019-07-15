@@ -1,0 +1,107 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Scripts/level.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Level/ground3/floor.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Weapons/WorldLaser.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Weapons/WorldLauncher.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Weapons/WorldAirgun.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Weapons/WorldBombshot.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Level/Arena1-Blue/ThinBarrier1.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Test/DamagableDummy.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Level/Arena1-Blue/SouthBoundary.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=10]
+
+[node name="TestArena" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Layout" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Ground" type="Sprite" parent="Layout"]
+position = Vector2( 960, 540 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PlayerManager" type="Node2D" parent="Layout"]
+
+[node name="Pickups" type="Node2D" parent="Layout"]
+editor/display_folded = true
+
+[node name="WorldLaser" parent="Layout/Pickups" instance=ExtResource( 3 )]
+position = Vector2( 768, 960 )
+
+[node name="WorldLauncher" parent="Layout/Pickups" instance=ExtResource( 4 )]
+position = Vector2( 896, 960 )
+
+[node name="WorldAirgun" parent="Layout/Pickups" instance=ExtResource( 5 )]
+position = Vector2( 1024, 960 )
+
+[node name="WorldBombshot" parent="Layout/Pickups" instance=ExtResource( 6 )]
+position = Vector2( 1152, 960 )
+
+[node name="Structure" type="Node2D" parent="Layout"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Obstacles" type="Node2D" parent="Layout/Structure"]
+editor/display_folded = true
+
+[node name="ThinBarrier1" parent="Layout/Structure/Obstacles" instance=ExtResource( 7 )]
+position = Vector2( 960, 576 )
+collision_mask = 0
+
+[node name="DamagableDummy" parent="Layout/Structure/Obstacles" instance=ExtResource( 8 )]
+position = Vector2( 720, 592 )
+
+[node name="DamagableDummy2" parent="Layout/Structure/Obstacles" instance=ExtResource( 8 )]
+position = Vector2( 960, 528 )
+
+[node name="Borders" type="Node2D" parent="Layout/Structure"]
+editor/display_folded = true
+
+[node name="WestBoundary" parent="Layout/Structure/Borders" instance=ExtResource( 9 )]
+position = Vector2( 384, 896 )
+rotation = 1.5708
+
+[node name="EastBoundary" parent="Layout/Structure/Borders" instance=ExtResource( 9 )]
+position = Vector2( 1536, 896 )
+rotation = -1.5708
+
+[node name="NorthBoundary" parent="Layout/Structure/Borders" instance=ExtResource( 9 )]
+position = Vector2( 960, 0 )
+rotation = 3.14159
+
+[node name="SouthBoundary" parent="Layout/Structure/Borders" instance=ExtResource( 9 )]
+position = Vector2( 960, 1088 )
+
+[node name="Players" type="Node2D" parent="Layout"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Player" parent="Layout/Players" instance=ExtResource( 10 )]
+position = Vector2( 960, 824 )
+input_mode = 1
+
+[node name="Projectiles" type="Node2D" parent="Layout"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Effects" type="Node2D" parent="Layout"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="Control"]
+margin_right = 384.0
+margin_bottom = 1088.0
