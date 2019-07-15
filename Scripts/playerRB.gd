@@ -21,7 +21,7 @@ signal died(_player_name)
 # audio-related
 export var using_audio_manager = true
 const DEATH_SOUND_TAG = "player_die"
-const PICKUP_SOUND_TAG = "weapopn_pickup" # maybe
+const PICKUP_SOUND_TAG = "weapon_pickup" # maybe
 signal play_sound(sound_tag)
 
 # movement-related
