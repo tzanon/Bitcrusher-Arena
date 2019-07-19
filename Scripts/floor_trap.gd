@@ -1,5 +1,7 @@
 extends Area2D
 
+export var debug_mode = false
+
 export var using_event_system = false
 
 export(float, 0.5, 1000.0) var damage_period = 3.0
@@ -21,14 +23,14 @@ func _ready():
 	TrapSprite = get_node("TrapSprite")
 	
 	DamageTimer = Timer.new()
-	DamageTimer.one_shot = false
+	DamageTimer.one_shot = true
 	DamageTimer.wait_time = damage_period
 	var connect_res = DamageTimer.connect("timeout", self, "deactivate")
 	if connect_res != 0:
 		printerr("Could not connect floor trap deactivate signal")
 	
 	DormantTimer = Timer.new()
-	DormantTimer.one_shot = false
+	DormantTimer.one_shot = true
 	DormantTimer.wait_time = dormant_period
 	connect_res = DormantTimer.connect("timeout", self, "activate")
 	if connect_res != 0:
@@ -44,11 +46,17 @@ func _process(delta):
 		_apply_damage(damage_per_second * delta)
 
 func activate():
+	if debug_mode:
+		print("floor trap activating")
+	
 	_is_damaging = true
 	TrapSprite.texture = _on_texture
 	DamageTimer.start()
 
 func deactivate():
+	if debug_mode:
+		print("floor trap deactivating")
+	
 	_is_damaging = false
 	TrapSprite.texture = _off_texture
 	

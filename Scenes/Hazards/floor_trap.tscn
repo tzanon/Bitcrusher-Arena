@@ -9,6 +9,9 @@ extents = Vector2( 30, 30 )
 [node name="FloorTrap" type="Area2D"]
 input_pickable = false
 script = ExtResource( 1 )
+damage_period = 2.0
+dormant_period = 3.0
+damage_per_second = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
