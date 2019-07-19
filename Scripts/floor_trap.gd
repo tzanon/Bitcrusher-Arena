@@ -1,78 +1,64 @@
 extends Area2D
 
-enum States { ON, OFF }
-	
+export var using_event_system = false
 
-export (float) var _period = 1.0
-export (int, 1, 100) var _damage_amount = 1
+export(float, 0.5, 1000.0) var damage_period = 3.0
+export(float, 0.5, 1000.0) var dormant_period = 5.0 # only used if independent of events
 
-var _paused = false
+var _is_damaging = false
+export(int, 1, 1000) var damage_per_second = 25
 
 export var _off_texture = preload("res://Sprites/Traps/floor_trap_off.png")
 export var _on_texture = preload("res://Sprites/Traps/floor_trap_on.png")
 
-var Sprite
-var PauseTimer
+var TrapSprite
 var DamageTimer
-
-var FlameGroup1
-var FlameGroup2
-var LastFlameGroup
+var DormantTimer
 
 func _ready():
-	Sprite = get_node("TrapSprite")
-	PauseTimer = Timer.new()
+	set_process(true)
+	
+	TrapSprite = get_node("TrapSprite")
+	
 	DamageTimer = Timer.new()
-	add_child(PauseTimer)
+	DamageTimer.one_shot = false
+	DamageTimer.wait_time = damage_period
+	var connect_res = DamageTimer.connect("timeout", self, "deactivate")
+	if connect_res != 0:
+		printerr("Could not connect floor trap deactivate signal")
+	
+	DormantTimer = Timer.new()
+	DormantTimer.one_shot = false
+	DormantTimer.wait_time = dormant_period
+	connect_res = DormantTimer.connect("timeout", self, "activate")
+	if connect_res != 0:
+		printerr("Could not connect floor trap activate signal")
+	
 	add_child(DamageTimer)
-	PauseTimer.wait_time = _period
-	DamageTimer.wait_time = float(_period) / (_damage_amount + 1)
-	PauseTimer.connect("timeout", self, "_interval")
-	DamageTimer.connect("timeout", self, "_damage")
-	PauseTimer.start()
+	add_child(DormantTimer)
 	
-	FlameGroup1 = get_node("FlameGroup1")
-	FlameGroup2 = get_node("FlameGroup2")
-	LastFlameGroup = FlameGroup1
-	FlameGroup1.hide()
-	FlameGroup2.hide()
+	deactivate()
+
+func _process(delta):
+	if _is_damaging:
+		_apply_damage(damage_per_second * delta)
+
+func activate():
+	_is_damaging = true
+	TrapSprite.texture = _on_texture
+	DamageTimer.start()
+
+func deactivate():
+	_is_damaging = false
+	TrapSprite.texture = _off_texture
 	
+	if !using_event_system:
+		DormantTimer.start()
 
-func _switch_flame_group():
-	if FlameGroup1.is_visible() || !FlameGroup2.is_visible():
-		FlameGroup1.hide()
-		FlameGroup2.show()
-	elif FlameGroup2.is_visible() || !FlameGroup1.is_visible():
-		FlameGroup2.hide()
-		FlameGroup1.show()
-	
-
-func _interval():
-	_paused = !_paused
-	if _paused:
-		Sprite.set_texture(_off_texture)
-		
-		if FlameGroup1.is_visible():
-			LastFlameGroup = FlameGroup1
-		elif FlameGroup2.is_visible():
-			LastFlameGroup = FlameGroup2
-		FlameGroup1.hide()
-		FlameGroup2.hide()
-		
-		DamageTimer.stop()
-	if !_paused: 
-		Sprite.set_texture(_on_texture)
-		
-		if LastFlameGroup == FlameGroup1:
-			FlameGroup2.show()
-		elif LastFlameGroup == FlameGroup2:
-			FlameGroup1.show()
-		
-		DamageTimer.start()
-
-func _damage():
+func _apply_damage(amount):
 	var bodies = get_overlapping_bodies()
-	if bodies.size() > 0:
-		if bodies[0].is_in_group("Damageable"):
-			bodies[0].damage(1)
+	for body in bodies:
+		if body.is_in_group("Damageable"):
+			body.damage(amount)
+	
 
