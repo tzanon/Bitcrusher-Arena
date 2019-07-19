@@ -120,7 +120,6 @@ position = Vector2( 1104, 688 )
 position = Vector2( 1312, 768 )
 
 [node name="Structure" type="Node2D" parent="Layout"]
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -174,7 +173,6 @@ position = Vector2( -128, 0 )
 rotation = 1.57079
 
 [node name="Pillars" type="Node2D" parent="Layout/Structure/Obstacles"]
-editor/display_folded = true
 
 [node name="Pillar1" parent="Layout/Structure/Obstacles/Pillars" instance=ExtResource( 22 )]
 position = Vector2( 960, 160 )
@@ -191,7 +189,6 @@ position = Vector2( 960, 736 )
 [node name="MoveableObstacles" type="Node2D" parent="Layout/Structure"]
 
 [node name="Traps" type="Node2D" parent="Layout/Structure"]
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -228,6 +225,7 @@ debug_mode = false
 
 [node name="FloorTrap1" parent="Layout/Structure/Traps" instance=ExtResource( 24 )]
 position = Vector2( 352, 576 )
+debug_mode = true
 
 [node name="FloorTrap2" parent="Layout/Structure/Traps" instance=ExtResource( 24 )]
 position = Vector2( 192, 800 )
